@@ -135,7 +135,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
 
   const simulateSpeech = useCallback(
     (line?: string) => {
-      const pick = line ?? LECTURE_LINES[Math.floor(Math.random() * LECTURE_LINES.length)];
+      const pick =
+        line ?? LECTURE_LINES[Math.floor(Math.random() * LECTURE_LINES.length)] ?? LECTURE_LINES[0]!;
       streamLine(pick);
     },
     [streamLine],
@@ -152,7 +153,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
 
   const simulateGesture = useCallback(
     (text?: string) => {
-      const pick = text ?? GESTURES[Math.floor(Math.random() * GESTURES.length)];
+      const pick = text ?? GESTURES[Math.floor(Math.random() * GESTURES.length)] ?? GESTURES[0]!;
       setGestureStatus("Hand landmarks locked · decoding ISL…");
       setGestureOutput("…");
       later(() => {
