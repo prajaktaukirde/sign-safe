@@ -3,7 +3,6 @@ import {
   Sparkles, Hand, RotateCcw, Trophy, BookOpen, Star, 
   AlertCircle, ShieldAlert, Award, Compass, Heart, Activity, CheckCircle2, RefreshCw
 } from "lucide-react";
-import { SigningAvatar } from "./SigningAvatar";
 import { WebcamMock } from "./WebcamMock";
 import { useDemo } from "@/lib/demo-store";
 
@@ -235,46 +234,35 @@ export function StudentView() {
                   </button>
                 </header>
 
-                {/* Visual Demonstrations Split Screen */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  {/* Left: 3D Signing Avatar */}
-                  <div className="relative h-[240px] overflow-hidden rounded-xl border border-border bg-[radial-gradient(500px_260px_at_50%_0%,rgba(0,102,255,0.14),transparent_70%)]">
-                    <SigningAvatar speed={avatarSpeed} replayKey={replayKey} transcript={liveWords || transcript} />
-                    <span className="absolute bottom-3 right-3 rounded-full bg-black/50 px-2.5 py-1 text-[11px] text-muted-foreground bg-black/70">
-                      3D AI Avatar
-                    </span>
-                  </div>
-
-                  {/* Right: Human Video Demonstration */}
-                  <div className="relative h-[240px] overflow-hidden rounded-xl border border-border bg-black">
-                    {currentSign?.videoUrl ? (
-                      currentSign.videoUrl.startsWith("http") ? (
-                        <iframe
-                          src={currentSign.videoUrl}
-                          className="absolute inset-0 h-full w-full border-0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          title={`ISL sign for ${currentSign.name}`}
-                        />
-                      ) : (
-                        <video
-                          src={currentSign.videoUrl}
-                          className="absolute inset-0 h-full w-full object-contain"
-                          controls
-                          autoPlay
-                          loop
-                          muted
-                        />
-                      )
+                {/* Official ISLRTC Demonstration Video */}
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border bg-black shadow-lg">
+                  {currentSign?.videoUrl ? (
+                    currentSign.videoUrl.startsWith("http") ? (
+                      <iframe
+                        src={currentSign.videoUrl}
+                        className="absolute inset-0 h-full w-full border-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title={`ISL sign for ${currentSign.name}`}
+                      />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground">
-                        No video link available
-                      </div>
-                    )}
-                    <span className="absolute bottom-3 right-3 rounded-full bg-black/50 px-2.5 py-1 text-[11px] text-muted-foreground bg-black/70">
-                      Human Demonstration Video
-                    </span>
-                  </div>
+                      <video
+                        src={currentSign.videoUrl}
+                        className="absolute inset-0 h-full w-full object-contain"
+                        controls
+                        autoPlay
+                        loop
+                        muted
+                      />
+                    )
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground">
+                      No video link available
+                    </div>
+                  )}
+                  <span className="absolute bottom-3 right-3 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                    📹 Official ISLRTC Sign Demonstration
+                  </span>
                 </div>
 
                 {/* Subtitle Description */}
