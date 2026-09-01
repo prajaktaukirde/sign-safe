@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { 
   Sparkles, Hand, RotateCcw, Trophy, BookOpen, Star, 
-  AlertCircle, ShieldAlert, Award, Compass, Heart, Activity, CheckCircle2, RefreshCw
+  AlertCircle, ShieldAlert, Award, Compass, Heart, Activity, CheckCircle2, RefreshCw,
+  Palette
 } from "lucide-react";
 import { WebcamMock } from "./WebcamMock";
 import { useDemo } from "@/lib/demo-store";
@@ -40,10 +41,27 @@ const CATEGORIES: Record<string, Category> = {
       { name: "Happy Anniversary", desc: "Perform the official ISL signs for HAPPY followed by the specific ISLRTC ANNIVERSARY sign.", mappedGesture: "Happy Anniversary", videoUrl: "/level1-greeting/happyaniversary.mp4" }
     ]
   },
+  colors: {
+    name: "Colours",
+    icon: Palette,
+    level: "🎨 Level 2",
+    signs: [
+      { name: "Black", desc: "Point index finger towards the forehead/eyebrow as shown in the official ISLRTC demonstration video.", mappedGesture: "Black", videoUrl: "/level2-colour/black.mp4" },
+      { name: "Brown", desc: "Form the letter B handshape moving downward beside the cheek in ISL.", mappedGesture: "Brown", videoUrl: "/level2-colour/brown.mp4" },
+      { name: "Green", desc: "Form the G handshape shaking gently across the body in ISL.", mappedGesture: "Green", videoUrl: "/level2-colour/green.mp4" },
+      { name: "Grey", desc: "Pass open fingers between each other in front of the chest in ISL.", mappedGesture: "Grey", videoUrl: "/level2-colour/grey.mp4" },
+      { name: "Orange", desc: "Squeeze hand in front of mouth/chin like squeezing an orange in ISL.", mappedGesture: "Orange", videoUrl: "/level2-colour/orange.mp4" },
+      { name: "Pink", desc: "Brush middle finger downward across lower lip/chin in ISL.", mappedGesture: "Pink", videoUrl: "/level2-colour/pink.mp4" },
+      { name: "Red", desc: "Index finger touches lip and pulls downward in ISL.", mappedGesture: "Red", videoUrl: "/level2-colour/red.mp4" },
+      { name: "Violet", desc: "Form V handshape and twist with a gentle shaking motion in ISL.", mappedGesture: "Violet", videoUrl: "/level2-colour/violet.mp4" },
+      { name: "White", desc: "Place flat hand on chest and pull outward closing into a fist in ISL.", mappedGesture: "White", videoUrl: "/level2-colour/white.mp4" },
+      { name: "Yellow", desc: "Form Y handshape and shake gently beside the shoulder in ISL.", mappedGesture: "Yellow", videoUrl: "/level2-colour/yellow.mp4" }
+    ]
+  },
   school: {
     name: "School & Learning",
     icon: BookOpen,
-    level: "🏫 Level 2",
+    level: "🏫 Level 3",
     signs: [
       { name: "Teacher", desc: "Hold both hands near chest and circle them.", mappedGesture: "Teacher", videoUrl: "https://www.youtube.com/embed/2_X0qT9N4j4" },
       { name: "Book", desc: "Bring palms together, then open them flat like a book.", mappedGesture: "Book", videoUrl: "https://www.youtube.com/embed/k-xS3c0p0z8" },
@@ -53,7 +71,7 @@ const CATEGORIES: Record<string, Category> = {
   emergency: {
     name: "Emergency & Safety",
     icon: ShieldAlert,
-    level: "🌟 Level 3",
+    level: "🚨 Level 4",
     signs: [
       { name: "Help", desc: "Rest your closed right fist on your flat left palm.", mappedGesture: "Help", videoUrl: "https://www.youtube.com/embed/0X6dM0Kk1iY" },
       { name: "Safe", desc: "Cross arms in front of chest then open them.", mappedGesture: "Yes", videoUrl: "https://www.youtube.com/embed/rP2t8P6qg5c" }
