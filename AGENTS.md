@@ -1,3 +1,3 @@
-﻿# SignSync + SafeSOS Kids Development Guide
+﻿# SignSync + SafeSOS Kids
 
-This repository contains the full source code for the AI-Powered ISL Learning and SafeSOS emergency system.
+AI-powered Indian Sign Language (ISL) learning and emergency safety platform for deaf children.
