@@ -43,31 +43,31 @@
 }
 
 :root {
-  --radius: 0.9rem;
-  --background: oklch(0.16 0.055 285);
-  --foreground: oklch(0.97 0.01 280);
-  --surface: oklch(0.19 0.06 285);
-  --card: oklch(0.21 0.06 285);
-  --card-foreground: oklch(0.97 0.01 280);
-  --popover: oklch(0.21 0.06 285);
-  --popover-foreground: oklch(0.97 0.01 280);
-  --primary: oklch(0.58 0.24 264);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.28 0.06 285);
-  --secondary-foreground: oklch(0.97 0.01 280);
-  --muted: oklch(0.26 0.05 285);
-  --muted-foreground: oklch(0.74 0.03 285);
-  --accent: oklch(0.62 0.19 250);
-  --accent-foreground: oklch(0.99 0 0);
-  --destructive: oklch(0.62 0.23 22);
-  --destructive-foreground: oklch(0.99 0 0);
-  --warning: oklch(0.77 0.17 65);
-  --warning-foreground: oklch(0.18 0.05 285);
-  --success: oklch(0.75 0.19 150);
-  --success-foreground: oklch(0.16 0.05 285);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.58 0.24 264);
+  --radius: 1.2rem; /* Fun, rounded cartoonish corners */
+  --background: oklch(0.96 0.015 220); /* Cheerful pastel sky-blue/gray base */
+  --foreground: oklch(0.22 0.02 240); /* Highly readable deep charcoal text */
+  --surface: oklch(0.98 0.008 240);
+  --card: oklch(1 0 0); /* Crisp white cards */
+  --card-foreground: oklch(0.22 0.02 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 240);
+  --primary: oklch(0.65 0.17 245); /* Happy bright sky-blue for kids */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.92 0.03 245); /* Soft gray-blue border/backgrounds */
+  --secondary-foreground: oklch(0.22 0.02 240);
+  --muted: oklch(0.94 0.01 240);
+  --muted-foreground: oklch(0.48 0.02 240);
+  --accent: oklch(0.78 0.16 85); /* Bright happy yellow */
+  --accent-foreground: oklch(0.22 0.02 240);
+  --destructive: oklch(0.62 0.19 25); /* Child-safe red */
+  --destructive-foreground: oklch(1 0 0);
+  --warning: oklch(0.8 0.17 75); /* Cheerful sun orange */
+  --warning-foreground: oklch(0.22 0.02 240);
+  --success: oklch(0.72 0.18 145); /* Bright, friendly green */
+  --success-foreground: oklch(0.2 0.03 145);
+  --border: oklch(0.22 0.02 240 / 12%);
+  --input: oklch(0.22 0.02 240 / 8%);
+  --ring: oklch(0.65 0.17 245);
 }
 
 @keyframes strobe {
@@ -92,13 +92,14 @@
 }
 
 @utility glass {
-  background-color: color-mix(in oklab, white 5%, transparent);
-  backdrop-filter: blur(14px);
-  border: 1px solid color-mix(in oklab, white 10%, transparent);
+  background-color: rgb(255 255 255 / 90%);
+  backdrop-filter: blur(8px);
+  border: 2px solid oklch(0.22 0.02 240 / 8%);
+  box-shadow: 0 12px 30px -10px oklch(0.22 0.02 240 / 6%);
 }
 
 @utility glow-primary {
-  box-shadow: 0 18px 60px -22px color-mix(in oklab, var(--primary) 80%, transparent);
+  box-shadow: 0 18px 60px -22px color-mix(in oklab, var(--primary) 30%, transparent);
 }
 
 @layer base {
@@ -108,8 +109,8 @@
 
   body {
     background:
-      radial-gradient(900px 600px at 12% -10%, oklch(0.35 0.16 275 / 0.35), transparent 60%),
-      radial-gradient(800px 500px at 95% 0%, oklch(0.4 0.14 240 / 0.25), transparent 55%),
+      radial-gradient(900px 600px at 10% -10%, oklch(0.95 0.06 150 / 0.5), transparent 60%),
+      radial-gradient(800px 500px at 90% 10%, oklch(0.94 0.1 80 / 0.4), transparent 55%),
       var(--color-background);
     background-attachment: fixed;
     color: var(--color-foreground);

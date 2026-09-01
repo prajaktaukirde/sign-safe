@@ -6,9 +6,9 @@ import { TeacherView } from "@/components/app/TeacherView";
 import { SosOverlay } from "@/components/app/SosOverlay";
 import { DemoPanel } from "@/components/app/DemoPanel";
 
-const TITLE = "SignSync + SafeSOS — ISL Classroom & Emergency Assistance";
+const TITLE = "AI ISL Teacher & Emergency App for Deaf Children";
 const DESC =
-  "AI-powered Indian Sign Language classroom accessibility and emergency evacuation assistance for deaf students and teachers.";
+  "An AI-powered Indian Sign Language learning platform and emergency assistance tool for deaf children.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,11 +40,11 @@ function Console() {
           </div>
           <div>
             <h1 className="text-xl font-black tracking-tight">
-              SignSync <span className="text-muted-foreground">+</span>{" "}
-              <span className="text-destructive">SafeSOS</span>
+              AI ISL Teacher <span className="text-muted-foreground">&</span>{" "}
+              <span className="text-destructive">SafeSOS Kids</span>
             </h1>
             <p className="text-xs text-muted-foreground">
-              ISL classroom accessibility & emergency assistance · {room}
+              Step-by-step ISL learning & safety platform · {room}
             </p>
           </div>
         </div>
@@ -59,7 +59,7 @@ function Console() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <GraduationCap className="h-4 w-4" /> Student
+              <GraduationCap className="h-4 w-4" /> 👧 Child Learner
             </button>
             <button
               onClick={() => setView("teacher")}
@@ -69,7 +69,7 @@ function Console() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              Teacher
+              👩‍🏫 Parent/Teacher Panel
             </button>
           </div>
           <button
