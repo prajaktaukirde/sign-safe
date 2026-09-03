@@ -65,82 +65,82 @@ export function SosOverlay() {
       <div
         className={
           safe
-            ? "absolute inset-0 bg-[oklch(0.35_0.14_150_/_0.92)]"
-            : "animate-strobe absolute inset-0"
+            ? "absolute inset-0 bg-emerald-950/90 backdrop-blur-md"
+            : "animate-strobe absolute inset-0 backdrop-blur-md"
         }
       />
-      <div className="relative mx-auto w-full max-w-6xl px-4 py-8">
-        <div className="mb-5 flex items-start justify-between gap-3">
-          <div className="rounded-2xl bg-black/55 px-5 py-4">
-            <h1 className="flex items-center gap-3 text-2xl font-black tracking-tight sm:text-4xl">
-              <AlertOctagon className="h-8 w-8 shrink-0 text-warning" />
-              {safe ? "STATUS CONFIRMED SAFE" : "!!! WARNING: FIRE ALARM DETECTED !!!"}
+      <div className="relative mx-auto w-full max-w-5xl px-4 py-8">
+        <div className="mb-6 flex items-start justify-between gap-3">
+          <div className="rounded-2xl bg-black/70 px-6 py-4 backdrop-blur-md border border-white/10 shadow-xl">
+            <h1 className="flex items-center gap-3 text-xl font-black tracking-tight sm:text-3xl text-white">
+              <AlertOctagon className="h-7 w-7 shrink-0 text-amber-400" />
+              {safe ? "STATUS CONFIRMED: SAFE" : "EMERGENCY: FIRE ALARM DETECTED"}
             </h1>
-            <p className="mt-1 text-sm text-white/80">
-              {emergencyReason} · {room} · Evacuate immediately via Exit B
+            <p className="mt-1 text-xs text-white/80">
+              {emergencyReason} · {room} · Evacuate via nearest Exit B
             </p>
           </div>
           <button
             onClick={clearEmergency}
-            className="rounded-full bg-black/50 p-3 hover:bg-black/70"
+            className="rounded-full bg-black/60 p-3 text-white hover:bg-black/80 transition-colors cursor-pointer border border-white/10"
             aria-label="Dismiss emergency overlay"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-5">
-          <div className="rounded-2xl bg-black/55 p-4 lg:col-span-3">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-white/70">
-              Evacuation Floorplan — Wing B, Level 1
+        <div className="grid gap-6 lg:grid-cols-5">
+          <div className="rounded-2xl bg-black/70 p-5 lg:col-span-3 backdrop-blur-md border border-white/10">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider text-white/70">
+              Evacuation Map — Wing B, Level 1
             </p>
-            <div className="h-[300px]">
+            <div className="h-[280px]">
               <Floorplan />
             </div>
           </div>
 
           <div className="space-y-4 lg:col-span-2">
-            <div className="grid gap-3 rounded-2xl bg-black/55 p-4">
+            <div className="grid gap-2.5 rounded-2xl bg-black/70 p-4 backdrop-blur-md border border-white/10">
               <button
                 onClick={() => setSafety("ok")}
-                className={`rounded-xl px-4 py-4 text-lg font-black transition-transform hover:scale-[1.02] ${
-                  safety === "ok" ? "bg-success text-success-foreground" : "bg-success/25 text-success"
+                className={`rounded-xl px-4 py-3 text-sm font-bold transition-all cursor-pointer ${
+                  safety === "ok" ? "bg-emerald-500 text-white" : "bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30"
                 }`}
               >
-                <ShieldCheck className="mr-2 inline h-5 w-5" /> I AM OK
+                <ShieldCheck className="mr-2 inline h-4 w-4" /> I AM OK
               </button>
               <button
                 onClick={() => setSafety("help")}
-                className={`rounded-xl px-4 py-4 text-lg font-black transition-transform hover:scale-[1.02] ${
-                  safety === "help" ? "bg-warning text-warning-foreground" : "bg-warning/25 text-warning"
+                className={`rounded-xl px-4 py-3 text-sm font-bold transition-all cursor-pointer ${
+                  safety === "help" ? "bg-amber-500 text-slate-950" : "bg-amber-500/20 text-amber-300 hover:bg-amber-500/30"
                 }`}
               >
-                <HeartPulse className="mr-2 inline h-5 w-5" /> I NEED HELP
+                <HeartPulse className="mr-2 inline h-4 w-4" /> I NEED HELP
               </button>
               <button
                 onClick={() => setSafety("trapped")}
-                className={`rounded-xl px-4 py-4 text-lg font-black transition-transform hover:scale-[1.02] ${
+                className={`rounded-xl px-4 py-3 text-sm font-bold transition-all cursor-pointer ${
                   safety === "trapped"
-                    ? "bg-destructive text-destructive-foreground"
-                    : "bg-destructive/30 text-white"
+                    ? "bg-rose-600 text-white"
+                    : "bg-rose-500/20 text-rose-300 hover:bg-rose-500/30"
                 }`}
               >
-                <AlertOctagon className="mr-2 inline h-5 w-5" /> I AM TRAPPED ({room})
+                <AlertOctagon className="mr-2 inline h-4 w-4" /> I AM TRAPPED ({room})
               </button>
             </div>
 
-            <div className="rounded-2xl bg-black/55 p-4">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-white/70">
-                Live rescue status log
+            <div className="rounded-2xl bg-black/70 p-4 backdrop-blur-md border border-white/10">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wider text-white/70">
+                Rescue Status Updates
               </p>
-              <ul className="max-h-52 space-y-2 overflow-y-auto pr-1">
+              <ul className="max-h-44 space-y-1.5 overflow-y-auto pr-1">
                 {logs.length === 0 && (
-                  <li className="text-sm text-white/60">Awaiting responder updates…</li>
+                  <li className="text-xs text-white/60">Awaiting responder updates…</li>
                 )}
                 {logs.map((l) => (
-                  <li key={l.id} className="rounded-lg bg-white/10 px-3 py-2 text-sm">
+                  <li key={l.id} className="rounded-lg bg-white/10 px-3 py-1.5 text-xs text-white">
                     <span className="font-bold">{l.source}:</span> {l.text}
-                    <span className="ml-2 text-[11px] text-white/50">{l.time}</span>
+                    <span className="ml-2 text-[10px] text-white/50">{l.time}</span>
                   </li>
                 ))}
               </ul>

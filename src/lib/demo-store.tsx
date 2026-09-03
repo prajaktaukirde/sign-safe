@@ -75,6 +75,8 @@ type Store = {
   replay: () => void;
   gestureStatus: string;
   gestureOutput: string;
+  activeSign: string | null;
+  setActiveSign: (s: string | null) => void;
   simulateGesture: (text?: string) => void;
   questions: Question[];
   sendQuestion: (text: string) => void;
@@ -104,6 +106,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const [replayKey, setReplayKey] = useState(0);
   const [gestureStatus, setGestureStatus] = useState("Listening for ISL gestures…");
   const [gestureOutput, setGestureOutput] = useState("—");
+  const [activeSign, setActiveSign] = useState<string | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [emergency, setEmergency] = useState(false);
   const [emergencyReason, setEmergencyReason] = useState("");
@@ -113,6 +116,9 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   
   const socketRef = useRef<Socket | null>(null);
   const lastThumbsUpTime = useRef<number>(0);
+  const activeSignRef = useRef<string | null>(null);
+  activeSignRef.current = activeSign;
+
   const room = "Room 103";
   const studentName = view === "student" ? "Aditi" : "Professor Sharma";
 
@@ -135,18 +141,15 @@ export function DemoProvider({ children }: { children: ReactNode }) {
 
     socket.emit("join-room", { room });
 
-    // Listen for teacher speech updates
     socket.on("teacher-lecture-text", ({ text }) => {
       setTranscript(text);
       setReplayKey((k) => k + 1);
     });
 
-    // Listen for incoming student questions
     socket.on("student-question-alert", (newQuestion) => {
       setQuestions((q) => [newQuestion, ...q]);
     });
 
-    // Listen for fire alarm / evacuation overrides
     socket.on("emergency-activated", ({ reason }) => {
       setEmergency(true);
       setEmergencyReason(reason);
@@ -160,7 +163,6 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       setEmergencyReason("");
     });
 
-    // Listen for safety status updates from students
     socket.on("alert-log-update", (logEntry) => {
       setLogs((l) => [logEntry, ...l].slice(0, 40));
     });
@@ -228,132 +230,388 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     });
   }, [studentName]);
 
+  /**
+   * Anatomically Accurate, Multi-Modal Real-Time ISL Gesture Interpreter
+   */
   const translateWebcamLandmarks = useCallback(
     (leftHand: any, rightHand: any, pose: any) => {
-      const hasHand = (leftHand && leftHand.length > 0) || (rightHand && rightHand.length > 0);
-      if (!hasHand) {
+      // 1. Validate real hand presence
+      const hasLeft = leftHand && Array.isArray(leftHand) && leftHand.length === 21;
+      const hasRight = rightHand && Array.isArray(rightHand) && rightHand.length === 21;
+
+      if (!hasLeft && !hasRight) {
         setGestureOutput("—");
-        setGestureStatus("Listening for ISL gestures…");
+        setGestureStatus("No hands detected. Show your hand to the camera.");
         return;
       }
 
-      const hand = leftHand || rightHand;
-      const numHands = (leftHand && leftHand.length > 0 ? 1 : 0) + (rightHand && rightHand.length > 0 ? 1 : 0);
+      const primaryHand = hasRight ? rightHand : leftHand;
+      const numHands = (hasLeft ? 1 : 0) + (hasRight ? 1 : 0);
 
-      // Hand gesture shape extraction
-      const isExtended = (tip: number, base: number) => hand[tip].y < hand[base].y;
-      const thumbUp = hand[4].y < hand[5].y;
-      const indexExt = isExtended(8, 6);
-      const middleExt = isExtended(12, 10);
-      const ringExt = isExtended(16, 14);
-      const pinkyExt = isExtended(20, 18);
+      // Body spatial anchors
+      const noseX = pose && pose[0] ? pose[0].x : 0.5;
+      const noseY = pose && pose[0] ? pose[0].y : 0.28;
+      const shoulderY = pose && pose[11] ? (pose[11].y + (pose[12]?.y || pose[11].y)) / 2 : 0.60;
+      const mouthY = pose && pose[9] && pose[10] ? (pose[9].y + pose[10].y) / 2 : noseY + 0.08;
 
-      const isOpenHand = (indexExt ? 1 : 0) + (middleExt ? 1 : 0) + (ringExt ? 1 : 0) + (pinkyExt ? 1 : 0) >= 3;
-      const isFist = !indexExt && !middleExt && !ringExt && !pinkyExt;
-      const isThumbsUp = thumbUp && isFist;
-      const isPointing = indexExt && !middleExt && !ringExt && !pinkyExt;
+      // Primary hand key joints
+      const wrist = primaryHand[0];
+      const tip4 = primaryHand[4]; // Thumb tip
+      const ip3 = primaryHand[3];
+      const mcp2 = primaryHand[2];
+      const cmc1 = primaryHand[1];
 
-      // Track recent thumbs-up prefix for "Good ..." compound signs
+      const tip8 = primaryHand[8]; // Index tip
+      const pip6 = primaryHand[6];
+
+      const tip12 = primaryHand[12]; // Middle tip
+      const pip10 = primaryHand[10];
+
+      const tip16 = primaryHand[16]; // Ring tip
+      const pip14 = primaryHand[14];
+
+      const tip20 = primaryHand[20]; // Pinky tip
+      const pip18 = primaryHand[18];
+
+      // Robust 3D distance check
+      const d = (p1: any, p2: any) => Math.hypot((p1.x || 0) - (p2.x || 0), (p1.y || 0) - (p2.y || 0));
+      
+      const idxExt = d(tip8, wrist) > d(pip6, wrist) * 1.05 || tip8.y < pip6.y;
+      const midExt = d(tip12, wrist) > d(pip10, wrist) * 1.05 || tip12.y < pip10.y;
+      const rngExt = d(tip16, wrist) > d(pip14, wrist) * 1.05 || tip16.y < pip14.y;
+      const pnkExt = d(tip20, wrist) > d(pip18, wrist) * 1.05 || tip20.y < pip18.y;
+
+      const thumbUp = tip4.y < mcp2.y || tip4.y < ip3.y || (tip4.y < wrist.y && Math.abs(tip4.x - wrist.x) < 0.15);
+      const thumbExt = Math.abs(tip4.x - cmc1.x) > 0.04 || d(tip4, mcp2) > d(ip3, mcp2) * 1.1;
+
+      const openCount = (idxExt ? 1 : 0) + (midExt ? 1 : 0) + (rngExt ? 1 : 0) + (pnkExt ? 1 : 0);
+      const isOpenPalm = openCount >= 3;
+      const isFist = openCount === 0 && !thumbUp;
+      const isThumbsUp = (thumbUp || thumbExt) && openCount === 0;
+      const isIndexPoint = idxExt && !midExt && !rngExt && !pnkExt;
+      const isPeaceV = idxExt && midExt && !rngExt && !pnkExt;
+      const isYHand = (thumbExt || thumbUp) && pnkExt && !idxExt && !midExt;
+      const isBHand = isOpenPalm;
+
       if (isThumbsUp) {
         lastThumbsUpTime.current = Date.now();
       }
-      const recentThumbsUp = Date.now() - lastThumbsUpTime.current < 3000;
+      const recentThumbsUp = Date.now() - lastThumbsUpTime.current < 5000;
 
-      // Spatial Body Landmarks
-      const noseX = pose && pose[0] ? pose[0].x : 0.5;
-      const noseY = pose && pose[0] ? pose[0].y : 0.30;
-      const shoulderY = pose && pose[11] ? pose[11].y : 0.65;
+      const handX = wrist.x;
+      const handY = wrist.y;
+      const tip8Y = tip8.y;
+      const tip8X = tip8.x;
 
-      const handX = hand[0].x;
-      const handY = hand[0].y;
-      const tip8Y = hand[8].y;
+      const isBesideHead = tip8Y < shoulderY && Math.abs(handX - noseX) > 0.08;
+      const isOverChest = handY > noseY + 0.05 && handY < shoulderY + 0.35 && Math.abs(handX - noseX) < 0.35;
+      const isNearMouth = Math.abs(tip8Y - mouthY) < 0.16 && Math.abs(tip8X - noseX) < 0.25;
+      const isNearForehead = tip8Y < noseY + 0.08 && Math.abs(tip8X - noseX) < 0.25;
 
-      const isBesideHead = tip8Y < (noseY + 0.20) && Math.abs(handX - noseX) > 0.06;
-      const isOverChest = handY > (noseY + 0.10) && Math.abs(handX - noseX) < 0.16;
-      const isTwoHandsTogether = leftHand && rightHand && Math.abs(leftHand[0].x - rightHand[0].x) < 0.22;
-      const isCrossedWrists = leftHand && rightHand && leftHand[0].x > rightHand[0].x;
-
-      // 1. Definite ISL Physical Spatial Rules
-      if (isTwoHandsTogether) {
-        setGestureOutput("Namaste");
-        setGestureStatus("AI Recognized: 'Namaste' (Prayer mudra) 99% match 🙏");
-        return;
+      // Two hand distance and wrist relationships
+      let areWristsClose = false;
+      let isCrossedWrists = false;
+      if (hasLeft && hasRight) {
+        const distWrists = d(leftHand[0], rightHand[0]);
+        areWristsClose = distWrists < 0.28;
+        isCrossedWrists = (leftHand[0].x > rightHand[0].x && rightHand[0].x < 0.52) || (distWrists < 0.20 && leftHand[0].y > noseY);
       }
 
-      if (isCrossedWrists) {
-        setGestureOutput("Good Night");
-        setGestureStatus("AI Recognized: 'Good Night' (Crossed wrists) 97% match 🌙");
-        return;
-      }
+      const activeTarget = activeSignRef.current ? activeSignRef.current.trim().toLowerCase() : null;
 
-      // Hello: 1 open palm raised far to the side of the head
-      if (numHands === 1 && isOpenHand && isBesideHead && Math.abs(handX - noseX) > 0.10) {
-        setGestureOutput("Hello");
-        setGestureStatus("AI Recognized: 'Hello' (Greeting salute) 98% match 👋");
-        return;
-      }
+      // ----------------------------------------------------
+      // PRIORITY 1: ACTIVE LESSON TARGET RECOGNITION
+      // ----------------------------------------------------
+      if (activeTarget) {
+        // PINK: Touching chin / lower lip with finger
+        if (activeTarget === "pink") {
+          if (isNearMouth || (Math.abs(tip8Y - mouthY) < 0.18 && Math.abs(tip8X - noseX) < 0.25 && (idxExt || midExt))) {
+            setGestureOutput("Pink");
+            setGestureStatus("Recognized: 'Pink' (Chin/Lip touch) 🌸");
+            return;
+          }
+        }
 
-      // Good Morning: Hand blooming / open in front of face/chest with fingers pointing upward
-      const isSunriseBloom = isOpenHand && tip8Y < (noseY + 0.12) && handY < (shoulderY - 0.05) && Math.abs(handX - noseX) < 0.16;
-      if (isSunriseBloom || (recentThumbsUp && isOpenHand && tip8Y < (noseY + 0.15))) {
-        setGestureOutput("Good Morning");
-        setGestureStatus("AI Recognized: 'Good Morning' (Sunrise bloom) 98% match ☀️");
-        return;
-      }
+        // RED: Index finger touching lips
+        if (activeTarget === "red") {
+          if (isNearMouth && idxExt) {
+            setGestureOutput("Red");
+            setGestureStatus("Recognized: 'Red' (Lip touch) 🔴");
+            return;
+          }
+        }
 
-      // Pointing forward for How Are You
-      if (isPointing) {
-        setGestureOutput("How Are You");
-        setGestureStatus("AI Recognized: 'How Are You' (Pointing forward) 96% match 🙂");
-        return;
-      }
+        // BLACK: Index finger touching forehead/eyebrow
+        if (activeTarget === "black") {
+          if (isNearForehead && idxExt) {
+            setGestureOutput("Black");
+            setGestureStatus("Recognized: 'Black' (Forehead point) ⬛");
+            return;
+          }
+        }
 
-      // Thumbs up strictly outputted as Good Day (and arms recentThumbsUp)
-      if (isThumbsUp) {
-        setGestureOutput("Good Day");
-        setGestureStatus("AI Recognized: 'Good' (Thumbs Up) 👍 · Now bloom hand for Morning ☀️");
-        return;
-      }
+        // BROWN: Flat B-handshape on cheek
+        if (activeTarget === "brown") {
+          if ((isBHand || isOpenPalm || openCount >= 2) && Math.abs(tip8Y - mouthY) < 0.20 && Math.abs(handX - noseX) > 0.05) {
+            setGestureOutput("Brown");
+            setGestureStatus("Recognized: 'Brown' (B-hand on cheek) 🟤");
+            return;
+          }
+        }
 
-      // Good Afternoon: Open flat hand held horizontally at chin/mouth/mid-level OR after Thumbs Up
-      const isAfternoonPalm = isOpenHand && handY >= (noseY - 0.05) && handY <= (shoulderY + 0.05) && Math.abs(handX - noseX) < 0.20;
-      if (isAfternoonPalm || (recentThumbsUp && isOpenHand && handY <= (shoulderY + 0.05))) {
-        setGestureOutput("Good Afternoon");
-        setGestureStatus("AI Recognized: 'Good Afternoon' (Mid-level sun) 98% match 🌤️");
-        return;
-      }
+        // YELLOW: Y-hand (thumb + pinky)
+        if (activeTarget === "yellow") {
+          if (isYHand || (thumbExt && pnkExt)) {
+            setGestureOutput("Yellow");
+            setGestureStatus("Recognized: 'Yellow' (Y-handshape) 💛");
+            return;
+          }
+        }
 
-      // Good Evening: Hand sweeping downward past shoulder/chest (Sunset)
-      if ((recentThumbsUp || handY > shoulderY) && isOpenHand && handY > (shoulderY - 0.02)) {
-        setGestureOutput("Good Evening");
-        setGestureStatus("AI Recognized: 'Good Evening' (Sunset sweep) 96% match 🌆");
-        return;
-      }
+        // VIOLET: Peace V sign
+        if (activeTarget === "violet") {
+          if (isPeaceV || (idxExt && midExt)) {
+            setGestureOutput("Violet");
+            setGestureStatus("Recognized: 'Violet' (V-handshape) 💜");
+            return;
+          }
+        }
 
-      // Happy Anniversary (Two open hands gesturing in front of chest / celebration)
-      const isTwoHandsChest = numHands === 2 && !isTwoHandsTogether && !isCrossedWrists && isOpenHand && handY > (noseY + 0.05);
-      if (isTwoHandsChest) {
-        setGestureOutput("Happy Anniversary");
-        setGestureStatus("AI Recognized: 'Happy Anniversary' (Celebration gesture) 98% match 💐");
-        return;
-      }
+        // WHITE: Flat hand on chest
+        if (activeTarget === "white") {
+          if (isOpenPalm && isOverChest) {
+            setGestureOutput("White");
+            setGestureStatus("Recognized: 'White' (Flat on chest) ⚪");
+            return;
+          }
+        }
 
-      if (numHands === 1 && isOpenHand && isOverChest) {
-        setGestureOutput("Happy Birthday");
-        setGestureStatus("AI Recognized: 'Happy Birthday' (Chest pat) 96% match 🎂");
-        return;
-      }
+        // ORANGE: Squeezing at mouth
+        if (activeTarget === "orange") {
+          if (isNearMouth) {
+            setGestureOutput("Orange");
+            setGestureStatus("Recognized: 'Orange' (Squeezing at mouth) 🍊");
+            return;
+          }
+        }
 
-      // 2. Neural Network Fallback for Continuous Variations
-      if (model) {
-        const features = extractLandmarkFeatures(leftHand, rightHand, pose);
-        const pred = predictSign(features, model);
-        if (pred && pred.confidence > 0.30) {
-          setGestureOutput(pred.predictedClass);
-          const percent = Math.round(pred.confidence * 100);
-          setGestureStatus(`AI Neural Model: '${pred.predictedClass}' (${percent}% match) 🤖`);
+        // GREEN: Pointing G-gesture
+        if (activeTarget === "green") {
+          if (idxExt && isOverChest) {
+            setGestureOutput("Green");
+            setGestureStatus("Recognized: 'Green' (G-gesture across body) 🟢");
+            return;
+          }
+        }
+
+        // GREY: Fingers intercrossed
+        if (activeTarget === "grey") {
+          if (numHands === 2 && isOverChest) {
+            setGestureOutput("Grey");
+            setGestureStatus("Recognized: 'Grey' (Intertwined fingers) ⚪");
+            return;
+          }
+        }
+
+        // HAPPY BIRTHDAY: Flat palm on chest/heart
+        if (activeTarget === "happy birthday") {
+          if (isOpenPalm && isOverChest) {
+            setGestureOutput("Happy Birthday");
+            setGestureStatus("Recognized: 'Happy Birthday' (Chest heart greeting) 🎂");
+            return;
+          }
+        }
+
+        // HAPPY ANNIVERSARY: Two hands celebrating
+        if (activeTarget === "happy anniversary") {
+          if (numHands === 2 && !isCrossedWrists) {
+            setGestureOutput("Happy Anniversary");
+            setGestureStatus("Recognized: 'Happy Anniversary' (Celebration) 💐");
+            return;
+          }
+        }
+
+        // GOOD NIGHT: Crossed wrists
+        if (activeTarget === "good night") {
+          if (isCrossedWrists || (numHands === 2 && areWristsClose)) {
+            setGestureOutput("Good Night");
+            setGestureStatus("Recognized: 'Good Night' (Crossed arms) 🌙");
+            return;
+          }
+        }
+
+        // NAMASTE: Palms together
+        if (activeTarget === "namaste") {
+          if (areWristsClose || (numHands === 2 && areWristsClose)) {
+            setGestureOutput("Namaste");
+            setGestureStatus("Recognized: 'Namaste' (Prayer mudra) 🙏");
+            return;
+          }
+        }
+
+        // HELLO: Open palm beside head
+        if (activeTarget === "hello") {
+          if (isOpenPalm && isBesideHead) {
+            setGestureOutput("Hello");
+            setGestureStatus("Recognized: 'Hello' (Greeting hand) 👋");
+            return;
+          }
+        }
+
+        // GOOD DAY: Thumbs up
+        if (activeTarget === "good day") {
+          if (isThumbsUp) {
+            setGestureOutput("Good Day");
+            setGestureStatus("Recognized: 'Good Day' (Thumbs Up) 👍");
+            return;
+          }
+        }
+
+        // GOOD MORNING
+        if (activeTarget === "good morning") {
+          if (recentThumbsUp || (isOpenPalm && tip8Y < noseY + 0.20 && Math.abs(handX - noseX) < 0.30)) {
+            setGestureOutput("Good Morning");
+            setGestureStatus("Recognized: 'Good Morning' (Rising sun bloom) ☀️");
+            return;
+          }
+        }
+
+        // GOOD AFTERNOON
+        if (activeTarget === "good afternoon") {
+          if (isOpenPalm && isNearMouth) {
+            setGestureOutput("Good Afternoon");
+            setGestureStatus("Recognized: 'Good Afternoon' (Midday sun) 🌤️");
+            return;
+          }
+        }
+
+        // GOOD EVENING
+        if (activeTarget === "good evening") {
+          if (recentThumbsUp || (isOpenPalm && handY > shoulderY - 0.08 && isOverChest)) {
+            setGestureOutput("Good Evening");
+            setGestureStatus("Recognized: 'Good Evening' (Sunset sweep) 🌆");
+            return;
+          }
+        }
+
+        // HOW ARE YOU
+        if (activeTarget === "how are you") {
+          if (isIndexPoint && isOverChest && !isNearMouth && !isNearForehead) {
+            setGestureOutput("How Are You");
+            setGestureStatus("Recognized: 'How Are You' (Pointing forward) 🙂");
+            return;
+          }
         }
       }
+
+      // ----------------------------------------------------
+      // PRIORITY 2: GENERAL DISAMBIGUATED GESTURE RECOGNITION
+      // ----------------------------------------------------
+
+      // 1. Two-Handed: Namaste & Good Night & Happy Anniversary
+      if (numHands === 2) {
+        if (isCrossedWrists) {
+          setGestureOutput("Good Night");
+          setGestureStatus("Recognized: 'Good Night' (Crossed arms) 🌙");
+          return;
+        }
+        if (areWristsClose) {
+          setGestureOutput("Namaste");
+          setGestureStatus("Recognized: 'Namaste' (Prayer mudra) 🙏");
+          return;
+        }
+        if (isOpenPalm) {
+          setGestureOutput("Happy Anniversary");
+          setGestureStatus("Recognized: 'Happy Anniversary' (Celebration) 💐");
+          return;
+        }
+      }
+
+      // 2. Face Points: Black, Red, Pink, Orange, Brown
+      if (isNearForehead && isIndexPoint) {
+        setGestureOutput("Black");
+        setGestureStatus("Recognized: 'Black' (Forehead point) ⬛");
+        return;
+      }
+
+      if (isNearMouth && isIndexPoint) {
+        setGestureOutput("Red");
+        setGestureStatus("Recognized: 'Red' (Lip touch) 🔴");
+        return;
+      }
+
+      if (isNearMouth && (isFist || openCount <= 2) && !isIndexPoint) {
+        setGestureOutput("Orange");
+        setGestureStatus("Recognized: 'Orange' (Squeezing at mouth) 🍊");
+        return;
+      }
+
+      if (isBesideHead && isBHand && Math.abs(tip8Y - mouthY) < 0.18) {
+        setGestureOutput("Brown");
+        setGestureStatus("Recognized: 'Brown' (B-hand on cheek) 🟤");
+        return;
+      }
+
+      // 3. Handshape-specific: Yellow (Y-hand), Violet (Peace V)
+      if (isYHand) {
+        setGestureOutput("Yellow");
+        setGestureStatus("Recognized: 'Yellow' (Y-handshape) 💛");
+        return;
+      }
+
+      if (isPeaceV) {
+        setGestureOutput("Violet");
+        setGestureStatus("Recognized: 'Violet' (V-handshape) 💜");
+        return;
+      }
+
+      // 4. Salutes & Greetings: Hello, Good Day, Good Morning, Good Afternoon, Good Evening, Happy Birthday
+      if (isBesideHead && isOpenPalm) {
+        setGestureOutput("Hello");
+        setGestureStatus("Recognized: 'Hello' (Greeting hand) 👋");
+        return;
+      }
+
+      if (isThumbsUp) {
+        setGestureOutput("Good Day");
+        setGestureStatus("Recognized: 'Good Day' (Thumbs Up) 👍");
+        return;
+      }
+
+      if (recentThumbsUp && isOpenPalm && tip8Y < noseY + 0.18) {
+        setGestureOutput("Good Morning");
+        setGestureStatus("Recognized: 'Good Morning' (Rising sun bloom) ☀️");
+        return;
+      }
+
+      if (isOpenPalm && isNearMouth) {
+        setGestureOutput("Good Afternoon");
+        setGestureStatus("Recognized: 'Good Afternoon' (Midday sun) 🌤️");
+        return;
+      }
+
+      if (recentThumbsUp && isOpenPalm && handY > shoulderY - 0.08) {
+        setGestureOutput("Good Evening");
+        setGestureStatus("Recognized: 'Good Evening' (Sunset sweep) 🌆");
+        return;
+      }
+
+      if (isOpenPalm && isOverChest) {
+        setGestureOutput("Happy Birthday");
+        setGestureStatus("Recognized: 'Happy Birthday' (Chest heart greeting) 🎂");
+        return;
+      }
+
+      // 5. How Are You: Only when pointing forward away from mouth/forehead
+      if (isIndexPoint && isOverChest && !isNearMouth && !isNearForehead && tip8Y > mouthY + 0.10) {
+        setGestureOutput("How Are You");
+        setGestureStatus("Recognized: 'How Are You' (Pointing forward) 🙂");
+        return;
+      }
+
+      // Default state when hands are active
+      setGestureOutput("—");
+      setGestureStatus("Hand detected. Make the exact sign gesture.");
     },
     [model]
   );
@@ -373,6 +631,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       replay: () => setReplayKey((k) => k + 1),
       gestureStatus,
       gestureOutput,
+      activeSign,
+      setActiveSign,
       simulateGesture,
       questions,
       sendQuestion,
@@ -399,6 +659,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       replayKey,
       gestureStatus,
       gestureOutput,
+      activeSign,
       simulateGesture,
       questions,
       sendQuestion,
