@@ -21,20 +21,6 @@ export function HeroLanding({ onStartLearning, onOpenTeacher, onOpenSOS }: HeroL
 
   const PREVIEW_SIGNS = [
     { 
-      name: language === "mr" ? "अक्षर A" : language === "hi" ? "अक्षर A" : "Letter A", 
-      emoji: "🅰️", 
-      desc: language === "mr" ? "अंगठा तर्जनीच्या बाजूला ठेवून मूठ बांधा" : language === "hi" ? "अंगूठे को तर्जनी के साथ रखते हुए मुट्ठी बनाएं" : "Fist with thumb resting along index finger", 
-      tag: "Level 3 · 98.8% Acc", 
-      cat: "alphabets" 
-    },
-    { 
-      name: language === "mr" ? "अक्षर V" : language === "hi" ? "अक्षर V" : "Letter V", 
-      emoji: "✌️", 
-      desc: language === "mr" ? "तर्जनी आणि मधले बोट 'V' आकारात उघडा" : language === "hi" ? "तर्जनी और मध्यमा को 'V' आकार में फैलाएं" : "Index & middle fingers extended in peace/V shape", 
-      tag: "Level 3 · 98.8% Acc", 
-      cat: "alphabets" 
-    },
-    { 
       name: language === "mr" ? "नमस्कार" : language === "hi" ? "नमस्ते" : "Namaste", 
       emoji: "🙏", 
       desc: language === "mr" ? "छातीसमोर दोन्ही हात जोडून प्रार्थना मुद्रा करा" : language === "hi" ? "छाती के सामने दोनों हाथ जोड़कर प्रार्थना मुद्रा बनाएं" : "Both flat palms pressed together in prayer mudra", 
@@ -49,11 +35,25 @@ export function HeroLanding({ onStartLearning, onOpenTeacher, onOpenSOS }: HeroL
       cat: "basic" 
     },
     { 
-      name: language === "mr" ? "लाल" : language === "hi" ? "लाल" : "Red", 
-      emoji: "🔴", 
-      desc: language === "mr" ? "तर्जनी ओठांना हळुवार स्पर्श करा" : language === "hi" ? "तर्जनी उंगली से होंठों को धीरे से स्पर्श करें" : "Index finger gently touching lips", 
+      name: language === "mr" ? "काळा" : language === "hi" ? "काला" : "Black", 
+      emoji: "⚫", 
+      desc: language === "mr" ? "तर्जनीच्या बाजूने उजव्या गालाला स्पर्श करा" : language === "hi" ? "तर्जनी उंगली के किनारे से दाहिने गाल को छुएं" : "Stroke right cheek with side of index finger", 
       tag: "Level 2 · Colours", 
       cat: "colors" 
+    },
+    { 
+      name: language === "mr" ? "गुलाबी" : language === "hi" ? "गुलाबी" : "Pink", 
+      emoji: "🌸", 
+      desc: language === "mr" ? "गालावर बोटांची टोके हळुवारपणे खाली फिरवा" : language === "hi" ? "गाल पर उंगलियों के पोरों को धीरे से नीचे की ओर फिराएं" : "Brush fingertips gently downwards across the cheek", 
+      tag: "Level 2 · Colours", 
+      cat: "colors" 
+    },
+    { 
+      name: language === "mr" ? "अक्षर V" : language === "hi" ? "अक्षर V" : "Letter V", 
+      emoji: "✌️", 
+      desc: language === "mr" ? "तर्जनी आणि मधले बोट 'V' आकारात उघडा" : language === "hi" ? "तर्जनी और मध्यमा को 'V' आकार में फैलाएं" : "Index & middle fingers extended in peace/V shape", 
+      tag: "Level 3 · 98.8% Acc", 
+      cat: "alphabets" 
     },
     { 
       name: language === "mr" ? "स्मार्ट SOS" : language === "hi" ? "स्मार्ट SOS" : "Smart SOS", 
