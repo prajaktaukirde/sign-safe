@@ -71,8 +71,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SignSync + SafeSOS" },
-      { name: "description", content: "ISL classroom accessibility and emergency assistance." },
+      { title: "SignSafe AI · Indian Sign Language & Emergency Rescue Platform" },
+      { name: "description", content: "Cloud-Native Trilingual ISL Learning and Emergency Disaster Rescue Platform powered by AWS." },
+      { property: "og:title", content: "SignSafe AI" },
+      { property: "og:description", content: "Cloud-Native Trilingual ISL Learning and Emergency Disaster Rescue Platform" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -87,7 +89,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "alternate icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
 

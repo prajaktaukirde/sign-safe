@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5" />
+      <stop offset="50%" stop-color="#7C3AED" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#F43F5E" />
+    </linearGradient>
+  </defs>
+  <!-- Background Shield/Rounded Square -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" />
+  
+  <!-- Outer glowing accent ring -->
+  <rect x="2" y="2" width="60" height="60" rx="14" stroke="url(#glowGrad)" stroke-width="2" stroke-opacity="0.6" fill="none" />
+  
+  <!-- Hand Mudra & Safety Sign (Stylized 🤟 ISL / Peace Hand) -->
+  <path d="M22 46V30C22 28.3431 23.3431 27 25 27C26.6569 27 28 28.3431 28 30V38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M28 38V22C28 20.3431 29.3431 19 31 19C32.6569 19 34 20.3431 34 22V36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M34 36V25C34 23.3431 35.3431 22 37 22C38.6569 22 40 23.3431 40 25V37" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M40 37V29C40 27.3431 41.3431 26 43 26C44.6569 26 46 27.3431 46 29V43C46 48.5228 41.5228 53 36 53H31C26.0294 53 22 48.9706 22 44V39" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Thumb extending -->
+  <path d="M22 39L17.5 35.5C16.2 34.4 15.5 32.8 15.5 31.1C15.5 28.3 18.5 26.5 21 28L24 30" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- AI Sparkle / Safety Star in top right -->
+  <path d="M49 13L50.5 17.5L55 19L50.5 20.5L49 25L47.5 20.5L43 19L47.5 17.5L49 13Z" fill="#FACC15" />
+</svg>
