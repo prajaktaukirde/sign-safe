@@ -67,6 +67,15 @@ export function SosOverlay() {
     }
   }, [contacts]);
 
+  // Lock background body scroll when SOS overlay is open
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, []);
+
   // Function to fetch real device GPS or IP fallback
   const fetchLocation = useCallback(() => {
     setLocLoading(true);
@@ -205,12 +214,10 @@ _Sent via SignSafe AI Assistive Platform_`;
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Soft translucent backdrop */}
-      <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-md" />
-
-      <div className="relative mx-auto w-full max-w-5xl px-4 py-6 sm:py-8">
-        {/* Header Bar */}
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/80 backdrop-blur-md">
+      <div className="min-h-full w-full px-4 py-6 sm:py-8 flex flex-col items-center justify-start">
+        <div className="w-full max-w-5xl">
+          {/* Header Bar */}
         <div className="mb-6 flex items-start justify-between gap-3">
           <div className="rounded-3xl bg-white p-5 sm:p-6 border border-rose-200 shadow-xl flex-1">
             <div className="flex items-center gap-3">
@@ -566,5 +573,6 @@ _Sent via SignSafe AI Assistive Platform_`;
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
