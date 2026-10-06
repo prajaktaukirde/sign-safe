@@ -3,11 +3,10 @@ import { useState } from "react";
 import { 
   Accessibility, GraduationCap, ShieldAlert, Sparkles, 
   Compass, Trophy, Home as HomeIcon, Video, Heart, Award, Flame,
-  Languages, Globe, Cloud, CheckCircle2, Server, X
+  Languages, Globe, CheckCircle2
 } from "lucide-react";
 import { DemoProvider, useDemo } from "@/lib/demo-store";
 import { LanguageProvider, useLanguage } from "@/lib/translations";
-import { AWS_SERVICES } from "@/lib/aws-services";
 import { StudentView } from "@/components/app/StudentView";
 import { TeacherView } from "@/components/app/TeacherView";
 import { SosOverlay } from "@/components/app/SosOverlay";
@@ -43,7 +42,6 @@ function Console() {
   const { language, setLanguage, t } = useLanguage();
   const [activeNav, setActiveNav] = useState<"home" | "learn" | "badges" | "teacher">("home");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [showAwsModal, setShowAwsModal] = useState(false);
 
   const handleStartLearning = (categoryKey?: string) => {
     setView("student");
@@ -150,17 +148,6 @@ function Console() {
 
         {/* Right Side Controls */}
         <div className="flex items-center gap-2">
-          {/* AWS Cloud Badge & Trigger */}
-          <button
-            onClick={() => setShowAwsModal(true)}
-            className="flex items-center gap-1.5 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-2.5 sm:px-3 py-1.5 text-xs font-bold text-amber-700 dark:text-amber-400 hover:bg-amber-500/20 transition-all cursor-pointer shadow-2xs"
-            title="View Active AWS Cloud Services"
-          >
-            <Cloud className="h-3.5 w-3.5 text-amber-600 animate-pulse" />
-            <span className="hidden sm:inline">AWS Cloud</span>
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
-          </button>
-
           {/* Language Selector Dropdown */}
           <div className="flex items-center gap-1 rounded-2xl border border-border/80 bg-muted/40 p-1">
             <Languages className="h-3.5 w-3.5 text-primary ml-1.5 hidden sm:inline" />
@@ -215,74 +202,6 @@ function Console() {
           />
         )}
       </div>
-
-      {/* 3. AWS SERVICES MODAL */}
-      {showAwsModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="relative w-full max-w-xl rounded-3xl border border-amber-500/30 bg-card p-6 shadow-2xl space-y-5">
-            <div className="flex items-center justify-between border-b border-border/80 pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-600 border border-amber-500/20">
-                  <Cloud className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-                    AWS Cloud Architecture
-                    <span className="rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-extrabold uppercase">
-                      Live & Active
-                    </span>
-                  </h3>
-                  <p className="text-xs text-muted-foreground">
-                    Cloud-native accessibility infrastructure for SignSafe AI
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowAwsModal(false)}
-                className="rounded-xl p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <div className="space-y-3">
-              {AWS_SERVICES.map((srv) => (
-                <div
-                  key={srv.id}
-                  className="flex items-start gap-3.5 rounded-2xl border border-border/80 bg-muted/40 p-3.5 transition-all hover:border-amber-500/30"
-                >
-                  <span className="text-2xl">{srv.icon}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
-                      <h4 className="text-sm font-bold text-foreground truncate">{srv.name}</h4>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 shrink-0">
-                        <CheckCircle2 className="h-3.5 w-3.5" />
-                        {srv.region}
-                      </span>
-                    </div>
-                    <span className="text-[11px] font-bold text-primary">{srv.service}</span>
-                    <p className="text-xs text-muted-foreground mt-0.5">{srv.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-3.5 text-xs text-muted-foreground flex items-center justify-between">
-              <span className="font-semibold text-amber-800 dark:text-amber-300">
-                ☁️ Hosted Live on AWS Amplify Global CDN
-              </span>
-              <a
-                href="https://main.d3aunvxyxb078t.amplifyapp.com"
-                target="_blank"
-                rel="noreferrer"
-                className="font-bold text-primary hover:underline ml-2"
-              >
-                amplifyapp.com ↗
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
 
       <DemoPanel />
       {emergency && <SosOverlay />}
