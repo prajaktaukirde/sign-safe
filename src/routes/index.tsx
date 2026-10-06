@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
 function Console() {
   const { view, setView, emergency, triggerEmergency, room } = useDemo();
   const { language, setLanguage, t } = useLanguage();
-  const [activeNav, setActiveNav] = useState<"home" | "learn" | "badges" | "teacher">("home");
+  const [activeNav, setActiveNav] = useState<"home" | "learn" | "sentences" | "badges" | "teacher">("home");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleStartLearning = (categoryKey?: string) => {
@@ -49,6 +49,11 @@ function Console() {
     if (categoryKey) {
       setSelectedCategory(categoryKey);
     }
+  };
+
+  const handleOpenSentences = () => {
+    setView("student");
+    setActiveNav("sentences");
   };
 
   const handleOpenTeacher = () => {
@@ -121,6 +126,21 @@ function Console() {
           <button
             onClick={() => {
               setView("student");
+              setActiveNav("sentences");
+            }}
+            className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+              activeNav === "sentences" && view === "student"
+                ? "bg-white text-primary shadow-2xs"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
+            <span>{t.tabSentences}</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setView("student");
               setActiveNav("badges");
             }}
             className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
@@ -187,15 +207,17 @@ function Console() {
         ) : activeNav === "home" ? (
           <HeroLanding
             onStartLearning={handleStartLearning}
+            onOpenSentences={handleOpenSentences}
             onOpenTeacher={handleOpenTeacher}
             onOpenSOS={() => triggerEmergency("Campus Evacuation Preview")}
           />
         ) : (
           <StudentView
             initialCategory={selectedCategory}
-            activeTab={activeNav === "badges" ? "progress" : "learn"}
+            activeTab={activeNav === "badges" ? "progress" : activeNav === "sentences" ? "sentences" : "learn"}
             onTabChange={(tab) => {
               if (tab === "progress") setActiveNav("badges");
+              else if (tab === "sentences") setActiveNav("sentences");
               else setActiveNav("learn");
             }}
             onBackToHome={() => setActiveNav("home")}
