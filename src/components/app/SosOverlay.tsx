@@ -388,67 +388,74 @@ _Sent via SignSafe AI Assistive Platform_`;
                 )}
 
                 {/* Contacts List with Instant Dispatch */}
-                <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
+                <div className="space-y-3">
                   {contacts.map((contact) => (
                     <div
                       key={contact.id}
-                      className="rounded-2xl border border-slate-200/90 bg-slate-50/70 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-white hover:border-slate-300 transition-all shadow-2xs"
+                      className="rounded-2xl border border-slate-200 bg-slate-50/50 p-3.5 space-y-2.5 hover:bg-white hover:border-slate-300 transition-all shadow-2xs"
                     >
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-slate-900 text-sm">{contact.name}</span>
-                          <span className="rounded-lg bg-slate-200/80 px-2 py-0.5 text-[10px] font-bold text-slate-700">
+                      {/* Top Row: Name, Badges & Delete */}
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 flex-wrap min-w-0">
+                          <span className="font-bold text-slate-900 text-sm truncate">{contact.name}</span>
+                          <span className="rounded-lg bg-slate-200/80 px-2 py-0.5 text-[10px] font-bold text-slate-700 shrink-0">
                             {contact.relation}
                           </span>
                           {contact.isPrimary && (
-                            <span className="rounded-lg bg-amber-100 text-amber-800 border border-amber-300 px-2 py-0.5 text-[10px] font-bold flex items-center gap-0.5">
+                            <span className="rounded-lg bg-amber-100 text-amber-800 border border-amber-300 px-2 py-0.5 text-[10px] font-bold flex items-center gap-1 shrink-0">
                               <Star className="h-3 w-3 fill-amber-500 text-amber-500" /> {t.primaryBadge}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs font-mono text-slate-500 mt-0.5 font-medium">+91 {contact.phone}</p>
-                      </div>
 
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        {/* WhatsApp Dispatch */}
-                        <button
-                          onClick={() => handleSendWhatsApp(contact.phone, contact.name)}
-                          className="rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
-                          title={`Send WhatsApp Alert to ${contact.name}`}
-                        >
-                          <MessageCircle className="h-3.5 w-3.5" />
-                          <span>WhatsApp</span>
-                        </button>
-
-                        {/* Cellular SMS Dispatch */}
-                        <button
-                          onClick={() => handleSendSms(contact.phone, contact.name)}
-                          className="rounded-xl bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
-                          title={`Send Cellular SMS to ${contact.name}`}
-                        >
-                          <MessageSquare className="h-3.5 w-3.5" />
-                          <span>SMS</span>
-                        </button>
-
-                        {/* Direct Call */}
-                        <a
-                          href={`tel:+91${contact.phone}`}
-                          className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white p-2 transition-colors shadow-xs"
-                          title={`Call ${contact.name}`}
-                        >
-                          <PhoneCall className="h-3.5 w-3.5" />
-                        </a>
-
-                        {/* Delete contact (only if not default primary) */}
                         {contacts.length > 1 && (
                           <button
                             onClick={() => handleDeleteContact(contact.id)}
-                            className="rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-700 p-2 transition-colors cursor-pointer"
-                            title="Delete Contact"
+                            className="rounded-lg p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer shrink-0"
+                            title="Remove Contact"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
                         )}
+                      </div>
+
+                      {/* Bottom Row: Phone Number & Action Buttons */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-200/60">
+                        <span className="text-xs font-mono text-slate-600 font-semibold flex items-center gap-1.5">
+                          <Phone className="h-3.5 w-3.5 text-slate-400" />
+                          +91 {contact.phone}
+                        </span>
+
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          {/* WhatsApp Dispatch */}
+                          <button
+                            onClick={() => handleSendWhatsApp(contact.phone, contact.name)}
+                            className="rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white px-2.5 sm:px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                            title={`Send WhatsApp Alert to ${contact.name}`}
+                          >
+                            <MessageCircle className="h-3.5 w-3.5" />
+                            <span>WhatsApp</span>
+                          </button>
+
+                          {/* Cellular SMS Dispatch */}
+                          <button
+                            onClick={() => handleSendSms(contact.phone, contact.name)}
+                            className="rounded-xl bg-amber-500 hover:bg-amber-600 text-white px-2.5 sm:px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                            title={`Send Cellular SMS to ${contact.name}`}
+                          >
+                            <MessageSquare className="h-3.5 w-3.5" />
+                            <span>SMS</span>
+                          </button>
+
+                          {/* Direct Call */}
+                          <a
+                            href={`tel:+91${contact.phone}`}
+                            className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white p-1.5 transition-colors shadow-xs flex items-center justify-center"
+                            title={`Call ${contact.name}`}
+                          >
+                            <PhoneCall className="h-3.5 w-3.5" />
+                          </a>
+                        </div>
                       </div>
                     </div>
                   ))}
