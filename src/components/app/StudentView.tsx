@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { 
   Sparkles, Hand, RotateCcw, Trophy, BookOpen, Star, 
   AlertCircle, ShieldAlert, Award, Compass, Heart, Activity, CheckCircle2, RefreshCw,
-  Palette, ChevronRight, ChevronLeft, Volume2, Flame
+  Palette, ChevronRight, ChevronLeft, Volume2, Flame, Lock, Trash2, BarChart3, TrendingUp, Check
 } from "lucide-react";
 import { WebcamMock } from "./WebcamMock";
 import { TestSection } from "./TestSection";
 import { useDemo } from "@/lib/demo-store";
 import { useLanguage, Language } from "@/lib/translations";
+import { loadProgress, saveProgressRecord, resetProgress, SignRecord } from "@/lib/progress-store";
 
 export interface LocalizedSign {
   name: string;
@@ -376,27 +377,60 @@ export const CATEGORIES: Record<string, Category> = {
   }
 };
 
-const BADGES = [
+const BADGES_CONFIG = [
   { 
     id: "first", 
     name: { en: "First Sign", hi: "पहला संकेत", mr: "पहिले चिन्ह" },
     desc: { en: "Learned your first ISL sign!", hi: "अपना पहला ISL संकेत सीखा!", mr: "तुमचे पहिले ISL चिन्ह शिकलात!" },
-    icon: Star, 
-    color: "text-amber-500 bg-amber-500/10 border-amber-500/20" 
+    icon: Star,
+    color: "text-amber-500 bg-amber-500/10 border-amber-500/30",
+    check: (history: Record<string, SignRecord>) => Object.keys(history).length >= 1,
+    progress: (history: Record<string, SignRecord>) => `${Math.min(Object.keys(history).length, 1)} / 1 Sign`
   },
   { 
     id: "perfect", 
-    name: { en: "Perfect Score", hi: "उत्कृष्ट स्कोर", mr: "उत्कृष्ट गुण" },
-    desc: { en: "Got 100% accuracy on a sign", hi: "संकेत पर 100% सटीकता प्राप्त की", mr: "चिन्हावर १००% अचूकता मिळवली" },
+    name: { en: "Precision Master", hi: "उत्कृष्ट सटीकता", mr: "अचूकता तज्ज्ञ" },
+    desc: { en: "Achieved 98%+ accuracy on a sign", hi: "संकेत पर 98%+ सटीकता प्राप्त की", mr: "चिन्हावर ९८%+ अचूकता मिळवली" },
     icon: Trophy, 
-    color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20" 
+    color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).some(r => r.accuracy >= 98),
+    progress: (history: Record<string, SignRecord>) => Object.values(history).some(r => r.accuracy >= 98) ? "Completed (98%+)" : "Aim for 98%+ Match"
+  },
+  { 
+    id: "greetings", 
+    name: { en: "Greetings Master", hi: "अभिवादन विशेषज्ञ", mr: "अभिवादन तज्ज्ञ" },
+    desc: { en: "Completed all 10 Level 1 Greetings", hi: "स्तर 1 के सभी 10 अभिवादन संकेत पूरे किए", mr: "स्तर १ मधील सर्व १० अभिवादन चिन्हे पूर्ण केली" },
+    icon: Compass, 
+    color: "text-blue-500 bg-blue-500/10 border-blue-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "basic").length >= 10,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "basic").length} / 10 Greetings`
+  },
+  { 
+    id: "colors", 
+    name: { en: "Colour Virtuoso", hi: "रंग पारंगत", mr: "रंग तज्ज्ञ" },
+    desc: { en: "Completed all 10 Level 2 Colour signs", hi: "स्तर 2 के सभी 10 रंग संकेत पूरे किए", mr: "स्तर २ मधील सर्व १० रंग चिन्हे पूर्ण केली" },
+    icon: Palette, 
+    color: "text-purple-500 bg-purple-500/10 border-purple-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "colors").length >= 10,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "colors").length} / 10 Colours`
+  },
+  { 
+    id: "alphabets", 
+    name: { en: "Alphabet Scholar", hi: "वर्णमाला अभ्यासक", mr: "मुळाक्षरे तज्ज्ञ" },
+    desc: { en: "Mastered at least 10 A–Z fingerspelled letters", hi: "कम से कम 10 A–Z फिंगरस्पेलिंग अक्षर सीखे", mr: "किमान १० A–Z फिंगरस्पेलिंग अक्षरे शिकली" },
+    icon: BookOpen, 
+    color: "text-orange-500 bg-orange-500/10 border-orange-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "alphabets").length >= 10,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "alphabets").length} / 10 Letters`
   },
   { 
     id: "safety", 
     name: { en: "Safety Hero", hi: "सुरक्षा हीरो", mr: "सुरक्षा हिरो" },
     desc: { en: "Completed Level 4 Emergency Signs", hi: "स्तर 4 आपातकालीन संकेत पूरे किए", mr: "स्तर ४ आपत्कालीन चिन्हे पूर्ण केली" },
-    icon: Award, 
-    color: "text-rose-500 bg-rose-500/10 border-rose-500/20" 
+    icon: ShieldAlert, 
+    color: "text-rose-500 bg-rose-500/10 border-rose-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "emergency").length >= 2,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "emergency").length} / 2 Emergency`
   }
 ];
 
@@ -433,18 +467,77 @@ export function StudentView({
   const [selectedCat, setSelectedCat] = useState<string | null>(initialCategory);
   const [currentSignIdx, setCurrentSignIdx] = useState(0);
 
+  // Persistent student progress store
+  const [progressHistory, setProgressHistory] = useState<Record<string, SignRecord>>({});
+
+  useEffect(() => {
+    const syncProgress = () => {
+      setProgressHistory(loadProgress());
+    };
+    syncProgress();
+    window.addEventListener("signsafe_progress_updated", syncProgress);
+    return () => window.removeEventListener("signsafe_progress_updated", syncProgress);
+  }, []);
+
   useEffect(() => {
     if (initialCategory) {
       setSelectedCat(initialCategory);
       setCurrentSignIdx(0);
     }
   }, [initialCategory]);
-  const [points, setPoints] = useState(350);
-  const [accuracyHistory, setAccuracyHistory] = useState<Record<string, number>>({
-    "Hello": 95,
-    "Namaste": 98,
-    "Good Morning": 92
-  });
+
+  // Derived progress statistics
+  const masteredCount = Object.keys(progressHistory).length;
+  const points = masteredCount * 10;
+
+  const basicCount = Object.values(progressHistory).filter(p => p.category === "basic").length;
+  const colorsCount = Object.values(progressHistory).filter(p => p.category === "colors").length;
+  const alphabetsCount = Object.values(progressHistory).filter(p => p.category === "alphabets").length;
+  const emergencyCount = Object.values(progressHistory).filter(p => p.category === "emergency").length;
+
+  const totalPracticeReps = Object.values(progressHistory).reduce((sum, p) => sum + (p.count || 1), 0);
+  const avgAccuracy = masteredCount > 0 
+    ? Math.round(Object.values(progressHistory).reduce((sum, p) => sum + p.accuracy, 0) / masteredCount)
+    : 0;
+
+  // Dynamic Level determination
+  const getCurrentLevel = () => {
+    if (masteredCount === 0) {
+      return {
+        title: language === "mr" ? "स्तर १ · शिकाऊ" : language === "hi" ? "स्तर 1 · नौसिखिया" : "Level 1 · Beginner",
+        desc: language === "mr" ? "पहिले स्टार मिळवण्यासाठी अभिवादन चिन्हे सुरू करा!" : language === "hi" ? "अपना पहला सितारा अर्जित करने के लिए अभिवादन शुरू करें!" : "Start with Greetings to earn your first star!",
+        nextGoal: language === "mr" ? "१० अभिवादन चिन्हे पूर्ण करा" : language === "hi" ? "10 अभिवादन संकेत पूरे करें" : "Complete Level 1 Greetings (0 / 10)"
+      };
+    }
+    if (basicCount < 10) {
+      return {
+        title: language === "mr" ? "स्तर १ · अभिवादन सराव" : language === "hi" ? "स्तर 1 · अभिवादन अभ्यास" : "Level 1 · Greetings Explorer",
+        desc: `${basicCount} / 10 ${language === "mr" ? "अभिवादन चिन्हे पूर्ण" : language === "hi" ? "अभिवादन संकेत पूर्ण" : "Greetings mastered"}`,
+        nextGoal: language === "mr" ? `स्तर २ उघडण्यासाठी अजून ${10 - basicCount} चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 2 अनलॉक करने के लिए और ${10 - basicCount} संकेत पूरे करें` : `Complete ${10 - basicCount} more Greetings to unlock Level 2 Colours!`
+      };
+    }
+    if (colorsCount < 10) {
+      return {
+        title: language === "mr" ? "स्तर २ · रंग कलाकार" : language === "hi" ? "स्तर 2 · रंग कलाकार" : "Level 2 · Colour Artist",
+        desc: `${colorsCount} / 10 ${language === "mr" ? "रंग चिन्हे पूर्ण" : language === "hi" ? "रंग संकेत पूर्ण" : "Colours mastered"}`,
+        nextGoal: language === "mr" ? `स्तर ३ उघडण्यासाठी अजून ${10 - colorsCount} रंग चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 3 अनलॉक करने के लिए और ${10 - colorsCount} रंग पूरे करें` : `Complete ${10 - colorsCount} more Colours to unlock Level 3 Alphabets!`
+      };
+    }
+    if (alphabetsCount < 26) {
+      return {
+        title: language === "mr" ? "स्तर ३ · AI मुळाक्षरे अभ्यासक" : language === "hi" ? "स्तर 3 · AI वर्णमाला विद्वान" : "Level 3 · Deep Learning Scholar",
+        desc: `${alphabetsCount} / 26 ${language === "mr" ? "अक्षरे पूर्ण" : language === "hi" ? "अक्षर पूर्ण" : "Letters mastered"}`,
+        nextGoal: language === "mr" ? "सर्व २६ अक्षरे पूर्ण करा" : language === "hi" ? "सभी 26 अक्षर पूरे करें" : "Master all 26 alphabets for full ISL proficiency!"
+      };
+    }
+    return {
+      title: language === "mr" ? "स्तर ४ · ISL ग्रँड मास्टर" : language === "hi" ? "स्तर 4 · ISL ग्रैंड मास्टर" : "Level 4 · ISL Grand Master",
+      desc: language === "mr" ? "सर्व अभ्यासक्रम यशस्वीपणे पूर्ण! 🏆" : language === "hi" ? "सभी पाठ्यक्रम सफलतापूर्वक पूर्ण! 🏆" : "All curriculum levels mastered! 🏆",
+      nextGoal: language === "mr" ? "सर्वोच्च प्राविण्य प्राप्त झाले!" : language === "hi" ? "सर्वोच्च दक्षता प्राप्त हुई!" : "Full Mastery Achieved!"
+    };
+  };
+
+  const currentLevelInfo = getCurrentLevel();
   
   // Real-time gesture validation states
   const [matchingStatus, setMatchingStatus] = useState<"waiting" | "correct" | "incorrect">("waiting");
@@ -529,25 +622,17 @@ export function StudentView({
         setMatchingStatus("correct");
         const score = 94 + Math.floor(Math.random() * 6);
         setEvaluatedScore(score);
-        setPoints((p) => p + 10);
-        setAccuracyHistory((prev) => ({
-          ...prev,
-          [currentSign.name]: score
-        }));
+        saveProgressRecord(currentSign.name, (selectedCat as any) || "basic", score);
       }
     }
-  }, [gestureOutput, currentSign, matchingStatus]);
+  }, [gestureOutput, currentSign, matchingStatus, selectedCat]);
 
   const forceMatch = () => {
     if (currentSign) {
       setMatchingStatus("correct");
       const score = 96;
       setEvaluatedScore(score);
-      setPoints((p) => p + 10);
-      setAccuracyHistory(prev => ({
-        ...prev,
-        [currentSign.name]: score
-      }));
+      saveProgressRecord(currentSign.name, (selectedCat as any) || "basic", score);
     }
   };
 
@@ -909,8 +994,16 @@ export function StudentView({
 
       {/* 2. Progress & Achievements Mode */}
       {activeTab === "progress" && (
-        <div className="space-y-5">
-          <div className="flex items-center justify-between">
+        <div className="space-y-6">
+          <div className="flex items-center justify-between border-b border-border/80 pb-3">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-black text-foreground">
+                {t.tabBadges}
+              </h2>
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Track your milestone badges and level advancement across Indian Sign Language.
+              </p>
+            </div>
             {onBackToHome && (
               <button
                 onClick={onBackToHome}
@@ -920,130 +1013,342 @@ export function StudentView({
                 <span>{t.backToHome}</span>
               </button>
             )}
-            <button
-              onClick={() => setActiveTab("learn")}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-2 text-xs font-bold text-primary hover:bg-muted transition-colors cursor-pointer shadow-2xs"
-            >
-              <Compass className="h-4 w-4" />
-              <span>{t.navLearn}</span>
-            </button>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
-            <div className="glass rounded-2xl p-6 text-center space-y-3">
+          {/* Key Milestone Status Cards */}
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="glass rounded-3xl p-6 text-center space-y-3 border border-border">
               <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{t.totalStars}</h3>
               <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500">
-                <Trophy className="h-8 w-8" />
+                <Trophy className="h-8 w-8 animate-pulse" />
               </div>
               <p className="text-3xl font-black text-foreground">{points} ⭐</p>
-              <p className="text-xs text-muted-foreground">{t.keepLearningStars}</p>
+              <p className="text-xs text-muted-foreground">
+                {masteredCount} / 48 {t.signsCount} {language === "mr" ? "यशस्वीपणे शिकली" : language === "hi" ? "सफलतापूर्वक सीखे गए" : "mastered so far"} (+10 ⭐ per sign)
+              </p>
             </div>
 
-            <div className="glass rounded-2xl p-6 text-center space-y-3">
+            <div className="glass rounded-3xl p-6 text-center space-y-3 border border-border">
               <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{t.currentLevel}</h3>
               <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                 <Award className="h-8 w-8" />
               </div>
-              <p className="text-xl font-bold text-foreground">{t.level2Explorer}</p>
-              <p className="text-xs text-muted-foreground">{t.completeLevel2ToUnlock}</p>
+              <p className="text-xl font-bold text-foreground">{currentLevelInfo.title}</p>
+              <p className="text-xs font-semibold text-primary">{currentLevelInfo.desc}</p>
+              <div className="pt-2 border-t border-border/50 text-[11px] text-muted-foreground">
+                🎯 {currentLevelInfo.nextGoal}
+              </div>
             </div>
+          </div>
 
-            <div className="glass rounded-2xl p-6 space-y-3">
-              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider text-center">{t.unlockedBadges}</h3>
-              <div className="space-y-2.5">
-                {BADGES.map((badge) => {
-                  const Icon = badge.icon;
-                  const bName = badge.name[language] || badge.name.en;
-                  const bDesc = badge.desc[language] || badge.desc.en;
-                  return (
-                    <div key={badge.id} className={`flex items-center gap-3 p-3 rounded-xl border ${badge.color}`}>
-                      <Icon className="h-5 w-5 shrink-0" />
+          {/* Badges Arena */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-primary" /> {t.unlockedBadges}
+            </h3>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {BADGES_CONFIG.map((badge) => {
+                const Icon = badge.icon;
+                const isUnlocked = badge.check(progressHistory);
+                const progressText = badge.progress(progressHistory);
+                const bName = badge.name[language] || badge.name.en;
+                const bDesc = badge.desc[language] || badge.desc.en;
+
+                return (
+                  <div
+                    key={badge.id}
+                    className={`flex flex-col justify-between p-5 rounded-2xl border transition-all ${
+                      isUnlocked
+                        ? `${badge.color} shadow-xs ring-1 ring-primary/20 scale-[1.01]`
+                        : "border-border/60 bg-muted/20 opacity-60 grayscale hover:grayscale-0"
+                    }`}
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${
+                          isUnlocked ? "bg-white shadow-2xs" : "bg-muted text-muted-foreground"
+                        }`}>
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        {isUnlocked ? (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                            <Check className="h-3 w-3" /> Unlocked
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[10px] font-bold text-muted-foreground">
+                            <Lock className="h-3 w-3" /> Locked
+                          </span>
+                        )}
+                      </div>
+
                       <div>
-                        <h4 className="font-bold text-xs">{bName}</h4>
-                        <p className="text-[11px] text-muted-foreground">{bDesc}</p>
+                        <h4 className="font-bold text-sm text-foreground">{bName}</h4>
+                        <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{bDesc}</p>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+
+                    <div className="mt-4 pt-3 border-t border-border/40 flex items-center justify-between text-[11px] font-bold">
+                      <span className="text-muted-foreground">Progress:</span>
+                      <span className={isUnlocked ? "text-emerald-600" : "text-foreground"}>
+                        {progressText}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       )}
 
-      {/* 3. Parent/Teacher Dashboard */}
+      {/* 3. Parent/Teacher Progress Dashboard */}
       {activeTab === "parent" && (
-        <div className="space-y-5">
-          <div className="flex items-center justify-between">
-            {onBackToHome && (
+        <div className="space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/80 pb-3">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-black text-foreground">
+                {t.tabParent}
+              </h2>
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Real-time analytics, gesture accuracy history, and curriculum mastery data.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
               <button
-                onClick={onBackToHome}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-2 text-xs font-bold text-foreground hover:bg-muted transition-colors cursor-pointer shadow-2xs"
+                onClick={() => setActiveTab("test")}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-3.5 py-2 text-xs font-bold text-white shadow-2xs hover:bg-primary/90 transition-all cursor-pointer"
               >
-                <ChevronLeft className="h-4 w-4 text-primary" />
-                <span>{t.backToHome}</span>
+                <Award className="h-4 w-4" />
+                <span>{t.tabTest}</span>
               </button>
-            )}
-            <button
-              onClick={() => setActiveTab("learn")}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-2 text-xs font-bold text-primary hover:bg-muted transition-colors cursor-pointer shadow-2xs"
-            >
-              <Compass className="h-4 w-4" />
-              <span>{t.navLearn}</span>
-            </button>
+
+              {masteredCount > 0 && (
+                <button
+                  onClick={() => {
+                    if (window.confirm("Are you sure you want to reset your practice progress?")) {
+                      resetProgress();
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2 text-xs font-bold text-destructive hover:bg-destructive/20 transition-all cursor-pointer shadow-2xs"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                  <span>Reset Progress</span>
+                </button>
+              )}
+            </div>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            <div className="glass rounded-2xl p-5 space-y-4">
+          {/* 4 Key Performance Metrics */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="glass rounded-2xl p-4 border border-border space-y-1">
+              <div className="flex items-center justify-between text-muted-foreground">
+                <span className="text-xs font-bold uppercase">{t.totalStars}</span>
+                <Trophy className="h-4 w-4 text-amber-500" />
+              </div>
+              <p className="text-2xl font-black text-foreground">{points} ⭐</p>
+              <p className="text-[11px] text-muted-foreground">+10 per validated gesture</p>
+            </div>
+
+            <div className="glass rounded-2xl p-4 border border-border space-y-1">
+              <div className="flex items-center justify-between text-muted-foreground">
+                <span className="text-xs font-bold uppercase">Average Accuracy</span>
+                <TrendingUp className="h-4 w-4 text-emerald-500" />
+              </div>
+              <p className="text-2xl font-black text-emerald-600">{avgAccuracy}%</p>
+              <p className="text-[11px] text-muted-foreground">Across {masteredCount} mastered signs</p>
+            </div>
+
+            <div className="glass rounded-2xl p-4 border border-border space-y-1">
+              <div className="flex items-center justify-between text-muted-foreground">
+                <span className="text-xs font-bold uppercase">Curriculum Mastered</span>
+                <BarChart3 className="h-4 w-4 text-primary" />
+              </div>
+              <p className="text-2xl font-black text-foreground">{masteredCount} / 48</p>
+              <p className="text-[11px] text-muted-foreground">{Math.round((masteredCount / 48) * 100)}% of ISL syllabus</p>
+            </div>
+
+            <div className="glass rounded-2xl p-4 border border-border space-y-1">
+              <div className="flex items-center justify-between text-muted-foreground">
+                <span className="text-xs font-bold uppercase">Practice Evaluations</span>
+                <Activity className="h-4 w-4 text-purple-500" />
+              </div>
+              <p className="text-2xl font-black text-foreground">{totalPracticeReps}</p>
+              <p className="text-[11px] text-muted-foreground">Total camera validations</p>
+            </div>
+          </div>
+
+          {/* Curriculum Category Completion Progress Bars */}
+          <div className="glass rounded-3xl p-6 border border-border space-y-4">
+            <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
+              <BookOpen className="h-4 w-4 text-primary" /> Curriculum Levels Breakdown
+            </h3>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {/* Level 1 Greetings */}
+              <div className="rounded-2xl border border-blue-500/20 bg-blue-500/5 p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-blue-700">🌱 Level 1: Greetings</span>
+                  <span>{basicCount} / 10</span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                  <div className="h-full bg-blue-600 rounded-full transition-all duration-500" style={{ width: `${(basicCount / 10) * 100}%` }} />
+                </div>
+                <p className="text-[10px] text-muted-foreground">{Math.round((basicCount / 10) * 100)}% Completed</p>
+              </div>
+
+              {/* Level 2 Colours */}
+              <div className="rounded-2xl border border-purple-500/20 bg-purple-500/5 p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-purple-700">🎨 Level 2: Colours</span>
+                  <span>{colorsCount} / 10</span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                  <div className="h-full bg-purple-600 rounded-full transition-all duration-500" style={{ width: `${(colorsCount / 10) * 100}%` }} />
+                </div>
+                <p className="text-[10px] text-muted-foreground">{Math.round((colorsCount / 10) * 100)}% Completed</p>
+              </div>
+
+              {/* Level 3 Alphabets */}
+              <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-amber-700">🔤 Level 3: Alphabets</span>
+                  <span>{alphabetsCount} / 26</span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                  <div className="h-full bg-amber-600 rounded-full transition-all duration-500" style={{ width: `${(alphabetsCount / 26) * 100}%` }} />
+                </div>
+                <p className="text-[10px] text-muted-foreground">{Math.round((alphabetsCount / 26) * 100)}% Completed</p>
+              </div>
+
+              {/* Level 4 Emergency */}
+              <div className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-rose-700">🚨 Level 4: Safety</span>
+                  <span>{emergencyCount} / 2</span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                  <div className="h-full bg-rose-600 rounded-full transition-all duration-500" style={{ width: `${(emergencyCount / 2) * 100}%` }} />
+                </div>
+                <p className="text-[10px] text-muted-foreground">{Math.round((emergencyCount / 2) * 100)}% Completed</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Gesture Accuracy & History Table */}
+          <div className="grid gap-6 lg:grid-cols-12">
+            <div className="glass rounded-3xl p-6 border border-border lg:col-span-7 space-y-4">
               <h3 className="text-base font-bold flex items-center gap-2 text-foreground">
                 <Activity className="h-4 w-4 text-primary" /> {t.studentAccuracyHistory}
               </h3>
-              <div className="space-y-2.5">
-                {Object.entries(accuracyHistory).map(([sign, acc]) => {
-                  const signDetails = getSignDetails(sign, language);
-                  return (
-                    <div key={sign} className="flex items-center justify-between border-b border-border/50 pb-2">
-                      <div>
-                        <span className="font-bold text-xs text-foreground">{signDetails.name}</span>
-                        <p className="text-[11px] text-muted-foreground">{t.recentSessionEval}</p>
+
+              {masteredCount === 0 ? (
+                <div className="rounded-2xl border border-dashed border-border p-8 text-center space-y-3 bg-muted/10">
+                  <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto">
+                    <Hand className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-foreground">No Gesture History Yet</h4>
+                    <p className="text-xs text-muted-foreground max-w-sm mx-auto mt-1 leading-relaxed">
+                      Start practicing in the <strong>Learn & Practice</strong> tab or test your skills in the <strong>Exam Arena</strong> to record your real-time accuracy data here!
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setActiveTab("learn")}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-primary/90 transition-all cursor-pointer"
+                  >
+                    <Compass className="h-3.5 w-3.5" /> Start First Lesson
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-2.5 max-h-96 overflow-y-auto pr-1">
+                  {Object.values(progressHistory).map((record) => {
+                    const signDetails = getSignDetails(record.signName, language);
+                    return (
+                      <div key={record.signName} className="flex items-center justify-between border-b border-border/50 pb-2.5 pt-1">
+                        <div>
+                          <span className="font-bold text-xs text-foreground">{signDetails.name}</span>
+                          <div className="flex items-center gap-2 text-[11px] text-muted-foreground mt-0.5">
+                            <span className="capitalize">{record.category}</span>
+                            <span>·</span>
+                            <span>{record.count} reps</span>
+                            <span>·</span>
+                            <span>{record.lastPracticed}</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <span className={`text-xs font-bold ${record.accuracy >= 90 ? "text-emerald-600" : "text-amber-600"}`}>
+                            {record.accuracy}%
+                          </span>
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
+                            record.accuracy >= 90
+                              ? "bg-emerald-500/10 text-emerald-600"
+                              : "bg-amber-500/10 text-amber-600"
+                          }`}>
+                            {record.accuracy >= 90 ? t.passedBadge : t.practiceBadge}
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className={`text-xs font-bold ${acc >= 90 ? "text-emerald-600" : "text-amber-600"}`}>
-                          {acc}%
-                        </span>
-                        <span className="text-[10px] bg-muted px-2 py-0.5 rounded-full text-muted-foreground font-semibold uppercase">
-                          {acc >= 90 ? t.passedBadge : t.practiceBadge}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
-            <div className="glass rounded-2xl p-5 space-y-4">
+            {/* AI Learning Recommendations */}
+            <div className="glass rounded-3xl p-6 border border-border lg:col-span-5 space-y-4">
               <h3 className="text-base font-bold flex items-center gap-2 text-foreground">
                 <Heart className="h-4 w-4 text-rose-500" /> {t.learningRecommendations}
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Based on gesture accuracy data, here are customized recommendations:
+                Adaptive AI suggestions based on your live camera gesture precision:
               </p>
+
               <div className="space-y-3">
-                <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3.5 flex items-start gap-3">
-                  <Sparkles className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-xs font-bold text-foreground">{t.reinforceSignsTitle}</h4>
-                    <p className="text-[11px] text-muted-foreground mt-0.5">
-                      {t.reinforceSignsDesc}
-                    </p>
+                {basicCount < 10 && (
+                  <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-3.5 flex items-start gap-3">
+                    <Sparkles className="h-4 w-4 text-blue-500 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-foreground">Master Foundation Greetings</h4>
+                      <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+                        Complete {10 - basicCount} remaining greeting signs to build everyday conversational fluency.
+                      </p>
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {basicCount >= 10 && colorsCount < 10 && (
+                  <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-3.5 flex items-start gap-3">
+                    <Palette className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-foreground">Explore Level 2 Colours</h4>
+                      <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+                        Expand your visual vocabulary by learning ISL signs for Red, Green, Yellow, and Blue.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {alphabetsCount < 10 && (
+                  <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3.5 flex items-start gap-3">
+                    <BookOpen className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-foreground">Deep Learning A–Z Fingerspelling</h4>
+                      <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+                        Practice 10 alphabet signs to test our 98.85% neural network model in real time.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="rounded-xl border border-primary/20 bg-primary/5 p-3.5 flex items-start gap-3">
-                  <BookOpen className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                  <Award className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-xs font-bold text-foreground">{t.nextMilestoneTitle}</h4>
-                    <p className="text-[11px] text-muted-foreground mt-0.5">
-                      {t.nextMilestoneDesc}
+                    <h4 className="text-xs font-bold text-foreground">Take an Assessment Exam</h4>
+                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+                      Visit the <strong>Exam Arena</strong> to test your skills under timed conditions and earn a Certificate of Proficiency!
                     </p>
                   </div>
                 </div>

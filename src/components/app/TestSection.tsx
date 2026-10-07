@@ -9,6 +9,7 @@ import { WebcamMock } from "./WebcamMock";
 import { useDemo } from "@/lib/demo-store";
 import { useLanguage, Language } from "@/lib/translations";
 import { CATEGORIES, getSignDetails, Sign } from "./StudentView";
+import { saveProgressRecord } from "@/lib/progress-store";
 
 export interface TestQuestion {
   id: number;
@@ -266,6 +267,7 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
         setQuestionStatus("correct");
         setEarnedPoints(p => p + 10);
         const spent = Math.round((Date.now() - questionStartTime) / 1000);
+        saveProgressRecord(currentQuestion.sign.name, (currentQuestion.categoryKey as any) || "basic", 96);
 
         setResults(prev => [
           ...prev,
@@ -289,6 +291,7 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
     setQuestionStatus("correct");
     setEarnedPoints(p => p + 10);
     const spent = Math.round((Date.now() - questionStartTime) / 1000);
+    saveProgressRecord(currentQuestion.sign.name, (currentQuestion.categoryKey as any) || "basic", 96);
 
     setResults(prev => [
       ...prev,
@@ -330,6 +333,7 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
     if (isCorrect) {
       setQuestionStatus("correct");
       setEarnedPoints(p => p + 10);
+      saveProgressRecord(currentQuestion.sign.name, (currentQuestion.categoryKey as any) || "basic", 95);
     } else {
       setQuestionStatus("incorrect");
     }
