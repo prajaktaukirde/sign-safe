@@ -808,7 +808,7 @@ export function StudentView({
                         className={`px-3 py-1 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
                           idx === currentSignIdx
                             ? "bg-primary text-primary-foreground"
-                            : accuracyHistory[s.name]
+                            : progressHistory[s.name]
                             ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
                             : "bg-muted/60 text-muted-foreground hover:text-foreground"
                         }`}

@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Accessibility, GraduationCap, ShieldAlert, Sparkles, 
   Compass, Trophy, Home as HomeIcon, Video, Heart, Award, Flame,
-  Languages, Globe, CheckCircle2
+  Languages, Globe, CheckCircle2, Activity, BarChart3
 } from "lucide-react";
 import { DemoProvider, useDemo } from "@/lib/demo-store";
 import { LanguageProvider, useLanguage } from "@/lib/translations";
@@ -12,6 +12,7 @@ import { TeacherView } from "@/components/app/TeacherView";
 import { SosOverlay } from "@/components/app/SosOverlay";
 import { DemoPanel } from "@/components/app/DemoPanel";
 import { HeroLanding } from "@/components/app/HeroLanding";
+import { loadProgress, SignRecord } from "@/lib/progress-store";
 
 const TITLE = "SignSafe AI · Indian Sign Language & Child Safety";
 const DESC =
@@ -40,8 +41,36 @@ export const Route = createFileRoute("/")({
 function Console() {
   const { view, setView, emergency, triggerEmergency, room } = useDemo();
   const { language, setLanguage, t } = useLanguage();
-  const [activeNav, setActiveNav] = useState<"home" | "learn" | "test" | "badges" | "teacher">("home");
+  const [activeNav, setActiveNav] = useState<"home" | "learn" | "test" | "badges" | "dashboard" | "teacher">("home");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // Dynamic progress history sync
+  const [progressHistory, setProgressHistory] = useState<Record<string, SignRecord>>({});
+
+  useEffect(() => {
+    const syncProgress = () => {
+      setProgressHistory(loadProgress());
+    };
+    syncProgress();
+    window.addEventListener("signsafe_progress_updated", syncProgress);
+    return () => window.removeEventListener("signsafe_progress_updated", syncProgress);
+  }, []);
+
+  const masteredCount = Object.keys(progressHistory).length;
+  const liveStars = masteredCount * 10;
+  const basicCount = Object.values(progressHistory).filter(p => p.category === "basic").length;
+  const colorsCount = Object.values(progressHistory).filter(p => p.category === "colors").length;
+  const alphabetsCount = Object.values(progressHistory).filter(p => p.category === "alphabets").length;
+
+  const currentLevelLabel = masteredCount === 0
+    ? (language === "mr" ? "🌱 स्तर १" : language === "hi" ? "🌱 स्तर 1" : "🌱 Level 1")
+    : basicCount < 10
+    ? (language === "mr" ? "🌿 अभिवादन" : language === "hi" ? "🌿 अभिवादन" : "🌿 Greetings")
+    : colorsCount < 10
+    ? (language === "mr" ? "🎨 रंग" : language === "hi" ? "🎨 रंग" : "🎨 Colours")
+    : alphabetsCount < 26
+    ? (language === "mr" ? "🔤 मुळाक्षरे" : language === "hi" ? "🔤 वर्णमाला" : "🔤 Alphabets")
+    : (language === "mr" ? "🏆 ग्रँड मास्टर" : language === "hi" ? "🏆 ग्रैंड मास्टर" : "🏆 Grand Master");
 
   const handleStartLearning = (categoryKey?: string) => {
     setView("student");
@@ -154,6 +183,21 @@ function Console() {
           </button>
 
           <button
+            onClick={() => {
+              setView("student");
+              setActiveNav("dashboard");
+            }}
+            className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+              activeNav === "dashboard" && view === "student"
+                ? "bg-white text-primary shadow-2xs"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Activity className="h-3.5 w-3.5 text-blue-500" />
+            <span className="hidden sm:inline">{t.tabParent}</span>
+          </button>
+
+          <button
             onClick={handleOpenTeacher}
             className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
               view === "teacher"
@@ -183,11 +227,11 @@ function Console() {
             </select>
           </div>
 
-          {/* Quick Stats Pill */}
+          {/* Quick Stats Pill with dynamic live data */}
           <div className="hidden lg:flex items-center gap-2 rounded-2xl border border-amber-500/20 bg-amber-500/10 px-3 py-1.5 text-xs font-bold text-amber-600">
-            <span>{t.starsCount}</span>
+            <span>⭐ {liveStars} Stars</span>
             <span className="text-muted-foreground">·</span>
-            <span>{t.levelBadge}</span>
+            <span>{currentLevelLabel}</span>
           </div>
 
           <button
@@ -214,10 +258,16 @@ function Console() {
         ) : (
           <StudentView
             initialCategory={selectedCategory}
-            activeTab={activeNav === "badges" ? "progress" : activeNav === "test" ? "test" : "learn"}
+            activeTab={
+              activeNav === "badges" ? "progress" :
+              activeNav === "test" ? "test" :
+              activeNav === "dashboard" ? "parent" :
+              "learn"
+            }
             onTabChange={(tab) => {
               if (tab === "progress") setActiveNav("badges");
               else if (tab === "test") setActiveNav("test");
+              else if (tab === "parent") setActiveNav("dashboard");
               else setActiveNav("learn");
             }}
             onBackToHome={() => setActiveNav("home")}
