@@ -95,8 +95,49 @@ export interface Translations {
   backToHome: string;
   backToLessons: string;
   tabLearn: string;
+  tabTest: string;
   tabBadges: string;
   tabParent: string;
+  testArenaTitle: string;
+  testArenaDesc: string;
+  selectTestCategory: string;
+  testCameraMode: string;
+  testCameraModeDesc: string;
+  testQuizMode: string;
+  testQuizModeDesc: string;
+  testTimePerQuestion: string;
+  testStartBtn: string;
+  testQuestionProgress: string;
+  testCurrentScore: string;
+  testPerformSignPrompt: string;
+  testSelectCorrectSign: string;
+  testTimerRemaining: string;
+  testSkipQuestion: string;
+  testSubmitAnswer: string;
+  testCorrectFeedback: string;
+  testIncorrectFeedback: string;
+  testCompletedTitle: string;
+  testCompletedDesc: string;
+  testFinalScore: string;
+  testAccuracyRate: string;
+  testGradeEarned: string;
+  testRetakeBtn: string;
+  testBackToArena: string;
+  testLevel1Title: string;
+  testLevel1Desc: string;
+  testLevel2Title: string;
+  testLevel2Desc: string;
+  testLevel3Title: string;
+  testLevel3Desc: string;
+  testEmergencyTitle: string;
+  testEmergencyDesc: string;
+  testMixedTitle: string;
+  testMixedDesc: string;
+  testCertificateTitle: string;
+  testCertificateSubtitle: string;
+  testCertificatePassed: string;
+  testCertificateIssuedTo: string;
+  testPrintCertificate: string;
   officialDemo: string;
   howToPerform: string;
   btnPrev: string;
@@ -289,8 +330,49 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     backToHome: "Back to Home",
     backToLessons: "All Lessons",
     tabLearn: "Learn & Practice",
+    tabTest: "Exam & Quiz Arena",
     tabBadges: "Achievements & Badges",
     tabParent: "Progress Dashboard",
+    testArenaTitle: "ISL Assessment & Exam Arena",
+    testArenaDesc: "Test your Indian Sign Language proficiency through real-time AI vision camera exams and visual theory quizzes.",
+    selectTestCategory: "Select an Assessment Category",
+    testCameraMode: "AI Camera Practical Exam",
+    testCameraModeDesc: "Perform signs in front of your camera with real-time AI computer vision grading.",
+    testQuizMode: "Visual Theory & Quiz",
+    testQuizModeDesc: "Identify correct sign gestures from video and pictorial questions with 4 choices.",
+    testTimePerQuestion: "Timer per Question",
+    testStartBtn: "Start Assessment",
+    testQuestionProgress: "Question",
+    testCurrentScore: "Current Score",
+    testPerformSignPrompt: "Perform the ISL sign for:",
+    testSelectCorrectSign: "Identify the correct sign shown in the demonstration:",
+    testTimerRemaining: "Time Left",
+    testSkipQuestion: "Skip Question",
+    testSubmitAnswer: "Submit Answer",
+    testCorrectFeedback: "Correct! +10 Points earned 🎉",
+    testIncorrectFeedback: "Incorrect. The correct sign is displayed above.",
+    testCompletedTitle: "Assessment Complete!",
+    testCompletedDesc: "Here is your detailed ISL evaluation report and performance scorecard.",
+    testFinalScore: "Final Score",
+    testAccuracyRate: "Accuracy Rate",
+    testGradeEarned: "Grade Achieved",
+    testRetakeBtn: "Retake Assessment",
+    testBackToArena: "Back to Arena",
+    testLevel1Title: "Level 1: Everyday Greetings",
+    testLevel1Desc: "10 core conversational gestures (Namaste, Hello, Good Morning, etc.)",
+    testLevel2Title: "Level 2: Colours & Vocabulary",
+    testLevel2Desc: "10 vibrant colour expressions (Black, Red, Green, Yellow, etc.)",
+    testLevel3Title: "Level 3: A–Z Fingerspelling",
+    testLevel3Desc: "10 random letters from the complete 26-sign alphabet vocabulary",
+    testEmergencyTitle: "Level 4: Emergency Rescue Signs",
+    testEmergencyDesc: "Life safety signs (Help, Safe, Emergency distress)",
+    testMixedTitle: "Grand Championship (Mixed Levels)",
+    testMixedDesc: "10 comprehensive questions selected across all curriculum levels",
+    testCertificateTitle: "Certificate of ISL Proficiency",
+    testCertificateSubtitle: "Indian Sign Language Assessment · SignSafe AI",
+    testCertificatePassed: "Has successfully passed the ISL Proficiency Examination with Distinction",
+    testCertificateIssuedTo: "Issued to Registered Student",
+    testPrintCertificate: "Print / Save Certificate",
     officialDemo: "Official ISLRTC Demonstration",
     howToPerform: "How to perform this sign",
     btnPrev: "Previous",
@@ -478,8 +560,49 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     backToHome: "होम पर वापस जाएं",
     backToLessons: "सभी पाठ",
     tabLearn: "सीखें और अभ्यास करें",
+    tabTest: "परीक्षा एवं क्विज़ एरीना",
     tabBadges: "उपलब्धियां और बैज",
     tabParent: "प्रगति डैशबोर्ड",
+    testArenaTitle: "ISL मूल्यांकन एवं परीक्षा एरीना",
+    testArenaDesc: "रीयल-टाइम AI विज़न कैमरा परीक्षा और विज़ुअल क्विज़ के माध्यम से अपनी भारतीय सांकेतिक भाषा दक्षता का परीक्षण करें।",
+    selectTestCategory: "एक मूल्यांकन श्रेणी चुनें",
+    testCameraMode: "AI कैमरा प्रायोगिक परीक्षा",
+    testCameraModeDesc: "रीयल-टाइम AI कंप्यूटर विज़न ग्रेडिंग के साथ अपने कैमरे के सामने संकेत प्रदर्शित करें।",
+    testQuizMode: "विज़ुअल थ्योरी एवं क्विज़",
+    testQuizModeDesc: "वीडियो और चित्रों से 4 विकल्पों में से सही संकेत को पहचानें।",
+    testTimePerQuestion: "प्रति प्रश्न समय",
+    testStartBtn: "मूल्यांकन शुरू करें",
+    testQuestionProgress: "प्रश्न",
+    testCurrentScore: "वर्तमान स्कोर",
+    testPerformSignPrompt: "इस संकेत को कैमरे के सामने बनाएं:",
+    testSelectCorrectSign: "प्रदर्शन में दिखाए गए सही संकेत को पहचानें:",
+    testTimerRemaining: "शेष समय",
+    testSkipQuestion: "प्रश्न छोड़ें",
+    testSubmitAnswer: "उत्तर सबमिट करें",
+    testCorrectFeedback: "सही उत्तर! +10 अंक प्राप्त हुए 🎉",
+    testIncorrectFeedback: "गलत उत्तर। सही संकेत ऊपर दिखाया गया है।",
+    testCompletedTitle: "मूल्यांकन पूरा हुआ!",
+    testCompletedDesc: "यह आपकी विस्तृत ISL मूल्यांकन रिपोर्ट और प्रदर्शन स्कोरकार्ड है।",
+    testFinalScore: "अंतिम स्कोर",
+    testAccuracyRate: "सटीकता दर",
+    testGradeEarned: "प्राप्त ग्रेड",
+    testRetakeBtn: "पुनः परीक्षा दें",
+    testBackToArena: "एरीना पर वापस जाएं",
+    testLevel1Title: "स्तर 1: दैनिक अभिवादन",
+    testLevel1Desc: "10 मुख्य वार्तालाप संकेत (नमस्ते, हैलो, सुप्रभात, आदि)",
+    testLevel2Title: "स्तर 2: रंग और शब्दावली",
+    testLevel2Desc: "10 जीवंत रंग अभिव्यक्तियाँ (काला, लाल, हरा, पीला, आदि)",
+    testLevel3Title: "स्तर 3: A–Z फिंगरस्पेलिंग",
+    testLevel3Desc: "संपूर्ण 26-अक्षर वर्णमाला शब्दावली से 10 यादृच्छिक अक्षर",
+    testEmergencyTitle: "स्तर 4: आपातकालीन बचाव संकेत",
+    testEmergencyDesc: "जीवन सुरक्षा संकेत (मदद, सुरक्षित, आपातकालीन संकट)",
+    testMixedTitle: "ग्रैंड चैम्पियनशिप (मिश्रित स्तर)",
+    testMixedDesc: "सभी पाठ्यक्रम स्तरों से चुने गए 10 व्यापक प्रश्न",
+    testCertificateTitle: "ISL दक्षता प्रमाण पत्र",
+    testCertificateSubtitle: "भारतीय सांकेतिक भाषा मूल्यांकन · साइनसेफ AI",
+    testCertificatePassed: "ने विशेष योग्यता के साथ ISL दक्षता परीक्षा सफलतापूर्वक उत्तीर्ण की है",
+    testCertificateIssuedTo: "पंजीकृत छात्र को जारी किया गया",
+    testPrintCertificate: "प्रमाण पत्र प्रिंट / सहेजें",
     officialDemo: "आधिकारिक ISLRTC प्रदर्शन",
     howToPerform: "यह संकेत कैसे करें",
     btnPrev: "पिछला संकेत",
@@ -667,8 +790,49 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     backToHome: "मुख्यपृष्ठावर परत जा",
     backToLessons: "सर्व धडे",
     tabLearn: "शिका आणि सराव करा",
+    tabTest: "परीक्षा व क्विझ एरीना",
     tabBadges: "यश आणि बॅजेस",
     tabParent: "प्रगती डॅशबोर्ड",
+    testArenaTitle: "ISL मूल्यमापन आणि परीक्षा एरीना",
+    testArenaDesc: "रीअल-टाइम AI व्हिजन कॅमेरा परीक्षा आणि व्हिज्युअल क्विझद्वारे आपल्या भारतीय सांकेतिक भाषा कौशल्याची चाचणी घ्या.",
+    selectTestCategory: "एक मूल्यमापन श्रेणी निवडा",
+    testCameraMode: "AI कॅमेरा प्रात्यक्षिक परीक्षा",
+    testCameraModeDesc: "रीअल-टाइम AI कॉम्प्युटर व्हिजन ग्रेडिंगसह आपल्या कॅमेऱ्यासमोर चिन्हे सादर करा.",
+    testQuizMode: "व्हिज्युअल थेअरी व क्विझ",
+    testQuizModeDesc: "व्हिडिओ आणि चित्रांमधून ४ पर्यायांतून योग्य चिन्ह ओळखा.",
+    testTimePerQuestion: "प्रति प्रश्न वेळ",
+    testStartBtn: "मूल्यमापन सुरू करा",
+    testQuestionProgress: "प्रश्न",
+    testCurrentScore: "सध्याचा गुण",
+    testPerformSignPrompt: "या चिन्हाचे प्रात्यक्षिक कॅमेऱ्यासमोर करा:",
+    testSelectCorrectSign: "प्रात्यक्षिकामध्ये दाखवलेले योग्य चिन्ह ओळखा:",
+    testTimerRemaining: "उरलेली वेळ",
+    testSkipQuestion: "प्रश्न वगळा",
+    testSubmitAnswer: "उत्तर सबमिट करा",
+    testCorrectFeedback: "बरोबर उत्तर! +१० गुण मिळाले 🎉",
+    testIncorrectFeedback: "चुकीचे उत्तर. योग्य चिन्ह वर दाखवले आहे.",
+    testCompletedTitle: "मूल्यमापन पूर्ण झाले!",
+    testCompletedDesc: "हा आपला तपशीलवार ISL मूल्यमापन अहवाल आणि गुणपत्रिका आहे.",
+    testFinalScore: "अंतिम गुण",
+    testAccuracyRate: "अचूकता दर",
+    testGradeEarned: "मिळालेली श्रेणी",
+    testRetakeBtn: "पुन्हा परीक्षा द्या",
+    testBackToArena: "एरीनावर परत जा",
+    testLevel1Title: "स्तर १: दैनिक अभिवादन",
+    testLevel1Desc: "१० मुख्य संभाषण चिन्हे (नमस्कार, हॅलो, शुभ सकाळ, इत्यादी)",
+    testLevel2Title: "स्तर २: रंग आणि शब्दसंग्रह",
+    testLevel2Desc: "१० रंग अभिव्यक्ती (काळा, लाल, हिरवा, पिवळा, इत्यादी)",
+    testLevel3Title: "स्तर ३: A–Z फिंगरस्पेलिंग",
+    testLevel3Desc: "संपूर्ण २६-अक्षरी वर्णमालेतून १० यादृच्छिक अक्षरे",
+    testEmergencyTitle: "स्तर ४: आपत्कालीन बचाव चिन्हे",
+    testEmergencyDesc: "जीवन सुरक्षा चिन्हे (मदत, सुरक्षित, आपत्कालीन संकट)",
+    testMixedTitle: "ग्रँड चॅम्पियनशिप (मिश्र स्तर)",
+    testMixedDesc: "सर्व अभ्यासक्रम स्तरांमधून निवडलेले १० सर्वसमावेशक प्रश्न",
+    testCertificateTitle: "ISL प्राविण्य प्रमाणपत्र",
+    testCertificateSubtitle: "भारतीय सांकेतिक भाषा मूल्यमापन · साइनसेफ AI",
+    testCertificatePassed: "यांनी विशेष प्राविण्यासह ISL परीक्षा यशस्वीरीत्या उत्तीर्ण केली आहे",
+    testCertificateIssuedTo: "नोंदणीकृत विद्यार्थ्याला प्रदान करण्यात आले",
+    testPrintCertificate: "प्रमाणपत्र प्रिंट / सेव्ह करा",
     officialDemo: "अधिकृत ISLRTC प्रात्यक्षिक",
     howToPerform: "हे चिन्ह कसे करावे",
     btnPrev: "मागील चिन्ह",

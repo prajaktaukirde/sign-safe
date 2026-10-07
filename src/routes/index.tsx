@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
 function Console() {
   const { view, setView, emergency, triggerEmergency, room } = useDemo();
   const { language, setLanguage, t } = useLanguage();
-  const [activeNav, setActiveNav] = useState<"home" | "learn" | "badges" | "teacher">("home");
+  const [activeNav, setActiveNav] = useState<"home" | "learn" | "test" | "badges" | "teacher">("home");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleStartLearning = (categoryKey?: string) => {
@@ -49,6 +49,11 @@ function Console() {
     if (categoryKey) {
       setSelectedCategory(categoryKey);
     }
+  };
+
+  const handleOpenTest = () => {
+    setView("student");
+    setActiveNav("test");
   };
 
   const handleOpenTeacher = () => {
@@ -121,6 +126,21 @@ function Console() {
           <button
             onClick={() => {
               setView("student");
+              setActiveNav("test");
+            }}
+            className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+              activeNav === "test" && view === "student"
+                ? "bg-white text-primary shadow-2xs"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Award className="h-3.5 w-3.5 text-primary" />
+            <span>{t.tabTest}</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setView("student");
               setActiveNav("badges");
             }}
             className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
@@ -187,15 +207,17 @@ function Console() {
         ) : activeNav === "home" ? (
           <HeroLanding
             onStartLearning={handleStartLearning}
+            onOpenTest={handleOpenTest}
             onOpenTeacher={handleOpenTeacher}
             onOpenSOS={() => triggerEmergency("Campus Evacuation Preview")}
           />
         ) : (
           <StudentView
             initialCategory={selectedCategory}
-            activeTab={activeNav === "badges" ? "progress" : "learn"}
+            activeTab={activeNav === "badges" ? "progress" : activeNav === "test" ? "test" : "learn"}
             onTabChange={(tab) => {
               if (tab === "progress") setActiveNav("badges");
+              else if (tab === "test") setActiveNav("test");
               else setActiveNav("learn");
             }}
             onBackToHome={() => setActiveNav("home")}

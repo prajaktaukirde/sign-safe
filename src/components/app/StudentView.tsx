@@ -5,6 +5,7 @@ import {
   Palette, ChevronRight, ChevronLeft, Volume2, Flame
 } from "lucide-react";
 import { WebcamMock } from "./WebcamMock";
+import { TestSection } from "./TestSection";
 import { useDemo } from "@/lib/demo-store";
 import { useLanguage, Language } from "@/lib/translations";
 
@@ -276,7 +277,7 @@ export function getSignDetails(signName: string, lang: Language): LocalizedSign 
   };
 }
 
-interface Sign {
+export interface Sign {
   name: string;
   desc: string;
   mappedGesture: string; // The output string our webcam classifier matches
@@ -284,7 +285,7 @@ interface Sign {
   hint?: string;
 }
 
-interface Category {
+export interface Category {
   name: string;
   icon: any;
   level: string;
@@ -292,7 +293,7 @@ interface Category {
   signs: Sign[];
 }
 
-const CATEGORIES: Record<string, Category> = {
+export const CATEGORIES: Record<string, Category> = {
   basic: {
     name: "Greetings",
     icon: Compass,
@@ -401,8 +402,8 @@ const BADGES = [
 
 interface StudentViewProps {
   initialCategory?: string | null;
-  activeTab?: "learn" | "progress" | "parent";
-  onTabChange?: (tab: "learn" | "progress" | "parent") => void;
+  activeTab?: "learn" | "test" | "progress" | "parent";
+  onTabChange?: (tab: "learn" | "test" | "progress" | "parent") => void;
   onBackToHome?: () => void;
 }
 
@@ -422,9 +423,9 @@ export function StudentView({
   } = useDemo();
   const { language, t } = useLanguage();
 
-  const [internalTab, setInternalTab] = useState<"learn" | "progress" | "parent">("learn");
+  const [internalTab, setInternalTab] = useState<"learn" | "test" | "progress" | "parent">("learn");
   const activeTab = externalTab ?? internalTab;
-  const setActiveTab = (tab: "learn" | "progress" | "parent") => {
+  const setActiveTab = (tab: "learn" | "test" | "progress" | "parent") => {
     setInternalTab(tab);
     onTabChange?.(tab);
   };
@@ -568,10 +569,10 @@ export function StudentView({
   return (
     <div className="space-y-6">
       {/* Navigation tabs */}
-      <div className="flex border-b border-border">
+      <div className="flex border-b border-border overflow-x-auto">
         <button
           onClick={() => setActiveTab("learn")}
-          className={`flex items-center gap-2 border-b-2 px-5 py-3 text-sm font-bold transition-colors cursor-pointer ${
+          className={`flex items-center gap-2 border-b-2 px-5 py-3 text-sm font-bold transition-colors cursor-pointer shrink-0 ${
             activeTab === "learn"
               ? "border-primary text-primary"
               : "border-transparent text-muted-foreground hover:text-foreground"
@@ -580,8 +581,18 @@ export function StudentView({
           <Compass className="h-4 w-4" /> {t.tabLearn}
         </button>
         <button
+          onClick={() => setActiveTab("test")}
+          className={`flex items-center gap-2 border-b-2 px-5 py-3 text-sm font-bold transition-colors cursor-pointer shrink-0 ${
+            activeTab === "test"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Award className="h-4 w-4 text-primary" /> {t.tabTest}
+        </button>
+        <button
           onClick={() => setActiveTab("progress")}
-          className={`flex items-center gap-2 border-b-2 px-5 py-3 text-sm font-bold transition-colors cursor-pointer ${
+          className={`flex items-center gap-2 border-b-2 px-5 py-3 text-sm font-bold transition-colors cursor-pointer shrink-0 ${
             activeTab === "progress"
               ? "border-primary text-primary"
               : "border-transparent text-muted-foreground hover:text-foreground"
@@ -591,7 +602,7 @@ export function StudentView({
         </button>
         <button
           onClick={() => setActiveTab("parent")}
-          className={`flex items-center gap-2 border-b-2 px-5 py-3 text-sm font-bold transition-colors cursor-pointer ${
+          className={`flex items-center gap-2 border-b-2 px-5 py-3 text-sm font-bold transition-colors cursor-pointer shrink-0 ${
             activeTab === "parent"
               ? "border-primary text-primary"
               : "border-transparent text-muted-foreground hover:text-foreground"
@@ -600,6 +611,14 @@ export function StudentView({
           <Activity className="h-4 w-4" /> {t.tabParent}
         </button>
       </div>
+
+      {/* Test Arena Mode */}
+      {activeTab === "test" && (
+        <TestSection
+          onBackToHome={onBackToHome}
+          onBackToLearn={() => setActiveTab("learn")}
+        />
+      )}
 
       {/* 1. Learn Mode */}
       {activeTab === "learn" && (
