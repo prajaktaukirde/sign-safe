@@ -95,25 +95,8 @@ export interface Translations {
   backToHome: string;
   backToLessons: string;
   tabLearn: string;
-  tabSentences: string;
   tabBadges: string;
   tabParent: string;
-  sentenceBuilderTitle: string;
-  sentenceBuilderDesc: string;
-  signedTokensLabel: string;
-  noTokensYet: string;
-  formedSentenceLabel: string;
-  speakSentenceBtn: string;
-  undoTokenBtn: string;
-  clearTokensBtn: string;
-  copySentenceBtn: string;
-  sentenceQuestsTitle: string;
-  sentenceQuestsDesc: string;
-  questCompletedBadge: string;
-  holdSignPrompt: string;
-  holdingSign: string;
-  signLockedNotice: string;
-  quickAddSign: string;
   officialDemo: string;
   howToPerform: string;
   btnPrev: string;
@@ -306,25 +289,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     backToHome: "Back to Home",
     backToLessons: "All Lessons",
     tabLearn: "Learn & Practice",
-    tabSentences: "Sentence Builder",
     tabBadges: "Achievements & Badges",
     tabParent: "Progress Dashboard",
-    sentenceBuilderTitle: "Continuous Sentence Builder Lab",
-    sentenceBuilderDesc: "Sign multiple words or letters in sequence. The AI will buffer your tokens, construct fluent sentences, and speak them aloud with Amazon Polly.",
-    signedTokensLabel: "Recognized Tokens Ribbon",
-    noTokensYet: "Sign gestures in front of the camera or click quick tokens below to start building your sentence...",
-    formedSentenceLabel: "Synthesized Natural Sentence",
-    speakSentenceBtn: "Speak Sentence (Polly)",
-    undoTokenBtn: "Undo Last Sign",
-    clearTokensBtn: "Clear All",
-    copySentenceBtn: "Copy Sentence",
-    sentenceQuestsTitle: "Sentence Practice Quests",
-    sentenceQuestsDesc: "Complete compound sentence challenges to earn bonus XP and mastery stars!",
-    questCompletedBadge: "Quest Completed! +50 XP 🎉",
-    holdSignPrompt: "Hold sign for 1.2s to commit",
-    holdingSign: "Locking sign...",
-    signLockedNotice: "Sign Committed to Sentence!",
-    quickAddSign: "Quick Add Token",
     officialDemo: "Official ISLRTC Demonstration",
     howToPerform: "How to perform this sign",
     btnPrev: "Previous",
@@ -512,25 +478,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     backToHome: "होम पर वापस जाएं",
     backToLessons: "सभी पाठ",
     tabLearn: "सीखें और अभ्यास करें",
-    tabSentences: "वाक्य निर्माता (Sentence Lab)",
     tabBadges: "उपलब्धियां और बैज",
     tabParent: "प्रगति डैशबोर्ड",
-    sentenceBuilderTitle: "सतत ISL वाक्य निर्माता लैब (Continuous Sentence Lab)",
-    sentenceBuilderDesc: "लगातार कई संकेत या अक्षर बनाएं। AI आपके संकेतों को जोड़कर व्याकरण के अनुसार पूरे वाक्य बनाएगा और Amazon Polly से बोलकर सुनाएगा।",
-    signedTokensLabel: "पहचाने गए संकेत (Token Ribbon)",
-    noTokensYet: "कैमरे के सामने संकेत करें या वाक्य शुरू करने के लिए नीचे दिए गए त्वरित बटनों पर क्लिक करें...",
-    formedSentenceLabel: "प्राकृतिक संश्लेषित वाक्य (Synthesized Sentence)",
-    speakSentenceBtn: "वाक्य बोलकर सुनाएं (Polly Voice)",
-    undoTokenBtn: "अंतिम संकेत हटाएं",
-    clearTokensBtn: "सभी हटाएं",
-    copySentenceBtn: "वाक्य कॉपी करें",
-    sentenceQuestsTitle: "वाक्य अभ्यास चुनौतियाँ (Sentence Quests)",
-    sentenceQuestsDesc: "अतिरिक्त XP और स्टार जीतने के लिए संयुक्त वाक्य चुनौतियों को पूरा करें!",
-    questCompletedBadge: "चुनौती पूरी हुई! +50 XP प्राप्त 🎉",
-    holdSignPrompt: "संकेत जोड़ने के लिए 1.2 सेकंड तक रोककर रखें",
-    holdingSign: "संकेत लॉक हो रहा है...",
-    signLockedNotice: "संकेत वाक्य में जुड़ गया!",
-    quickAddSign: "त्वरित टोकन जोड़ें",
     officialDemo: "आधिकारिक ISLRTC प्रदर्शन",
     howToPerform: "यह संकेत कैसे करें",
     btnPrev: "पिछला संकेत",
@@ -718,25 +667,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     backToHome: "मुख्यपृष्ठावर परत जा",
     backToLessons: "सर्व धडे",
     tabLearn: "शिका आणि सराव करा",
-    tabSentences: "वाक्य रचना (Sentence Lab)",
     tabBadges: "यश आणि बॅजेस",
     tabParent: "प्रगती डॅशबोर्ड",
-    sentenceBuilderTitle: "सलग ISL वाक्य रचना प्रयोगशाळा (Continuous Sentence Lab)",
-    sentenceBuilderDesc: "एकापाठोपाठ एक चिन्हे किंवा अक्षरे करा. AI तुमचे चिन्हे एकत्र जोडून व्याकरणासह पूर्ण वाक्य तयार करेल आणि Amazon Polly द्वारे बोलून दाखवेल.",
-    signedTokensLabel: "ओळखलेली चिन्हे (Token Ribbon)",
-    noTokensYet: "कॅमेऱ्यासमोर सलग चिन्हे करा किंवा वाक्य तयार करण्यासाठी खालील द्रुत बटणांवर क्लिक करा...",
-    formedSentenceLabel: "तयार झालेले नैसर्गिक वाक्य (Synthesized Sentence)",
-    speakSentenceBtn: "वाक्य ऐका (Polly Voice)",
-    undoTokenBtn: "शेवटचे चिन्ह काढा",
-    clearTokensBtn: "सर्व साफ करा",
-    copySentenceBtn: "वाक्य कॉपी करा",
-    sentenceQuestsTitle: "वाक्य सराव आव्हाने (Sentence Quests)",
-    sentenceQuestsDesc: "अतिरिक्त XP आणि स्टार्स मिळवण्यासाठी संयुक्त वाक्य आव्हाने पूर्ण करा!",
-    questCompletedBadge: "आव्हान यशस्वीपणे पूर्ण! +५० XP मिळाले 🎉",
-    holdSignPrompt: "चिन्ह जोडण्यासाठी १.२ सेकंद धरून ठेवा",
-    holdingSign: "चिन्ह लॉक होत आहे...",
-    signLockedNotice: "चिन्ह वाक्यात जोडले गेले!",
-    quickAddSign: "द्रुत चिन्ह जोडा",
     officialDemo: "अधिकृत ISLRTC प्रात्यक्षिक",
     howToPerform: "हे चिन्ह कसे करावे",
     btnPrev: "मागील चिन्ह",

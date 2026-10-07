@@ -10,12 +10,11 @@ import { useLanguage } from "@/lib/translations";
 
 interface HeroLandingProps {
   onStartLearning: (categoryKey?: string) => void;
-  onOpenSentences?: () => void;
   onOpenTeacher: () => void;
   onOpenSOS: () => void;
 }
 
-export function HeroLanding({ onStartLearning, onOpenSentences, onOpenTeacher, onOpenSOS }: HeroLandingProps) {
+export function HeroLanding({ onStartLearning, onOpenTeacher, onOpenSOS }: HeroLandingProps) {
   const { triggerEmergency } = useDemo();
   const { t, language } = useLanguage();
   const [activePreview, setActivePreview] = useState(0);
@@ -179,14 +178,6 @@ export function HeroLanding({ onStartLearning, onOpenSentences, onOpenTeacher, o
               >
                 <span>{t.btnStartLearning}</span>
                 <ArrowRight className="h-4 w-4" />
-              </button>
-
-              <button
-                onClick={onOpenSentences}
-                className="inline-flex items-center gap-2 rounded-2xl border border-primary/30 bg-primary/10 px-5 py-3.5 text-sm font-bold text-primary hover:bg-primary/20 transition-all cursor-pointer shadow-2xs hover:scale-[1.02]"
-              >
-                <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                <span>{t.tabSentences}</span>
               </button>
 
               <button
@@ -471,15 +462,8 @@ export function HeroLanding({ onStartLearning, onOpenSentences, onOpenTeacher, o
 
           <div className="flex items-center gap-3">
             <button
-              onClick={onOpenSentences}
-              className="text-xs font-bold text-primary hover:underline cursor-pointer"
-            >
-              {t.tabSentences}
-            </button>
-            <span className="text-muted-foreground">·</span>
-            <button
               onClick={() => onStartLearning("alphabets")}
-              className="text-xs font-bold text-muted-foreground hover:text-foreground cursor-pointer"
+              className="text-xs font-bold text-primary hover:underline cursor-pointer"
             >
               Level 3 Alphabets (A-Z)
             </button>
