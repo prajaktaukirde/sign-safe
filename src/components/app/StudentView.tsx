@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { 
   Sparkles, Hand, RotateCcw, Trophy, BookOpen, Star, 
   AlertCircle, ShieldAlert, Award, Compass, Heart, Activity, CheckCircle2, RefreshCw,
-  Palette, ChevronRight, ChevronLeft, Volume2, Flame, Lock, Trash2, BarChart3, TrendingUp, Check
+  Palette, ChevronRight, ChevronLeft, Volume2, Flame, Lock, Trash2, BarChart3, TrendingUp, Check,
+  PartyPopper, Hash, MessageSquare, PhoneCall, ShieldCheck, HeartPulse, AlertOctagon, Send
 } from "lucide-react";
 import { WebcamMock } from "./WebcamMock";
 import { TestSection } from "./TestSection";
@@ -253,16 +254,108 @@ export const SIGN_TRANSLATIONS: Record<string, Record<Language, LocalizedSign>> 
     mr: { name: "अक्षर Z", desc: "तर्जनी बोट पुढे काढून हवेत 'Z' असा झिगझॅग आकार काढा.", hint: "तर्जनीने Z झिगझॅग काढा 🆉" }
   },
 
-  // Level 4: Emergency
-  "Help": {
-    en: { name: "Help", desc: "Rest your closed right fist on your flat left palm and lift slightly.", hint: "Fist on flat palm 🆘" },
-    hi: { name: "मदद / सहायता (Help)", desc: "अपनी बंद दाहिनी मुट्ठी को सपाट बायीं हथेली पर रखें और थोड़ा ऊपर उठाएं।", hint: "सपाट हथेली पर मुट्ठी रखें 🆘" },
-    mr: { name: "मदत (Help)", desc: "डाव्या सपाट तळहातावर उजव्या हाताची बंद मूठ ठेवा आणि हलकेच वर उचला.", hint: "सपाट तळहातावर मूठ ठेवा 🆘" }
+  // Level 4: Festivals & Celebrations
+  "Diwali": {
+    en: { name: "Diwali", desc: "Spread both hands outward from the center with fluttering, twinkling fingers like lighting sparkling diyas and fireworks.", hint: "Both hands outward with twinkling fingers 🪔" },
+    hi: { name: "दीवाली (Diwali)", desc: "दिये और आतिशबाजी की तरह दोनों हाथों को बाहर फैलाते हुए उंगलियों को टिमटिमाएं।", hint: "दोनों हाथों से दिये जलाने का संकेत 🪔" },
+    mr: { name: "दिवाळी (Diwali)", desc: "दिवे आणि फटाक्यांप्रमाणे दोन्ही हात बाहेर पसरवून बोटे लुकलुकावा.", hint: "दोन्ही हातांनी दिवे लावण्याची मुद्रा 🪔" }
   },
+  "Holi": {
+    en: { name: "Holi", desc: "Throw and sprinkle imaginary vibrant gulal colors with both open palms joyfully dancing in the air.", hint: "Sprinkling colors with both hands 🎨" },
+    hi: { name: "होली (Holi)", desc: "दोनों खुले हाथों से हवा में रंग और गुलाल उड़ाने का अभिनय करें।", hint: "दोनों हाथों से रंग उड़ाएं 🎨" },
+    mr: { name: "होळी (Holi)", desc: "दोन्ही खुल्या हातांनी हवेत रंग आणि गुलाल उधळण्याची मुद्रा करा.", hint: "दोन्ही हातांनी रंग उधळणे 🎨" }
+  },
+  "Christmas": {
+    en: { name: "Christmas", desc: "Trace a triangular Christmas tree shape downward with both palms joined at the peak.", hint: "Trace triangle tree shape with hands 🎄" },
+    hi: { name: "क्रिसमस (Christmas)", desc: "दोनों हाथों को मिलाकर नीचे की ओर त्रिकोणीय क्रिसमस ट्री का आकार बनाएं।", hint: "त्रिकोणीय क्रिसमस ट्री का आकार 🎄" },
+    mr: { name: "नाताळ / ख्रिसमस (Christmas)", desc: "दोन्ही हात एकत्र करून खाली त्रिकोणी ख्रिसमस ट्रीचा आकार तयार करा.", hint: "त्रिकोणी ख्रिसमस ट्रीचा आकार 🎄" }
+  },
+  "Eid": {
+    en: { name: "Eid", desc: "Cross arms gently across chest curving outward in the traditional Eid Mubarak warm embrace.", hint: "Embrace greeting pose 🌙" },
+    hi: { name: "ईद (Eid)", desc: "पारंपरिक ईद मुबारक अभिवादन में छाती पर हाथ रखकर गले मिलने की मुद्रा बनाएं।", hint: "गले मिलने की मुद्रा 🌙" },
+    mr: { name: "ईद (Eid)", desc: "पारंपरिक ईद मुबारक अभिवादनामध्ये छातीसमोर हात ठेवून आलिंगन देण्याची मुद्रा करा.", hint: "ईद आलिंगन मुद्रा 🌙" }
+  },
+  "Ganesh Chaturthi": {
+    en: { name: "Ganesh Chaturthi", desc: "Curve your dominant arm in front of your nose like an elephant trunk representing Lord Ganesha.", hint: "Elephant trunk gesture in front of nose 🐘" },
+    hi: { name: "गणेश चतुर्थी (Ganesh Chaturthi)", desc: "भगवान गणेश को दर्शाने के लिए अपनी नाक के सामने सूंड की तरह हाथ घुमाएं।", hint: "नाक के सामने हाथी की सूंड का संकेत 🐘" },
+    mr: { name: "गणेशोत्सव (Ganesh Chaturthi)", desc: "गणपती बाप्पाची सोंड दर्शवण्यासाठी नाकासमोर हात वळवून सोंडेसारखा हलवा.", hint: "नाकासमोर गणपतीच्या सोंडेचा आकार 🐘" }
+  },
+  "Navratri": {
+    en: { name: "Navratri", desc: "Hold imaginary Dandiya sticks in both hands and perform the rhythmic Garba cross-clash gesture.", hint: "Dandiya sticks playing gesture 💃" },
+    hi: { name: "नवरात्रि (Navratri)", desc: "दोनों हाथों में डांडिया स्टिक पकड़ने और गरबा खेलने की लयबद्ध मुद्रा बनाएं।", hint: "डांडिया खेलने की मुद्रा 💃" },
+    mr: { name: "नवरात्री (Navratri)", desc: "दोन्ही हातांत दांडिया काठ्या पकडल्यासारखा गरब्याचा तालबद्ध अभिनय करा.", hint: "दांडिया खेळण्याची मुद्रा 💃" }
+  },
+  "Durga Puja": {
+    en: { name: "Durga Puja", desc: "Hold multiple divine hand gestures with a Trishul blessing pose representing Goddess Durga.", hint: "Trishul blessing pose 🔱" },
+    hi: { name: "दुर्गा पूजा (Durga Puja)", desc: "मां दुर्गा को दर्शाने के लिए त्रिशूल और आशीर्वाद की दिव्य मुद्रा बनाएं।", hint: "त्रिशूल और आशीर्वाद मुद्रा 🔱" },
+    mr: { name: "दुर्गा पूजा (Durga Puja)", desc: "दुर्गा मातेचे त्रिशूळ आणि आशीर्वाद दर्शवणारी दिव्य मुद्रा करा.", hint: "त्रिशूळ व आशीर्वाद मुद्रा 🔱" }
+  },
+  "Dussehra": {
+    en: { name: "Dussehra", desc: "Draw an imaginary bow and arrow representing Lord Rama's victory over Ravana.", hint: "Pulling bow and arrow gesture 🏹" },
+    hi: { name: "दशहरा (Dussehra)", desc: "भगवान राम की रावण पर विजय दर्शाने के लिए धनुष और तीर खींचने की मुद्रा बनाएं।", hint: "धनुष-बाण चलाने की मुद्रा 🏹" },
+    mr: { name: "दसरा (Dussehra)", desc: "श्रीरामांचा रावणावरील विजय दर्शवण्यासाठी धनुष्य-बाण चालवण्याची मुद्रा करा.", hint: "धनुष्य-बाण चालवणे 🏹" }
+  },
+  "Raksha Bandhan": {
+    en: { name: "Raksha Bandhan", desc: "Tie an imaginary sacred Rakhi thread around your left wrist with your right fingers.", hint: "Tying Rakhi on wrist 🧵" },
+    hi: { name: "रक्षाबंधन (Raksha Bandhan)", desc: "अपनी दाहिनी उंगलियों से बायीं कलाई पर राखी का पवित्र धागा बांधने का अभिनय करें।", hint: "कलाई पर राखी बांधने की मुद्रा 🧵" },
+    mr: { name: "रक्षाबंधन (Raksha Bandhan)", desc: "उजव्या हाताच्या बोटांनी डाव्या मनगटावर राखी बांधल्यासारखी मुद्रा करा.", hint: "मनगटावर राखी बांधणे 🧵" }
+  },
+  "Janmashtami": {
+    en: { name: "Janmashtami", desc: "Hold both hands horizontally to your lips as if playing Lord Krishna's divine flute.", hint: "Playing Krishna flute pose 🪈" },
+    hi: { name: "जन्माष्टमी (Janmashtami)", desc: "भगवान कृष्ण की दिव्य बांसुरी बजाने की तरह दोनों हाथों को होंठों के पास रखें।", hint: "बांसुरी बजाने की मुद्रा 🪈" },
+    mr: { name: "गोकुळाष्टमी / जन्माष्टमी (Janmashtami)", desc: "श्रीकृष्णाची बासरी वाजवल्याप्रमाणे दोन्ही हात ओठांजवळ आडवे धरा.", hint: "बासरी वाजवण्याची मुद्रा 🪈" }
+  },
+  "Independence Day": {
+    en: { name: "Independence Day", desc: "Salute with flat hand at forehead then flutter hand upward like the Indian Tricolor flag.", hint: "Salute then flutter hand like flag 🇮🇳" },
+    hi: { name: "स्वतंत्रता दिवस (Independence Day)", desc: "माथे पर सैल्यूट करें फिर तिरंगे झंडे की तरह हाथ को ऊपर लहराएं।", hint: "सैल्यूट और तिरंगा फहराने का संकेत 🇮🇳" },
+    mr: { name: "स्वातंत्र्य दिन (Independence Day)", desc: "कपाळावर सॅल्यूट करा आणि नंतर तिरंग्याप्रमाणे हात वर फडकवा.", hint: "सॅल्यूट आणि तिरंगा फडकवणे 🇮🇳" }
+  },
+  "Republic Day": {
+    en: { name: "Republic Day", desc: "Make the firm constitution parade salute with pride representing January 26th.", hint: "Firm patriotic salute 🇮🇳" },
+    hi: { name: "गणतंत्र दिवस (Republic Day)", desc: "26 जनवरी के सम्मान में गर्व के साथ संविधान परेड सैल्यूट करें।", hint: "गर्व से सैल्यूट मुद्रा 🇮🇳" },
+    mr: { name: "प्रजासत्ताक दिन (Republic Day)", desc: "२६ जानेवारीच्या सन्मानार्थ अभिमानाने संचलन सॅल्यूट मुद्रा करा.", hint: "देशभक्तीची सॅल्यूट मुद्रा 🇮🇳" }
+  },
+
+  // Level 5: Numbers (1 to 10, 11 to 15, 25, 50, 100, 1000, etc.)
+  "1": { en: { name: "Number 1", desc: "Hold index finger straight up with all other fingers closed in a fist.", hint: "Index finger straight up ☝️" }, hi: { name: "संख्या 1 (One)", desc: "तर्जनी उंगली को सीधा ऊपर रखें और बाकी उंगलियां मुट्ठी में बंद रखें।", hint: "तर्जनी उंगली ऊपर ☝️" }, mr: { name: "अंक १ (One)", desc: "तर्जनी बोट सरळ वर धरा आणि बाकीची बोटे मुठीत बंद ठेवा.", hint: "तर्जनी बोट वर ☝️" } },
+  "2": { en: { name: "Number 2", desc: "Hold index and middle fingers straight up in a 'V' shape.", hint: "2 fingers up (Index + Middle) ✌️" }, hi: { name: "संख्या 2 (Two)", desc: "तर्जनी और मध्यमा उंगली को 'V' आकार में ऊपर रखें।", hint: "2 उंगलियां ऊपर (V आकार) ✌️" }, mr: { name: "अंक २ (Two)", desc: "तर्जनी आणि मधले बोट 'V' आकारात सरळ वर धरा.", hint: "२ बोटे वर (V आकार) ✌️" } },
+  "3": { en: { name: "Number 3", desc: "Hold thumb, index, and middle fingers extended.", hint: "3 fingers extended 🤟" }, hi: { name: "संख्या 3 (Three)", desc: "अंगूठा, तर्जनी और मध्यमा उंगली को खोलकर सीधा रखें।", hint: "3 उंगलियां खुली 🤟" }, mr: { name: "अंक ३ (Three)", desc: "अंगठा, तर्जनी आणि मधले बोट उघडे सरळ ठेवा.", hint: "३ बोटे उघडी 🤟" } },
+  "4": { en: { name: "Number 4", desc: "Hold all four fingers flat upright with thumb folded across palm.", hint: "4 fingers straight up 🖐️" }, hi: { name: "संख्या 4 (Four)", desc: "चारों उंगलियों को सीधा ऊपर रखें और अंगूठे को हथेली पर मोड़ें।", hint: "4 उंगलियां सीधी ऊपर 🖐️" }, mr: { name: "अंक ४ (Four)", desc: "सर्व चार बोटे सरळ वर धरा आणि अंगठा तळहातावर दुमडा.", hint: "४ बोटे सरळ वर 🖐️" } },
+  "5": { en: { name: "Number 5", desc: "Open all five fingers wide with palm facing forward.", hint: "All 5 fingers open 🖐️" }, hi: { name: "संख्या 5 (Five)", desc: "हथेली को सामने रखकर पांचों उंगलियां चौड़ी खोलें।", hint: "पांचों उंगलियां खुली 🖐️" }, mr: { name: "अंक ५ (Five)", desc: "तळहात पुढे ठेवून पाचही बोटे रुंद उघडा.", hint: "पाचही बोटे उघडी 🖐️" } },
+  "6": { en: { name: "Number 6", desc: "Touch thumb to pinky finger with middle 3 fingers extended upright.", hint: "Thumb touches pinky (6) 👌" }, hi: { name: "संख्या 6 (Six)", desc: "अंगूठे को छोटी उंगली से छुएं और बीच की 3 उंगलियां सीधी रखें।", hint: "अंगूठा छोटी उंगली से मिलाएं 👌" }, mr: { name: "अंक ६ (Six)", desc: "अंगठा करंगळीला लावा आणि मधली ३ बोटे सरळ वर ठेवा.", hint: "अंगठा करंगळीला स्पर्श करतो 👌" } },
+  "7": { en: { name: "Number 7", desc: "Touch thumb to ring finger with other fingers extended upright.", hint: "Thumb touches ring finger (7) ✋" }, hi: { name: "संख्या 7 (Seven)", desc: "अंगूठे को अनामिका (रिंग फिंगर) से छुएं।", hint: "अंगूठा अनामिका से मिलाएं ✋" }, mr: { name: "अंक ७ (Seven)", desc: "अंगठा अनामिकेला लावा आणि इतर बोटे सरळ ठेवा.", hint: "अंगठा अनामिकेला स्पर्श करतो ✋" } },
+  "8": { en: { name: "Number 8", desc: "Touch thumb to middle finger with remaining fingers extended.", hint: "Thumb touches middle finger (8) ✋" }, hi: { name: "संख्या 8 (Eight)", desc: "अंगूठे को मध्यमा उंगली से छुएं।", hint: "अंगूठा मध्यमा से मिलाएं ✋" }, mr: { name: "अंक ८ (Eight)", desc: "अंगठा मधल्या बोटाला लावा आणि इतर बोटे सरळ ठेवा.", hint: "अंगठा मधल्या बोटाला स्पर्श करतो ✋" } },
+  "9": { en: { name: "Number 9", desc: "Touch thumb to index fingertip in a neat circular ring.", hint: "Thumb touches index finger (9) 👌" }, hi: { name: "संख्या 9 (Nine)", desc: "अंगूठे और तर्जनी के पोरों को मिलाकर वृत्त बनाएं।", hint: "अंगूठा और तर्जनी मिलाएं 👌" }, mr: { name: "अंक ९ (Nine)", desc: "अंगठा आणि तर्जनीचे शेंडे एकत्र जोडून गोल करा.", hint: "अंगठा आणि तर्जनी एकत्र 👌" } },
+  "10": { en: { name: "Number 10", desc: "Hold a firm thumbs-up and shake or twist your wrist slightly.", hint: "Thumbs up shaking gesture 🔟" }, hi: { name: "संख्या 10 (Ten)", desc: "अंगूठा ऊपर (थम्ब्स अप) करके कलाई को धीरे से हिलाएं।", hint: "थम्ब्स अप हिलाएं 🔟" }, mr: { name: "अंक १० (Ten)", desc: "अंगठा वर करून (थम्स अप) मनगट हलकेच हलवा.", hint: "थम्स अप हलवणे 🔟" } },
+  "11": { en: { name: "Number 11", desc: "Flick your index finger upward from your thumb twice.", hint: "Flick index finger up 1️⃣1️⃣" }, hi: { name: "संख्या 11 (Eleven)", desc: "तर्जनी उंगली को अंगूठे से दो बार ऊपर की ओर झटकें।", hint: "तर्जनी ऊपर झटकें 1️⃣1️⃣" }, mr: { name: "अंक ११ (Eleven)", desc: "तर्जनी बोट अंगठ्यावरून दोनदा वर उडवा.", hint: "तर्जनी वर उडवणे 1️⃣1️⃣" } },
+  "12": { en: { name: "Number 12", desc: "Flick both index and middle fingers upward together.", hint: "Flick 2 fingers up 1️⃣2️⃣" }, hi: { name: "संख्या 12 (Twelve)", desc: "तर्जनी और मध्यमा दोनों उंगलियों को एक साथ ऊपर झटकें।", hint: "2 उंगलियां ऊपर झटकें 1️⃣2️⃣" }, mr: { name: "अंक १२ (Twelve)", desc: "तर्जनी आणि मधले बोट एकत्र वर उडवा.", hint: "२ बोटे वर उडवणे 1️⃣2️⃣" } },
+  "13": { en: { name: "Number 13", desc: "Wiggle index and middle fingers together toward yourself.", hint: "Wiggle 2 fingers in 1️⃣3️⃣" }, hi: { name: "संख्या 13 (Thirteen)", desc: "तर्जनी और मध्यमा उंगलियों को अपनी ओर मोड़कर हिलाएं।", hint: "2 उंगलियां अंदर की ओर मोड़ें 1️⃣3️⃣" }, mr: { name: "अंक १३ (Thirteen)", desc: "तर्जनी आणि मधले बोट स्वतःकडे वाकवून हलवा.", hint: "२ बोटे स्वतःकडे हलवणे 1️⃣3️⃣" } },
+  "14": { en: { name: "Number 14", desc: "Wiggle four extended fingers gently toward yourself.", hint: "Wiggle 4 fingers in 1️⃣4️⃣" }, hi: { name: "संख्या 14 (Fourteen)", desc: "चारों उंगलियों को अपनी ओर मोड़कर हिलाएं।", hint: "4 उंगलियां अंदर मोड़ें 1️⃣4️⃣" }, mr: { name: "अंक १४ (Fourteen)", desc: "चारही बोटे स्वतःकडे वाकवून हलवा.", hint: "४ बोटे स्वतःकडे हलवणे 1️⃣4️⃣" } },
+  "15": { en: { name: "Number 15", desc: "Wave all five open fingers gently forward and back.", hint: "Wave all 5 fingers 1️⃣5️⃣" }, hi: { name: "संख्या 15 (Fifteen)", desc: "पांचों उंगलियां खोलकर आगे-पीछे हिलाएं।", hint: "5 उंगलियां हिलाएं 1️⃣5️⃣" }, mr: { name: "अंक १५ (Fifteen)", desc: "पाचही बोटे उघडून पुढे-मागे हलवा.", hint: "५ बोटे हलवणे 1️⃣5️⃣" } },
+  "25": { en: { name: "Number 25", desc: "Wiggle your middle finger with open 5-handshape.", hint: "Middle finger wiggle 2️⃣5️⃣" }, hi: { name: "संख्या 25 (Twenty Five)", desc: "खुले हाथ के साथ मध्यमा उंगली को हिलाएं।", hint: "मध्यमा उंगली हिलाएं 2️⃣5️⃣" }, mr: { name: "अंक २५ (Twenty Five)", desc: "खुल्या हातासह मधले बोट हलवा.", hint: "मधले बोट हलवणे 2️⃣5️⃣" } },
+  "50": { en: { name: "Number 50", desc: "Show 5-handshape followed by 0-handshape (O shape).", hint: "5 followed by 0 5️⃣0️⃣" }, hi: { name: "संख्या 50 (Fifty)", desc: "पहले 5 दिखाएं फिर 0 (शून्य) का आकार बनाएं।", hint: "5 फिर 0 बनाएं 5️⃣0️⃣" }, mr: { name: "अंक ५० (Fifty)", desc: "आधी ५ दाखवा आणि नंतर ० (शून्य) मुद्रा करा.", hint: "५ नंतर ० मुद्रा 5️⃣0️⃣" } },
+  "100": { en: { name: "Number 100", desc: "Show number 1 followed by curved C-handshape (Century).", hint: "1 then C-shape 💯" }, hi: { name: "संख्या 100 (Hundred)", desc: "पहले 1 दिखाएं फिर C-आकार बनाकर पीछे खींचें।", hint: "1 और C आकार 💯" }, mr: { name: "अंक १०० (Hundred)", desc: "आधी १ दाखवा आणि नंतर C-मुद्रा करून मागे घ्या.", hint: "१ आणि C आकार 💯" } },
+  "1000": { en: { name: "1 Thousand (1,000)", desc: "Show 1-finger then tap open palm indicating Thousand.", hint: "1 followed by Thousand palm tap 1️⃣0️⃣0️⃣0️⃣" }, hi: { name: "1 हजार (1,000)", desc: "1 का संकेत दें और हथेली पर थपथपाकर हजार का संकेत बनाएं।", hint: "1 और हजार का संकेत 1️⃣0️⃣0️⃣0️⃣" }, mr: { name: "१ हजार (1,000)", desc: "१ दाखवून तळहातावर थाप मारून हजार दर्शवा.", hint: "१ आणि हजार चिन्ह 1️⃣0️⃣0️⃣0️⃣" } },
+  "10000": { en: { name: "10 Thousand (10,000)", desc: "Show 10 gesture followed by Thousand palm tap.", hint: "10 followed by Thousand tap 🔟0️⃣0️⃣0️⃣" }, hi: { name: "10 हजार (10,000)", desc: "10 का संकेत दें फिर हजार का संकेत बनाएं।", hint: "10 और हजार का संकेत 🔟0️⃣0️⃣0️⃣" }, mr: { name: "१० हजार (10,000)", desc: "१० दाखवून हजार दर्शवा.", hint: "१० आणि हजार चिन्ह 🔟0️⃣0️⃣0️⃣" } },
+  "100000": { en: { name: "1 Lakh (1,00,000)", desc: "Show 1 gesture followed by Lakh hand sweep.", hint: "1 followed by Lakh sweep 💰" }, hi: { name: "1 लाख (1,00,000)", desc: "1 दिखाएं और फिर लाख का संकेत बनाएं।", hint: "1 और लाख का संकेत 💰" }, mr: { name: "१ लाख (1,00,000)", desc: "१ दाखवून लाख चिन्ह करा.", hint: "१ आणि लाख चिन्ह 💰" } },
+  "1000000": { en: { name: "10 Lakh (1 Million)", desc: "Show 10 gesture followed by Lakh hand sweep.", hint: "10 followed by Lakh sweep 💰" }, hi: { name: "10 लाख (1 Million)", desc: "10 दिखाएं और फिर लाख का संकेत बनाएं।", hint: "10 और लाख का संकेत 💰" }, mr: { name: "१० लाख (1 Million)", desc: "१० दाखवून लाख चिन्ह करा.", hint: "१० आणि लाख चिन्ह 💰" } },
+  "10cr": { en: { name: "10 Crore", desc: "Show 10 gesture followed by Crore C-twist curve.", hint: "10 followed by Crore twist 👑" }, hi: { name: "10 करोड़ (10 Crore)", desc: "10 दिखाएं और फिर करोड़ का विशेष C-ट्विस्ट संकेत बनाएं।", hint: "10 और करोड़ का संकेत 👑" }, mr: { name: "१० कोटी (10 Crore)", desc: "१० दाखवून कोटी दर्शवणारी C-ट्विस्ट मुद्रा करा.", hint: "१० आणि कोटी चिन्ह 👑" } },
+
+  // Level 6: Emergency & Life Safety
   "Safe": {
-    en: { name: "Safe", desc: "Cross arms in front of chest then open them wide outward.", hint: "Arms cross and open wide 🛡️" },
-    hi: { name: "सुरक्षित (Safe)", desc: "छाती के सामने दोनों हाथों को क्रॉस करें और फिर बाहर की ओर चौड़ा खोलें।", hint: "हाथ क्रॉस करके चौड़ा खोलें 🛡️" },
-    mr: { name: "सुरक्षित (Safe)", desc: "छातीसमोर दोन्ही हात क्रॉस करा आणि नंतर बाहेरच्या बाजूला रुंद उघडा.", hint: "हात क्रॉस करून रुंद उघडा 🛡️" }
+    en: { name: "Safe", desc: "Cross arms in front of chest then open them wide outward indicating safety, protection, and security.", hint: "Arms cross and open wide 🛡️" },
+    hi: { name: "सुरक्षित (Safe)", desc: "छाती के सामने दोनों हाथों को क्रॉस करें और फिर सुरक्षा दर्शाने के लिए बाहर चौड़ा खोलें।", hint: "हाथ क्रॉस करके चौड़ा खोलें 🛡️" },
+    mr: { name: "सुरक्षित (Safe)", desc: "छातीसमोर दोन्ही हात क्रॉस करा आणि नंतर सुरक्षा दर्शवण्यासाठी बाहेर रुंद उघडा.", hint: "हात क्रॉस करून रुंद उघडा 🛡️" }
+  },
+  "Help": {
+    en: { name: "Help", desc: "Rest your closed dominant fist upright on your flat open palm and lift both hands upward together.", hint: "Fist resting on flat palm lifting up 🆘" },
+    hi: { name: "मदद / सहायता (Help)", desc: "अपनी बंद मुट्ठी को सपाट हथेली पर रखें और दोनों हाथों को एक साथ ऊपर उठाएं।", hint: "सपाट हथेली पर मुट्ठी रखकर ऊपर उठाएं 🆘" },
+    mr: { name: "मदत (Help)", desc: "डाव्या सपाट तळहातावर उजव्या हाताची बंद मूठ ठेवा आणि दोन्ही हात एकत्र वर उचला.", hint: "सपाट तळहातावर मूठ ठेवून वर उचलणे 🆘" }
+  },
+  "Emergency": {
+    en: { name: "Emergency Distress", desc: "Raise both waving hands high above your head signaling urgent distress and evacuation.", hint: "Both hands waving high above head 🚨" },
+    hi: { name: "आपातकालीन संकट (Emergency)", desc: "तत्काल सहायता और निकासी के संकेत के लिए दोनों हाथों को सिर के ऊपर उठाएं।", hint: "दोनों हाथ ऊपर उठाकर संकट संकेत 🚨" },
+    mr: { name: "आपत्कालीन संकट (Emergency)", desc: "त्वरित मदत आणि बाहेर पडण्यासाठी दोन्ही हात डोक्यावर उंच हलवा.", hint: "दोन्ही हात वर करून संकट इशारा 🚨" }
   }
 };
 
@@ -281,8 +374,8 @@ export function getSignDetails(signName: string, lang: Language): LocalizedSign 
 export interface Sign {
   name: string;
   desc: string;
-  mappedGesture: string; // The output string our webcam classifier matches
-  videoUrl: string;      // Demonstration URL
+  mappedGesture: string;
+  videoUrl: string;
   hint?: string;
 }
 
@@ -365,14 +458,66 @@ export const CATEGORIES: Record<string, Category> = {
       { name: "Z", desc: "Extend your index finger and trace the letter 'Z' zigzag in the air.", mappedGesture: "Z", videoUrl: "/level3-Alphabets/ndian-Sign-Language-Alphabets-24.png", hint: "Index draws Z zigzag in air 🆉" }
     ]
   },
+  festivals: {
+    name: "Festivals & Celebrations",
+    icon: Sparkles,
+    level: "🎉 Level 4",
+    description: "Auspicious Indian festivals and cultural celebrations in ISL",
+    signs: [
+      { name: "Diwali", desc: "Spread both hands outward from the center with fluttering, twinkling fingers like lighting sparkling diyas and fireworks.", mappedGesture: "Diwali", videoUrl: "/level4-Festivals/diwali.mp4", hint: "Twinkling fingers outward 🪔" },
+      { name: "Holi", desc: "Throw and sprinkle imaginary vibrant gulal colors with both open palms joyfully dancing in the air.", mappedGesture: "Holi", videoUrl: "/level4-Festivals/holi.mp4", hint: "Sprinkling colors with both hands 🎨" },
+      { name: "Christmas", desc: "Trace a triangular Christmas tree shape downward with both palms joined at the peak.", mappedGesture: "Christmas", videoUrl: "/level4-Festivals/christmas.mp4", hint: "Trace triangle tree shape 🎄" },
+      { name: "Eid", desc: "Cross arms gently across chest curving outward in the traditional Eid Mubarak warm embrace.", mappedGesture: "Eid", videoUrl: "/level4-Festivals/eid.mp4", hint: "Warm embrace pose 🌙" },
+      { name: "Ganesh Chaturthi", desc: "Curve your dominant arm in front of your nose like an elephant trunk representing Lord Ganesha.", mappedGesture: "Ganesh Chaturthi", videoUrl: "/level4-Festivals/ganesh.mp4", hint: "Elephant trunk gesture 🐘" },
+      { name: "Navratri", desc: "Hold imaginary Dandiya sticks in both hands and perform the rhythmic Garba cross-clash gesture.", mappedGesture: "Navratri", videoUrl: "/level4-Festivals/navratri.mp4", hint: "Dandiya sticks playing gesture 💃" },
+      { name: "Durga Puja", desc: "Hold multiple divine hand gestures with a Trishul blessing pose representing Goddess Durga.", mappedGesture: "Durga Puja", videoUrl: "/level4-Festivals/durgapoja.mp4", hint: "Trishul blessing pose 🔱" },
+      { name: "Dussehra", desc: "Draw an imaginary bow and arrow representing Lord Rama's victory over Ravana.", mappedGesture: "Dussehra", videoUrl: "/level4-Festivals/dussehrea.mp4", hint: "Pulling bow and arrow 🏹" },
+      { name: "Raksha Bandhan", desc: "Tie an imaginary sacred Rakhi thread around your left wrist with your right fingers.", mappedGesture: "Raksha Bandhan", videoUrl: "/level4-Festivals/rakshabadhan.mp4", hint: "Tying Rakhi on wrist 🧵" },
+      { name: "Janmashtami", desc: "Hold both hands horizontally to your lips as if playing Lord Krishna's divine flute.", mappedGesture: "Janmashtami", videoUrl: "/level4-Festivals/janmashtami.mp4", hint: "Playing Krishna flute pose 🪈" },
+      { name: "Independence Day", desc: "Salute with flat hand at forehead then flutter hand upward like the Indian Tricolor flag.", mappedGesture: "Independence Day", videoUrl: "/level4-Festivals/independenceday.mp4", hint: "Salute & flutter flag 🇮🇳" },
+      { name: "Republic Day", desc: "Make the firm constitution parade salute with pride representing January 26th.", mappedGesture: "Republic Day", videoUrl: "/level4-Festivals/republic day.mp4", hint: "Firm parade salute 🇮🇳" }
+    ]
+  },
+  numbers: {
+    name: "Numbers & Counting",
+    icon: Award,
+    level: "🔢 Level 5",
+    description: "Counting and number signs from 1 to 15, 100, 1000 up to Crores",
+    signs: [
+      { name: "1", desc: "Hold index finger straight up with all other fingers closed in a fist.", mappedGesture: "1", videoUrl: "/level5-numbers/1.png", hint: "Index finger up ☝️" },
+      { name: "2", desc: "Hold index and middle fingers straight up in a 'V' shape.", mappedGesture: "2", videoUrl: "/level5-numbers/2.png", hint: "2 fingers up (V shape) ✌️" },
+      { name: "3", desc: "Hold thumb, index, and middle fingers extended.", mappedGesture: "3", videoUrl: "/level5-numbers/3.png", hint: "3 fingers extended 🤟" },
+      { name: "4", desc: "Hold all four fingers flat upright with thumb folded across palm.", mappedGesture: "4", videoUrl: "/level5-numbers/4.png", hint: "4 fingers straight up 🖐️" },
+      { name: "5", desc: "Open all five fingers wide with palm facing forward.", mappedGesture: "5", videoUrl: "/level5-numbers/5.png", hint: "All 5 fingers open 🖐️" },
+      { name: "6", desc: "Touch thumb to pinky finger with middle 3 fingers extended upright.", mappedGesture: "6", videoUrl: "/level5-numbers/6.mp4", hint: "Thumb touches pinky 👌" },
+      { name: "7", desc: "Touch thumb to ring finger with other fingers extended upright.", mappedGesture: "7", videoUrl: "/level5-numbers/7.png", hint: "Thumb touches ring finger ✋" },
+      { name: "8", desc: "Touch thumb to middle finger with remaining fingers extended.", mappedGesture: "8", videoUrl: "/level5-numbers/8.png", hint: "Thumb touches middle finger ✋" },
+      { name: "9", desc: "Touch thumb to index fingertip in a neat circular ring.", mappedGesture: "9", videoUrl: "/level5-numbers/9.png", hint: "Thumb touches index finger 👌" },
+      { name: "10", desc: "Hold a firm thumbs-up and shake or twist your wrist slightly.", mappedGesture: "10", videoUrl: "/level5-numbers/10.mp4", hint: "Thumbs up shaking gesture 🔟" },
+      { name: "11", desc: "Flick your index finger upward from your thumb twice.", mappedGesture: "11", videoUrl: "/level5-numbers/11.mp4", hint: "Flick index finger up 1️⃣1️⃣" },
+      { name: "12", desc: "Flick both index and middle fingers upward together.", mappedGesture: "12", videoUrl: "/level5-numbers/12.mp4", hint: "Flick 2 fingers up 1️⃣2️⃣" },
+      { name: "13", desc: "Wiggle index and middle fingers together toward yourself.", mappedGesture: "13", videoUrl: "/level5-numbers/13.mp4", hint: "Wiggle 2 fingers in 1️⃣3️⃣" },
+      { name: "14", desc: "Wiggle four extended fingers gently toward yourself.", mappedGesture: "14", videoUrl: "/level5-numbers/14.mp4", hint: "Wiggle 4 fingers in 1️⃣4️⃣" },
+      { name: "15", desc: "Wave all five open fingers gently forward and back.", mappedGesture: "15", videoUrl: "/level5-numbers/15.mp4", hint: "Wave all 5 fingers 1️⃣5️⃣" },
+      { name: "25", desc: "Wiggle your middle finger with open 5-handshape.", mappedGesture: "25", videoUrl: "/level5-numbers/25.mp4", hint: "Middle finger wiggle 2️⃣5️⃣" },
+      { name: "50", desc: "Show 5-handshape followed by 0-handshape (O shape).", mappedGesture: "50", videoUrl: "/level5-numbers/50.mp4", hint: "5 followed by 0 5️⃣0️⃣" },
+      { name: "100", desc: "Show number 1 followed by curved C-handshape (Century).", mappedGesture: "100", videoUrl: "/level5-numbers/100.mp4", hint: "1 then C-shape 💯" },
+      { name: "1000", desc: "Show 1-finger then tap open palm indicating Thousand.", mappedGesture: "1000", videoUrl: "/level5-numbers/1000.mp4", hint: "1 followed by Thousand palm tap 1️⃣0️⃣0️⃣0️⃣" },
+      { name: "10000", desc: "Show 10 gesture followed by Thousand palm tap.", mappedGesture: "10000", videoUrl: "/level5-numbers/10000.mp4", hint: "10 followed by Thousand tap 🔟0️⃣0️⃣0️⃣" },
+      { name: "100000", desc: "Show 1 gesture followed by Lakh hand sweep.", mappedGesture: "100000", videoUrl: "/level5-numbers/100000.mp4", hint: "1 followed by Lakh sweep 💰" },
+      { name: "1000000", desc: "Show 10 gesture followed by Lakh hand sweep.", mappedGesture: "1000000", videoUrl: "/level5-numbers/1000000.mp4", hint: "10 followed by Lakh sweep 💰" },
+      { name: "10cr", desc: "Show 10 gesture followed by Crore C-twist curve.", mappedGesture: "10cr", videoUrl: "/level5-numbers/10cr.mp4", hint: "10 followed by Crore twist 👑" }
+    ]
+  },
   emergency: {
     name: "Emergency & Safety",
     icon: ShieldAlert,
-    level: "🚨 Level 4",
-    description: "Vital safety and emergency assistance signs",
+    level: "🚨 Level 6",
+    description: "Vital safety and emergency assistance signs with 1-tap live status dispatch",
     signs: [
-      { name: "Help", desc: "Rest your closed right fist on your flat left palm and lift slightly.", mappedGesture: "Help", videoUrl: "https://www.youtube.com/embed/0X6dM0Kk1iY", hint: "Fist on flat palm 🆘" },
-      { name: "Safe", desc: "Cross arms in front of chest then open them wide outward.", mappedGesture: "Yes", videoUrl: "https://www.youtube.com/embed/rP2t8P6qg5c", hint: "Arms cross and open wide 🛡️" }
+      { name: "Safe", desc: "Cross arms in front of chest then open them wide outward indicating safety, protection, and security.", mappedGesture: "Safe", videoUrl: "/emergencyModule/safe.mp4", hint: "Arms cross and open wide 🛡️" },
+      { name: "Help", desc: "Rest your closed dominant fist upright on your flat open palm and lift both hands upward together.", mappedGesture: "Help", videoUrl: "/emergencyModule/help.mp4", hint: "Fist on flat palm lifting up 🆘" },
+      { name: "Emergency", desc: "Raise both waving hands high above your head signaling urgent distress and evacuation.", mappedGesture: "Emergency", videoUrl: "/emergencyModule/emergency.mp4", hint: "Both hands waving high above head 🚨" }
     ]
   }
 };
@@ -419,18 +564,36 @@ const BADGES_CONFIG = [
     name: { en: "Alphabet Scholar", hi: "वर्णमाला अभ्यासक", mr: "मुळाक्षरे तज्ज्ञ" },
     desc: { en: "Mastered at least 10 A–Z fingerspelled letters", hi: "कम से कम 10 A–Z फिंगरस्पेलिंग अक्षर सीखे", mr: "किमान १० A–Z फिंगरस्पेलिंग अक्षरे शिकली" },
     icon: BookOpen, 
-    color: "text-orange-500 bg-orange-500/10 border-orange-500/30",
+    color: "text-amber-500 bg-amber-500/10 border-amber-500/30",
     check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "alphabets").length >= 10,
     progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "alphabets").length} / 10 Letters`
   },
   { 
+    id: "festivals", 
+    name: { en: "Cultural Festival Champion", hi: "सांस्कृतिक त्यौहार चैंपियन", mr: "सांस्कृतिक सण चॅम्पियन" },
+    desc: { en: "Completed all 12 auspicious Indian Festival signs", hi: "सभी 12 भारतीय त्यौहार संकेत पूरे किए", mr: "सर्व १२ भारतीय सणांची चिन्हे पूर्ण केली" },
+    icon: Sparkles, 
+    color: "text-pink-500 bg-pink-500/10 border-pink-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "festivals").length >= 12,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "festivals").length} / 12 Festivals`
+  },
+  { 
+    id: "numbers", 
+    name: { en: "Math & Numbers Wizard", hi: "संख्या एवं गणित विजार्ड", mr: "संख्या व गणित विझार्ड" },
+    desc: { en: "Mastered at least 10 counting number signs", hi: "कम से कम 10 संख्या संकेत सीखे", mr: "किमान १० संख्या चिन्हे शिकली" },
+    icon: Award, 
+    color: "text-indigo-500 bg-indigo-500/10 border-indigo-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "numbers").length >= 10,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "numbers").length} / 10 Numbers`
+  },
+  { 
     id: "safety", 
-    name: { en: "Safety Hero", hi: "सुरक्षा हीरो", mr: "सुरक्षा हिरो" },
-    desc: { en: "Completed Level 4 Emergency Signs", hi: "स्तर 4 आपातकालीन संकेत पूरे किए", mr: "स्तर ४ आपत्कालीन चिन्हे पूर्ण केली" },
+    name: { en: "Life Safety Hero", hi: "जीवन सुरक्षा हीरो", mr: "जीवन सुरक्षा हिरो" },
+    desc: { en: "Completed Level 6 Emergency Safety Signs (Safe, Help, Emergency)", hi: "स्तर 6 आपातकालीन संकेत पूरे किए", mr: "स्तर ६ आपत्कालीन चिन्हे पूर्ण केली" },
     icon: ShieldAlert, 
     color: "text-rose-500 bg-rose-500/10 border-rose-500/30",
-    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "emergency").length >= 2,
-    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "emergency").length} / 2 Emergency`
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "emergency").length >= 3,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "emergency").length} / 3 Emergency`
   }
 ];
 
@@ -453,7 +616,12 @@ export function StudentView({
     gestureStatus,
     gestureOutput,
     simulateSpeech,
-    setActiveSign
+    setActiveSign,
+    safety,
+    setSafety,
+    triggerEmergency,
+    addLog,
+    room
   } = useDemo();
   const { language, t } = useLanguage();
 
@@ -466,6 +634,7 @@ export function StudentView({
 
   const [selectedCat, setSelectedCat] = useState<string | null>(initialCategory);
   const [currentSignIdx, setCurrentSignIdx] = useState(0);
+  const [safetyFeedbackToast, setSafetyFeedbackToast] = useState<string | null>(null);
 
   // Persistent student progress store
   const [progressHistory, setProgressHistory] = useState<Record<string, SignRecord>>({});
@@ -493,6 +662,8 @@ export function StudentView({
   const basicCount = Object.values(progressHistory).filter(p => p.category === "basic").length;
   const colorsCount = Object.values(progressHistory).filter(p => p.category === "colors").length;
   const alphabetsCount = Object.values(progressHistory).filter(p => p.category === "alphabets").length;
+  const festivalsCount = Object.values(progressHistory).filter(p => p.category === "festivals").length;
+  const numbersCount = Object.values(progressHistory).filter(p => p.category === "numbers").length;
   const emergencyCount = Object.values(progressHistory).filter(p => p.category === "emergency").length;
 
   const totalPracticeReps = Object.values(progressHistory).reduce((sum, p) => sum + (p.count || 1), 0);
@@ -500,7 +671,7 @@ export function StudentView({
     ? Math.round(Object.values(progressHistory).reduce((sum, p) => sum + p.accuracy, 0) / masteredCount)
     : 0;
 
-  // Dynamic Level determination
+  // Dynamic Level determination across all 6 levels
   const getCurrentLevel = () => {
     if (masteredCount === 0) {
       return {
@@ -527,11 +698,32 @@ export function StudentView({
       return {
         title: language === "mr" ? "स्तर ३ · AI मुळाक्षरे अभ्यासक" : language === "hi" ? "स्तर 3 · AI वर्णमाला विद्वान" : "Level 3 · Deep Learning Scholar",
         desc: `${alphabetsCount} / 26 ${language === "mr" ? "अक्षरे पूर्ण" : language === "hi" ? "अक्षर पूर्ण" : "Letters mastered"}`,
-        nextGoal: language === "mr" ? "सर्व २६ अक्षरे पूर्ण करा" : language === "hi" ? "सभी 26 अक्षर पूरे करें" : "Master all 26 alphabets for full ISL proficiency!"
+        nextGoal: language === "mr" ? `स्तर ४ उघडण्यासाठी अजून ${26 - alphabetsCount} अक्षरे पूर्ण करा` : language === "hi" ? `स्तर 4 अनलॉक करने के लिए और ${26 - alphabetsCount} अक्षर पूरे करें` : `Complete ${26 - alphabetsCount} more Letters to unlock Level 4 Festivals!`
+      };
+    }
+    if (festivalsCount < 12) {
+      return {
+        title: language === "mr" ? "स्तर ४ · सण व संस्कृती चॅम्पियन" : language === "hi" ? "स्तर 4 · त्यौहार व संस्कृति चैंपियन" : "Level 4 · Festival Champion",
+        desc: `${festivalsCount} / 12 ${language === "mr" ? "सणांची चिन्हे पूर्ण" : language === "hi" ? "त्यौहार संकेत पूर्ण" : "Festivals mastered"}`,
+        nextGoal: language === "mr" ? `स्तर ५ उघडण्यासाठी अजून ${12 - festivalsCount} सणांची चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 5 अनलॉक करने के लिए और ${12 - festivalsCount} संकेत पूरे करें` : `Complete ${12 - festivalsCount} more Festivals to unlock Level 5 Numbers!`
+      };
+    }
+    if (numbersCount < 23) {
+      return {
+        title: language === "mr" ? "स्तर ५ · संख्या व गणित विझार्ड" : language === "hi" ? "स्तर 5 · संख्या व गणित विजार्ड" : "Level 5 · Numbers Wizard",
+        desc: `${numbersCount} / 23 ${language === "mr" ? "संख्या चिन्हे पूर्ण" : language === "hi" ? "संख्या संकेत पूर्ण" : "Numbers mastered"}`,
+        nextGoal: language === "mr" ? `स्तर ६ उघडण्यासाठी अजून ${23 - numbersCount} संख्या चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 6 अनलॉक करने के लिए और ${23 - numbersCount} संख्याएं पूरी करें` : `Complete ${23 - numbersCount} more Numbers to unlock Level 6 Emergency!`
+      };
+    }
+    if (emergencyCount < 3) {
+      return {
+        title: language === "mr" ? "स्तर ६ · जीवन सुरक्षा हिरो" : language === "hi" ? "स्तर 6 · जीवन सुरक्षा हीरो" : "Level 6 · Safety Guardian",
+        desc: `${emergencyCount} / 3 ${language === "mr" ? "सुरक्षा चिन्हे पूर्ण" : language === "hi" ? "सुरक्षा संकेत पूर्ण" : "Emergency signs mastered"}`,
+        nextGoal: language === "mr" ? "सर्व आपत्कालीन चिन्हे पूर्ण करा" : language === "hi" ? "सभी आपातकालीन संकेत पूरे करें" : "Complete all Emergency signs for full safety certification!"
       };
     }
     return {
-      title: language === "mr" ? "स्तर ४ · ISL ग्रँड मास्टर" : language === "hi" ? "स्तर 4 · ISL ग्रैंड मास्टर" : "Level 4 · ISL Grand Master",
+      title: language === "mr" ? "स्तर ६ · ISL ग्रँड मास्टर" : language === "hi" ? "स्तर 6 · ISL ग्रैंड मास्टर" : "Level 6 · ISL Grand Master",
       desc: language === "mr" ? "सर्व अभ्यासक्रम यशस्वीपणे पूर्ण! 🏆" : language === "hi" ? "सभी पाठ्यक्रम सफलतापूर्वक पूर्ण! 🏆" : "All curriculum levels mastered! 🏆",
       nextGoal: language === "mr" ? "सर्वोच्च प्राविण्य प्राप्त झाले!" : language === "hi" ? "सर्वोच्च दक्षता प्राप्त हुई!" : "Full Mastery Achieved!"
     };
@@ -551,6 +743,8 @@ export function StudentView({
     if (key === "basic") return t.catGreetings;
     if (key === "colors") return t.catColours;
     if (key === "alphabets") return t.catAlphabets;
+    if (key === "festivals") return t.catFestivals;
+    if (key === "numbers") return t.catNumbers;
     if (key === "emergency") return t.catEmergency;
     return defaultName;
   };
@@ -559,8 +753,38 @@ export function StudentView({
     if (key === "basic") return t.catGreetingsDesc;
     if (key === "colors") return t.catColoursDesc;
     if (key === "alphabets") return t.catAlphabetsDesc;
+    if (key === "festivals") return t.catFestivalsDesc;
+    if (key === "numbers") return t.catNumbersDesc;
     if (key === "emergency") return t.catEmergencyDesc;
     return defaultDesc;
+  };
+
+  // Safety status update dispatcher
+  const handleUpdateSafety = (status: "ok" | "help" | "trapped") => {
+    setSafety(status);
+    if (status === "ok") {
+      addLog("Student", `[SAFE] Student confirmed safe in ${room}`);
+      setSafetyFeedbackToast(t.safeStatusUpdatedMsg || "✅ Status: SAFE NOW! Guardian WhatsApp notification sent.");
+      try {
+        const msg = encodeURIComponent(`[SIGN-SAFE UPDATE] Student is SAFE NOW in ${room}. Location & status verified.`);
+        window.open(`https://wa.me/919876543210?text=${msg}`, "_blank");
+      } catch (e) {
+        console.warn(e);
+      }
+    } else if (status === "help") {
+      addLog("Student", `[ASSISTANCE] Student requested assistance in ${room}`);
+      setSafetyFeedbackToast(t.helpStatusUpdatedMsg || "🟡 Status: ASSISTANCE REQUESTED! Staff & support team dispatched.");
+      try {
+        const msg = encodeURIComponent(`[SIGN-SAFE ASSIST] Student needs assistance in ${room}. Immediate attention required.`);
+        window.open(`https://wa.me/919876543210?text=${msg}`, "_blank");
+      } catch (e) {
+        console.warn(e);
+      }
+    } else if (status === "trapped") {
+      triggerEmergency(`Distress reported from ${room}`);
+      addLog("Student", `[SOS DANGER] Student marked IN DANGER in ${room}`);
+      setSafetyFeedbackToast(t.dangerStatusUpdatedMsg || "🚨 Status: IN DANGER! Smart SOS triggered & GPS coordinates dispatched.");
+    }
   };
 
   // Whenever we select a sign, reset validation state, register active target sign, and simulate teacher speech
@@ -616,13 +840,35 @@ export function StudentView({
         (nameNorm === "green" && outputNorm === "green") ||
         (nameNorm === "grey" && outputNorm === "grey") ||
         (nameNorm === "orange" && outputNorm === "orange") ||
-        (nameNorm === "pink" && outputNorm === "pink");
+        (nameNorm === "pink" && outputNorm === "pink") ||
+        (nameNorm === "diwali" && outputNorm === "diwali") ||
+        (nameNorm === "holi" && outputNorm === "holi") ||
+        (nameNorm === "christmas" && outputNorm === "christmas") ||
+        (nameNorm === "eid" && outputNorm === "eid") ||
+        (nameNorm === "ganesh chaturthi" && (outputNorm === "ganesh chaturthi" || outputNorm === "ganesh")) ||
+        (nameNorm === "navratri" && outputNorm === "navratri") ||
+        (nameNorm === "durga puja" && (outputNorm === "durga puja" || outputNorm === "durga")) ||
+        (nameNorm === "dussehra" && outputNorm === "dussehra") ||
+        (nameNorm === "raksha bandhan" && (outputNorm === "raksha bandhan" || outputNorm === "rakhi")) ||
+        (nameNorm === "janmashtami" && outputNorm === "janmashtami") ||
+        (nameNorm === "independence day" && (outputNorm === "independence day" || outputNorm === "flag")) ||
+        (nameNorm === "republic day" && (outputNorm === "republic day" || outputNorm === "salute")) ||
+        (nameNorm === "safe" && outputNorm === "safe") ||
+        (nameNorm === "help" && outputNorm === "help") ||
+        (nameNorm === "emergency" && (outputNorm === "emergency" || outputNorm === "danger"));
 
       if (isDirectMatch || isCompoundMatch) {
         setMatchingStatus("correct");
         const score = 94 + Math.floor(Math.random() * 6);
         setEvaluatedScore(score);
         saveProgressRecord(currentSign.name, (selectedCat as any) || "basic", score);
+        if (currentSign.name.toLowerCase() === "safe") {
+          handleUpdateSafety("ok");
+        } else if (currentSign.name.toLowerCase() === "help") {
+          handleUpdateSafety("help");
+        } else if (currentSign.name.toLowerCase() === "emergency") {
+          handleUpdateSafety("trapped");
+        }
       }
     }
   }, [gestureOutput, currentSign, matchingStatus, selectedCat]);
@@ -633,6 +879,13 @@ export function StudentView({
       const score = 96;
       setEvaluatedScore(score);
       saveProgressRecord(currentSign.name, (selectedCat as any) || "basic", score);
+      if (currentSign.name.toLowerCase() === "safe") {
+        handleUpdateSafety("ok");
+      } else if (currentSign.name.toLowerCase() === "help") {
+        handleUpdateSafety("help");
+      } else if (currentSign.name.toLowerCase() === "emergency") {
+        handleUpdateSafety("trapped");
+      }
     }
   };
 
@@ -987,6 +1240,85 @@ export function StudentView({
                   </div>
                 </div>
               </div>
+
+              {/* Interactive Live Safety Status Suite (Deaf 1-tap dispatcher) */}
+              <div className="rounded-2xl border-2 border-border/80 bg-card p-5 space-y-3 shadow-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <ShieldAlert className="h-5 w-5 text-primary" />
+                    <div>
+                      <h3 className="font-bold text-sm uppercase tracking-wide text-foreground">
+                        Update Your Safety Status
+                      </h3>
+                      <p className="text-xs text-muted-foreground">
+                        Deaf-accessible 1-tap live emergency dispatcher · {room}
+                      </p>
+                    </div>
+                  </div>
+                  {safety !== "unknown" && (
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider ${
+                      safety === "ok" ? "bg-emerald-500/20 text-emerald-600 border border-emerald-500/30" :
+                      safety === "help" ? "bg-amber-500/20 text-amber-600 border border-amber-500/30" :
+                      "bg-rose-500/20 text-rose-600 border border-rose-500/30 animate-pulse"
+                    }`}>
+                      Status: {safety.toUpperCase()}
+                    </span>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  {/* 🟢 I AM SAFE NOW */}
+                  <button
+                    onClick={() => handleUpdateSafety("ok")}
+                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
+                      safety === "ok"
+                        ? "bg-emerald-700 text-white ring-2 ring-emerald-400"
+                        : "bg-emerald-600 hover:bg-emerald-700 text-white"
+                    }`}
+                  >
+                    <ShieldCheck className="h-4 w-4" />
+                    <span>I AM SAFE NOW</span>
+                  </button>
+
+                  {/* 🟡 I NEED ASSISTANCE */}
+                  <button
+                    onClick={() => handleUpdateSafety("help")}
+                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
+                      safety === "help"
+                        ? "bg-amber-600 text-white ring-2 ring-amber-300"
+                        : "bg-amber-500 hover:bg-amber-600 text-white"
+                    }`}
+                  >
+                    <HeartPulse className="h-4 w-4" />
+                    <span>I NEED ASSISTANCE</span>
+                  </button>
+
+                  {/* 🔴 I AM IN DANGER (Room 103) */}
+                  <button
+                    onClick={() => handleUpdateSafety("trapped")}
+                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
+                      safety === "trapped"
+                        ? "bg-rose-700 text-white ring-2 ring-rose-400 animate-pulse"
+                        : "bg-rose-600 hover:bg-rose-700 text-white animate-pulse"
+                    }`}
+                  >
+                    <AlertOctagon className="h-4 w-4" />
+                    <span>I AM IN DANGER ({room})</span>
+                  </button>
+                </div>
+
+                {safetyFeedbackToast && (
+                  <div className="p-3 rounded-xl bg-primary/10 border border-primary/20 text-xs text-primary font-bold flex items-center justify-between">
+                    <span>{safetyFeedbackToast}</span>
+                    <button
+                      onClick={() => setSafetyFeedbackToast(null)}
+                      className="text-muted-foreground hover:text-foreground cursor-pointer text-sm font-black px-1"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -1024,7 +1356,7 @@ export function StudentView({
               </div>
               <p className="text-3xl font-black text-foreground">{points} ⭐</p>
               <p className="text-xs text-muted-foreground">
-                {masteredCount} / 48 {t.signsCount} {language === "mr" ? "यशस्वीपणे शिकली" : language === "hi" ? "सफलतापूर्वक सीखे गए" : "mastered so far"} (+10 ⭐ per sign)
+                {masteredCount} / 84 {t.signsCount} {language === "mr" ? "यशस्वीपणे शिकली" : language === "hi" ? "सफलतापूर्वक सीखे गए" : "mastered so far"} (+10 ⭐ per sign)
               </p>
             </div>
 
@@ -1165,8 +1497,8 @@ export function StudentView({
                 <span className="text-xs font-bold uppercase">Curriculum Mastered</span>
                 <BarChart3 className="h-4 w-4 text-primary" />
               </div>
-              <p className="text-2xl font-black text-foreground">{masteredCount} / 48</p>
-              <p className="text-[11px] text-muted-foreground">{Math.round((masteredCount / 48) * 100)}% of ISL syllabus</p>
+              <p className="text-2xl font-black text-foreground">{masteredCount} / 84</p>
+              <p className="text-[11px] text-muted-foreground">{Math.round((masteredCount / 84) * 100)}% of ISL syllabus</p>
             </div>
 
             <div className="glass rounded-2xl p-4 border border-border space-y-1">
@@ -1185,7 +1517,7 @@ export function StudentView({
               <BookOpen className="h-4 w-4 text-primary" /> Curriculum Levels Breakdown
             </h3>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {/* Level 1 Greetings */}
               <div className="rounded-2xl border border-blue-500/20 bg-blue-500/5 p-4 space-y-2">
                 <div className="flex items-center justify-between text-xs font-bold">
@@ -1222,16 +1554,40 @@ export function StudentView({
                 <p className="text-[10px] text-muted-foreground">{Math.round((alphabetsCount / 26) * 100)}% Completed</p>
               </div>
 
-              {/* Level 4 Emergency */}
-              <div className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-4 space-y-2">
+              {/* Level 4 Festivals */}
+              <div className="rounded-2xl border border-pink-500/20 bg-pink-500/5 p-4 space-y-2">
                 <div className="flex items-center justify-between text-xs font-bold">
-                  <span className="text-rose-700">🚨 Level 4: Safety</span>
-                  <span>{emergencyCount} / 2</span>
+                  <span className="text-pink-700">🎉 Level 4: Festivals</span>
+                  <span>{festivalsCount} / 12</span>
                 </div>
                 <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-                  <div className="h-full bg-rose-600 rounded-full transition-all duration-500" style={{ width: `${(emergencyCount / 2) * 100}%` }} />
+                  <div className="h-full bg-pink-600 rounded-full transition-all duration-500" style={{ width: `${(festivalsCount / 12) * 100}%` }} />
                 </div>
-                <p className="text-[10px] text-muted-foreground">{Math.round((emergencyCount / 2) * 100)}% Completed</p>
+                <p className="text-[10px] text-muted-foreground">{Math.round((festivalsCount / 12) * 100)}% Completed</p>
+              </div>
+
+              {/* Level 5 Numbers */}
+              <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-indigo-700">🔢 Level 5: Numbers</span>
+                  <span>{numbersCount} / 23</span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                  <div className="h-full bg-indigo-600 rounded-full transition-all duration-500" style={{ width: `${(numbersCount / 23) * 100}%` }} />
+                </div>
+                <p className="text-[10px] text-muted-foreground">{Math.round((numbersCount / 23) * 100)}% Completed</p>
+              </div>
+
+              {/* Level 6 Emergency */}
+              <div className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-rose-700">🚨 Level 6: Safety</span>
+                  <span>{emergencyCount} / 3</span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                  <div className="h-full bg-rose-600 rounded-full transition-all duration-500" style={{ width: `${(emergencyCount / 3) * 100}%` }} />
+                </div>
+                <p className="text-[10px] text-muted-foreground">{Math.round((emergencyCount / 3) * 100)}% Completed</p>
               </div>
             </div>
           </div>
@@ -1331,13 +1687,49 @@ export function StudentView({
                   </div>
                 )}
 
-                {alphabetsCount < 10 && (
+                {colorsCount >= 10 && alphabetsCount < 26 && (
                   <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3.5 flex items-start gap-3">
                     <BookOpen className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-xs font-bold text-foreground">Deep Learning A–Z Fingerspelling</h4>
                       <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
-                        Practice 10 alphabet signs to test our 98.85% neural network model in real time.
+                        Practice {26 - alphabetsCount} remaining alphabet signs to test our 98.85% neural network in real time.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {alphabetsCount >= 26 && festivalsCount < 12 && (
+                  <div className="rounded-xl border border-pink-500/20 bg-pink-500/5 p-3.5 flex items-start gap-3">
+                    <Sparkles className="h-4 w-4 text-pink-500 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-foreground">Celebrate Level 4 Festivals</h4>
+                      <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+                        Learn signs for Diwali, Holi, Eid, Christmas, Ganesh Chaturthi, and Independence Day!
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {festivalsCount >= 12 && numbersCount < 23 && (
+                  <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-3.5 flex items-start gap-3">
+                    <Award className="h-4 w-4 text-indigo-500 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-foreground">Master Level 5 Numbers</h4>
+                      <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+                        Learn counting from 1 to 15, 25, 50, 100, 1000, 10,000 up to Crores.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {emergencyCount < 3 && (
+                  <div className="rounded-xl border border-rose-500/20 bg-rose-500/5 p-3.5 flex items-start gap-3">
+                    <ShieldAlert className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-foreground">Complete Level 6 Life Safety</h4>
+                      <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+                        Master the 3 life-saving signs: Safe, Help, and Emergency Distress.
                       </p>
                     </div>
                   </div>

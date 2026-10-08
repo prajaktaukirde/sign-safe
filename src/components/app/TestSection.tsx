@@ -86,12 +86,30 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
       color: "border-amber-500/30 bg-amber-500/5 hover:border-amber-500 text-amber-600"
     },
     {
+      id: "festivals",
+      title: t.testLevel4Title,
+      desc: t.testLevel4Desc,
+      icon: Sparkles,
+      count: "12 Festival Signs",
+      badge: "🎉 Level 4",
+      color: "border-pink-500/30 bg-pink-500/5 hover:border-pink-500 text-pink-600"
+    },
+    {
+      id: "numbers",
+      title: t.testLevel5Title,
+      desc: t.testLevel5Desc,
+      icon: Award,
+      count: "10 Random Numbers",
+      badge: "🔢 Level 5",
+      color: "border-indigo-500/30 bg-indigo-500/5 hover:border-indigo-500 text-indigo-600"
+    },
+    {
       id: "emergency",
-      title: t.testEmergencyTitle,
-      desc: t.testEmergencyDesc,
+      title: t.testLevel6Title,
+      desc: t.testLevel6Desc,
       icon: ShieldAlert,
-      count: "Safety Signs",
-      badge: "🚨 Level 4",
+      count: "3 Safety Signs",
+      badge: "🚨 Level 6",
       color: "border-rose-500/30 bg-rose-500/5 hover:border-rose-500 text-rose-600"
     },
     {
@@ -110,25 +128,33 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
     let pool: { sign: Sign; cat: string }[] = [];
 
     if (catKey === "mixed") {
-      // Pick 3 greetings, 3 colors, 3 alphabets, 1 emergency
-      const bSigns = [...CATEGORIES.basic.signs].sort(() => 0.5 - Math.random()).slice(0, 3);
-      const cSigns = [...CATEGORIES.colors.signs].sort(() => 0.5 - Math.random()).slice(0, 3);
-      const aSigns = [...CATEGORIES.alphabets.signs].sort(() => 0.5 - Math.random()).slice(0, 3);
-      const eSigns = [...CATEGORIES.emergency.signs].sort(() => 0.5 - Math.random()).slice(0, 1);
+      // Pick 2 greetings, 2 colors, 2 alphabets, 2 festivals, 1 number, 1 emergency
+      const bSigns = [...(CATEGORIES.basic?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 2);
+      const cSigns = [...(CATEGORIES.colors?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 2);
+      const aSigns = [...(CATEGORIES.alphabets?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 2);
+      const fSigns = [...(CATEGORIES.festivals?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 2);
+      const nSigns = [...(CATEGORIES.numbers?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
+      const eSigns = [...(CATEGORIES.emergency?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
 
       pool = [
         ...bSigns.map(s => ({ sign: s, cat: "basic" })),
         ...cSigns.map(s => ({ sign: s, cat: "colors" })),
         ...aSigns.map(s => ({ sign: s, cat: "alphabets" })),
+        ...fSigns.map(s => ({ sign: s, cat: "festivals" })),
+        ...nSigns.map(s => ({ sign: s, cat: "numbers" })),
         ...eSigns.map(s => ({ sign: s, cat: "emergency" })),
       ].sort(() => 0.5 - Math.random());
     } else if (catKey === "alphabets") {
       // Pick 10 random letters from A-Z
-      const shuffled = [...CATEGORIES.alphabets.signs].sort(() => 0.5 - Math.random()).slice(0, 10);
+      const shuffled = [...(CATEGORIES.alphabets?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 10);
       pool = shuffled.map(s => ({ sign: s, cat: "alphabets" }));
+    } else if (catKey === "numbers") {
+      // Pick 10 random numbers
+      const shuffled = [...(CATEGORIES.numbers?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 10);
+      pool = shuffled.map(s => ({ sign: s, cat: "numbers" }));
     } else {
       const cat = CATEGORIES[catKey] || CATEGORIES.basic;
-      pool = cat.signs.map(s => ({ sign: s, cat: catKey }));
+      pool = (cat?.signs || []).map(s => ({ sign: s, cat: catKey }));
     }
 
     // Generate options for Quiz mode (4 choices per question)
@@ -261,7 +287,22 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
         (nameNorm === "green" && outputNorm === "green") ||
         (nameNorm === "grey" && outputNorm === "grey") ||
         (nameNorm === "orange" && outputNorm === "orange") ||
-        (nameNorm === "pink" && outputNorm === "pink");
+        (nameNorm === "pink" && outputNorm === "pink") ||
+        (nameNorm === "diwali" && outputNorm === "diwali") ||
+        (nameNorm === "holi" && outputNorm === "holi") ||
+        (nameNorm === "christmas" && outputNorm === "christmas") ||
+        (nameNorm === "eid" && outputNorm === "eid") ||
+        (nameNorm === "ganesh chaturthi" && (outputNorm === "ganesh chaturthi" || outputNorm === "ganesh")) ||
+        (nameNorm === "navratri" && outputNorm === "navratri") ||
+        (nameNorm === "durga puja" && (outputNorm === "durga puja" || outputNorm === "durga")) ||
+        (nameNorm === "dussehra" && outputNorm === "dussehra") ||
+        (nameNorm === "raksha bandhan" && (outputNorm === "raksha bandhan" || outputNorm === "rakhi")) ||
+        (nameNorm === "janmashtami" && outputNorm === "janmashtami") ||
+        (nameNorm === "independence day" && (outputNorm === "independence day" || outputNorm === "flag")) ||
+        (nameNorm === "republic day" && (outputNorm === "republic day" || outputNorm === "salute")) ||
+        (nameNorm === "safe" && outputNorm === "safe") ||
+        (nameNorm === "help" && outputNorm === "help") ||
+        (nameNorm === "emergency" && (outputNorm === "emergency" || outputNorm === "danger"));
 
       if (isDirectMatch || isCompoundMatch) {
         setQuestionStatus("correct");

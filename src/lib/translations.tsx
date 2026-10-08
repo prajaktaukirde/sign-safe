@@ -52,8 +52,31 @@ export interface Translations {
   level3Desc: string;
   level4Title: string;
   level4Desc: string;
+  level5Title: string;
+  level5Desc: string;
+  level6Title: string;
+  level6Desc: string;
   btnStartLevel: string;
   btnTestSos: string;
+
+  // Category Names & Descriptions
+  catGreetings: string;
+  catGreetingsDesc: string;
+  catColours: string;
+  catColoursDesc: string;
+  catAlphabets: string;
+  catAlphabetsDesc: string;
+  catFestivals: string;
+  catFestivalsDesc: string;
+  catNumbers: string;
+  catNumbersDesc: string;
+  catEmergency: string;
+  catEmergencyDesc: string;
+
+  // Safety Status Messages
+  safeStatusUpdatedMsg: string;
+  helpStatusUpdatedMsg: string;
+  dangerStatusUpdatedMsg: string;
 
   // Module 2 SOS
   mod2Tag: string;
@@ -129,6 +152,12 @@ export interface Translations {
   testLevel2Desc: string;
   testLevel3Title: string;
   testLevel3Desc: string;
+  testLevel4Title: string;
+  testLevel4Desc: string;
+  testLevel5Title: string;
+  testLevel5Desc: string;
+  testLevel6Title: string;
+  testLevel6Desc: string;
   testEmergencyTitle: string;
   testEmergencyDesc: string;
   testMixedTitle: string;
@@ -289,10 +318,32 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level2Desc: "Colour vocabulary in Indian Sign Language: Red, Yellow, Blue, Green, Black, White, Violet, and Brown.",
     level3Title: "Complete Alphabets (A–Z)",
     level3Desc: "All 26 ISL fingerspelling letters trained on 1,300 MediaPipe landmark samples with 98.85% accuracy.",
-    level4Title: "Emergency & Safety",
-    level4Desc: "Critical safety gestures (Help, Safe) paired with live GPS WhatsApp alerts and strobe alarms.",
+    level4Title: "Festivals & Celebrations",
+    level4Desc: "12 auspicious Indian festival signs: Diwali, Holi, Christmas, Eid, Ganesh Chaturthi, Navratri, Durga Puja, Dussehra, etc.",
+    level5Title: "Numbers & Counting",
+    level5Desc: "23 Indian Sign Language counting gestures: 1 to 15, 25, 50, 100, 1,000 up to Crores.",
+    level6Title: "Emergency & Life Safety",
+    level6Desc: "Critical safety signs (Safe, Help, Emergency) with direct 1-tap Safety Status Update and Smart SOS dispatch.",
     btnStartLevel: "Start Level",
     btnTestSos: "Test Smart SOS",
+
+    // Category Names & Descriptions
+    catGreetings: "Everyday Greetings",
+    catGreetingsDesc: "Essential foundational greetings in Indian Sign Language",
+    catColours: "Vibrant Colours",
+    catColoursDesc: "Vibrant colour words and expressions in ISL",
+    catAlphabets: "Alphabets (A-Z)",
+    catAlphabetsDesc: "Complete A–Z Indian Sign Language fingerspelling vocabulary",
+    catFestivals: "Festivals & Cultural Celebrations",
+    catFestivalsDesc: "Learn 12 auspicious Indian festival signs with real ISL video demonstrations",
+    catNumbers: "Numbers & Counting",
+    catNumbersDesc: "Practice counting and number signs from 1 to 15, 100, 1,000 up to Crores",
+    catEmergency: "Emergency & Life Safety",
+    catEmergencyDesc: "Master life-saving emergency gestures (Safe, Help, Emergency) and update your safety status",
+
+    safeStatusUpdatedMsg: "Status updated: SAFE ✓ Confirmation dispatched to Guardian.",
+    helpStatusUpdatedMsg: "Status updated: ASSISTANCE NEEDED ⚠️ Guardian notified.",
+    dangerStatusUpdatedMsg: "CRITICAL DANGER ALERT 🚨 Live GPS and SOS dispatched!",
 
     mod2Tag: "Module 2 · Smart SOS Distress & Geolocation",
     mod2Heading: "Protecting Deaf Children During Emergencies",
@@ -364,7 +415,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel2Desc: "10 vibrant colour expressions (Black, Red, Green, Yellow, etc.)",
     testLevel3Title: "Level 3: A–Z Fingerspelling",
     testLevel3Desc: "10 random letters from the complete 26-sign alphabet vocabulary",
-    testEmergencyTitle: "Level 4: Emergency Rescue Signs",
+    testLevel4Title: "Level 4: Festivals & Celebrations",
+    testLevel4Desc: "12 cultural and festival expressions (Diwali, Holi, Christmas, etc.)",
+    testLevel5Title: "Level 5: Numbers & Counting",
+    testLevel5Desc: "Counting signs from 1 to 15, 100, 1000 up to Crores",
+    testLevel6Title: "Level 6: Emergency & Safety",
+    testLevel6Desc: "Life safety signs with 1-tap live status dispatch",
+    testEmergencyTitle: "Level 6: Emergency Rescue Signs",
     testEmergencyDesc: "Life safety signs (Help, Safe, Emergency distress)",
     testMixedTitle: "Grand Championship (Mixed Levels)",
     testMixedDesc: "10 comprehensive questions selected across all curriculum levels",
@@ -519,10 +576,32 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level2Desc: "ISL में रंगों के नाम: लाल, पीला, नीला, हरा, काला, सफेद, बैंगनी और भूरा।",
     level3Title: "संपूर्ण वर्णमाला (A–Z)",
     level3Desc: "सभी 26 ISL फिंगरस्पेलिंग अक्षर 1,300 लैंडमार्क नमूनों पर 98.85% सटीकता से प्रशिक्षित।",
-    level4Title: "आपातकालीन एवं जीवन सुरक्षा",
-    level4Desc: "महत्वपूर्ण सुरक्षा संकेत (मदद, सुरक्षित) लाइव GPS व्हाट्सएप अलर्ट के साथ।",
+    level4Title: "त्यौहार और सांस्कृतिक उत्सव",
+    level4Desc: "12 प्रमुख भारतीय त्यौहार संकेत: दीवाली, होली, क्रिसमस, ईद, गणेश चतुर्थी, नवरात्रि, दुर्गा पूजा, दशहरा आदि।",
+    level5Title: "संख्याएँ और गिनती",
+    level5Desc: "23 ISL संख्या संकेत: 1 से 15, 25, 50, 100, 1,000 से करोड़ तक।",
+    level6Title: "आपातकालीन एवं जीवन सुरक्षा",
+    level6Desc: "महत्वपूर्ण सुरक्षा संकेत (सुरक्षित, मदद, आपातकाल) 1-टैप सुरक्षा स्थिति अपडेट और स्मार्ट SOS अलर्ट के साथ।",
     btnStartLevel: "स्तर शुरू करें",
     btnTestSos: "SOS का परीक्षण करें",
+
+    // Category Names & Descriptions
+    catGreetings: "दैनिक अभिवादन",
+    catGreetingsDesc: "भारतीय सांकेतिक भाषा में बुनियादी अभिवादन संकेत",
+    catColours: "रंग और अभिव्यक्तियां",
+    catColoursDesc: "ISL में विभिन्न रंगों के नाम और संकेत",
+    catAlphabets: "संपूर्ण वर्णमाला (A–Z)",
+    catAlphabetsDesc: "सभी 26 ISL फिंगरस्पेलिंग अक्षरों का संपूर्ण संग्रह",
+    catFestivals: "त्यौहार और सांस्कृतिक उत्सव",
+    catFestivalsDesc: "12 प्रमुख भारतीय त्यौहारों के आधिकारिक वीडियो संकेत सीखें",
+    catNumbers: "संख्याएँ और गिनती",
+    catNumbersDesc: "संख्या 1 से 15, 100, 1,000 से करोड़ तक गिनती का अभ्यास करें",
+    catEmergency: "आपातकालीन एवं जीवन सुरक्षा",
+    catEmergencyDesc: "जीवन रक्षक संकेत सीखें (सुरक्षित, मदद, आपातकाल) और अपनी सुरक्षा स्थिति अपडेट करें",
+
+    safeStatusUpdatedMsg: "स्थिति अपडेट: सुरक्षित ✓ अभिभावक को पुष्टि भेजी गई।",
+    helpStatusUpdatedMsg: "स्थिति अपडेट: सहायता की आवश्यकता ⚠️ अभिभावक को सूचित किया गया।",
+    dangerStatusUpdatedMsg: "गंभीर संकट अलर्ट 🚨 लाइव GPS और SOS तुरंत भेजा गया!",
 
     mod2Tag: "मॉड्यूल 2 · स्मार्ट SOS आपातकालीन अलर्ट एवं भू-स्थान",
     mod2Heading: "आपातकाल के दौरान मूक-बधिर बच्चों की सुरक्षा",
@@ -594,7 +673,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel2Desc: "10 जीवंत रंग अभिव्यक्तियाँ (काला, लाल, हरा, पीला, आदि)",
     testLevel3Title: "स्तर 3: A–Z फिंगरस्पेलिंग",
     testLevel3Desc: "संपूर्ण 26-अक्षर वर्णमाला शब्दावली से 10 यादृच्छिक अक्षर",
-    testEmergencyTitle: "स्तर 4: आपातकालीन बचाव संकेत",
+    testLevel4Title: "स्तर 4: भारतीय त्यौहार व उत्सव",
+    testLevel4Desc: "12 सांस्कृतिक और त्यौहार संकेत (दीवाली, होली, क्रिसमस, आदि)",
+    testLevel5Title: "स्तर 5: संख्याएँ और गणना",
+    testLevel5Desc: "1 से 15, 100, 1000 से लेकर करोड़ तक के संख्या संकेत",
+    testLevel6Title: "स्तर 6: आपातकालीन व जीवन सुरक्षा",
+    testLevel6Desc: "1-टैप लाइव स्थिति प्रेषण के साथ जीवन सुरक्षा संकेत",
+    testEmergencyTitle: "स्तर 6: आपातकालीन बचाव संकेत",
     testEmergencyDesc: "जीवन सुरक्षा संकेत (मदद, सुरक्षित, आपातकालीन संकट)",
     testMixedTitle: "ग्रैंड चैम्पियनशिप (मिश्रित स्तर)",
     testMixedDesc: "सभी पाठ्यक्रम स्तरों से चुने गए 10 व्यापक प्रश्न",
@@ -749,10 +834,32 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level2Desc: "ISL मध्ये रंगांची नावे: लाल, पिवळा, निळा, हिरवा, काळा, पांढरा, जांभळा आणि तपकिरी.",
     level3Title: "संपूर्ण मुळाक्षरे (A–Z)",
     level3Desc: "सर्व २६ ISL फिंगरस्पेलिंग अक्षरे १,३०० लँडमार्क नमुन्यांवर ९८.८५% अचूकतेसह प्रशिक्षित.",
-    level4Title: "आपत्कालीन व जीवन सुरक्षा",
-    level4Desc: "महत्त्वाची सुरक्षा चिन्हे (मदत, सुरक्षित) थेट GPS व्हॉट्सॲप अलर्टसह.",
+    level4Title: "सण आणि सांस्कृतिक उत्सव",
+    level4Desc: "१२ प्रमुख भारतीय सणांची चिन्हे: दिवाळी, होळी, नाताळ, ईद, गणेशोत्सव, नवरात्री, दुर्गा पूजा, दसरा इत्यादी.",
+    level5Title: "संख्या आणि मोजणी",
+    level5Desc: "२३ ISL संख्या चिन्हे: १ ते १५, २५, ५०, १००, १,००० ते कोटींपर्यंत.",
+    level6Title: "आपत्कालीन आणि जीवन सुरक्षा",
+    level6Desc: "महत्त्वाची सुरक्षा चिन्हे (सुरक्षित, मदत, आपत्कालीन) १-टॅप सुरक्षा स्थिती अपडेट आणि स्मार्ट SOS अलर्टसह.",
     btnStartLevel: "स्तर सुरू करा",
     btnTestSos: "SOS तपासा",
+
+    // Category Names & Descriptions
+    catGreetings: "दैनंदिन अभिवादन",
+    catGreetingsDesc: "भारतीय सांकेतिक भाषेतील मूलभूत अभिवादन चिन्हे",
+    catColours: "रंग आणि शब्दसंग्रह",
+    catColoursDesc: "ISL मधील विविध रंगांची नावे आणि चिन्हे",
+    catAlphabets: "संपूर्ण मुळाक्षरे (A–Z)",
+    catAlphabetsDesc: "सर्व २६ ISL फिंगरस्पेलिंग अक्षरांचा संपूर्ण संग्रह",
+    catFestivals: "सण आणि सांस्कृतिक उत्सव",
+    catFestivalsDesc: "१२ प्रमुख भारतीय सणांची अधिकृत व्हिडिओ चिन्हे शिका",
+    catNumbers: "संख्या आणि मोजणी",
+    catNumbersDesc: "संख्या १ ते १५, १००, १,००० ते कोटींपर्यंत मोजणीचा सराव करा",
+    catEmergency: "आपत्कालीन आणि जीवन सुरक्षा",
+    catEmergencyDesc: "जीवनरक्षक चिन्हे शिका (सुरक्षित, मदत, आपत्कालीन) आणि आपली सुरक्षा स्थिती अपडेट करा",
+
+    safeStatusUpdatedMsg: "स्थिती अपडेट: सुरक्षित ✓ पालकांना पुष्टीकरण पाठवले.",
+    helpStatusUpdatedMsg: "स्थिती अपडेट: मदतीची आवश्यकता ⚠️ पालकांना सूचना पाठवली.",
+    dangerStatusUpdatedMsg: "गंभीर संकट अलर्ट 🚨 थेट GPS आणि SOS त्वरित पाठवला!",
 
     mod2Tag: "मॉड्यूल २ · स्मार्ट SOS आपत्कालीन अलर्ट व थेट स्थान",
     mod2Heading: "आपत्कालीन परिस्थितीत मूकबधिर बालकांचे रक्षण",
@@ -824,7 +931,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel2Desc: "१० रंग अभिव्यक्ती (काळा, लाल, हिरवा, पिवळा, इत्यादी)",
     testLevel3Title: "स्तर ३: A–Z फिंगरस्पेलिंग",
     testLevel3Desc: "संपूर्ण २६-अक्षरी वर्णमालेतून १० यादृच्छिक अक्षरे",
-    testEmergencyTitle: "स्तर ४: आपत्कालीन बचाव चिन्हे",
+    testLevel4Title: "स्तर ४: भारतीय सण व उत्सव",
+    testLevel4Desc: "१२ सांस्कृतिक आणि सणांची चिन्हे (दिवाळी, होळी, नाताळ, इत्यादी)",
+    testLevel5Title: "स्तर ५: संख्या आणि मोजणी",
+    testLevel5Desc: "१ ते १५, १००, १००० ते कोटी पर्यंतची संख्या चिन्हे",
+    testLevel6Title: "स्तर ६: आपत्कालीन व जीवन सुरक्षा",
+    testLevel6Desc: "१-टॅप थेट आपत्कालीन स्थिती प्रेषणासह जीवन सुरक्षा चिन्हे",
+    testEmergencyTitle: "स्तर ६: आपत्कालीन बचाव चिन्हे",
     testEmergencyDesc: "जीवन सुरक्षा चिन्हे (मदत, सुरक्षित, आपत्कालीन संकट)",
     testMixedTitle: "ग्रँड चॅम्पियनशिप (मिश्र स्तर)",
     testMixedDesc: "सर्व अभ्यासक्रम स्तरांमधून निवडलेले १० सर्वसमावेशक प्रश्न",

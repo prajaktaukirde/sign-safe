@@ -38,14 +38,7 @@ export function HeroLanding({ onStartLearning, onOpenTest, onOpenTeacher, onOpen
     { 
       name: language === "mr" ? "काळा" : language === "hi" ? "काला" : "Black", 
       emoji: "⚫", 
-      desc: language === "mr" ? "तर्जनीच्या बाजूने उजव्या गालाला स्पर्श करा" : language === "hi" ? "तर्जनी उंगली के किनारे से दाहिने गाल को छुएं" : "Stroke right cheek with side of index finger", 
-      tag: "Level 2 · Colours", 
-      cat: "colors" 
-    },
-    { 
-      name: language === "mr" ? "गुलाबी" : language === "hi" ? "गुलाबी" : "Pink", 
-      emoji: "🌸", 
-      desc: language === "mr" ? "गालावर बोटांची टोके हळुवारपणे खाली फिरवा" : language === "hi" ? "गाल पर उंगलियों के पोरों को धीरे से नीचे की ओर फिराएं" : "Brush fingertips gently downwards across the cheek", 
+      desc: language === "mr" ? "तर्जनीच्या बाजूने कपाळाला किंवा गालाला स्पर्श करा" : language === "hi" ? "तर्जनी उंगली के किनारे से माथे या गाल को छुएं" : "Point index finger to forehead or cheek", 
       tag: "Level 2 · Colours", 
       cat: "colors" 
     },
@@ -53,14 +46,35 @@ export function HeroLanding({ onStartLearning, onOpenTest, onOpenTeacher, onOpen
       name: language === "mr" ? "अक्षर V" : language === "hi" ? "अक्षर V" : "Letter V", 
       emoji: "✌️", 
       desc: language === "mr" ? "तर्जनी आणि मधले बोट 'V' आकारात उघडा" : language === "hi" ? "तर्जनी और मध्यमा को 'V' आकार में फैलाएं" : "Index & middle fingers extended in peace/V shape", 
-      tag: "Level 3 · 98.8% Acc", 
+      tag: "Level 3 · Alphabets", 
       cat: "alphabets" 
+    },
+    { 
+      name: language === "mr" ? "दिवाळी" : language === "hi" ? "दीवाली" : "Diwali", 
+      emoji: "🪔", 
+      desc: language === "mr" ? "दिवे लावल्याप्रमाणे दोन्ही हात बाहेर पसरवून बोटे लुकलुकावा" : language === "hi" ? "दिये जलाने की तरह दोनों हाथ फैलाकर उंगलियां टिमटिमाएं" : "Both hands outward with fluttering sparkling fingers", 
+      tag: "Level 4 · Festivals", 
+      cat: "festivals" 
+    },
+    { 
+      name: language === "mr" ? "अंक ५ (Five)" : language === "hi" ? "संख्या 5 (Five)" : "Number 5", 
+      emoji: "🖐️", 
+      desc: language === "mr" ? "तळहात पुढे ठेवून पाचही बोटे उघडा" : language === "hi" ? "हथेली सामने रखकर पांचों उंगलियां खोलें" : "Open all 5 fingers upright facing forward", 
+      tag: "Level 5 · Numbers", 
+      cat: "numbers" 
+    },
+    { 
+      name: language === "mr" ? "सुरक्षित (Safe)" : language === "hi" ? "सुरक्षित (Safe)" : "Safe", 
+      emoji: "🛡️", 
+      desc: language === "mr" ? "हात क्रॉस करून सुरक्षा व संरक्षणाची खात्री द्या" : language === "hi" ? "हाथ क्रॉस करके सुरक्षा और बचाव का संकेत दें" : "Cross arms and open wide indicating safety & protection", 
+      tag: "Level 6 · Emergency", 
+      cat: "emergency" 
     },
     { 
       name: language === "mr" ? "स्मार्ट SOS" : language === "hi" ? "स्मार्ट SOS" : "Smart SOS", 
       emoji: "🚨", 
       desc: language === "mr" ? "१-टॅप थेट GPS व व्हॉट्सॲप/SMS आपत्कालीन संदेश" : language === "hi" ? "1-टैप लाइव GPS और व्हाट्सएप/SMS संकट अलर्ट" : "1-Tap GPS location & WhatsApp distress to Registered Guardians", 
-      tag: "Module 2 · Safety", 
+      tag: "Safety Suite", 
       cat: "emergency" 
     },
   ];
@@ -94,11 +108,29 @@ export function HeroLanding({ onStartLearning, onOpenTest, onOpenTeacher, onOpen
       badge: "Deep Learning AI"
     },
     {
-      id: "emergency",
+      id: "festivals",
       title: t.level4Title,
-      level: "🚨 Level 4 / Module 2",
-      count: language === "mr" ? "सुरक्षा सुट" : language === "hi" ? "सुरक्षा सूट" : "Distress Suite",
+      level: "🎉 Level 4",
+      count: language === "mr" ? "१२ चिन्हे" : language === "hi" ? "12 संकेत" : "12 Signs",
       desc: t.level4Desc,
+      color: "from-pink-500/10 to-rose-500/10 border-pink-500/20 text-pink-600",
+      badge: "Culture & Celebrations"
+    },
+    {
+      id: "numbers",
+      title: t.level5Title,
+      level: "🔢 Level 5",
+      count: language === "mr" ? "२३ चिन्हे" : language === "hi" ? "23 संकेत" : "23 Signs",
+      desc: t.level5Desc,
+      color: "from-indigo-500/10 to-cyan-500/10 border-indigo-500/20 text-indigo-600",
+      badge: "Counting & Math"
+    },
+    {
+      id: "emergency",
+      title: t.level6Title,
+      level: "🚨 Level 6",
+      count: language === "mr" ? "३ चिन्हे + SOS" : language === "hi" ? "3 संकेत + SOS" : "3 Signs + SOS",
+      desc: t.level6Desc,
       color: "from-rose-500/10 to-red-500/10 border-rose-500/20 text-rose-600",
       badge: "Life Safety"
     }
@@ -314,7 +346,7 @@ export function HeroLanding({ onStartLearning, onOpenTest, onOpenTeacher, onOpen
           </button>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {LESSON_MODULES.map((mod) => (
             <div
               key={mod.id}
@@ -333,23 +365,21 @@ export function HeroLanding({ onStartLearning, onOpenTest, onOpenTeacher, onOpen
               </div>
 
               <div className="mt-6 pt-4 border-t border-border/40">
-                {mod.id === "emergency" ? (
-                  <button
-                    onClick={() => triggerEmergency("Safety module selected")}
-                    className="flex w-full items-center justify-between rounded-2xl bg-rose-600 px-4 py-2.5 text-xs font-bold text-white shadow-2xs hover:bg-rose-500 transition-all cursor-pointer"
-                  >
-                    <span>{t.btnTestSos}</span>
+                <button
+                  onClick={() => onStartLearning(mod.id)}
+                  className={`flex w-full items-center justify-between rounded-2xl px-4 py-2.5 text-xs font-bold shadow-2xs transition-all cursor-pointer ${
+                    mod.id === "emergency"
+                      ? "bg-rose-600 text-white hover:bg-rose-500"
+                      : "bg-white text-foreground hover:bg-primary hover:text-white"
+                  }`}
+                >
+                  <span>{t.btnStartLevel}</span>
+                  {mod.id === "emergency" ? (
                     <ShieldAlert className="h-3.5 w-3.5" />
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => onStartLearning(mod.id)}
-                    className="flex w-full items-center justify-between rounded-2xl bg-white px-4 py-2.5 text-xs font-bold text-foreground shadow-2xs hover:bg-primary hover:text-white transition-all cursor-pointer"
-                  >
-                    <span>{t.btnStartLevel}</span>
+                  ) : (
                     <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
-                )}
+                  )}
+                </button>
               </div>
             </div>
           ))}
