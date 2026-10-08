@@ -1241,84 +1241,86 @@ export function StudentView({
                 </div>
               </div>
 
-              {/* Interactive Live Safety Status Suite (Deaf 1-tap dispatcher) */}
-              <div className="rounded-2xl border-2 border-border/80 bg-card p-5 space-y-3 shadow-xs">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <ShieldAlert className="h-5 w-5 text-primary" />
-                    <div>
-                      <h3 className="font-bold text-sm uppercase tracking-wide text-foreground">
-                        Update Your Safety Status
-                      </h3>
-                      <p className="text-xs text-muted-foreground">
-                        Deaf-accessible 1-tap live emergency dispatcher · {room}
-                      </p>
+              {/* Interactive Live Safety Status Suite (Only in Level 6 Emergency & Safety module) */}
+              {selectedCat === "emergency" && (
+                <div className="rounded-2xl border-2 border-border/80 bg-card p-5 space-y-3 shadow-xs">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <ShieldAlert className="h-5 w-5 text-primary" />
+                      <div>
+                        <h3 className="font-bold text-sm uppercase tracking-wide text-foreground">
+                          Update Your Safety Status
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          Deaf-accessible 1-tap live emergency dispatcher · {room}
+                        </p>
+                      </div>
                     </div>
+                    {safety !== "unknown" && (
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider ${
+                        safety === "ok" ? "bg-emerald-500/20 text-emerald-600 border border-emerald-500/30" :
+                        safety === "help" ? "bg-amber-500/20 text-amber-600 border border-amber-500/30" :
+                        "bg-rose-500/20 text-rose-600 border border-rose-500/30 animate-pulse"
+                      }`}>
+                        Status: {safety.toUpperCase()}
+                      </span>
+                    )}
                   </div>
-                  {safety !== "unknown" && (
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider ${
-                      safety === "ok" ? "bg-emerald-500/20 text-emerald-600 border border-emerald-500/30" :
-                      safety === "help" ? "bg-amber-500/20 text-amber-600 border border-amber-500/30" :
-                      "bg-rose-500/20 text-rose-600 border border-rose-500/30 animate-pulse"
-                    }`}>
-                      Status: {safety.toUpperCase()}
-                    </span>
-                  )}
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                  {/* 🟢 I AM SAFE NOW */}
-                  <button
-                    onClick={() => handleUpdateSafety("ok")}
-                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
-                      safety === "ok"
-                        ? "bg-emerald-700 text-white ring-2 ring-emerald-400"
-                        : "bg-emerald-600 hover:bg-emerald-700 text-white"
-                    }`}
-                  >
-                    <ShieldCheck className="h-4 w-4" />
-                    <span>I AM SAFE NOW</span>
-                  </button>
-
-                  {/* 🟡 I NEED ASSISTANCE */}
-                  <button
-                    onClick={() => handleUpdateSafety("help")}
-                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
-                      safety === "help"
-                        ? "bg-amber-600 text-white ring-2 ring-amber-300"
-                        : "bg-amber-500 hover:bg-amber-600 text-white"
-                    }`}
-                  >
-                    <HeartPulse className="h-4 w-4" />
-                    <span>I NEED ASSISTANCE</span>
-                  </button>
-
-                  {/* 🔴 I AM IN DANGER (Room 103) */}
-                  <button
-                    onClick={() => handleUpdateSafety("trapped")}
-                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
-                      safety === "trapped"
-                        ? "bg-rose-700 text-white ring-2 ring-rose-400 animate-pulse"
-                        : "bg-rose-600 hover:bg-rose-700 text-white animate-pulse"
-                    }`}
-                  >
-                    <AlertOctagon className="h-4 w-4" />
-                    <span>I AM IN DANGER ({room})</span>
-                  </button>
-                </div>
-
-                {safetyFeedbackToast && (
-                  <div className="p-3 rounded-xl bg-primary/10 border border-primary/20 text-xs text-primary font-bold flex items-center justify-between">
-                    <span>{safetyFeedbackToast}</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                    {/* 🟢 I AM SAFE NOW */}
                     <button
-                      onClick={() => setSafetyFeedbackToast(null)}
-                      className="text-muted-foreground hover:text-foreground cursor-pointer text-sm font-black px-1"
+                      onClick={() => handleUpdateSafety("ok")}
+                      className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
+                        safety === "ok"
+                          ? "bg-emerald-700 text-white ring-2 ring-emerald-400"
+                          : "bg-emerald-600 hover:bg-emerald-700 text-white"
+                      }`}
                     >
-                      ✕
+                      <ShieldCheck className="h-4 w-4" />
+                      <span>I AM SAFE NOW</span>
+                    </button>
+
+                    {/* 🟡 I NEED ASSISTANCE */}
+                    <button
+                      onClick={() => handleUpdateSafety("help")}
+                      className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
+                        safety === "help"
+                          ? "bg-amber-600 text-white ring-2 ring-amber-300"
+                          : "bg-amber-500 hover:bg-amber-600 text-white"
+                      }`}
+                    >
+                      <HeartPulse className="h-4 w-4" />
+                      <span>I NEED ASSISTANCE</span>
+                    </button>
+
+                    {/* 🔴 I AM IN DANGER (Room 103) */}
+                    <button
+                      onClick={() => handleUpdateSafety("trapped")}
+                      className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs transition-all shadow-xs cursor-pointer active:scale-95 ${
+                        safety === "trapped"
+                          ? "bg-rose-700 text-white ring-2 ring-rose-400 animate-pulse"
+                          : "bg-rose-600 hover:bg-rose-700 text-white animate-pulse"
+                      }`}
+                    >
+                      <AlertOctagon className="h-4 w-4" />
+                      <span>I AM IN DANGER ({room})</span>
                     </button>
                   </div>
-                )}
-              </div>
+
+                  {safetyFeedbackToast && (
+                    <div className="p-3 rounded-xl bg-primary/10 border border-primary/20 text-xs text-primary font-bold flex items-center justify-between">
+                      <span>{safetyFeedbackToast}</span>
+                      <button
+                        onClick={() => setSafetyFeedbackToast(null)}
+                        className="text-muted-foreground hover:text-foreground cursor-pointer text-sm font-black px-1"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>

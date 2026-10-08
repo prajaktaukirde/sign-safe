@@ -213,6 +213,31 @@ _Sent via SignSafe AI Assistive Platform_`;
     setStatusNotification("Updated primary emergency contact.");
   };
 
+  // 1-Tap Safety Choice with automated WhatsApp alert and Log Dispatch
+  const handleSafetyChoice = (status: "ok" | "help" | "trapped") => {
+    setSafety(status);
+    const targetPhone = primaryContact?.phone || "9112480174";
+    const cleanPhone = targetPhone.replace(/[^0-9]/g, "");
+    const formattedNumber = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+
+    if (status === "ok") {
+      addLog?.("Student", `[SAFE CONFIRMATION] Student is SAFE NOW in ${room}`);
+      setStatusNotification(`Status updated: SAFE NOW ✅ — WhatsApp alert prepared for ${primaryContact?.name || "Guardian"}`);
+      const msg = encodeURIComponent(`[SIGN-SAFE UPDATE]\nStudent: ${studentName}\nStatus: I AM SAFE NOW ✅\nLocation: ${room} (${locationName})\nGPS: ${mapsUrl}\nTime: ${new Date().toLocaleTimeString()}`);
+      window.open(`https://wa.me/${formattedNumber}?text=${msg}`, "_blank");
+    } else if (status === "help") {
+      addLog?.("Student", `[ASSISTANCE NEEDED] Student requested assistance in ${room}`);
+      setStatusNotification(`Status updated: ASSISTANCE REQUESTED 🟡 — Alert sent to ${primaryContact?.name || "Guardian"}`);
+      const msg = encodeURIComponent(`[SIGN-SAFE ALERT]\nStudent: ${studentName}\nStatus: I NEED ASSISTANCE 🟡\nLocation: ${room} (${locationName})\nGPS: ${mapsUrl}\nTime: ${new Date().toLocaleTimeString()}`);
+      window.open(`https://wa.me/${formattedNumber}?text=${msg}`, "_blank");
+    } else if (status === "trapped") {
+      addLog?.("Student", `[CRITICAL DANGER] Student marked IN DANGER in ${room}`);
+      setStatusNotification(`🚨 SOS CRITICAL: IN DANGER alert dispatched to ${primaryContact?.name || "Guardian"} & Emergency Team`);
+      const msg = encodeURIComponent(`[EMERGENCY SOS DISTRESS ALERT 🚨]\nStudent: ${studentName}\nStatus: I AM IN DANGER! 🔴\nLocation: ${room} (${locationName})\nGPS: ${mapsUrl}\nTime: ${new Date().toLocaleTimeString()}\nImmediate evacuation & rescue required!`);
+      window.open(`https://wa.me/${formattedNumber}?text=${msg}`, "_blank");
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/80 backdrop-blur-md">
       <div className="min-h-full w-full px-4 py-6 sm:py-8 flex flex-col items-center justify-start">
@@ -513,41 +538,107 @@ _Sent via SignSafe AI Assistive Platform_`;
             </div>
           </div>
 
-          {/* Right Column: Safety Status Selection & Logs */}
+          {/* Right Column: Safety Status Selection with Deaf Video Demonstration & Logs */}
           <div className="space-y-4 lg:col-span-2">
-            <div className="grid gap-2.5 rounded-3xl bg-white p-5 border border-slate-200/80 shadow-md">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 pb-1 block">
-                {t.updateSafetyStatus}
-              </span>
+            <div className="rounded-3xl bg-white p-5 border border-slate-200/80 shadow-md space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+                  <ShieldCheck className="h-4 w-4 text-primary" /> {t.updateSafetyStatus}
+                </span>
+                <span className="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                  Deaf ISL Video Guide
+                </span>
+              </div>
 
-              <button
-                onClick={() => setSafety("ok")}
-                className={`rounded-2xl px-4 py-3.5 text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                  safety === "ok" ? "bg-emerald-500 text-white shadow-md ring-2 ring-emerald-300" : "bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200"
-                }`}
-              >
-                <ShieldCheck className="h-4 w-4" /> {t.btnImSafe}
-              </button>
+              {/* 1. SAFE Card */}
+              <div className={`rounded-2xl border p-2.5 space-y-2 transition-all ${
+                safety === "ok" ? "border-emerald-500 bg-emerald-50/50 ring-2 ring-emerald-300" : "border-slate-200 bg-slate-50/50 hover:border-slate-300"
+              }`}>
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs">
+                  <video
+                    src="/emergencyModule/safe.mp4"
+                    className="h-full w-full object-contain"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <span className="absolute top-1.5 left-1.5 rounded-md bg-black/70 px-1.5 py-0.5 text-[9px] font-black text-emerald-400 uppercase tracking-wider">
+                    Sign: SAFE (सुरक्षित)
+                  </span>
+                </div>
+                <button
+                  onClick={() => handleSafetyChoice("ok")}
+                  className={`w-full rounded-xl py-2.5 px-3 text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs ${
+                    safety === "ok"
+                      ? "bg-emerald-600 text-white shadow-md ring-2 ring-emerald-400"
+                      : "bg-emerald-50 text-emerald-800 hover:bg-emerald-600 hover:text-white border border-emerald-200"
+                  }`}
+                >
+                  <ShieldCheck className="h-4 w-4 shrink-0" />
+                  <span>{t.btnImSafe}</span>
+                </button>
+              </div>
 
-              <button
-                onClick={() => setSafety("help")}
-                className={`rounded-2xl px-4 py-3.5 text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                  safety === "help" ? "bg-amber-500 text-white shadow-md ring-2 ring-amber-300" : "bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-200"
-                }`}
-              >
-                <HeartPulse className="h-4 w-4" /> {t.btnNeedHelp}
-              </button>
+              {/* 2. HELP Card */}
+              <div className={`rounded-2xl border p-2.5 space-y-2 transition-all ${
+                safety === "help" ? "border-amber-500 bg-amber-50/50 ring-2 ring-amber-300" : "border-slate-200 bg-slate-50/50 hover:border-slate-300"
+              }`}>
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs">
+                  <video
+                    src="/emergencyModule/help.mp4"
+                    className="h-full w-full object-contain"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <span className="absolute top-1.5 left-1.5 rounded-md bg-black/70 px-1.5 py-0.5 text-[9px] font-black text-amber-400 uppercase tracking-wider">
+                    Sign: HELP (मदत / सहायता)
+                  </span>
+                </div>
+                <button
+                  onClick={() => handleSafetyChoice("help")}
+                  className={`w-full rounded-xl py-2.5 px-3 text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs ${
+                    safety === "help"
+                      ? "bg-amber-600 text-white shadow-md ring-2 ring-amber-400"
+                      : "bg-amber-50 text-amber-800 hover:bg-amber-600 hover:text-white border border-amber-200"
+                  }`}
+                >
+                  <HeartPulse className="h-4 w-4 shrink-0" />
+                  <span>{t.btnNeedHelp}</span>
+                </button>
+              </div>
 
-              <button
-                onClick={() => setSafety("trapped")}
-                className={`rounded-2xl px-4 py-3.5 text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                  safety === "trapped"
-                    ? "bg-rose-600 text-white shadow-md ring-2 ring-rose-300"
-                    : "bg-rose-50 text-rose-800 hover:bg-rose-100 border border-rose-200"
-                }`}
-              >
-                <AlertOctagon className="h-4 w-4" /> {t.btnInDanger} ({room})
-              </button>
+              {/* 3. DANGER Card */}
+              <div className={`rounded-2xl border p-2.5 space-y-2 transition-all ${
+                safety === "trapped" ? "border-rose-500 bg-rose-50/50 ring-2 ring-rose-300" : "border-slate-200 bg-slate-50/50 hover:border-slate-300"
+              }`}>
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs">
+                  <video
+                    src="/emergencyModule/emergency.mp4"
+                    className="h-full w-full object-contain"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <span className="absolute top-1.5 left-1.5 rounded-md bg-rose-600 px-1.5 py-0.5 text-[9px] font-black text-white uppercase tracking-wider animate-pulse">
+                    Sign: EMERGENCY (आपत्कालीन)
+                  </span>
+                </div>
+                <button
+                  onClick={() => handleSafetyChoice("trapped")}
+                  className={`w-full rounded-xl py-2.5 px-3 text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs ${
+                    safety === "trapped"
+                      ? "bg-rose-600 text-white shadow-md ring-2 ring-rose-400 animate-pulse"
+                      : "bg-rose-50 text-rose-800 hover:bg-rose-600 hover:text-white border border-rose-200 animate-pulse"
+                  }`}
+                >
+                  <AlertOctagon className="h-4 w-4 shrink-0" />
+                  <span>{t.btnInDanger} ({room})</span>
+                </button>
+              </div>
             </div>
 
             {/* Emergency Logs */}
