@@ -4,7 +4,7 @@ import {
   MapPin, PhoneCall, MessageCircle, MessageSquare, ExternalLink, 
   Clock, Compass, AlertTriangle, Radio, RefreshCw, CheckCircle2, 
   Smartphone, Copy, Check, ChevronDown, ChevronUp, UserPlus, Trash2,
-  Users, User, Phone, Plus, Star
+  Users, User, Phone, Plus, Star, RotateCcw, Play, Repeat
 } from "lucide-react";
 import { useDemo } from "@/lib/demo-store";
 import { useLanguage } from "@/lib/translations";
@@ -551,21 +551,49 @@ _Sent via SignSafe AI Assistive Platform_`;
               </div>
 
               {/* 1. SAFE Card */}
-              <div className={`rounded-2xl border p-2.5 space-y-2 transition-all ${
+              <div className={`video-card-container rounded-2xl border p-2.5 space-y-2 transition-all ${
                 safety === "ok" ? "border-emerald-500 bg-emerald-50/50 ring-2 ring-emerald-300" : "border-slate-200 bg-slate-50/50 hover:border-slate-300"
               }`}>
-                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs">
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs group">
                   <video
                     src="/emergencyModule/safe.mp4"
-                    className="h-full w-full object-contain"
+                    className="h-full w-full object-contain cursor-pointer"
                     autoPlay
                     loop
                     muted
                     playsInline
+                    onEnded={(e) => {
+                      e.currentTarget.currentTime = 0;
+                      e.currentTarget.play().catch(() => {});
+                    }}
+                    onClick={(e) => {
+                      if (e.currentTarget.paused) {
+                        e.currentTarget.play().catch(() => {});
+                      } else {
+                        e.currentTarget.currentTime = 0;
+                        e.currentTarget.play().catch(() => {});
+                      }
+                    }}
                   />
                   <span className="absolute top-1.5 left-1.5 rounded-md bg-black/70 px-1.5 py-0.5 text-[9px] font-black text-emerald-400 uppercase tracking-wider">
                     Sign: SAFE (सुरक्षित)
                   </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const vid = e.currentTarget.parentElement?.querySelector("video");
+                      if (vid) {
+                        vid.currentTime = 0;
+                        vid.play().catch(() => {});
+                      }
+                    }}
+                    className="absolute top-1.5 right-1.5 rounded-lg bg-black/70 hover:bg-black text-white px-2 py-0.5 text-[10px] font-bold flex items-center gap-1 backdrop-blur-xs transition-colors cursor-pointer opacity-90 hover:opacity-100 shadow-2xs"
+                    title="Replay Video"
+                  >
+                    <RotateCcw className="h-3 w-3" />
+                    <span>Replay</span>
+                  </button>
                 </div>
                 <button
                   onClick={() => handleSafetyChoice("ok")}
@@ -581,21 +609,49 @@ _Sent via SignSafe AI Assistive Platform_`;
               </div>
 
               {/* 2. HELP Card */}
-              <div className={`rounded-2xl border p-2.5 space-y-2 transition-all ${
+              <div className={`video-card-container rounded-2xl border p-2.5 space-y-2 transition-all ${
                 safety === "help" ? "border-amber-500 bg-amber-50/50 ring-2 ring-amber-300" : "border-slate-200 bg-slate-50/50 hover:border-slate-300"
               }`}>
-                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs">
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs group">
                   <video
                     src="/emergencyModule/help.mp4"
-                    className="h-full w-full object-contain"
+                    className="h-full w-full object-contain cursor-pointer"
                     autoPlay
                     loop
                     muted
                     playsInline
+                    onEnded={(e) => {
+                      e.currentTarget.currentTime = 0;
+                      e.currentTarget.play().catch(() => {});
+                    }}
+                    onClick={(e) => {
+                      if (e.currentTarget.paused) {
+                        e.currentTarget.play().catch(() => {});
+                      } else {
+                        e.currentTarget.currentTime = 0;
+                        e.currentTarget.play().catch(() => {});
+                      }
+                    }}
                   />
                   <span className="absolute top-1.5 left-1.5 rounded-md bg-black/70 px-1.5 py-0.5 text-[9px] font-black text-amber-400 uppercase tracking-wider">
                     Sign: HELP (मदत / सहायता)
                   </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const vid = e.currentTarget.parentElement?.querySelector("video");
+                      if (vid) {
+                        vid.currentTime = 0;
+                        vid.play().catch(() => {});
+                      }
+                    }}
+                    className="absolute top-1.5 right-1.5 rounded-lg bg-black/70 hover:bg-black text-white px-2 py-0.5 text-[10px] font-bold flex items-center gap-1 backdrop-blur-xs transition-colors cursor-pointer opacity-90 hover:opacity-100 shadow-2xs"
+                    title="Replay Video"
+                  >
+                    <RotateCcw className="h-3 w-3" />
+                    <span>Replay</span>
+                  </button>
                 </div>
                 <button
                   onClick={() => handleSafetyChoice("help")}
@@ -611,21 +667,49 @@ _Sent via SignSafe AI Assistive Platform_`;
               </div>
 
               {/* 3. DANGER Card */}
-              <div className={`rounded-2xl border p-2.5 space-y-2 transition-all ${
+              <div className={`video-card-container rounded-2xl border p-2.5 space-y-2 transition-all ${
                 safety === "trapped" ? "border-rose-500 bg-rose-50/50 ring-2 ring-rose-300" : "border-slate-200 bg-slate-50/50 hover:border-slate-300"
               }`}>
-                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs">
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-xs group">
                   <video
                     src="/emergencyModule/emergency.mp4"
-                    className="h-full w-full object-contain"
+                    className="h-full w-full object-contain cursor-pointer"
                     autoPlay
                     loop
                     muted
                     playsInline
+                    onEnded={(e) => {
+                      e.currentTarget.currentTime = 0;
+                      e.currentTarget.play().catch(() => {});
+                    }}
+                    onClick={(e) => {
+                      if (e.currentTarget.paused) {
+                        e.currentTarget.play().catch(() => {});
+                      } else {
+                        e.currentTarget.currentTime = 0;
+                        e.currentTarget.play().catch(() => {});
+                      }
+                    }}
                   />
                   <span className="absolute top-1.5 left-1.5 rounded-md bg-rose-600 px-1.5 py-0.5 text-[9px] font-black text-white uppercase tracking-wider animate-pulse">
                     Sign: EMERGENCY (आपत्कालीन)
                   </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const vid = e.currentTarget.parentElement?.querySelector("video");
+                      if (vid) {
+                        vid.currentTime = 0;
+                        vid.play().catch(() => {});
+                      }
+                    }}
+                    className="absolute top-1.5 right-1.5 rounded-lg bg-black/70 hover:bg-black text-white px-2 py-0.5 text-[10px] font-bold flex items-center gap-1 backdrop-blur-xs transition-colors cursor-pointer opacity-90 hover:opacity-100 shadow-2xs"
+                    title="Replay Video"
+                  >
+                    <RotateCcw className="h-3 w-3" />
+                    <span>Replay</span>
+                  </button>
                 </div>
                 <button
                   onClick={() => handleSafetyChoice("trapped")}
