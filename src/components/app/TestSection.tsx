@@ -288,18 +288,23 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
         (nameNorm === "grey" && outputNorm === "grey") ||
         (nameNorm === "orange" && outputNorm === "orange") ||
         (nameNorm === "pink" && outputNorm === "pink") ||
-        (nameNorm === "diwali" && outputNorm === "diwali") ||
-        (nameNorm === "holi" && outputNorm === "holi") ||
-        (nameNorm === "christmas" && outputNorm === "christmas") ||
-        (nameNorm === "eid" && outputNorm === "eid") ||
-        (nameNorm === "ganesh chaturthi" && (outputNorm === "ganesh chaturthi" || outputNorm === "ganesh")) ||
-        (nameNorm === "navratri" && outputNorm === "navratri") ||
-        (nameNorm === "durga puja" && (outputNorm === "durga puja" || outputNorm === "durga")) ||
-        (nameNorm === "dussehra" && outputNorm === "dussehra") ||
-        (nameNorm === "raksha bandhan" && (outputNorm === "raksha bandhan" || outputNorm === "rakhi")) ||
-        (nameNorm === "janmashtami" && outputNorm === "janmashtami") ||
-        (nameNorm === "independence day" && (outputNorm === "independence day" || outputNorm === "flag")) ||
-        (nameNorm === "republic day" && (outputNorm === "republic day" || outputNorm === "salute")) ||
+        (nameNorm === "diwali" && (outputNorm === "diwali" || outputNorm.includes("diwali"))) ||
+        (nameNorm === "holi" && (outputNorm === "holi" || outputNorm.includes("holi"))) ||
+        (nameNorm === "christmas" && (outputNorm === "christmas" || outputNorm.includes("christmas"))) ||
+        (nameNorm === "eid" && (outputNorm === "eid" || outputNorm.includes("eid"))) ||
+        (nameNorm === "ganesh chaturthi" && (outputNorm === "ganesh chaturthi" || outputNorm === "ganesh" || outputNorm.includes("ganesh"))) ||
+        (nameNorm === "navratri" && (outputNorm === "navratri" || outputNorm.includes("navratri") || outputNorm.includes("dandiya"))) ||
+        (nameNorm === "durga puja" && (outputNorm === "durga puja" || outputNorm === "durga" || outputNorm.includes("durga"))) ||
+        (nameNorm === "dussehra" && (outputNorm === "dussehra" || outputNorm.includes("dussehra") || outputNorm.includes("bow"))) ||
+        (nameNorm === "raksha bandhan" && (outputNorm === "raksha bandhan" || outputNorm === "rakhi" || outputNorm.includes("raksha"))) ||
+        (nameNorm === "janmashtami" && (outputNorm === "janmashtami" || outputNorm.includes("janmashtami") || outputNorm.includes("flute"))) ||
+        (nameNorm === "independence day" && (outputNorm === "independence day" || outputNorm === "flag" || outputNorm.includes("independence"))) ||
+        (nameNorm === "republic day" && (outputNorm === "republic day" || outputNorm === "salute" || outputNorm.includes("republic"))) ||
+        (nameNorm === "1000" && (outputNorm === "1000" || outputNorm.includes("thousand") || outputNorm.includes("1000"))) ||
+        (nameNorm === "10000" && (outputNorm === "10000" || outputNorm.includes("10000") || outputNorm.includes("10 thousand"))) ||
+        (nameNorm === "100000" && (outputNorm === "100000" || outputNorm.includes("lakh") || outputNorm.includes("100000"))) ||
+        (nameNorm === "1000000" && (outputNorm === "1000000" || outputNorm.includes("million") || outputNorm.includes("10 lakh"))) ||
+        (nameNorm === "10cr" && (outputNorm === "10cr" || outputNorm.includes("crore") || outputNorm.includes("10cr"))) ||
         (nameNorm === "safe" && outputNorm === "safe") ||
         (nameNorm === "help" && outputNorm === "help") ||
         (nameNorm === "emergency" && (outputNorm === "emergency" || outputNorm === "danger"));

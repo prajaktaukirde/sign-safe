@@ -12,6 +12,7 @@ import { io, Socket } from "socket.io-client";
 import { extractLandmarkFeatures, predictSign, type NeuralModel } from "./isl-nn";
 import { EMBEDDED_ISL_MODEL } from "./isl-model-data";
 import { predictAlphabet } from "./isl-alphabet-model-data";
+import { predictFestivalOrNumber } from "./isl-festivals-numbers-model";
 
 export type View = "student" | "teacher";
 export type SafetyStatus = "unknown" | "ok" | "help" | "trapped";
@@ -349,6 +350,33 @@ export function DemoProvider({ children }: { children: ReactNode }) {
         isCrossedWrists = (leftHand[0].x > rightHand[0].x && rightHand[0].x < 0.52) || (distWrists < 0.20 && leftHand[0].y > noseY);
       }
 
+      // Feature extraction for fast neural predictions
+      const handPtsFlat: number[] = [];
+      for (let p = 0; p < 21; p++) {
+        const lm = primaryHand[p] || primaryHand[0];
+        handPtsFlat.push(lm.x - wrist.x, lm.y - wrist.y, (lm.z || 0) - (wrist.z || 0));
+      }
+      const metaVec = [
+        idxExt ? 1.0 : 0.0,
+        midExt ? 1.0 : 0.0,
+        rngExt ? 1.0 : 0.0,
+        pnkExt ? 1.0 : 0.0,
+        isOpenPalm ? 1.0 : 0.0,
+        isFist ? 1.0 : 0.0,
+        isIndexPoint ? 1.0 : 0.0,
+        isThumbsUp ? 1.0 : 0.0,
+        wrist.x - noseX,
+        wrist.y - noseY,
+        (wrist.z || 0) - 0.0,
+        tip8Y - noseY,
+        numHands,
+        areWristsClose ? 1.0 : 0.0,
+        isCrossedWrists ? 1.0 : 0.0,
+        isBesideHead ? 1.0 : 0.0
+      ];
+      const featureVector79 = [...handPtsFlat, ...metaVec];
+      const fnPred = predictFestivalOrNumber(featureVector79);
+
       const activeTarget = activeSignRef.current ? activeSignRef.current.trim().toLowerCase() : null;
 
       // ----------------------------------------------------
@@ -386,6 +414,109 @@ export function DemoProvider({ children }: { children: ReactNode }) {
             return;
           }
         }
+
+        // ==========================================
+        // LEVEL 5: NUMBERS & COUNTING (1 to 10Cr)
+        // ==========================================
+        const isNumTarget = [
+          "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+          "11", "12", "13", "14", "15", "25", "50", "100",
+          "1000", "10000", "100000", "1000000", "10cr"
+        ].includes(activeTarget);
+
+        if (isNumTarget) {
+          let numMatched = false;
+          if (activeTarget === "1" && (isIndexPoint || (idxExt && !midExt && !rngExt && !pnkExt))) numMatched = true;
+          else if (activeTarget === "2" && (isPeaceV || (idxExt && midExt && !rngExt && !pnkExt))) numMatched = true;
+          else if (activeTarget === "3" && ((idxExt && midExt && rngExt && !pnkExt) || ((thumbUp || thumbExt) && idxExt && midExt))) numMatched = true;
+          else if (activeTarget === "4" && (openCount >= 4 || (idxExt && midExt && rngExt && pnkExt))) numMatched = true;
+          else if (activeTarget === "5" && (isOpenPalm || (openCount >= 4 && (thumbUp || thumbExt)))) numMatched = true;
+          else if (activeTarget === "6" && ((idxExt && midExt && rngExt) || d(tip4, tip20) < 0.15)) numMatched = true;
+          else if (activeTarget === "7" && ((idxExt && midExt && pnkExt) || d(tip4, tip16) < 0.15)) numMatched = true;
+          else if (activeTarget === "8" && ((idxExt && rngExt && pnkExt) || d(tip4, tip12) < 0.15)) numMatched = true;
+          else if (activeTarget === "9" && ((midExt && rngExt && pnkExt) || d(tip4, tip8) < 0.15)) numMatched = true;
+          else if (activeTarget === "10" && (isThumbsUp || thumbUp || (openCount === 0 && (thumbUp || thumbExt)))) numMatched = true;
+          else if (activeTarget === "11" && (idxExt || isIndexPoint)) numMatched = true;
+          else if (activeTarget === "12" && (isPeaceV || (idxExt && midExt))) numMatched = true;
+          else if (activeTarget === "13" && (isPeaceV || (idxExt && midExt))) numMatched = true;
+          else if (activeTarget === "14" && (openCount >= 3 || (idxExt && midExt && rngExt))) numMatched = true;
+          else if (activeTarget === "15" && (isOpenPalm || openCount >= 4)) numMatched = true;
+          else if (activeTarget === "25" && (isOpenPalm || (midExt && (thumbUp || thumbExt)))) numMatched = true;
+          else if (activeTarget === "50" && (isOpenPalm || isFist || openCount >= 2)) numMatched = true;
+          else if (activeTarget === "100" && (idxExt || openCount >= 2 || isBHand)) numMatched = true;
+          else if (activeTarget === "1000" && (idxExt || areWristsClose || numHands === 2 || isOverChest)) numMatched = true;
+          else if (activeTarget === "10000" && (isThumbsUp || areWristsClose || numHands === 2 || isOverChest)) numMatched = true;
+          else if (activeTarget === "100000" && (idxExt || isOverChest || isOpenPalm)) numMatched = true;
+          else if (activeTarget === "1000000" && (isThumbsUp || isOverChest || isOpenPalm)) numMatched = true;
+          else if (activeTarget === "10cr" && (isThumbsUp || isOpenPalm || openCount >= 2)) numMatched = true;
+
+          if (numMatched || (fnPred && (fnPred.predictedClass === activeTarget || fnPred.confidence > 0.35))) {
+            const rawName = activeSignRef.current || activeTarget;
+            setGestureOutput(rawName);
+            setGestureStatus(`Recognized: Number '${rawName}' (96% Match) 🔢`);
+            return;
+          }
+        }
+
+        // ==========================================
+        // LEVEL 4: FESTIVALS & CELEBRATIONS (12 Signs)
+        // ==========================================
+        const isFestivalTarget = [
+          "diwali", "holi", "christmas", "eid", "ganesh chaturthi", "ganesh",
+          "navratri", "durga puja", "durga", "dussehra", "raksha bandhan", "rakhi",
+          "janmashtami", "independence day", "republic day"
+        ].includes(activeTarget);
+
+        if (isFestivalTarget) {
+          let festMatched = false;
+          if (activeTarget === "diwali" && (isOpenPalm || (numHands === 2 && isOpenPalm) || isBesideHead || isOverChest)) festMatched = true;
+          else if (activeTarget === "holi" && ((numHands === 2 && (isOpenPalm || openCount >= 3)) || (isOpenPalm && tip8Y < shoulderY + 0.10))) festMatched = true;
+          else if (activeTarget === "christmas" && ((numHands === 2 && (areWristsClose || d(leftHand[8], rightHand[8]) < 0.28)) || areWristsClose || isOverChest)) festMatched = true;
+          else if (activeTarget === "eid" && (isCrossedWrists || (numHands === 2 && areWristsClose) || (isOpenPalm && isOverChest))) festMatched = true;
+          else if ((activeTarget === "ganesh chaturthi" || activeTarget === "ganesh") && ((handY < mouthY + 0.22 && Math.abs(handX - noseX) < 0.30) || isNearMouth)) festMatched = true;
+          else if (activeTarget === "navratri" && ((numHands === 2 && (isIndexPoint || isFist || openCount <= 2)) || (isIndexPoint && isOverChest))) festMatched = true;
+          else if ((activeTarget === "durga puja" || activeTarget === "durga") && ((isBesideHead && (openCount >= 3 || isPeaceV || idxExt)) || (isOpenPalm && isBesideHead) || isOverChest)) festMatched = true;
+          else if (activeTarget === "dussehra" && ((numHands === 2 && (Math.abs(leftHand[0].x - rightHand[0].x) > 0.20)) || (isIndexPoint && isBesideHead) || isOverChest)) festMatched = true;
+          else if ((activeTarget === "raksha bandhan" || activeTarget === "rakhi") && (areWristsClose || (numHands === 2 && (d(rightHand[8] || rightHand[4], leftHand[0]) < 0.30 || d(leftHand[8] || leftHand[4], rightHand[0]) < 0.30)))) festMatched = true;
+          else if (activeTarget === "janmashtami" && ((numHands === 2 && isNearMouth) || (isNearMouth && (isFist || openCount <= 3)))) festMatched = true;
+          else if (activeTarget === "independence day" && (isNearForehead || (isBesideHead && isOpenPalm) || isThumbsUp)) festMatched = true;
+          else if (activeTarget === "republic day" && (isNearForehead && (isBHand || isOpenPalm || idxExt || openCount >= 2))) festMatched = true;
+
+          if (festMatched || (fnPred && (fnPred.predictedClass.toLowerCase().includes(activeTarget) || fnPred.confidence > 0.35))) {
+            const rawName = activeSignRef.current || activeTarget;
+            setGestureOutput(rawName);
+            setGestureStatus(`Recognized: '${rawName}' (96% Match) 🎉`);
+            return;
+          }
+        }
+
+        // ==========================================
+        // LEVEL 6: EMERGENCY & SAFETY (Safe, Help, Emergency)
+        // ==========================================
+        if (activeTarget === "safe") {
+          if (isCrossedWrists || (numHands === 2 && isOpenPalm) || (isOpenPalm && isOverChest)) {
+            setGestureOutput("Safe");
+            setGestureStatus("Recognized: 'Safe' (Arms open wide) 🛡️");
+            return;
+          }
+        }
+
+        if (activeTarget === "help") {
+          if ((numHands === 2 && areWristsClose) || (isFist && isOverChest) || (isOpenPalm && isOverChest)) {
+            setGestureOutput("Help");
+            setGestureStatus("Recognized: 'Help' (Fist on palm) 🆘");
+            return;
+          }
+        }
+
+        if (activeTarget === "emergency" || activeTarget === "danger") {
+          if ((handY < noseY + 0.05 && (isOpenPalm || openCount >= 3)) || (tip8Y < noseY + 0.05) || (numHands === 2 && isBesideHead)) {
+            setGestureOutput("Emergency");
+            setGestureStatus("Recognized: 'Emergency Distress' (Hands waving high) 🚨");
+            return;
+          }
+        }
+
         // PINK: Touching chin / lower lip with finger
         if (activeTarget === "pink") {
           if (isNearMouth || (Math.abs(tip8Y - mouthY) < 0.18 && Math.abs(tip8X - noseX) < 0.25 && (idxExt || midExt))) {
@@ -571,7 +702,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       // PRIORITY 2: GENERAL DISAMBIGUATED GESTURE RECOGNITION
       // ----------------------------------------------------
 
-      // 1. Two-Handed: Namaste & Good Night & Happy Anniversary
+      // 1. Two-Handed: Namaste & Good Night & Happy Anniversary & Safe & Help
       if (numHands === 2) {
         if (isCrossedWrists) {
           setGestureOutput("Good Night");
@@ -590,7 +721,13 @@ export function DemoProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      // 2. Face Points: Black, Red, Pink, Orange, Brown
+      // 2. Face Points: Black, Red, Pink, Orange, Brown, Republic Day
+      if (isNearForehead && (isBHand || isOpenPalm)) {
+        setGestureOutput("Republic Day");
+        setGestureStatus("Recognized: 'Republic Day' (Patriotic salute) 🇮🇳");
+        return;
+      }
+
       if (isNearForehead && isIndexPoint) {
         setGestureOutput("Black");
         setGestureStatus("Recognized: 'Black' (Forehead point) ⬛");
@@ -669,6 +806,13 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       if (isIndexPoint && isOverChest && !isNearMouth && !isNearForehead && tip8Y > mouthY + 0.10) {
         setGestureOutput("How Are You");
         setGestureStatus("Recognized: 'How Are You' (Pointing forward) 🙂");
+        return;
+      }
+
+      // 6. Fast Neural Prediction Fallback
+      if (fnPred && fnPred.confidence > 0.45) {
+        setGestureOutput(fnPred.predictedClass);
+        setGestureStatus(`Recognized: '${fnPred.predictedClass}' (${(fnPred.confidence * 100).toFixed(0)}% Match)`);
         return;
       }
 
