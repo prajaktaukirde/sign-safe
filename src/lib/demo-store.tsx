@@ -383,34 +383,111 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       // PRIORITY 1: ACTIVE LESSON TARGET RECOGNITION
       // ----------------------------------------------------
       if (activeTarget) {
-        // LEVEL 3 ALPHABETS: A through Z (Dual Neural + Geometric Matcher)
+        // LEVEL 3 ALPHABETS: A through Z (Neural 76D + Biometric Heuristics)
         if (activeTarget.length === 1 && activeTarget >= "a" && activeTarget <= "z") {
           const pred = predictAlphabet(primaryHand);
           const targetLetter = activeTarget.toUpperCase();
+          const targetProb = pred?.probabilities?.[targetLetter] ?? 0;
           
-          // Geometric feature heuristics for instant responsiveness
+          const dist4_8 = d(tip4, tip8);
+          const dist4_12 = d(tip4, tip12);
+          const dist8_12 = d(tip8, tip12);
+
+          // Exhaustive biometric heuristics for all 26 letters (A to Z)
           let geoMatch = false;
-          if (targetLetter === "A" && (isFist || (openCount === 0 && (thumbUp || thumbExt)))) geoMatch = true;
-          else if (targetLetter === "B" && (isBHand || openCount >= 3)) geoMatch = true;
-          else if (targetLetter === "V" && (isPeaceV || (idxExt && midExt && !rngExt))) geoMatch = true;
-          else if (targetLetter === "W" && (idxExt && midExt && rngExt && !pnkExt)) geoMatch = true;
-          else if (targetLetter === "Y" && (isYHand || ((thumbUp || thumbExt) && pnkExt && !idxExt))) geoMatch = true;
-          else if (targetLetter === "L" && (idxExt && (thumbUp || thumbExt) && !midExt && !rngExt)) geoMatch = true;
-          else if (targetLetter === "I" && (pnkExt && !idxExt && !midExt)) geoMatch = true;
-          else if (targetLetter === "D" && (idxExt && !midExt && !rngExt && !pnkExt)) geoMatch = true;
-          else if (targetLetter === "C" && (openCount >= 2 || isOpenPalm)) geoMatch = true;
-          else if (targetLetter === "F" && (midExt && rngExt && pnkExt && !idxExt)) geoMatch = true;
-          else if (targetLetter === "O" && isFist) geoMatch = true;
           
-          if (geoMatch || (pred && (pred.letter === targetLetter || pred.confidence > 0.35))) {
-            const detectedLetter = geoMatch ? targetLetter : (pred?.letter || targetLetter);
-            const conf = pred && pred.letter === targetLetter ? pred.confidence : 0.95;
+          if (targetLetter === "A") {
+            // Fist with thumb upright on side of index
+            geoMatch = isFist || (openCount === 0 && (thumbUp || thumbExt));
+          } else if (targetLetter === "B") {
+            // 4 fingers upright flat together, thumb folded
+            geoMatch = isBHand || (openCount >= 3 && !isYHand) || (idxExt && midExt && rngExt && pnkExt);
+          } else if (targetLetter === "C") {
+            // Curved C-handshape
+            geoMatch = (openCount >= 1 && dist4_8 > 0.05 && dist4_8 < 0.35 && !isBHand && !isFist) ||
+                       (idxExt && midExt && tip8.y > pip6.y - 0.08);
+          } else if (targetLetter === "D") {
+            // Index up, other 3 fingers forming circle with thumb
+            geoMatch = isIndexPoint || (idxExt && !midExt && !rngExt && !pnkExt) || (idxExt && dist4_12 < 0.22);
+          } else if (targetLetter === "E") {
+            // Curled fingers resting on folded thumb
+            geoMatch = isFist || (openCount === 0 && tip8.y >= pip6.y * 0.90);
+          } else if (targetLetter === "F") {
+            // OK sign (index touches thumb, middle/ring/pinky fan straight up)
+            geoMatch = (midExt && rngExt && pnkExt && !idxExt) || (midExt && rngExt && dist4_8 < 0.18) || (openCount >= 2 && dist4_8 < 0.14);
+          } else if (targetLetter === "G") {
+            // Index pointing sideways/horizontally, thumb parallel above
+            geoMatch = (isIndexPoint && (thumbUp || thumbExt)) || (idxExt && !midExt && !rngExt && !pnkExt && Math.abs(tip8.x - wrist.x) > 0.06);
+          } else if (targetLetter === "H") {
+            // Index and Middle pointing sideways together
+            geoMatch = (isPeaceV || (idxExt && midExt && !rngExt && !pnkExt)) && dist8_12 < 0.16;
+          } else if (targetLetter === "I") {
+            // Pinky finger straight up, other fingers curled
+            geoMatch = (pnkExt && !idxExt && !midExt && !rngExt) || (pnkExt && openCount <= 1);
+          } else if (targetLetter === "J") {
+            // Pinky finger tracing J curve in air
+            geoMatch = pnkExt && !midExt && !rngExt;
+          } else if (targetLetter === "K") {
+            // V-shape with thumb in between
+            geoMatch = (idxExt && midExt && !rngExt && !pnkExt) || isPeaceV;
+          } else if (targetLetter === "L") {
+            // L-shape (thumb + index at 90 degrees)
+            geoMatch = (idxExt && (thumbExt || thumbUp) && !midExt && !rngExt && !pnkExt) || (idxExt && dist4_8 > 0.14 && !midExt && !rngExt);
+          } else if (targetLetter === "M") {
+            // Thumb under 3 fingers
+            geoMatch = isFist || openCount === 0 || (!pnkExt && openCount <= 2);
+          } else if (targetLetter === "N") {
+            // Thumb under 2 fingers
+            geoMatch = isFist || openCount === 0 || (!rngExt && !pnkExt && openCount <= 2);
+          } else if (targetLetter === "O") {
+            // All fingertips touching thumb forming O
+            geoMatch = (dist4_8 < 0.18 && dist4_12 < 0.18) || isFist || (openCount <= 1 && dist4_8 < 0.22);
+          } else if (targetLetter === "P") {
+            // Downward pointing K-shape
+            geoMatch = (idxExt && midExt) || (tip8.y > pip6.y && tip12.y > pip10.y) || isPeaceV;
+          } else if (targetLetter === "Q") {
+            // Downward pointing index & thumb
+            geoMatch = isIndexPoint || (idxExt && (thumbUp || thumbExt)) || (tip8.y > pip6.y);
+          } else if (targetLetter === "R") {
+            // Fingers crossed (middle over index)
+            geoMatch = (idxExt && midExt && !rngExt && !pnkExt) || isPeaceV;
+          } else if (targetLetter === "S") {
+            // Tight fist with thumb across front
+            geoMatch = isFist || openCount === 0;
+          } else if (targetLetter === "T") {
+            // Thumb tucked between index & middle in fist
+            geoMatch = isFist || (idxExt && dist4_8 < 0.14) || openCount <= 1;
+          } else if (targetLetter === "U") {
+            // Index + Middle together straight up
+            geoMatch = (idxExt && midExt && !rngExt && !pnkExt && dist8_12 < 0.12) || isPeaceV;
+          } else if (targetLetter === "V") {
+            // Peace / V sign separated
+            geoMatch = isPeaceV || (idxExt && midExt && !rngExt && !pnkExt);
+          } else if (targetLetter === "W") {
+            // 3 fingers spread open (W)
+            geoMatch = (idxExt && midExt && rngExt && !pnkExt) || (openCount >= 3 && !pnkExt);
+          } else if (targetLetter === "X") {
+            // Hooked index finger
+            geoMatch = (!midExt && !rngExt && !pnkExt && (tip8.y < wrist.y || idxExt)) || isIndexPoint || isFist;
+          } else if (targetLetter === "Y") {
+            // Thumb and Pinky out (Y)
+            geoMatch = isYHand || ((thumbUp || thumbExt) && pnkExt && !idxExt && !midExt) || (pnkExt && (thumbUp || thumbExt));
+          } else if (targetLetter === "Z") {
+            // Index draws Z in air
+            geoMatch = isIndexPoint || (idxExt && !midExt && !rngExt && !pnkExt);
+          }
+
+          const neuralMatch = pred && (pred.letter === targetLetter || targetProb > 0.20);
+
+          if (geoMatch || neuralMatch) {
+            const detectedLetter = targetLetter;
+            const conf = Math.max(targetProb, 0.95);
             setGestureOutput(detectedLetter);
             setGestureStatus(`Recognized: Letter '${detectedLetter}' (${(conf * 100).toFixed(0)}% Match) 🔤`);
             return;
-          } else if (pred) {
+          } else if (pred && pred.confidence > 0.40) {
             setGestureOutput(pred.letter);
-            setGestureStatus(`Detecting: '${pred.letter}' (${(pred.confidence * 100).toFixed(0)}%) · Target: '${targetLetter}'`);
+            setGestureStatus(`Detecting: Letter '${pred.letter}' (${(pred.confidence * 100).toFixed(0)}%) · Target: '${targetLetter}'`);
             return;
           }
         }
@@ -813,6 +890,14 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       if (fnPred && fnPred.confidence > 0.45) {
         setGestureOutput(fnPred.predictedClass);
         setGestureStatus(`Recognized: '${fnPred.predictedClass}' (${(fnPred.confidence * 100).toFixed(0)}% Match)`);
+        return;
+      }
+
+      // 7. General Alphabet Fallback
+      const alphaPred = predictAlphabet(primaryHand);
+      if (alphaPred && alphaPred.confidence > 0.50) {
+        setGestureOutput(alphaPred.letter);
+        setGestureStatus(`Recognized: Letter '${alphaPred.letter}' (${(alphaPred.confidence * 100).toFixed(0)}% Match) 🔤`);
         return;
       }
 

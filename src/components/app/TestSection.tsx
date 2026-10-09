@@ -266,7 +266,11 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
       const mappedNorm = currentQuestion.sign.mappedGesture.trim().toLowerCase();
       const nameNorm = currentQuestion.sign.name.trim().toLowerCase();
 
-      const isDirectMatch = outputNorm === mappedNorm || outputNorm === nameNorm;
+      const isDirectMatch = 
+        outputNorm === mappedNorm || 
+        outputNorm === nameNorm || 
+        outputNorm.replace("letter ", "") === nameNorm || 
+        outputNorm.replace("letter ", "") === mappedNorm;
       const isCompoundMatch =
         (nameNorm === "good morning" && (outputNorm === "good morning" || outputNorm === "morning")) ||
         (nameNorm === "good afternoon" && (outputNorm === "good afternoon" || outputNorm === "afternoon")) ||

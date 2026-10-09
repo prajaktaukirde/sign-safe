@@ -819,7 +819,11 @@ export function StudentView({
       const nameNorm = currentSign.name.trim().toLowerCase();
 
       // Check if user's gesture matches the required sign
-      const isDirectMatch = outputNorm === mappedNorm || outputNorm === nameNorm;
+      const isDirectMatch = 
+        outputNorm === mappedNorm || 
+        outputNorm === nameNorm || 
+        outputNorm.replace("letter ", "") === nameNorm || 
+        outputNorm.replace("letter ", "") === mappedNorm;
       const isCompoundMatch = 
         (nameNorm === "good morning" && (outputNorm === "good morning" || outputNorm === "morning")) ||
         (nameNorm === "good afternoon" && (outputNorm === "good afternoon" || outputNorm === "afternoon")) ||
