@@ -3,7 +3,8 @@ import {
   Trophy, Sparkles, Hand, CheckCircle2, XCircle, AlertCircle,
   Timer, ChevronRight, ChevronLeft, RefreshCw, Play, Award,
   Volume2, Printer, BookOpen, Palette, Compass, ShieldAlert,
-  Eye, HelpCircle, Flame, Zap, RotateCcw, Share2
+  Eye, HelpCircle, Flame, Zap, RotateCcw, Share2,
+  Briefcase, Users, MessageSquare
 } from "lucide-react";
 import { WebcamMock } from "./WebcamMock";
 import { useDemo } from "@/lib/demo-store";
@@ -104,12 +105,48 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
       color: "border-indigo-500/30 bg-indigo-500/5 hover:border-indigo-500 text-indigo-600"
     },
     {
-      id: "emergency",
+      id: "jobs",
       title: t.testLevel6Title,
       desc: t.testLevel6Desc,
+      icon: Briefcase,
+      count: "9 Career Signs",
+      badge: "💼 Level 6",
+      color: "border-teal-500/30 bg-teal-500/5 hover:border-teal-500 text-teal-600"
+    },
+    {
+      id: "relations",
+      title: t.testLevel7Title,
+      desc: t.testLevel7Desc,
+      icon: Users,
+      count: "12 Kinship Signs",
+      badge: "👨‍👩‍👧‍👦 Level 7",
+      color: "border-fuchsia-500/30 bg-fuchsia-500/5 hover:border-fuchsia-500 text-fuchsia-600"
+    },
+    {
+      id: "questions",
+      title: t.testLevel8Title,
+      desc: t.testLevel8Desc,
+      icon: HelpCircle,
+      count: "12 Question Signs",
+      badge: "❓ Level 8",
+      color: "border-amber-500/30 bg-amber-500/5 hover:border-amber-500 text-amber-600"
+    },
+    {
+      id: "sentences",
+      title: t.testLevel9Title,
+      desc: t.testLevel9Desc,
+      icon: MessageSquare,
+      count: "15 Dialog Signs",
+      badge: "💬 Level 9",
+      color: "border-sky-500/30 bg-sky-500/5 hover:border-sky-500 text-sky-600"
+    },
+    {
+      id: "emergency",
+      title: t.testLevel10Title,
+      desc: t.testLevel10Desc,
       icon: ShieldAlert,
       count: "3 Safety Signs",
-      badge: "🚨 Level 6",
+      badge: "🚨 Level 10",
       color: "border-rose-500/30 bg-rose-500/5 hover:border-rose-500 text-rose-600"
     },
     {
@@ -128,12 +165,16 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
     let pool: { sign: Sign; cat: string }[] = [];
 
     if (catKey === "mixed") {
-      // Pick 2 greetings, 2 colors, 2 alphabets, 2 festivals, 1 number, 1 emergency
-      const bSigns = [...(CATEGORIES.basic?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 2);
-      const cSigns = [...(CATEGORIES.colors?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 2);
-      const aSigns = [...(CATEGORIES.alphabets?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 2);
-      const fSigns = [...(CATEGORIES.festivals?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 2);
+      // Pick 1 question from each of the 10 categories
+      const bSigns = [...(CATEGORIES.basic?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
+      const cSigns = [...(CATEGORIES.colors?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
+      const aSigns = [...(CATEGORIES.alphabets?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
+      const fSigns = [...(CATEGORIES.festivals?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
       const nSigns = [...(CATEGORIES.numbers?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
+      const jSigns = [...(CATEGORIES.jobs?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
+      const rSigns = [...(CATEGORIES.relations?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
+      const qSigns = [...(CATEGORIES.questions?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
+      const sSigns = [...(CATEGORIES.sentences?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
       const eSigns = [...(CATEGORIES.emergency?.signs || [])].sort(() => 0.5 - Math.random()).slice(0, 1);
 
       pool = [
@@ -142,6 +183,10 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
         ...aSigns.map(s => ({ sign: s, cat: "alphabets" })),
         ...fSigns.map(s => ({ sign: s, cat: "festivals" })),
         ...nSigns.map(s => ({ sign: s, cat: "numbers" })),
+        ...jSigns.map(s => ({ sign: s, cat: "jobs" })),
+        ...rSigns.map(s => ({ sign: s, cat: "relations" })),
+        ...qSigns.map(s => ({ sign: s, cat: "questions" })),
+        ...sSigns.map(s => ({ sign: s, cat: "sentences" })),
         ...eSigns.map(s => ({ sign: s, cat: "emergency" })),
       ].sort(() => 0.5 - Math.random());
     } else if (catKey === "alphabets") {
@@ -309,6 +354,58 @@ export function TestSection({ onBackToHome, onBackToLearn }: TestSectionProps) {
         (nameNorm === "100000" && (outputNorm === "100000" || outputNorm.includes("lakh") || outputNorm.includes("100000"))) ||
         (nameNorm === "1000000" && (outputNorm === "1000000" || outputNorm.includes("million") || outputNorm.includes("10 lakh"))) ||
         (nameNorm === "10cr" && (outputNorm === "10cr" || outputNorm.includes("crore") || outputNorm.includes("10cr"))) ||
+        // Level 6: Jobs
+        (nameNorm === "teacher" && (outputNorm === "teacher" || outputNorm.includes("teacher"))) ||
+        (nameNorm === "doctor" && (outputNorm === "doctor" || outputNorm.includes("doctor"))) ||
+        (nameNorm === "driver" && (outputNorm === "driver" || outputNorm.includes("driver"))) ||
+        (nameNorm === "farmer" && (outputNorm === "farmer" || outputNorm.includes("farmer"))) ||
+        (nameNorm === "lawyer" && (outputNorm === "lawyer" || outputNorm.includes("lawyer"))) ||
+        (nameNorm === "barber" && (outputNorm === "barber" || outputNorm.includes("barber"))) ||
+        (nameNorm === "postman" && (outputNorm === "postman" || outputNorm.includes("postman"))) ||
+        (nameNorm === "sweeper" && (outputNorm === "sweeper" || outputNorm.includes("sweeper"))) ||
+        (nameNorm === "writer" && (outputNorm === "writer" || outputNorm.includes("writer"))) ||
+        // Level 7: Relations
+        (nameNorm === "father" && (outputNorm === "father" || outputNorm.includes("father"))) ||
+        (nameNorm === "mother" && (outputNorm === "mother" || outputNorm.includes("mother"))) ||
+        (nameNorm === "brother" && (outputNorm === "brother" || outputNorm.includes("brother"))) ||
+        (nameNorm === "daughter" && (outputNorm === "daughter" || outputNorm.includes("daughter"))) ||
+        (nameNorm === "husband" && (outputNorm === "husband" || outputNorm.includes("husband"))) ||
+        (nameNorm === "wife" && (outputNorm === "wife" || outputNorm.includes("wife"))) ||
+        (nameNorm === "married" && (outputNorm === "married" || outputNorm.includes("married"))) ||
+        (nameNorm === "grandfather" && (outputNorm === "grandfather" || outputNorm.includes("grandfather"))) ||
+        (nameNorm === "grandmother" && (outputNorm === "grandmother" || outputNorm.includes("grandmother"))) ||
+        (nameNorm === "family" && (outputNorm === "family" || outputNorm.includes("family"))) ||
+        (nameNorm === "man" && (outputNorm === "man" || outputNorm.includes("man"))) ||
+        (nameNorm === "woman" && (outputNorm === "woman" || outputNorm.includes("woman"))) ||
+        // Level 8: Questions
+        (nameNorm === "what" && (outputNorm === "what" || outputNorm.includes("what"))) ||
+        (nameNorm === "where" && (outputNorm === "where" || outputNorm.includes("where"))) ||
+        (nameNorm === "when" && (outputNorm === "when" || outputNorm.includes("when"))) ||
+        (nameNorm === "which" && (outputNorm === "which" || outputNorm.includes("which"))) ||
+        (nameNorm === "who" && (outputNorm === "who" || outputNorm.includes("who"))) ||
+        (nameNorm === "how" && (outputNorm === "how" || outputNorm.includes("how"))) ||
+        (nameNorm === "question" && (outputNorm === "question" || outputNorm.includes("question"))) ||
+        (nameNorm === "answer" && (outputNorm === "answer" || outputNorm.includes("answer"))) ||
+        (nameNorm === "time" && (outputNorm === "time" || outputNorm.includes("time"))) ||
+        (nameNorm === "place" && (outputNorm === "place" || outputNorm.includes("place"))) ||
+        (nameNorm === "face" && (outputNorm === "face" || outputNorm.includes("face"))) ||
+        (nameNorm === "this" && (outputNorm === "this" || outputNorm.includes("this"))) ||
+        // Level 9: Sentences
+        (nameNorm.includes("nice to meet") && outputNorm.includes("nice to meet")) ||
+        (nameNorm.includes("my name") && outputNorm.includes("my name")) ||
+        (nameNorm.includes("deaf") && outputNorm.includes("deaf")) ||
+        (nameNorm.includes("sign language") && outputNorm.includes("sign language")) ||
+        (nameNorm.includes("your name") && outputNorm.includes("your name")) ||
+        (nameNorm.includes("where are you from") && outputNorm.includes("where are you from")) ||
+        (nameNorm.includes("what do you do") && outputNorm.includes("what do you do")) ||
+        (nameNorm.includes("father name") && outputNorm.includes("father name")) ||
+        (nameNorm.includes("profession") && outputNorm.includes("profession")) ||
+        (nameNorm.includes("healthy") && outputNorm.includes("healthy")) ||
+        (nameNorm.includes("slow") && outputNorm.includes("slow")) ||
+        (nameNorm.includes("again") && outputNorm.includes("again")) ||
+        (nameNorm.includes("fast") && outputNorm.includes("fast")) ||
+        (nameNorm.includes("understand") && outputNorm.includes("understand")) ||
+        // Level 10: Emergency
         (nameNorm === "safe" && outputNorm === "safe") ||
         (nameNorm === "help" && outputNorm === "help") ||
         (nameNorm === "emergency" && (outputNorm === "emergency" || outputNorm === "danger"));

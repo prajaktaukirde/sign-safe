@@ -56,6 +56,12 @@ export interface Translations {
   level5Desc: string;
   level6Title: string;
   level6Desc: string;
+  level7Title: string;
+  level7Desc: string;
+  level8Title: string;
+  level8Desc: string;
+  level9Title: string;
+  level9Desc: string;
   btnStartLevel: string;
   btnTestSos: string;
 
@@ -70,6 +76,12 @@ export interface Translations {
   catFestivalsDesc: string;
   catNumbers: string;
   catNumbersDesc: string;
+  catJobs: string;
+  catJobsDesc: string;
+  catRelations: string;
+  catRelationsDesc: string;
+  catQuestions: string;
+  catQuestionsDesc: string;
   catEmergency: string;
   catEmergencyDesc: string;
 
@@ -158,6 +170,14 @@ export interface Translations {
   testLevel5Desc: string;
   testLevel6Title: string;
   testLevel6Desc: string;
+  testLevel7Title: string;
+  testLevel7Desc: string;
+  testLevel8Title: string;
+  testLevel8Desc: string;
+  testLevel9Title: string;
+  testLevel9Desc: string;
+  testLevel10Title: string;
+  testLevel10Desc: string;
   testEmergencyTitle: string;
   testEmergencyDesc: string;
   testMixedTitle: string;
@@ -269,6 +289,18 @@ export interface Translations {
   catColoursDesc: string;
   catAlphabets: string;
   catAlphabetsDesc: string;
+  catFestivals: string;
+  catFestivalsDesc: string;
+  catNumbers: string;
+  catNumbersDesc: string;
+  catJobs: string;
+  catJobsDesc: string;
+  catRelations: string;
+  catRelationsDesc: string;
+  catQuestions: string;
+  catQuestionsDesc: string;
+  catSentences: string;
+  catSentencesDesc: string;
   catEmergency: string;
   catEmergencyDesc: string;
 }
@@ -322,8 +354,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level4Desc: "12 auspicious Indian festival signs: Diwali, Holi, Christmas, Eid, Ganesh Chaturthi, Navratri, Durga Puja, Dussehra, etc.",
     level5Title: "Numbers & Counting",
     level5Desc: "23 Indian Sign Language counting gestures: 1 to 15, 25, 50, 100, 1,000 up to Crores.",
-    level6Title: "Emergency & Life Safety",
-    level6Desc: "Critical safety signs (Safe, Help, Emergency) with direct 1-tap Safety Status Update and Smart SOS dispatch.",
+    level6Title: "Jobs & Professions",
+    level6Desc: "10 career and profession signs: Teacher, Doctor, Police, Engineer, Nurse, Farmer, Driver, Chef, Lawyer, Soldier.",
+    level7Title: "Family & Relations",
+    level7Desc: "10 essential kinship signs: Father, Mother, Brother, Sister, Grandfather, Grandmother, Son, Daughter, Friend, Family.",
+    level8Title: "Question Words (Wh-Words)",
+    level8Desc: "8 fundamental inquiry gestures: What, Where, When, Why, Who, How, Which, How Many.",
+    level9Title: "Emergency & Life Safety",
+    level9Desc: "Critical safety signs (Safe, Help, Emergency) with direct 1-tap Safety Status Update and Smart SOS dispatch.",
     btnStartLevel: "Start Level",
     btnTestSos: "Test Smart SOS",
 
@@ -338,6 +376,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     catFestivalsDesc: "Learn 12 auspicious Indian festival signs with real ISL video demonstrations",
     catNumbers: "Numbers & Counting",
     catNumbersDesc: "Practice counting and number signs from 1 to 15, 100, 1,000 up to Crores",
+    catJobs: "Jobs & Professions",
+    catJobsDesc: "Master 10 essential career and workplace gestures in ISL",
+    catRelations: "Family & Relations",
+    catRelationsDesc: "Learn 10 warm family and interpersonal relationship signs",
+    catQuestions: "Question Words (Wh-Questions)",
+    catQuestionsDesc: "Inquire confidently with 8 core question signs in Indian Sign Language",
     catEmergency: "Emergency & Life Safety",
     catEmergencyDesc: "Master life-saving emergency gestures (Safe, Help, Emergency) and update your safety status",
 
@@ -419,9 +463,17 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel4Desc: "12 cultural and festival expressions (Diwali, Holi, Christmas, etc.)",
     testLevel5Title: "Level 5: Numbers & Counting",
     testLevel5Desc: "Counting signs from 1 to 15, 100, 1000 up to Crores",
-    testLevel6Title: "Level 6: Emergency & Safety",
-    testLevel6Desc: "Life safety signs with 1-tap live status dispatch",
-    testEmergencyTitle: "Level 6: Emergency Rescue Signs",
+    testLevel6Title: "Level 6: Jobs & Professions",
+    testLevel6Desc: "9 career gestures (Teacher, Doctor, Driver, Farmer, Lawyer, Barber, Postman, etc.)",
+    testLevel7Title: "Level 7: Family & Relations",
+    testLevel7Desc: "12 kinship signs (Father, Mother, Brother, Daughter, Husband, Wife, Family, etc.)",
+    testLevel8Title: "Level 8: Question Words & Concepts",
+    testLevel8Desc: "12 Wh-question words and concepts (What, Where, When, Who, Which, How, etc.)",
+    testLevel9Title: "Level 9: Daily Conversation & Sentences",
+    testLevel9Desc: "15 practical conversational phrases and dialog sentences",
+    testLevel10Title: "Level 10: Emergency & Life Safety",
+    testLevel10Desc: "Life safety signs with 1-tap live status dispatch and Smart SOS",
+    testEmergencyTitle: "Level 10: Emergency Rescue Signs",
     testEmergencyDesc: "Life safety signs (Help, Safe, Emergency distress)",
     testMixedTitle: "Grand Championship (Mixed Levels)",
     testMixedDesc: "10 comprehensive questions selected across all curriculum levels",
@@ -528,6 +580,18 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     catColoursDesc: "Vibrant colour words and expressions in ISL",
     catAlphabets: "Alphabets (A-Z)",
     catAlphabetsDesc: "Complete A–Z Indian Sign Language fingerspelling vocabulary",
+    catFestivals: "Festivals & Celebrations",
+    catFestivalsDesc: "Auspicious Indian festivals and cultural celebrations in ISL",
+    catNumbers: "Numbers & Counting",
+    catNumbersDesc: "Counting and number signs from 1 to 15, 100, 1000 up to Crores",
+    catJobs: "Jobs & Professions",
+    catJobsDesc: "Occupations, community helpers, and workplace professions in ISL",
+    catRelations: "Family & Relations",
+    catRelationsDesc: "Family members, kinship, relationships, and loved ones in ISL",
+    catQuestions: "Question Words & Concepts",
+    catQuestionsDesc: "Essential Wh-questions (What, Where, When, Who, Why, How, etc.)",
+    catSentences: "Daily Conversation & Sentences",
+    catSentencesDesc: "Practical daily dialogues, polite phrases, and conversation sentences",
     catEmergency: "Emergency & Safety",
     catEmergencyDesc: "Vital safety and emergency assistance signs",
   },
@@ -580,8 +644,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level4Desc: "12 प्रमुख भारतीय त्यौहार संकेत: दीवाली, होली, क्रिसमस, ईद, गणेश चतुर्थी, नवरात्रि, दुर्गा पूजा, दशहरा आदि।",
     level5Title: "संख्याएँ और गिनती",
     level5Desc: "23 ISL संख्या संकेत: 1 से 15, 25, 50, 100, 1,000 से करोड़ तक।",
-    level6Title: "आपातकालीन एवं जीवन सुरक्षा",
-    level6Desc: "महत्वपूर्ण सुरक्षा संकेत (सुरक्षित, मदद, आपातकाल) 1-टैप सुरक्षा स्थिति अपडेट और स्मार्ट SOS अलर्ट के साथ।",
+    level6Title: "व्यवसाय और पेशे",
+    level6Desc: "10 प्रमुख व्यवसाय संकेत: शिक्षक, डॉक्टर, पुलिस, इंजीनियर, नर्स, किसान, ड्राइवर, शेफ, वकील, सैनिक।",
+    level7Title: "परिवार और रिश्ते",
+    level7Desc: "10 आवश्यक पारिवारिक संकेत: पिता, माता, भाई, बहन, दादाजी, दादीजी, बेटा, बेटी, दोस्त, परिवार।",
+    level8Title: "प्रश्नवाचक शब्द",
+    level8Desc: "8 मुख्य प्रश्नवाचक संकेत: क्या, कहाँ, कब, क्यों, कौन, कैसे, कौन सा, कितना।",
+    level9Title: "आपातकालीन एवं जीवन सुरक्षा",
+    level9Desc: "महत्वपूर्ण सुरक्षा संकेत (सुरक्षित, मदद, आपातकाल) 1-टैप सुरक्षा स्थिति अपडेट और स्मार्ट SOS अलर्ट के साथ।",
     btnStartLevel: "स्तर शुरू करें",
     btnTestSos: "SOS का परीक्षण करें",
 
@@ -596,6 +666,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     catFestivalsDesc: "12 प्रमुख भारतीय त्यौहारों के आधिकारिक वीडियो संकेत सीखें",
     catNumbers: "संख्याएँ और गिनती",
     catNumbersDesc: "संख्या 1 से 15, 100, 1,000 से करोड़ तक गिनती का अभ्यास करें",
+    catJobs: "व्यवसाय और पेशे",
+    catJobsDesc: "ISL में 10 आवश्यक करियर और कार्यक्षेत्र के संकेत सीखें",
+    catRelations: "परिवार और रिश्ते",
+    catRelationsDesc: "10 महत्वपूर्ण पारिवारिक और आत्मीय रिश्तों के संकेत सीखें",
+    catQuestions: "प्रश्नवाचक शब्द",
+    catQuestionsDesc: "सांकेतिक भाषा में 8 महत्वपूर्ण प्रश्नों के संकेत सीखें",
     catEmergency: "आपातकालीन एवं जीवन सुरक्षा",
     catEmergencyDesc: "जीवन रक्षक संकेत सीखें (सुरक्षित, मदद, आपातकाल) और अपनी सुरक्षा स्थिति अपडेट करें",
 
@@ -677,9 +753,17 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel4Desc: "12 सांस्कृतिक और त्यौहार संकेत (दीवाली, होली, क्रिसमस, आदि)",
     testLevel5Title: "स्तर 5: संख्याएँ और गणना",
     testLevel5Desc: "1 से 15, 100, 1000 से लेकर करोड़ तक के संख्या संकेत",
-    testLevel6Title: "स्तर 6: आपातकालीन व जीवन सुरक्षा",
-    testLevel6Desc: "1-टैप लाइव स्थिति प्रेषण के साथ जीवन सुरक्षा संकेत",
-    testEmergencyTitle: "स्तर 6: आपातकालीन बचाव संकेत",
+    testLevel6Title: "स्तर 6: व्यवसाय और पेशे",
+    testLevel6Desc: "9 करियर संकेत (शिक्षक, डॉक्टर, ड्राइवर, किसान, वकील, नाई, डाकिया, आदि)",
+    testLevel7Title: "स्तर 7: परिवार और रिश्ते",
+    testLevel7Desc: "12 पारिवारिक संकेत (पिता, माता, भाई, बेटी, पति, पत्नी, परिवार, आदि)",
+    testLevel8Title: "स्तर 8: प्रश्नवाचक शब्द व अवधारणाएं",
+    testLevel8Desc: "12 प्रश्नवाचक संकेत (क्या, कहाँ, कब, कौन, कौन सा, कैसे, आदि)",
+    testLevel9Title: "स्तर 9: दैनिक वार्तालाप एवं वाक्य",
+    testLevel9Desc: "15 व्यावहारिक दैनिक वार्तालाप और संवाद वाक्य",
+    testLevel10Title: "स्तर 10: आपातकालीन व जीवन सुरक्षा",
+    testLevel10Desc: "1-टैप लाइव स्थिति प्रेषण और स्मार्ट SOS के साथ जीवन सुरक्षा संकेत",
+    testEmergencyTitle: "स्तर 10: आपातकालीन बचाव संकेत",
     testEmergencyDesc: "जीवन सुरक्षा संकेत (मदद, सुरक्षित, आपातकालीन संकट)",
     testMixedTitle: "ग्रैंड चैम्पियनशिप (मिश्रित स्तर)",
     testMixedDesc: "सभी पाठ्यक्रम स्तरों से चुने गए 10 व्यापक प्रश्न",
@@ -786,6 +870,18 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     catColoursDesc: "ISL में जीवंत रंगों के नाम और संकेत",
     catAlphabets: "वर्णमाला (A-Z)",
     catAlphabetsDesc: "संपूर्ण 26 ISL फिंगरस्पेलिंग वर्णमाला",
+    catFestivals: "भारतीय त्यौहार व उत्सव",
+    catFestivalsDesc: "सांस्कृतिक और त्यौहार संकेत (दीवाली, होली, क्रिसमस, आदि)",
+    catNumbers: "संख्याएँ और गणना",
+    catNumbersDesc: "1 से 15, 100, 1000 से लेकर करोड़ तक के संख्या संकेत",
+    catJobs: "व्यवसाय और पेशे",
+    catJobsDesc: "महत्वपूर्ण करियर और व्यवसाय संकेत (शिक्षक, डॉक्टर, ड्राइवर, आदि)",
+    catRelations: "परिवार और रिश्ते",
+    catRelationsDesc: "पारिवारिक सदस्य और रिश्तों के संकेत (माता, पिता, भाई, आदि)",
+    catQuestions: "प्रश्नवाचक शब्द व अवधारणाएं",
+    catQuestionsDesc: "आवश्यक प्रश्नवाचक शब्द (क्या, कहाँ, कब, कौन, कैसे, आदि)",
+    catSentences: "दैनिक वार्तालाप एवं वाक्य",
+    catSentencesDesc: "व्यावहारिक दैनिक संवाद, विनम्र वाक्यांश और बातचीत के वाक्य",
     catEmergency: "आपातकालीन एवं सुरक्षा",
     catEmergencyDesc: "महत्वपूर्ण सुरक्षा और सहायता संकेत",
   },
@@ -838,8 +934,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level4Desc: "१२ प्रमुख भारतीय सणांची चिन्हे: दिवाळी, होळी, नाताळ, ईद, गणेशोत्सव, नवरात्री, दुर्गा पूजा, दसरा इत्यादी.",
     level5Title: "संख्या आणि मोजणी",
     level5Desc: "२३ ISL संख्या चिन्हे: १ ते १५, २५, ५०, १००, १,००० ते कोटींपर्यंत.",
-    level6Title: "आपत्कालीन आणि जीवन सुरक्षा",
-    level6Desc: "महत्त्वाची सुरक्षा चिन्हे (सुरक्षित, मदत, आपत्कालीन) १-टॅप सुरक्षा स्थिती अपडेट आणि स्मार्ट SOS अलर्टसह.",
+    level6Title: "व्यवसाय आणि नोकऱ्या",
+    level6Desc: "१० प्रमुख व्यवसाय चिन्हे: शिक्षक, डॉक्टर, पोलीस, अभियंता, परिचारिका, शेतकरी, चालक, शेफ, वकील, सैनिक.",
+    level7Title: "नातेसंबंध आणि परिवार",
+    level7Desc: "१० आवश्यक कौटुंबिक चिन्हे: वडील, आई, भाऊ, बहीण, आजोबा, आजी, मुलगा, मुलगी, मित्र, कुटुंब.",
+    level8Title: "प्रश्न विचारणारे शब्द",
+    level8Desc: "८ मूलभूत प्रश्नवाचक चिन्हे: काय, कुठे, केव्हा, का, कोण, कसे, कोणते, किती.",
+    level9Title: "आपत्कालीन आणि जीवन सुरक्षा",
+    level9Desc: "महत्त्वाची सुरक्षा चिन्हे (सुरक्षित, मदत, आपत्कालीन) १-टॅप सुरक्षा स्थिती अपडेट आणि स्मार्ट SOS अलर्टसह.",
     btnStartLevel: "स्तर सुरू करा",
     btnTestSos: "SOS तपासा",
 
@@ -854,6 +956,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     catFestivalsDesc: "१२ प्रमुख भारतीय सणांची अधिकृत व्हिडिओ चिन्हे शिका",
     catNumbers: "संख्या आणि मोजणी",
     catNumbersDesc: "संख्या १ ते १५, १००, १,००० ते कोटींपर्यंत मोजणीचा सराव करा",
+    catJobs: "व्यवसाय आणि नोकऱ्या",
+    catJobsDesc: "ISL मधील १० आवश्यक करिअर आणि कार्यक्षेत्राची चिन्हे शिका",
+    catRelations: "नातेसंबंध आणि परिवार",
+    catRelationsDesc: "१० प्रेमळ कौटुंबिक आणि नातेसंबंधांची चिन्हे शिका",
+    catQuestions: "प्रश्न विचारणारे शब्द",
+    catQuestionsDesc: "सांकेतिक भाषेत ८ महत्त्वाची प्रश्न विचारण्याची चिन्हे शिका",
     catEmergency: "आपत्कालीन आणि जीवन सुरक्षा",
     catEmergencyDesc: "जीवनरक्षक चिन्हे शिका (सुरक्षित, मदत, आपत्कालीन) आणि आपली सुरक्षा स्थिती अपडेट करा",
 
@@ -935,9 +1043,17 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel4Desc: "१२ सांस्कृतिक आणि सणांची चिन्हे (दिवाळी, होळी, नाताळ, इत्यादी)",
     testLevel5Title: "स्तर ५: संख्या आणि मोजणी",
     testLevel5Desc: "१ ते १५, १००, १००० ते कोटी पर्यंतची संख्या चिन्हे",
-    testLevel6Title: "स्तर ६: आपत्कालीन व जीवन सुरक्षा",
-    testLevel6Desc: "१-टॅप थेट आपत्कालीन स्थिती प्रेषणासह जीवन सुरक्षा चिन्हे",
-    testEmergencyTitle: "स्तर ६: आपत्कालीन बचाव चिन्हे",
+    testLevel6Title: "स्तर ६: व्यवसाय आणि नोकऱ्या",
+    testLevel6Desc: "९ करिअर चिन्हे (शिक्षक, डॉक्टर, ड्रायव्हर, शेतकरी, वकील, न्हावी, पोस्टमन, इत्यादी)",
+    testLevel7Title: "स्तर ७: नातेसंबंध आणि परिवार",
+    testLevel7Desc: "१२ कौटुंबिक चिन्हे (वडील, आई, भाऊ, मुलगी, नवरा, बायको, परिवार, इत्यादी)",
+    testLevel8Title: "स्तर ८: प्रश्न विचारणारे शब्द व संकल्पना",
+    testLevel8Desc: "१२ प्रश्न विचारण्याची चिन्हे (काय, कुठे, केव्हा, कोण, कोणते, कसे, इत्यादी)",
+    testLevel9Title: "स्तर ९: दैनंदिन संभाषण व वाक्ये",
+    testLevel9Desc: "१५ व्यावहारिक दैनंदिन संभाषण व संवाद वाक्ये",
+    testLevel10Title: "स्तर १०: आपत्कालीन व जीवन सुरक्षा",
+    testLevel10Desc: "१-टॅप थेट आपत्कालीन स्थिती प्रेषण व स्मार्ट SOS सह जीवन सुरक्षा चिन्हे",
+    testEmergencyTitle: "स्तर १०: आपत्कालीन बचाव चिन्हे",
     testEmergencyDesc: "जीवन सुरक्षा चिन्हे (मदत, सुरक्षित, आपत्कालीन संकट)",
     testMixedTitle: "ग्रँड चॅम्पियनशिप (मिश्र स्तर)",
     testMixedDesc: "सर्व अभ्यासक्रम स्तरांमधून निवडलेले १० सर्वसमावेशक प्रश्न",
@@ -1044,6 +1160,18 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     catColoursDesc: "ISL मधील रंगांची नावे व चिन्हे",
     catAlphabets: "मुळाक्षरे (A-Z)",
     catAlphabetsDesc: "सर्व २६ ISL फिंगरस्पेलिंग मुळाक्षरे",
+    catFestivals: "भारतीय सण व उत्सव",
+    catFestivalsDesc: "सांस्कृतिक आणि सणांची चिन्हे (दिवाळी, होळी, नाताळ, इत्यादी)",
+    catNumbers: "संख्या आणि मोजणी",
+    catNumbersDesc: "१ ते १५, १००, १००० ते कोटी पर्यंतची संख्या चिन्हे",
+    catJobs: "व्यवसाय आणि नोकऱ्या",
+    catJobsDesc: "महत्वपूर्ण करिअर व व्यवसाय चिन्हे (शिक्षक, डॉक्टर, ड्रायव्हर, इत्यादी)",
+    catRelations: "नातेसंबंध आणि परिवार",
+    catRelationsDesc: "कौटुंबिक सदस्य आणि नातेसंबंधांची चिन्हे (आई, वडील, भाऊ, इत्यादी)",
+    catQuestions: "प्रश्न विचारणारे शब्द व संकल्पना",
+    catQuestionsDesc: "आवश्यक प्रश्न विचारण्याची चिन्हे (काय, कुठे, केव्हा, कोण, कसे, इत्यादी)",
+    catSentences: "दैनंदिन संभाषण व वाक्ये",
+    catSentencesDesc: "व्यावहारिक दैनंदिन संवाद, नम्र वाक्यांश आणि संभाषणाची वाक्ये",
     catEmergency: "आपत्कालीन व जीवन सुरक्षा",
     catEmergencyDesc: "अत्यावश्यक सुरक्षा आणि मदत चिन्हे",
   }

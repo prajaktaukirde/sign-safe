@@ -1,6 +1,8 @@
+export type ProgressCategory = "basic" | "colors" | "alphabets" | "festivals" | "numbers" | "jobs" | "relations" | "questions" | "sentences" | "emergency";
+
 export interface SignRecord {
   signName: string;
-  category: "basic" | "colors" | "alphabets" | "emergency";
+  category: ProgressCategory;
   accuracy: number;
   lastPracticed: string;
   count: number;
@@ -27,7 +29,7 @@ export function loadProgress(): Record<string, SignRecord> {
 
 export function saveProgressRecord(
   signName: string,
-  category: "basic" | "colors" | "alphabets" | "emergency",
+  category: ProgressCategory,
   accuracy: number
 ): Record<string, SignRecord> {
   const current = loadProgress();

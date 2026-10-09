@@ -126,13 +126,49 @@ export function HeroLanding({ onStartLearning, onOpenTest, onOpenTeacher, onOpen
       badge: "Counting & Math"
     },
     {
-      id: "emergency",
+      id: "jobs",
       title: t.level6Title,
-      level: "🚨 Level 6",
-      count: language === "mr" ? "३ चिन्हे + SOS" : language === "hi" ? "3 संकेत + SOS" : "3 Signs + SOS",
+      level: "💼 Level 6",
+      count: language === "mr" ? "९ चिन्हे" : language === "hi" ? "9 संकेत" : "9 Signs",
       desc: t.level6Desc,
+      color: "from-teal-500/10 to-emerald-500/10 border-teal-500/20 text-teal-600",
+      badge: "Career & Professions"
+    },
+    {
+      id: "relations",
+      title: t.level7Title,
+      level: "👨‍👩‍👧‍👦 Level 7",
+      count: language === "mr" ? "१२ चिन्हे" : language === "hi" ? "12 संकेत" : "12 Signs",
+      desc: t.level7Desc,
+      color: "from-fuchsia-500/10 to-pink-500/10 border-fuchsia-500/20 text-fuchsia-600",
+      badge: "Family & Kinship"
+    },
+    {
+      id: "questions",
+      title: t.level8Title,
+      level: "❓ Level 8",
+      count: language === "mr" ? "१२ चिन्हे" : language === "hi" ? "12 संकेत" : "12 Signs",
+      desc: t.level8Desc,
+      color: "from-amber-500/10 to-yellow-500/10 border-amber-500/20 text-amber-600",
+      badge: "Inquiry & Wh-Words"
+    },
+    {
+      id: "sentences",
+      title: t.level9Title,
+      level: "💬 Level 9",
+      count: language === "mr" ? "१५ वाक्ये" : language === "hi" ? "15 वाक्य" : "15 Phrases",
+      desc: t.level9Desc,
+      color: "from-sky-500/10 to-blue-500/10 border-sky-500/20 text-sky-600",
+      badge: "Daily Conversation"
+    },
+    {
+      id: "emergency",
+      title: t.level10Title || t.level9Title,
+      level: "🚨 Level 10",
+      count: language === "mr" ? "३ चिन्हे + SOS" : language === "hi" ? "3 संकेत + SOS" : "3 Signs + SOS",
+      desc: t.level10Desc || t.level9Desc,
       color: "from-rose-500/10 to-red-500/10 border-rose-500/20 text-rose-600",
-      badge: "Life Safety"
+      badge: "Life Safety & SOS"
     }
   ];
 

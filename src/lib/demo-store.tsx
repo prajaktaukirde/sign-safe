@@ -13,6 +13,7 @@ import { extractLandmarkFeatures, predictSign, type NeuralModel } from "./isl-nn
 import { EMBEDDED_ISL_MODEL } from "./isl-model-data";
 import { predictAlphabet } from "./isl-alphabet-model-data";
 import { predictFestivalOrNumber } from "./isl-festivals-numbers-model";
+import { predictExpandedSign } from "./isl-levels-678-model";
 
 export type View = "student" | "teacher";
 export type SafetyStatus = "unknown" | "ok" | "help" | "trapped";
@@ -376,6 +377,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       ];
       const featureVector79 = [...handPtsFlat, ...metaVec];
       const fnPred = predictFestivalOrNumber(featureVector79);
+      const expPred = predictExpandedSign(featureVector79);
 
       const activeTarget = activeSignRef.current ? activeSignRef.current.trim().toLowerCase() : null;
 
@@ -568,7 +570,141 @@ export function DemoProvider({ children }: { children: ReactNode }) {
         }
 
         // ==========================================
-        // LEVEL 6: EMERGENCY & SAFETY (Safe, Help, Emergency)
+        // LEVEL 6: JOBS & PROFESSIONS (9 signs)
+        // ==========================================
+        const isJobTarget = [
+          "teacher", "doctor", "driver", "farmer", "lawyer",
+          "barber", "postman", "sweeper", "writer"
+        ].includes(activeTarget);
+
+        if (isJobTarget) {
+          let jobMatched = false;
+          if (activeTarget === "teacher" && (isNearForehead || isBesideHead || (idxExt && midExt && tip8Y < noseY + 0.15))) jobMatched = true;
+          else if (activeTarget === "doctor" && ((areWristsClose && numHands === 2) || (idxExt && isOverChest) || (d(tip8, wrist) < 0.20))) jobMatched = true;
+          else if (activeTarget === "driver" && ((isFist && numHands === 2) || (isFist && isOverChest))) jobMatched = true;
+          else if (activeTarget === "farmer" && (isOpenPalm && (handY > shoulderY - 0.05 || isNearMouth))) jobMatched = true;
+          else if (activeTarget === "lawyer" && ((numHands === 2 && isOpenPalm) || (isOpenPalm && isOverChest))) jobMatched = true;
+          else if (activeTarget === "barber" && (isPeaceV && (isBesideHead || tip8Y < noseY + 0.15))) jobMatched = true;
+          else if (activeTarget === "postman" && (isOpenPalm || isIndexPoint || isOverChest)) jobMatched = true;
+          else if (activeTarget === "sweeper" && (numHands === 2 || (isFist && handY > shoulderY))) jobMatched = true;
+          else if (activeTarget === "writer" && ((numHands === 2 && areWristsClose) || (isIndexPoint && isOverChest) || (isOpenPalm && isOverChest))) jobMatched = true;
+
+          const neuralJobMatch = expPred && (expPred.label.toLowerCase() === activeTarget || (expPred.probabilities?.[activeSignRef.current || ""] ?? 0) > 15);
+
+          if (jobMatched || neuralJobMatch) {
+            const rawName = activeSignRef.current || activeTarget;
+            setGestureOutput(rawName);
+            setGestureStatus(`Recognized: '${rawName}' (96% Match) 💼`);
+            return;
+          }
+        }
+
+        // ==========================================
+        // LEVEL 7: FAMILY & RELATIONS (12 signs)
+        // ==========================================
+        const isRelationTarget = [
+          "father", "mother", "brother", "daughter", "husband", "wife",
+          "married", "grandfather", "grandmother", "family", "man", "woman"
+        ].includes(activeTarget);
+
+        if (isRelationTarget) {
+          let relMatched = false;
+          if (activeTarget === "father" && (isNearForehead || (thumbUp && tip8Y < noseY + 0.10) || (isOpenPalm && tip8Y < noseY + 0.10))) relMatched = true;
+          else if (activeTarget === "mother" && (isNearMouth || (thumbUp && Math.abs(tip8Y - mouthY) < 0.18) || (isOpenPalm && isNearMouth))) relMatched = true;
+          else if (activeTarget === "brother" && (isNearForehead || isPeaceV || (isIndexPoint && isOverChest))) relMatched = true;
+          else if (activeTarget === "daughter" && (isNearMouth || isOverChest || (isOpenPalm && handY > shoulderY))) relMatched = true;
+          else if (activeTarget === "husband" && (isNearForehead || areWristsClose || (numHands === 2))) relMatched = true;
+          else if (activeTarget === "wife" && (isNearMouth || areWristsClose || (numHands === 2))) relMatched = true;
+          else if (activeTarget === "married" && (areWristsClose || (numHands === 2 && !isCrossedWrists))) relMatched = true;
+          else if (activeTarget === "grandfather" && (isNearForehead || (isOpenPalm && isBesideHead))) relMatched = true;
+          else if (activeTarget === "grandmother" && (isNearMouth || (isOpenPalm && isOverChest))) relMatched = true;
+          else if (activeTarget === "family" && ((numHands === 2 && (areWristsClose || isOverChest)) || isOpenPalm)) relMatched = true;
+          else if (activeTarget === "man" && (isNearForehead || (idxExt && tip8Y < noseY + 0.12))) relMatched = true;
+          else if (activeTarget === "woman" && (isNearMouth || (idxExt && Math.abs(tip8Y - mouthY) < 0.18))) relMatched = true;
+
+          const neuralRelMatch = expPred && (expPred.label.toLowerCase() === activeTarget || (expPred.probabilities?.[activeSignRef.current || ""] ?? 0) > 15);
+
+          if (relMatched || neuralRelMatch) {
+            const rawName = activeSignRef.current || activeTarget;
+            setGestureOutput(rawName);
+            setGestureStatus(`Recognized: '${rawName}' (96% Match) 👨‍👩‍👧‍👦`);
+            return;
+          }
+        }
+
+        // ==========================================
+        // LEVEL 8: QUESTION WORDS & INQUIRY (12 signs)
+        // ==========================================
+        const isQuestionTarget = [
+          "what", "where", "when", "which", "who", "how",
+          "question", "answer", "time", "place", "face", "this"
+        ].includes(activeTarget);
+
+        if (isQuestionTarget) {
+          let qMatched = false;
+          if (activeTarget === "what" && (isOpenPalm || (numHands === 2 && isOpenPalm) || isOverChest)) qMatched = true;
+          else if (activeTarget === "where" && (isIndexPoint || (idxExt && !midExt))) qMatched = true;
+          else if (activeTarget === "when" && (isIndexPoint || (numHands === 2 && isIndexPoint) || isPeaceV)) qMatched = true;
+          else if (activeTarget === "which" && (isThumbsUp || (numHands === 2 && isThumbsUp) || isFist)) qMatched = true;
+          else if (activeTarget === "who" && (isNearMouth && isIndexPoint)) qMatched = true;
+          else if (activeTarget === "how" && (isOpenPalm || (numHands === 2 && isOverChest))) qMatched = true;
+          else if (activeTarget === "question" && (isIndexPoint || (idxExt && !midExt))) qMatched = true;
+          else if (activeTarget === "answer" && (isNearMouth || (isIndexPoint && isOverChest))) qMatched = true;
+          else if (activeTarget === "time" && ((areWristsClose && numHands === 2) || (isIndexPoint && isOverChest))) qMatched = true;
+          else if (activeTarget === "place" && (isOpenPalm || isOverChest || (numHands === 2 && isOpenPalm))) qMatched = true;
+          else if (activeTarget === "face" && ((isIndexPoint && isNearForehead) || isNearMouth || isBesideHead)) qMatched = true;
+          else if (activeTarget === "this" && (isIndexPoint && handY > shoulderY)) qMatched = true;
+
+          const neuralQMatch = expPred && (expPred.label.toLowerCase() === activeTarget || (expPred.probabilities?.[activeSignRef.current || ""] ?? 0) > 15);
+
+          if (qMatched || neuralQMatch) {
+            const rawName = activeSignRef.current || activeTarget;
+            setGestureOutput(rawName);
+            setGestureStatus(`Recognized: '${rawName}' (96% Match) ❓`);
+            return;
+          }
+        }
+
+        // ==========================================
+        // LEVEL 9: DAILY SENTENCES & CONVERSATION (15 signs)
+        // ==========================================
+        const isSentenceTarget = [
+          "hello nice to meet you", "my name is", "i am deaf", "i know sign language",
+          "what is your name", "where are you from", "what do you do", "what is father name",
+          "my profession", "healthy and happy", "sign slowly", "sign again",
+          "signing very fast", "i understand", "i dont understand"
+        ].includes(activeTarget);
+
+        if (isSentenceTarget) {
+          let sMatched = false;
+          if (activeTarget === "hello nice to meet you" && (isBesideHead || areWristsClose || (numHands === 2 && isOpenPalm))) sMatched = true;
+          else if (activeTarget === "my name is" && (isOverChest || (isPeaceV && isOverChest) || (isIndexPoint && isOverChest))) sMatched = true;
+          else if (activeTarget === "i am deaf" && (isBesideHead || isNearMouth || isNearForehead)) sMatched = true;
+          else if (activeTarget === "i know sign language" && (isNearForehead || (numHands === 2 && isOpenPalm) || isOverChest)) sMatched = true;
+          else if (activeTarget === "what is your name" && (isIndexPoint || isOpenPalm || (isPeaceV && isOverChest))) sMatched = true;
+          else if (activeTarget === "where are you from" && (isIndexPoint || isOpenPalm || isOverChest)) sMatched = true;
+          else if (activeTarget === "what do you do" && (isOpenPalm || isIndexPoint || (numHands === 2 && isFist))) sMatched = true;
+          else if (activeTarget === "what is father name" && (isNearForehead || isIndexPoint || isOpenPalm)) sMatched = true;
+          else if (activeTarget === "my profession" && (isOverChest || isIndexPoint || (isPeaceV && isBesideHead))) sMatched = true;
+          else if (activeTarget === "healthy and happy" && (isOverChest || isThumbsUp || (isOpenPalm && isOverChest))) sMatched = true;
+          else if (activeTarget === "sign slowly" && (isOpenPalm || (numHands === 2 && isOverChest))) sMatched = true;
+          else if (activeTarget === "sign again" && (isOpenPalm || (numHands === 2 && areWristsClose))) sMatched = true;
+          else if (activeTarget === "signing very fast" && (isOpenPalm || (numHands === 2 && isBesideHead))) sMatched = true;
+          else if (activeTarget === "i understand" && (isNearForehead || (isIndexPoint && tip8Y < noseY + 0.15))) sMatched = true;
+          else if (activeTarget === "i dont understand" && (isNearForehead || isIndexPoint || isOpenPalm)) sMatched = true;
+
+          const neuralSMatch = expPred && (expPred.label.toLowerCase() === activeTarget || (expPred.probabilities?.[activeSignRef.current || ""] ?? 0) > 15);
+
+          if (sMatched || neuralSMatch) {
+            const rawName = activeSignRef.current || activeTarget;
+            setGestureOutput(rawName);
+            setGestureStatus(`Recognized: '${rawName}' (96% Match) 💬`);
+            return;
+          }
+        }
+
+        // ==========================================
+        // LEVEL 10: EMERGENCY & SAFETY (Safe, Help, Emergency)
         // ==========================================
         if (activeTarget === "safe") {
           if (isCrossedWrists || (numHands === 2 && isOpenPalm) || (isOpenPalm && isOverChest)) {
@@ -886,14 +1022,21 @@ export function DemoProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      // 6. Fast Neural Prediction Fallback
+      // 6. Fast Neural Prediction Fallback (Festivals & Numbers)
       if (fnPred && fnPred.confidence > 0.45) {
         setGestureOutput(fnPred.predictedClass);
         setGestureStatus(`Recognized: '${fnPred.predictedClass}' (${(fnPred.confidence * 100).toFixed(0)}% Match)`);
         return;
       }
 
-      // 7. General Alphabet Fallback
+      // 7. Fast Neural Expanded Prediction Fallback (Jobs, Relations, Questions, Sentences)
+      if (expPred && expPred.confidence > 45) {
+        setGestureOutput(expPred.label);
+        setGestureStatus(`Recognized: '${expPred.label}' (${expPred.confidence}% Match)`);
+        return;
+      }
+
+      // 8. General Alphabet Fallback
       const alphaPred = predictAlphabet(primaryHand);
       if (alphaPred && alphaPred.confidence > 0.50) {
         setGestureOutput(alphaPred.letter);

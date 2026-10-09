@@ -3,7 +3,8 @@ import {
   Sparkles, Hand, RotateCcw, Trophy, BookOpen, Star, 
   AlertCircle, ShieldAlert, Award, Compass, Heart, Activity, CheckCircle2, RefreshCw,
   Palette, ChevronRight, ChevronLeft, Volume2, Flame, Lock, Trash2, BarChart3, TrendingUp, Check,
-  PartyPopper, Hash, MessageSquare, PhoneCall, ShieldCheck, HeartPulse, AlertOctagon, Send
+  PartyPopper, Hash, MessageSquare, PhoneCall, ShieldCheck, HeartPulse, AlertOctagon, Send,
+  Briefcase, Users, HelpCircle
 } from "lucide-react";
 import { WebcamMock } from "./WebcamMock";
 import { TestSection } from "./TestSection";
@@ -341,7 +342,255 @@ export const SIGN_TRANSLATIONS: Record<string, Record<Language, LocalizedSign>> 
   "1000000": { en: { name: "10 Lakh (1 Million)", desc: "Show 10 gesture followed by Lakh hand sweep.", hint: "10 followed by Lakh sweep 💰" }, hi: { name: "10 लाख (1 Million)", desc: "10 दिखाएं और फिर लाख का संकेत बनाएं।", hint: "10 और लाख का संकेत 💰" }, mr: { name: "१० लाख (1 Million)", desc: "१० दाखवून लाख चिन्ह करा.", hint: "१० आणि लाख चिन्ह 💰" } },
   "10cr": { en: { name: "10 Crore", desc: "Show 10 gesture followed by Crore C-twist curve.", hint: "10 followed by Crore twist 👑" }, hi: { name: "10 करोड़ (10 Crore)", desc: "10 दिखाएं और फिर करोड़ का विशेष C-ट्विस्ट संकेत बनाएं।", hint: "10 और करोड़ का संकेत 👑" }, mr: { name: "१० कोटी (10 Crore)", desc: "१० दाखवून कोटी दर्शवणारी C-ट्विस्ट मुद्रा करा.", hint: "१० आणि कोटी चिन्ह 👑" } },
 
-  // Level 6: Emergency & Life Safety
+  // Level 6: Jobs & Professions
+  "Teacher": {
+    en: { name: "Teacher", desc: "Touch index and middle fingertips to forehead near temple, then move outward indicating sharing wisdom and teaching.", hint: "Fingertips at temple moving outward 👨‍🏫" },
+    hi: { name: "शिक्षक / शिक्षिका (Teacher)", desc: "कनपटी/माथे को छूकर छात्रों की ओर ज्ञान प्रसार करते हुए हाथ आगे बढ़ाएं।", hint: "माथे को छूकर हाथ आगे बढ़ाएं 👨‍🏫" },
+    mr: { name: "शिक्षक / शिक्षिका (Teacher)", desc: "कपाळाला हात लावून विद्यार्थ्यांकडे ज्ञान प्रसारासाठी हात पुढे न्या.", hint: "कपाळाला हात लावून पुढे नेणे 👨‍🏫" }
+  },
+  "Doctor": {
+    en: { name: "Doctor", desc: "Tap your index and middle fingertips gently on your opposite inner wrist like taking a pulse.", hint: "Two fingers checking wrist pulse 🩺" },
+    hi: { name: "डॉक्टर / चिकित्सक (Doctor)", desc: "नाड़ी की जांच करने के लिए अपनी दो उंगलियों (तर्जनी + मध्यमा) से दूसरी कलाई को छुएं।", hint: "कलाई पर नाड़ी की जांच 🩺" },
+    mr: { name: "डॉक्टर / वैद्य (Doctor)", desc: "नाडी तपासण्यासाठी तर्जनी व मधल्या बोटाने दुसऱ्या हाताचे मनगट तपासा.", hint: "मनगटावर नाडी तपासणे 🩺" }
+  },
+  "Driver": {
+    en: { name: "Driver", desc: "Hold and steer an imaginary round vehicle steering wheel with both hands.", hint: "Steering wheel motion 🚗" },
+    hi: { name: "ड्राइवर / चालक (Driver)", desc: "दोनों हाथों से गाड़ी का गोल स्टीयरिंग व्हील पकड़कर घुमाने का संकेत बनाएं।", hint: "स्टीयरिंग व्हील घुमाने का संकेत 🚗" },
+    mr: { name: "चालक / ड्रायव्हर (Driver)", desc: "दोन्ही हातांनी वाहनाचे स्टिअरिंग धरून फिरवल्याचा अभिनय करा.", hint: "स्टिअरिंग फिरवणे 🚗" }
+  },
+  "Farmer": {
+    en: { name: "Farmer", desc: "Sweep your flat open hand across waist level or chin indicating farming and crops.", hint: "Sweep hand across waist level 🌾" },
+    hi: { name: "किसान / कृषक (Farmer)", desc: "खेती और फसलों को दर्शाने के लिए खुली सपाट हथेली को घुमाएं।", hint: "कमर के पास सपाट हाथ घुमाएं 🌾" },
+    mr: { name: "शेतकरी (Farmer)", desc: "शेती आणि पिके दर्शवण्यासाठी सपाट हात फिरवा.", hint: "सपाट हात फिरवणे 🌾" }
+  },
+  "Lawyer": {
+    en: { name: "Lawyer", desc: "Alternate both flat hands up and down like the balanced scales of justice.", hint: "Scales of justice motion ⚖️" },
+    hi: { name: "वकील / अधिवक्ता (Lawyer)", desc: "न्याय के तराजू की तरह दोनों सपाट हाथों को ऊपर-नीचे बारी-बारी से संतुलित करें।", hint: "न्याय का तराजू संतुलित करना ⚖️" },
+    mr: { name: "वकील (Lawyer)", desc: "न्यायाच्या पारड्यांप्रमाणे दोन्ही सपाट हात आलटून-पालटून वर-खाली करा.", hint: "न्यायाचे तराजू ⚖️" }
+  },
+  "Barber": {
+    en: { name: "Barber", desc: "Move index and middle fingers in a scissors snipping motion near hair/ears.", hint: "Scissors snipping motion near ear ✂️" },
+    hi: { name: "नाई / हज्जाम (Barber)", desc: "बालों या कान के पास कैंची की तरह तर्जनी और मध्यमा उंगलियों को चलाएं।", hint: "कैंची की तरह उंगलियां चलाना ✂️" },
+    mr: { name: "न्हावी / केस कापणारा (Barber)", desc: "केसांजवळ किंवा कानाजवळ कात्रीप्रमाणे तर्जनी व मधले बोट चालवा.", hint: "कात्रीसारखी हालचाल ✂️" }
+  },
+  "Postman": {
+    en: { name: "Postman", desc: "Mimic carrying mail bag strap and delivering a letter with thumb and index fingers.", hint: "Letter delivering gesture ✉️" },
+    hi: { name: "डाकिया (Postman)", desc: "कंधे पर डाक थैले का पट्टा और हाथ से पत्र देने का संकेत बनाएं।", hint: "पत्र देने का संकेत ✉️" },
+    mr: { name: "पोस्टमन / टपालवाला (Postman)", desc: "खांद्यावरील पिशवी आणि हाताने पत्र देण्याचा अभिनय करा.", hint: "पत्र देण्याची मुद्रा ✉️" }
+  },
+  "Sweeper": {
+    en: { name: "Sweeper", desc: "Hold both hands together sweeping downward like holding a broom.", hint: "Broom sweeping motion 🧹" },
+    hi: { name: "सफाई कर्मचारी (Sweeper)", desc: "झाड़ू पकड़ने की तरह दोनों हाथों से नीचे की ओर सफाई का संकेत बनाएं।", hint: "झाड़ू लगाने की मुद्रा 🧹" },
+    mr: { name: "सफाई कामगार (Sweeper)", desc: "झाडू धरल्याप्रमाणे दोन्ही हातांनी खाली झाडण्याची मुद्रा करा.", hint: "झाडू मारण्याची मुद्रा 🧹" }
+  },
+  "Writer": {
+    en: { name: "Writer", desc: "Hold imaginary pen with fingers and write smoothly across flat open palm.", hint: "Writing with pen on palm ✍️" },
+    hi: { name: "लेखक / साहित्यकार (Writer)", desc: "उंगलियों से काल्पनिक कलम पकड़कर हथेली पर लिखने का अभिनय करें।", hint: "हथेली पर कलम से लिखना ✍️" },
+    mr: { name: "लेखक (Writer)", desc: "बोटांनी पेन धरून उघड्या तळहातावर लिहिण्याचा अभिनय करा.", hint: "तळहातावर पेन चालवणे ✍️" }
+  },
+
+  // Level 7: Family & Relations
+  "Father": {
+    en: { name: "Father", desc: "Touch your thumb with an open flat hand to your forehead/temple.", hint: "Open hand thumb at forehead 👨" },
+    hi: { name: "पिताजी / पापा (Father)", desc: "खुले हाथ के अंगूठे को अपने माथे या कनपटी पर टिकाएं (पुरुष ऊपरी चेहरा संकेत)।", hint: "माथे पर अंगूठा टिकाएं 👨" },
+    mr: { name: "वडील / बाबा (Father)", desc: "उघड्या हाताचा अंगठा कपाळावर किंवा कानशिलाजवळ टेकवा.", hint: "कपाळावर अंगठा टेकवणे 👨" }
+  },
+  "Mother": {
+    en: { name: "Mother", desc: "Touch your thumb with an open flat hand to your chin/lower cheek.", hint: "Open hand thumb at chin 👩" },
+    hi: { name: "माताजी / माँ (Mother)", desc: "खुले हाथ के अंगूठे को अपनी ठोड़ी या निचले गाल पर टिकाएं (महिला निचला चेहरा संकेत)।", hint: "ठोड़ी पर अंगूठा टिकाएं 👩" },
+    mr: { name: "आई / माता (Mother)", desc: "उघड्या हाताचा अंगठा हनुवटीला किंवा खालच्या गालाला स्पर्श करा.", hint: "हनुवटीला अंगठा टेकवणे 👩" }
+  },
+  "Brother": {
+    en: { name: "Brother", desc: "Male forehead tap followed by bringing both index fingers parallel together.", hint: "Forehead tap + parallel index fingers 👦" },
+    hi: { name: "भाई (Brother)", desc: "माथे पर पुरुष संकेत देने के बाद दोनों तर्जनी उंगलियों को एक साथ समानांतर लाएं।", hint: "माथा स्पर्श + तर्जनी उंगलियां 👦" },
+    mr: { name: "भाऊ (Brother)", desc: "कपाळाला स्पर्श करून दोन्ही तर्जनी बोटे समांतर एकत्र आणा.", hint: "कपाळ स्पर्श + समांतर बोटे 👦" }
+  },
+  "Daughter": {
+    en: { name: "Daughter", desc: "Female chin stroke followed by gentle baby cradle arm movement.", hint: "Chin stroke + baby cradle 👧" },
+    hi: { name: "बेटी / पुत्री (Daughter)", desc: "ठोड़ी पर महिला संकेत देने के बाद बाहों में बच्चे को झुलाने का अभिनय करें।", hint: "ठोड़ी स्पर्श + गोद में झुलाना 👧" },
+    mr: { name: "मुलगी / कन्या (Daughter)", desc: "हनुवटीला स्पर्श करून बाळाला पाळण्यात थोपटल्याचा अभिनय करा.", hint: "हनुवटी स्पर्श + बाळ थोपटणे 👧" }
+  },
+  "Husband": {
+    en: { name: "Husband", desc: "Male forehead touch followed by clasping both hands together in marriage.", hint: "Male sign + clasp hands 🤵" },
+    hi: { name: "पति (Husband)", desc: "माथे पर पुरुष संकेत के बाद विवाह मुद्रा में दोनों हाथों को आपस में जोड़ें।", hint: "पुरुष संकेत + हाथ जोड़ना 🤵" },
+    mr: { name: "पती / नवरा (Husband)", desc: "कपाळावर पुरुष चिन्ह करून लग्नाच्या मुद्रेत दोन्ही हात एकत्र जोडा.", hint: "पुरुष चिन्ह + हात जोडणे 🤵" }
+  },
+  "Wife": {
+    en: { name: "Wife", desc: "Female chin touch followed by clasping both hands together in marriage.", hint: "Female sign + clasp hands 👰" },
+    hi: { name: "पत्नी (Wife)", desc: "ठोड़ी पर महिला संकेत के बाद विवाह मुद्रा में दोनों हाथों को आपस में जोड़ें।", hint: "महिला संकेत + हाथ जोड़ना 👰" },
+    mr: { name: "पत्नी / बायको (Wife)", desc: "हनुवटीवर स्त्री चिन्ह करून लग्नाच्या मुद्रेत दोन्ही हात एकत्र जोडा.", hint: "स्त्री चिन्ह + हात जोडणे 👰" }
+  },
+  "Married": {
+    en: { name: "Marriage / Married", desc: "Clasp right hand gently over left hand forming the marriage bond.", hint: "Clasped hands in marriage 💍" },
+    hi: { name: "विवाह / शादीशुदा (Married)", desc: "विवाह का बंधन दर्शाने के लिए दाएं हाथ को बाएं हाथ पर रखकर जोड़ें।", hint: "हाथ जोड़कर विवाह मुद्रा 💍" },
+    mr: { name: "विवाह / लग्न (Married)", desc: "लग्नाचे बंधन दर्शवण्यासाठी उजवा हात डाव्या हातावर ठेवून जोडा.", hint: "हात जोडून लग्न मुद्रा 💍" }
+  },
+  "Grandfather": {
+    en: { name: "Grandfather", desc: "Touch thumb to forehead and bounce hand outward two gentle steps forward.", hint: "Father sign blooming forward 👴" },
+    hi: { name: "दादाजी / नानाजी (Grandfather)", desc: "पिता के संकेत को माथे पर बनाकर हाथ को दो बार आगे की ओर बढ़ाएं।", hint: "पिता संकेत आगे बढ़ाएं 👴" },
+    mr: { name: "आजोबा (Grandfather)", desc: "वडिलांचे कपाळावरील चिन्ह करून हात दोन वेळा पुढे न्या.", hint: "कपाळावरून हात पुढे नेणे 👴" }
+  },
+  "Grandmother": {
+    en: { name: "Grandmother", desc: "Touch thumb to chin and bounce hand outward two gentle steps forward.", hint: "Mother sign blooming forward 👵" },
+    hi: { name: "दादीजी / नानीजी (Grandmother)", desc: "माँ के संकेत को ठोड़ी पर बनाकर हाथ को दो बार आगे की ओर बढ़ाएं।", hint: "माँ संकेत आगे बढ़ाएं 👵" },
+    mr: { name: "आजी (Grandmother)", desc: "आईचे हनुवटीवरील चिन्ह करून हात दोन वेळा पुढे न्या.", hint: "हनुवटीवरून हात पुढे नेणे 👵" }
+  },
+  "Family": {
+    en: { name: "Family", desc: "Form 'F' shapes with both hands, circling outward to join together in a circle.", hint: "Two hands circling to form family circle 👨‍👩‍👧‍👦" },
+    hi: { name: "परिवार / कुटुंब (Family)", desc: "दोनों हाथों से F-आकार बनाकर बाहर की ओर गोल घुमाते हुए आपस में जोड़ें।", hint: "हाथों से गोल परिवार वृत्त बनाना 👨‍👩‍👧‍👦" },
+    mr: { name: "कुटुंब / परिवार (Family)", desc: "दोन्ही हातांनी F-मुद्रा करून बाहेरून गोल फिरवून कुटुंब वर्तुळ पूर्ण करा.", hint: "कुटुंब वर्तुळ तयार करणे 👨‍👩‍👧‍👦" }
+  },
+  "Man": {
+    en: { name: "Man", desc: "Formal male sign with thumb/fingers at temple/forehead with proud posture.", hint: "Male indicator at forehead 👨" },
+    hi: { name: "पुरुष / आदमी (Man)", desc: "माथे के पास हाथ से पुरुष का मानक सांकेतिक चिन्ह बनाएं।", hint: "माथे पर पुरुष संकेत 👨" },
+    mr: { name: "पुरुष / माणूस (Man)", desc: "कपाळाजवळ हाताने पुरुषाचे प्रमाण सांकेतिक चिन्ह करा.", hint: "कपाळावर पुरुष चिन्ह 👨" }
+  },
+  "Woman": {
+    en: { name: "Woman", desc: "Formal female sign with thumb/fingers brushing lower jaw/chin gracefully.", hint: "Female indicator at chin 👩" },
+    hi: { name: "महिला / स्त्री (Woman)", desc: "ठोड़ी के पास हाथ से महिला का मानक सांकेतिक चिन्ह बनाएं।", hint: "ठोड़ी पर महिला संकेत 👩" },
+    mr: { name: "महिला / स्त्री (Woman)", desc: "हनुवटीजवळ हाताने स्त्रीचे प्रमाण सांकेतिक चिन्ह करा.", hint: "हनुवटीवर स्त्री चिन्ह 👩" }
+  },
+
+  // Level 8: Question Words & Concepts
+  "What": {
+    en: { name: "What", desc: "Hold both open flat palms facing up and shake them gently side-to-side.", hint: "Both open palms up shaking side-to-side ❓" },
+    hi: { name: "क्या? (What)", desc: "दोनों खुली हथेलियों को ऊपर की ओर रखकर धीरे से दोनों तरफ हिलाएं।", hint: "खुली हथेलियां ऊपर हिलाएं ❓" },
+    mr: { name: "काय? (What)", desc: "दोन्ही उघडे तळहात वरच्या दिशेने ठेवून हळूवार दोन्ही बाजूला हलवा.", hint: "उघडे तळहात वर हलवणे ❓" }
+  },
+  "Where": {
+    en: { name: "Where", desc: "Extend index finger pointing up and shake side-to-side inquiring location.", hint: "Index finger shaking side-to-side 📍" },
+    hi: { name: "कहाँ? (Where)", desc: "स्थान पूछने के लिए अपनी तर्जनी उंगली को ऊपर उठाकर दोनों तरफ हिलाएं।", hint: "तर्जनी उंगली दोनों तरफ हिलाएं 📍" },
+    mr: { name: "कुठे? (Where)", desc: "ठिकाण विचारण्यासाठी तर्जनी बोट वर करून दोन्ही बाजूला हलवा.", hint: "तर्जनी बोट बाजूला हलवणे 📍" }
+  },
+  "When": {
+    en: { name: "When", desc: "Circle one index finger around the other upright index finger like clock hands.", hint: "Index circling other index finger ⏰" },
+    hi: { name: "कब? (When)", desc: "घड़ी की सुइयों की तरह एक तर्जनी उंगली को दूसरी सीधी तर्जनी के चारों ओर घुमाएं।", hint: "तर्जनी को दूसरी उंगली के चारों ओर घुमाएं ⏰" },
+    mr: { name: "केव्हा? (When)", desc: "घड्याळाच्या काट्याप्रमाणे एक तर्जनी बोट दुसऱ्या सरळ तर्जनीभोवती गोल फिरवा.", hint: "तर्जनीभोवती दुसरे बोट फिरवणे ⏰" }
+  },
+  "Which": {
+    en: { name: "Which", desc: "Hold both thumbs up and alternate them up and down comparing choices.", hint: "Both thumbs up alternating up and down ⚖️" },
+    hi: { name: "कौन सा? (Which)", desc: "विकल्पों की तुलना करने के लिए दोनों अंगूठे ऊपर रखकर बारी-बारी से ऊपर-नीचे करें।", hint: "दोनों अंगूठे ऊपर-नीचे करना ⚖️" },
+    mr: { name: "कोणते? (Which)", desc: "पर्याय निवडण्यासाठी दोन्ही अंगठे वर करून आलटून-पालटून वर-खाली करा.", hint: "दोन्ही अंगठे वर-खाली करणे ⚖️" }
+  },
+  "Who": {
+    en: { name: "Who", desc: "Circle index finger in front of lips/chin inquiring identity.", hint: "Index finger circling in front of lips 👤" },
+    hi: { name: "कौन? (Who)", desc: "पहचान पूछने के लिए तर्जनी उंगली को अपने होंठों/ठोड़ी के सामने गोल घुमाएं।", hint: "होंठों के सामने तर्जनी घुमाना 👤" },
+    mr: { name: "कोण? (Who)", desc: "ओळख विचारण्यासाठी तर्जनी बोट ओठांसमोर/हनुवटीसमोर गोल फिरवा.", hint: "ओठांसमोर बोट फिरवणे 👤" }
+  },
+  "How": {
+    en: { name: "How", desc: "Start with curved hands palms down, roll them upward together to face palms up.", hint: "Both hands rolling upward palms-up 🔄" },
+    hi: { name: "कैसे? (How)", desc: "हथेलियों को नीचे रखकर शुरू करें, फिर दोनों हाथों को ऊपर की ओर घुमाकर हथेलियां ऊपर करें।", hint: "हाथों को ऊपर घुमाकर खोलना 🔄" },
+    mr: { name: "कसे? (How)", desc: "तळहात खाली ठेवून सुरुवात करा, नंतर दोन्ही हात वर फिरवून तळहात वर करा.", hint: "तळहात वर फिरवणे 🔄" }
+  },
+  "Question": {
+    en: { name: "Question", desc: "Draw an imaginary question mark (?) in the air with your index finger.", hint: "Drawing question mark in air ❓" },
+    hi: { name: "प्रश्न / सवाल (Question)", desc: "अपनी तर्जनी उंगली से हवा में प्रश्नवाचक चिन्ह (?) बनाएं।", hint: "हवा में प्रश्न चिन्ह बनाना ❓" },
+    mr: { name: "प्रश्न (Question)", desc: "तर्जनी बोटाने हवेत प्रश्नचिन्ह (?) रेखाटा.", hint: "हवेत प्रश्नचिन्ह काढणे ❓" }
+  },
+  "Answer": {
+    en: { name: "Answer", desc: "Place index finger at lips and point forward answering clearly.", hint: "Index finger moving from lips forward 💬" },
+    hi: { name: "उत्तर / जवाब (Answer)", desc: "तर्जनी उंगली को होंठों पर रखकर स्पष्ट उत्तर देने के लिए आगे बढ़ाएं।", hint: "होंठों से उंगली आगे बढ़ाना 💬" },
+    mr: { name: "उत्तर (Answer)", desc: "तर्जनी बोट ओठांवर ठेवून स्पष्ट उत्तरासाठी पुढे न्या.", hint: "ओठांवरून बोट पुढे नेणे 💬" }
+  },
+  "Time": {
+    en: { name: "Time", desc: "Tap index finger twice on the wrist watch position.", hint: "Tapping watch on wrist ⌚" },
+    hi: { name: "समय / वक्त (Time)", desc: "कलाई घड़ी की स्थिति पर अपनी तर्जनी उंगली से दो बार थपथपाएं।", hint: "कलाई पर घड़ी थपथपाना ⌚" },
+    mr: { name: "वेळ / समय (Time)", desc: "मनगटावरील घड्याळाच्या जागी तर्जनी बोटाने दोनदा टॅप करा.", hint: "मनगटावर घड्याळ टॅप करणे ⌚" }
+  },
+  "Place": {
+    en: { name: "Place / Location", desc: "Hold open palms flat indicating a geographical area or place.", hint: "Flat palms indicating place 📍" },
+    hi: { name: "स्थान / जगह (Place)", desc: "खुली हथेलियों को सपाट रखकर किसी स्थान या क्षेत्र को दर्शाएं।", hint: "स्थान दर्शाने के लिए सपाट हाथ 📍" },
+    mr: { name: "जागा / ठिकाण (Place)", desc: "उघडे तळहात सपाट ठेवून विशिष्ट जागा किंवा ठिकाण दर्शवा.", hint: "ठिकाण दर्शवणारे सपाट हात 📍" }
+  },
+  "Face": {
+    en: { name: "Face", desc: "Trace a circular oval around your face with your index finger.", hint: "Tracing face contour 😊" },
+    hi: { name: "चेहरा (Face)", desc: "अपनी तर्जनी उंगली से अपने चेहरे के चारों ओर एक अंडाकार वृत्त बनाएं।", hint: "चेहरे की रूपरेखा बनाना 😊" },
+    mr: { name: "चेहरा (Face)", desc: "तर्जनी बोटाने आपल्या चेहऱ्याभोवती अंडाकृती वर्तुळ काढा.", hint: "चेहऱ्याभोवती वर्तुळ काढणे 😊" }
+  },
+  "This": {
+    en: { name: "This", desc: "Point index finger firmly downward indicating this object or topic.", hint: "Index pointing down 👇" },
+    hi: { name: "यह / यह वाला (This)", desc: "इस वस्तु या विषय को इंगित करने के लिए तर्जनी उंगली को नीचे की ओर रखें।", hint: "तर्जनी उंगली नीचे दिखाना 👇" },
+    mr: { name: "हे / हे वाला (This)", desc: "ही वस्तू किंवा विषय दर्शवण्यासाठी तर्जनी बोट खाली दाखवा.", hint: "तर्जनी बोट खाली दाखवणे 👇" }
+  },
+
+  // Level 9: Daily Conversation & Sentences
+  "Hello Nice To Meet You": {
+    en: { name: "Hello, Nice to Meet You", desc: "Wave hello followed by bringing both index fingers together meeting happily.", hint: "Hello wave + meeting gesture 🤝" },
+    hi: { name: "नमस्ते, आपसे मिलकर खुशी हुई", desc: "नमस्ते का संकेत दें और फिर दोनों तर्जनी उंगलियों को मिलाकर मिलने की खुशी व्यक्त करें।", hint: "नमस्ते + मिलने का संकेत 🤝" },
+    mr: { name: "नमस्कार, तुम्हाला भेटून आनंद झाला", desc: "नमस्कार चिन्ह करून दोन्ही तर्जनी बोटे एकत्र आणून भेटीचा आनंद दर्शवा.", hint: "नमस्कार + भेटणे 🤝" }
+  },
+  "My Name Is": {
+    en: { name: "My Name Is...", desc: "Touch chest with flat hand (My) followed by H-hand fingers tapping together (Name).", hint: "Chest tap (My) + Name tap 📛" },
+    hi: { name: "मेरा नाम... है", desc: "छाती पर हाथ रखें (मेरा) और फिर दो उंगलियों को मिलाकर 'नाम' का संकेत बनाएं।", hint: "छाती स्पर्श (मेरा) + नाम संकेत 📛" },
+    mr: { name: "माझे नाव... आहे", desc: "छातीवर हात ठेवा (माझे) आणि दोन बोटे एकत्र टॅप करून 'नाव' चिन्ह करा.", hint: "छाती स्पर्श (माझे) + नाव चिन्ह 📛" }
+  },
+  "I Am Deaf": {
+    en: { name: "I Am Deaf", desc: "Touch index finger from ear to mouth indicating deaf identity.", hint: "Ear to mouth touch 🧏" },
+    hi: { name: "मैं मूक-बधिर हूँ", desc: "अपनी तर्जनी उंगली को कान से मुंह तक ले जाकर मूक-बधिर पहचान का संकेत दें।", hint: "कान से मुंह तक उंगली छूना 🧏" },
+    mr: { name: "मी कर्णबधिर आहे", desc: "तर्जनी बोटाने कानापासून ओठांपर्यंत स्पर्श करून कर्णबधिर ओळख दर्शवा.", hint: "कानापासून ओठांपर्यंत स्पर्श 🧏" }
+  },
+  "I Know Sign Language": {
+    en: { name: "I Know Sign Language", desc: "Touch forehead (Know) followed by rolling both hands in sign language conversation.", hint: "Forehead touch (Know) + signing hands 🤟" },
+    hi: { name: "मुझे सांकेतिक भाषा आती है", desc: "माथे को छुएं (जानना) और फिर दोनों हाथों से सांकेतिक भाषा में बात करने का संकेत दें।", hint: "माथा छूना + संकेत करना 🤟" },
+    mr: { name: "मला सांकेतिक भाषा येते", desc: "कपाळाला स्पर्श करा (माहिती असणे) आणि दोन्ही हातांनी सांकेतिक संभाषणाची हालचाल करा.", hint: "कपाळ स्पर्श + सांकेतिक संवाद 🤟" }
+  },
+  "What Is Your Name": {
+    en: { name: "What Is Your Name?", desc: "Point forward (Your) + Name fingers tap + What open palms shake.", hint: "Your + Name + What ❓" },
+    hi: { name: "आपका नाम क्या है?", desc: "सामने इशारा करें (आपका) + नाम का संकेत + हथेलियां हिलाकर क्या पूछें।", hint: "आपका + नाम + क्या ❓" },
+    mr: { name: "तुमचे नाव काय आहे?", desc: "समोर निर्देश (तुमचे) + नाव चिन्ह + काय चे तळहात हलवणे.", hint: "तुमचे + नाव + काय ❓" }
+  },
+  "Where Are You From": {
+    en: { name: "Where Are You From?", desc: "Point forward (You) followed by place & where inquiry gesture.", hint: "You + Where location inquiry 🏡" },
+    hi: { name: "आप कहाँ से हैं / आपका घर कहाँ है?", desc: "सामने इशारा करें (आप) और फिर स्थान एवं कहाँ का प्रश्न संकेत बनाएं।", hint: "आप + कहाँ 🏡" },
+    mr: { name: "तुम्ही कुठून आहात / तुमचे घर कुठे आहे?", desc: "समोर निर्देश (तुम्ही) आणि ठिकाण व कुठे चे प्रश्न चिन्ह करा.", hint: "तुम्ही + कुठे 🏡" }
+  },
+  "What Do You Do": {
+    en: { name: "What Do You Do? (Work)", desc: "Point forward (You) + Work hammer hands + What inquiring palms.", hint: "You + Work + What 💼" },
+    hi: { name: "आप क्या काम करते हैं?", desc: "सामने इशारा करें (आप) + काम/व्यवसाय संकेत + क्या पूछने के लिए हथेलियां खोलें।", hint: "आप + काम + क्या 💼" },
+    mr: { name: "तुम्ही काय काम करता?", desc: "समोर निर्देश (तुम्ही) + कामाचे चिन्ह + काय विचारण्यासाठी तळहात उघडणे.", hint: "तुम्ही + काम + काय 💼" }
+  },
+  "What Is Father Name": {
+    en: { name: "What Is Your Father's Name?", desc: "Your + Father (forehead) + Name + What question sign.", hint: "Your + Father + Name + What 👨" },
+    hi: { name: "आपके पिता का नाम क्या है?", desc: "आपका + पिता (माथा) + नाम + क्या का संयुक्त सांकेतिक वाक्य बनाएं।", hint: "आपका + पिता + नाम + क्या 👨" },
+    mr: { name: "तुमच्या वडिलांचे नाव काय आहे?", desc: "तुमचे + वडील (कपाळ) + नाव + काय चे संयुक्त सांकेतिक वाक्य.", hint: "तुमचे + वडील + नाव + काय 👨" }
+  },
+  "My Profession": {
+    en: { name: "My Profession / Student / Doctor", desc: "Self point followed by role indicator and badge gesture.", hint: "Self + Role gesture 🎓" },
+    hi: { name: "मेरा पेशा / मैं विद्यार्थी/डॉक्टर हूँ", desc: "छाती पर इशारा करें और अपनी भूमिका/पेशा का संकेत प्रस्तुत करें।", hint: "स्वयं + पेशा संकेत 🎓" },
+    mr: { name: "माझा व्यवसाय / मी विद्यार्थी/डॉक्टर आहे", desc: "स्वतःकडे निर्देश करून आपला व्यवसाय/भूमिका दर्शवा.", hint: "स्वतः + व्यवसाय मुद्रा 🎓" }
+  },
+  "Healthy And Happy": {
+    en: { name: "Hope You Are Healthy & Happy", desc: "Both hands sweep from chest with thumbs up in vibrant wellness.", hint: "Chest sweep + Thumbs up wellness 😊" },
+    hi: { name: "आशा है आप स्वस्थ और खुश हैं", desc: "छाती से दोनों हाथ बाहर लाकर थम्स अप दिखाते हुए प्रसन्नता व्यक्त करें।", hint: "स्वास्थ्य + प्रसन्नता संकेत 😊" },
+    mr: { name: "आशा आहे तुम्ही निरोगी व आनंदी आहात", desc: "छातीवरून दोन्ही हात बाहेर आणून थम्स अप करून निरोगी व आनंदी भावना दर्शवा.", hint: "आरोग्य + आनंद मुद्रा 😊" }
+  },
+  "Sign Slowly": {
+    en: { name: "Please Sign Slowly", desc: "Flat right hand moving gently and slowly across left forearm.", hint: "Slow gentle glide across arm 🐢" },
+    hi: { name: "कृपया धीरे संकेत करें", desc: "धीमी गति दर्शाने के लिए दाहिने हाथ को बाईं बांह पर धीरे-धीरे आगे बढ़ाएं।", hint: "बांह पर धीमा हाथ चलाना 🐢" },
+    mr: { name: "कृपया हळू सांकेतिक भाषा वापरा", desc: "हळूवार गती दर्शवण्यासाठी उजवा हात डाव्या हातावरून हळूहळू पुढे न्या.", hint: "हळूवार हात फिरवणे 🐢" }
+  },
+  "Sign Again": {
+    en: { name: "Could You Please Sign Again?", desc: "Curved right hand pivoting into open left palm repeating gesture.", hint: "Pivoting hand repeating in palm 🔁" },
+    hi: { name: "कृपया फिर से संकेत दिखाएं", desc: "दोबारा का संकेत देने के लिए दाहिने मुड़े हुए हाथ को बाईं हथेली में दोहराएं।", hint: "पुनः दोहराने का संकेत 🔁" },
+    mr: { name: "कृपया पुन्हा करून दाखवाल का?", desc: "पुन्हा दर्शवण्यासाठी उजवा वळवलेला हात डाव्या तळहातावर पुन्हा टेकवा.", hint: "पुन्हा करण्याची मुद्रा 🔁" }
+  },
+  "Signing Very Fast": {
+    en: { name: "You Are Signing Very Fast", desc: "Both hands flutter rapidly side-to-side signaling high speed.", hint: "Rapid flutter hands signaling fast ⚡" },
+    hi: { name: "आप बहुत तेज़ संकेत कर रहे हैं", desc: "तीव्र गति का संकेत देने के लिए दोनों हाथों को तेजी से अगल-बगल हिलाएं।", hint: "तेज़ गति से हाथ हिलाना ⚡" },
+    mr: { name: "तुम्ही खूप वेगाने सांकेतिक भाषा वापरत आहात", desc: "वेगवान गती दर्शवण्यासाठी दोन्ही हात वेगाने आजूबाजूला हलवा.", hint: "वेगाने हात हलवणे ⚡" }
+  },
+  "I Understand": {
+    en: { name: "Yes, I Understand", desc: "Flick index finger upright from fist near temple (idea lightbulb).", hint: "Index flick near temple 💡" },
+    hi: { name: "हाँ, मैं समझ गया", desc: "कनपटी के पास मुट्ठी से तर्जनी उंगली को ऊपर उछालें (विचार चमकना)।", hint: "कनपटी पर उंगली उछालना 💡" },
+    mr: { name: "हो, मला समजले", desc: "कपाळाजवळ मुठीतून तर्जनी बोट वर उडवा (कल्पना सुचणे/समजणे).", hint: "कपाळाजवळ बोट वर करणे 💡" }
+  },
+  "I Dont Understand": {
+    en: { name: "I Don't Understand", desc: "Flick index finger near temple while shaking head sideways.", hint: "Index flick with head shake 🤷" },
+    hi: { name: "मुझे समझ नहीं आया", desc: "सिर को 'ना' में हिलाते हुए कनपटी के पास तर्जनी उंगली को उछालें।", hint: "सिर हिलाना + उंगली उछालना 🤷" },
+    mr: { name: "मला समजले नाही", desc: "मान नकारार्थी हलवून कपाळाजवळ तर्जनी बोट वर करा.", hint: "मान हलवणे + बोट वर करणे 🤷" }
+  },
+
+  // Level 10: Emergency & Life Safety
   "Safe": {
     en: { name: "Safe", desc: "Cross arms in front of chest then open them wide outward indicating safety, protection, and security.", hint: "Arms cross and open wide 🛡️" },
     hi: { name: "सुरक्षित (Safe)", desc: "छाती के सामने दोनों हाथों को क्रॉस करें और फिर सुरक्षा दर्शाने के लिए बाहर चौड़ा खोलें।", hint: "हाथ क्रॉस करके चौड़ा खोलें 🛡️" },
@@ -509,10 +758,90 @@ export const CATEGORIES: Record<string, Category> = {
       { name: "10cr", desc: "Show 10 gesture followed by Crore C-twist curve.", mappedGesture: "10cr", videoUrl: "/level5-numbers/10cr.mp4", hint: "10 followed by Crore twist 👑" }
     ]
   },
+  jobs: {
+    name: "Jobs & Professions",
+    icon: Briefcase,
+    level: "💼 Level 6",
+    description: "Important occupations, community helpers, and workplace professions in ISL",
+    signs: [
+      { name: "Teacher", desc: "Touch index and middle fingertips to forehead near temple, then move outward indicating sharing wisdom and teaching.", mappedGesture: "Teacher", videoUrl: "/level6-jobs/teacher.mp4", hint: "Fingertips at temple moving outward 👨‍🏫" },
+      { name: "Doctor", desc: "Tap your index and middle fingertips gently on your opposite inner wrist like taking a pulse.", mappedGesture: "Doctor", videoUrl: "/level6-jobs/docter.mp4", hint: "2 fingers tapping inner wrist (pulse) 🩺" },
+      { name: "Driver", desc: "Hold imaginary steering wheel with both fists and steer gently left and right.", mappedGesture: "Driver", videoUrl: "/level6-jobs/driver.mp4", hint: "Both hands holding steering wheel 🚗" },
+      { name: "Farmer", desc: "Swipe open flat hand across waist level or chin indicating farming and crops.", mappedGesture: "Farmer", videoUrl: "/level6-jobs/framer.mp4", hint: "Sweep hand across waist level 🌾" },
+      { name: "Lawyer", desc: "Hold one flat palm horizontal and balance the other hand on it like the scales of justice.", mappedGesture: "Lawyer", videoUrl: "/level6-jobs/lawyer.mp4", hint: "Hands balancing scales of justice ⚖️" },
+      { name: "Barber", desc: "Move index and middle fingers in a scissors snipping motion near hair/ears.", mappedGesture: "Barber", videoUrl: "/level6-jobs/barber.mp4", hint: "Scissors cutting hair near ear ✂️" },
+      { name: "Postman", desc: "Mimic carrying mail bag strap and delivering a letter with thumb and index fingers.", mappedGesture: "Postman", videoUrl: "/level6-jobs/postman.mp4", hint: "Letter delivering gesture ✉️" },
+      { name: "Sweeper", desc: "Hold both hands together sweeping downward like holding a broom.", mappedGesture: "Sweeper", videoUrl: "/level6-jobs/sweeper.mp4", hint: "Broom sweeping motion 🧹" },
+      { name: "Writer", desc: "Hold imaginary pen with fingers and write smoothly across flat open palm.", mappedGesture: "Writer", videoUrl: "/level6-jobs/writer.mp4", hint: "Writing with pen on palm ✍️" }
+    ]
+  },
+  relations: {
+    name: "Family & Relations",
+    icon: Users,
+    level: "👨‍👩‍👧‍👦 Level 7",
+    description: "Close family members, kinship, relationships, and loved ones in ISL",
+    signs: [
+      { name: "Father", desc: "Place thumb of open 5-hand on forehead with fingers upright, indicating male elder.", mappedGesture: "Father", videoUrl: "/level7-relations/father.mp4", hint: "Thumb at forehead with open hand 👨" },
+      { name: "Mother", desc: "Place thumb of open 5-hand on chin with fingers upright, indicating female elder.", mappedGesture: "Mother", videoUrl: "/level7-relations/mother.mp4", hint: "Thumb at chin with open hand 👩" },
+      { name: "Brother", desc: "Sign Father (forehead) followed by bringing both index fingers parallel together in brotherhood.", mappedGesture: "Brother", videoUrl: "/level7-relations/brother'.mp4", hint: "Forehead touch + parallel index fingers 👦" },
+      { name: "Daughter", desc: "Touch chin down into cradling arm gesture indicating baby girl.", mappedGesture: "Daughter", videoUrl: "/level7-relations/daughter.mp4", hint: "Chin touch to baby cradle 👧" },
+      { name: "Husband", desc: "Male forehead touch followed by clasping both hands together in marriage.", mappedGesture: "Husband", videoUrl: "/level7-relations/husband.mp4", hint: "Male sign + clasp hands 🤵" },
+      { name: "Wife", desc: "Female chin touch followed by clasping both hands together in marriage.", mappedGesture: "Wife", videoUrl: "/level7-relations/wife.mp4", hint: "Female sign + clasp hands 👰" },
+      { name: "Married", desc: "Clasp right hand gently over left hand forming the marriage bond.", mappedGesture: "Married", videoUrl: "/level7-relations/married.mp4", hint: "Clasped hands in marriage 💍" },
+      { name: "Grandfather", desc: "Touch thumb to forehead and bounce forward in two gentle arcs representing generations.", mappedGesture: "Grandfather", videoUrl: "/level7-relations/grandfather.mp4", hint: "Thumb at forehead bouncing forward 👴" },
+      { name: "Grandmother", desc: "Touch thumb to chin and bounce forward in two gentle arcs representing generations.", mappedGesture: "Grandmother", videoUrl: "/level7-relations/grandmother.mp4", hint: "Thumb at chin bouncing forward 👵" },
+      { name: "Family", desc: "Form 'F' hands with thumbs and index fingers touching, circling outward and meeting together.", mappedGesture: "Family", videoUrl: "/level7-relations/family.mp4", hint: "Both hands circle outward and meet 👨‍👩‍👦" },
+      { name: "Man", desc: "Formal male sign with thumb/fingers at temple/forehead with proud posture.", mappedGesture: "Man", videoUrl: "/level7-relations/main.png", hint: "Male indicator at forehead 👨" },
+      { name: "Woman", desc: "Formal female sign with thumb/fingers brushing lower jaw/chin gracefully.", mappedGesture: "Woman", videoUrl: "/level7-relations/women.png", hint: "Female indicator at chin 👩" }
+    ]
+  },
+  questions: {
+    name: "Question Words",
+    icon: HelpCircle,
+    level: "❓ Level 8",
+    description: "Essential Wh-questions (What, Where, When, Why, Who, How, Which, Time, Place, etc.) in ISL",
+    signs: [
+      { name: "What", desc: "Hold both open palms facing upward in front of you and shake side-to-side with questioning expression.", mappedGesture: "What", videoUrl: "/level8-questions/what.mp4", hint: "Both palms facing up shaking side-to-side 🤷" },
+      { name: "Where", desc: "Hold index finger pointing straight up and wave or shake it side to side inquiring location.", mappedGesture: "Where", videoUrl: "/level8-questions/where.mp4", hint: "Index finger wagging side to side 📍" },
+      { name: "When", desc: "Circle right index finger around stationary left index finger tip representing the passage of time.", mappedGesture: "When", videoUrl: "/level8-questions/when.mp4", hint: "Index finger circles around other index ⏰" },
+      { name: "Which", desc: "Hold both 'A' fist thumbs-up hands in front and alternate moving them up and down like weighing choices.", mappedGesture: "Which", videoUrl: "/level8-questions/which.mp4", hint: "Alternating thumbs up up and down 🔀" },
+      { name: "Who", desc: "Place index finger near chin/lips and wiggle or circle index finger asking identity.", mappedGesture: "Who", videoUrl: "/level8-questions/who.mp4", hint: "Index finger wiggling at chin 👤" },
+      { name: "How", desc: "Place curved backs of fingers together with palms facing down, then roll palms facing up.", mappedGesture: "How", videoUrl: "/level8-questions/how.mp4", hint: "Hands roll over from palms-down to palms-up 🔄" },
+      { name: "Question", desc: "Draw an imaginary question mark (?) in the air with your index finger.", mappedGesture: "Question", videoUrl: "/level8-questions/question.mp4", hint: "Drawing question mark in air ❓" },
+      { name: "Answer", desc: "Place index finger at lips and point forward answering clearly.", mappedGesture: "Answer", videoUrl: "/level8-questions/answer.mp4", hint: "Index finger moving from lips forward 💬" },
+      { name: "Time", desc: "Tap index finger twice on the wrist watch position.", mappedGesture: "Time", videoUrl: "/level8-questions/time.mp4", hint: "Tapping watch on wrist ⌚" },
+      { name: "Place", desc: "Hold open palms flat indicating a geographical area or place.", mappedGesture: "Place", videoUrl: "/level8-questions/place.mp4", hint: "Flat palms indicating place 📍" },
+      { name: "Face", desc: "Trace a circular oval around your face with your index finger.", mappedGesture: "Face", videoUrl: "/level8-questions/face.mp4", hint: "Tracing face contour 😊" },
+      { name: "This", desc: "Point index finger firmly downward indicating this object or topic.", mappedGesture: "This", videoUrl: "/level8-questions/This.mp4", hint: "Index pointing down 👇" }
+    ]
+  },
+  sentences: {
+    name: "Daily Conversation & Sentences",
+    icon: MessageSquare,
+    level: "💬 Level 9",
+    description: "Practical daily dialogues, polite phrases, and conversation sentences in ISL",
+    signs: [
+      { name: "Hello Nice To Meet You", desc: "Wave hello followed by bringing both index fingers together meeting happily.", mappedGesture: "Hello Nice To Meet You", videoUrl: "/level9-sentences/hello_nice_to_meet_u.mp4", hint: "Hello wave + meeting gesture 🤝" },
+      { name: "My Name Is", desc: "Touch chest with flat hand (My) followed by H-hand fingers tapping together (Name).", mappedGesture: "My Name Is", videoUrl: "/level9-sentences/my_name_is_priya.mp4", hint: "Chest tap (My) + Name tap 📛" },
+      { name: "I Am Deaf", desc: "Touch index finger from ear to mouth indicating deaf identity.", mappedGesture: "I Am Deaf", videoUrl: "/level9-sentences/iamdeaf.mp4", hint: "Ear to mouth touch 🧏" },
+      { name: "I Know Sign Language", desc: "Touch forehead (Know) followed by rolling both hands in sign language conversation.", mappedGesture: "I Know Sign Language", videoUrl: "/level9-sentences/i_know_little_sign_language.mp4", hint: "Forehead touch (Know) + signing hands 🤟" },
+      { name: "What Is Your Name", desc: "Point forward (Your) + Name fingers tap + What open palms shake.", mappedGesture: "What Is Your Name", videoUrl: "/level9-sentences/what_is_ur_name.mp4", hint: "Your + Name + What ❓" },
+      { name: "Where Are You From", desc: "Point forward (You) followed by place & where inquiry gesture.", mappedGesture: "Where Are You From", videoUrl: "/level9-sentences/where r u from_or_where is ur house.mp4", hint: "You + Where location inquiry 🏡" },
+      { name: "What Do You Do", desc: "Point forward (You) + Work hammer hands + What inquiring palms.", mappedGesture: "What Do You Do", videoUrl: "/level9-sentences/what_do_u_do.mp4", hint: "You + Work + What 💼" },
+      { name: "What Is Father Name", desc: "Your + Father (forehead) + Name + What question sign.", mappedGesture: "What Is Father Name", videoUrl: "/level9-sentences/what_is_urs_father_name.mp4", hint: "Your + Father + Name + What 👨" },
+      { name: "My Profession", desc: "Self point followed by role indicator and badge gesture.", mappedGesture: "My Profession", videoUrl: "/level9-sentences/i_amstudent,doctor,engineer,homemaker,stay at home.mp4", hint: "Self + Role gesture 🎓" },
+      { name: "Healthy And Happy", desc: "Both hands sweep from chest with thumbs up in vibrant wellness.", mappedGesture: "Healthy And Happy", videoUrl: "/level9-sentences/friends_hope_u_r_healthy_and happy.mp4", hint: "Chest sweep + Thumbs up wellness 😊" },
+      { name: "Sign Slowly", desc: "Flat right hand moving gently and slowly across left forearm.", mappedGesture: "Sign Slowly", videoUrl: "/level9-sentences/please_sign_slow.mp4", hint: "Slow gentle glide across arm 🐢" },
+      { name: "Sign Again", desc: "Curved right hand pivoting into open left palm repeating gesture.", mappedGesture: "Sign Again", videoUrl: "/level9-sentences/please_could_sign _again.mp4", hint: "Pivoting hand repeating in palm 🔁" },
+      { name: "Signing Very Fast", desc: "Both hands flutter rapidly side-to-side signaling high speed.", mappedGesture: "Signing Very Fast", videoUrl: "/level9-sentences/u_r_signing_very_fast.mp4", hint: "Rapid flutter hands signaling fast ⚡" },
+      { name: "I Understand", desc: "Flick index finger upright from fist near temple (idea lightbulb).", mappedGesture: "I Understand", videoUrl: "/level9-sentences/Yes_i_understand.mp4", hint: "Index flick near temple 💡" },
+      { name: "I Dont Understand", desc: "Flick index finger near temple while shaking head sideways.", mappedGesture: "I Dont Understand", videoUrl: "/level9-sentences/I_dont_understand.mp4", hint: "Index flick with head shake 🤷" }
+    ]
+  },
   emergency: {
     name: "Emergency & Safety",
     icon: ShieldAlert,
-    level: "🚨 Level 6",
+    level: "🚨 Level 10",
     description: "Vital safety and emergency assistance signs with 1-tap live status dispatch",
     signs: [
       { name: "Safe", desc: "Cross arms in front of chest then open them wide outward indicating safety, protection, and security.", mappedGesture: "Safe", videoUrl: "/emergencyModule/safe.mp4", hint: "Arms cross and open wide 🛡️" },
@@ -587,9 +916,45 @@ const BADGES_CONFIG = [
     progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "numbers").length} / 10 Numbers`
   },
   { 
+    id: "jobs", 
+    name: { en: "Career Champion", hi: "करियर चैंपियन", mr: "करिअर चॅम्पियन" },
+    desc: { en: "Mastered all 9 career & job profession signs", hi: "सभी 9 करियर एवं व्यवसाय संकेत सीखे", mr: "सर्व ९ करिअर व व्यवसाय चिन्हे शिकली" },
+    icon: Briefcase, 
+    color: "text-teal-500 bg-teal-500/10 border-teal-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "jobs").length >= 9,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "jobs").length} / 9 Jobs`
+  },
+  { 
+    id: "relations", 
+    name: { en: "Family Guardian", hi: "पारिवारिक संरक्षक", mr: "कौटुंबिक रक्षक" },
+    desc: { en: "Mastered all 12 family & relation signs", hi: "सभी 12 पारिवारिक एवं रिश्ते संकेत सीखे", mr: "सर्व १२ कौटुंबिक नातेसंबंध चिन्हे शिकली" },
+    icon: Users, 
+    color: "text-fuchsia-500 bg-fuchsia-500/10 border-fuchsia-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "relations").length >= 12,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "relations").length} / 12 Relations`
+  },
+  { 
+    id: "questions", 
+    name: { en: "Inquiry Master", hi: "जिज्ञासा मास्टर", mr: "जिज्ञासू तज्ज्ञ" },
+    desc: { en: "Mastered all 12 question words & concept signs", hi: "सभी 12 प्रश्नवाचक संकेत सीखे", mr: "सर्व १२ प्रश्न विचारण्याची चिन्हे शिकली" },
+    icon: HelpCircle, 
+    color: "text-amber-500 bg-amber-500/10 border-amber-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "questions").length >= 12,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "questions").length} / 12 Questions`
+  },
+  { 
+    id: "sentences", 
+    name: { en: "Dialogue Virtuoso", hi: "संवाद पारंगत", mr: "संवाद तज्ज्ञ" },
+    desc: { en: "Mastered all 15 daily conversation sentences", hi: "सभी 15 दैनिक वार्तालाप वाक्य सीखे", mr: "सर्व १५ दैनंदिन संभाषण वाक्ये शिकली" },
+    icon: MessageSquare, 
+    color: "text-sky-500 bg-sky-500/10 border-sky-500/30",
+    check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "sentences").length >= 15,
+    progress: (history: Record<string, SignRecord>) => `${Object.values(history).filter(r => r.category === "sentences").length} / 15 Phrases`
+  },
+  { 
     id: "safety", 
     name: { en: "Life Safety Hero", hi: "जीवन सुरक्षा हीरो", mr: "जीवन सुरक्षा हिरो" },
-    desc: { en: "Completed Level 6 Emergency Safety Signs (Safe, Help, Emergency)", hi: "स्तर 6 आपातकालीन संकेत पूरे किए", mr: "स्तर ६ आपत्कालीन चिन्हे पूर्ण केली" },
+    desc: { en: "Completed Level 10 Emergency Safety Signs (Safe, Help, Emergency)", hi: "स्तर 10 आपातकालीन संकेत पूरे किए", mr: "स्तर १० आपत्कालीन चिन्हे पूर्ण केली" },
     icon: ShieldAlert, 
     color: "text-rose-500 bg-rose-500/10 border-rose-500/30",
     check: (history: Record<string, SignRecord>) => Object.values(history).filter(r => r.category === "emergency").length >= 3,
@@ -664,6 +1029,10 @@ export function StudentView({
   const alphabetsCount = Object.values(progressHistory).filter(p => p.category === "alphabets").length;
   const festivalsCount = Object.values(progressHistory).filter(p => p.category === "festivals").length;
   const numbersCount = Object.values(progressHistory).filter(p => p.category === "numbers").length;
+  const jobsCount = Object.values(progressHistory).filter(p => p.category === "jobs").length;
+  const relationsCount = Object.values(progressHistory).filter(p => p.category === "relations").length;
+  const questionsCount = Object.values(progressHistory).filter(p => p.category === "questions").length;
+  const sentencesCount = Object.values(progressHistory).filter(p => p.category === "sentences").length;
   const emergencyCount = Object.values(progressHistory).filter(p => p.category === "emergency").length;
 
   const totalPracticeReps = Object.values(progressHistory).reduce((sum, p) => sum + (p.count || 1), 0);
@@ -671,7 +1040,7 @@ export function StudentView({
     ? Math.round(Object.values(progressHistory).reduce((sum, p) => sum + p.accuracy, 0) / masteredCount)
     : 0;
 
-  // Dynamic Level determination across all 6 levels
+  // Dynamic Level determination across all 10 levels
   const getCurrentLevel = () => {
     if (masteredCount === 0) {
       return {
@@ -712,18 +1081,46 @@ export function StudentView({
       return {
         title: language === "mr" ? "स्तर ५ · संख्या व गणित विझार्ड" : language === "hi" ? "स्तर 5 · संख्या व गणित विजार्ड" : "Level 5 · Numbers Wizard",
         desc: `${numbersCount} / 23 ${language === "mr" ? "संख्या चिन्हे पूर्ण" : language === "hi" ? "संख्या संकेत पूर्ण" : "Numbers mastered"}`,
-        nextGoal: language === "mr" ? `स्तर ६ उघडण्यासाठी अजून ${23 - numbersCount} संख्या चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 6 अनलॉक करने के लिए और ${23 - numbersCount} संख्याएं पूरी करें` : `Complete ${23 - numbersCount} more Numbers to unlock Level 6 Emergency!`
+        nextGoal: language === "mr" ? `स्तर ६ उघडण्यासाठी अजून ${23 - numbersCount} संख्या चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 6 अनलॉक करने के लिए और ${23 - numbersCount} संख्याएं पूरी करें` : `Complete ${23 - numbersCount} more Numbers to unlock Level 6 Jobs!`
+      };
+    }
+    if (jobsCount < 9) {
+      return {
+        title: language === "mr" ? "स्तर ६ · करिअर व व्यवसाय तज्ज्ञ" : language === "hi" ? "स्तर 6 · करियर व व्यवसाय विशेषज्ञ" : "Level 6 · Career Champion",
+        desc: `${jobsCount} / 9 ${language === "mr" ? "व्यवसाय चिन्हे पूर्ण" : language === "hi" ? "व्यवसाय संकेत पूर्ण" : "Job signs mastered"}`,
+        nextGoal: language === "mr" ? `स्तर ७ उघडण्यासाठी अजून ${9 - jobsCount} व्यवसाय चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 7 अनलॉक करने के लिए और ${9 - jobsCount} संकेत पूरे करें` : `Complete ${9 - jobsCount} more Jobs to unlock Level 7 Relations!`
+      };
+    }
+    if (relationsCount < 12) {
+      return {
+        title: language === "mr" ? "स्तर ७ · कौटुंबिक रक्षक" : language === "hi" ? "स्तर 7 · पारिवारिक संरक्षक" : "Level 7 · Family Guardian",
+        desc: `${relationsCount} / 12 ${language === "mr" ? "नातेसंबंध चिन्हे पूर्ण" : language === "hi" ? "रिश्ते संकेत पूर्ण" : "Family signs mastered"}`,
+        nextGoal: language === "mr" ? `स्तर ८ उघडण्यासाठी अजून ${12 - relationsCount} कौटुंबिक चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 8 अनलॉक करने के लिए और ${12 - relationsCount} संकेत पूरे करें` : `Complete ${12 - relationsCount} more Relations to unlock Level 8 Questions!`
+      };
+    }
+    if (questionsCount < 12) {
+      return {
+        title: language === "mr" ? "स्तर ८ · जिज्ञासू तज्ज्ञ" : language === "hi" ? "स्तर 8 · जिज्ञासा मास्टर" : "Level 8 · Inquiry Master",
+        desc: `${questionsCount} / 12 ${language === "mr" ? "प्रश्न चिन्हे पूर्ण" : language === "hi" ? "प्रश्न संकेत पूर्ण" : "Question signs mastered"}`,
+        nextGoal: language === "mr" ? `स्तर ९ उघडण्यासाठी अजून ${12 - questionsCount} प्रश्न चिन्हे पूर्ण करा` : language === "hi" ? `स्तर 9 अनलॉक करने के लिए और ${12 - questionsCount} संकेत पूरे करें` : `Complete ${12 - questionsCount} more Questions to unlock Level 9 Sentences!`
+      };
+    }
+    if (sentencesCount < 15) {
+      return {
+        title: language === "mr" ? "स्तर ९ · संभाषण पारंगत" : language === "hi" ? "स्तर 9 · संवाद पारंगत" : "Level 9 · Dialogue Virtuoso",
+        desc: `${sentencesCount} / 15 ${language === "mr" ? "संभाषण वाक्ये पूर्ण" : language === "hi" ? "वार्तालाप वाक्य पूर्ण" : "Conversation sentences mastered"}`,
+        nextGoal: language === "mr" ? `स्तर १० उघडण्यासाठी अजून ${15 - sentencesCount} संभाषण वाक्ये पूर्ण करा` : language === "hi" ? `स्तर 10 अनलॉक करने के लिए और ${15 - sentencesCount} वाक्य पूरे करें` : `Complete ${15 - sentencesCount} more Phrases to unlock Level 10 Safety!`
       };
     }
     if (emergencyCount < 3) {
       return {
-        title: language === "mr" ? "स्तर ६ · जीवन सुरक्षा हिरो" : language === "hi" ? "स्तर 6 · जीवन सुरक्षा हीरो" : "Level 6 · Safety Guardian",
+        title: language === "mr" ? "स्तर १० · जीवन सुरक्षा हिरो" : language === "hi" ? "स्तर 10 · जीवन सुरक्षा हीरो" : "Level 10 · Safety Guardian",
         desc: `${emergencyCount} / 3 ${language === "mr" ? "सुरक्षा चिन्हे पूर्ण" : language === "hi" ? "सुरक्षा संकेत पूर्ण" : "Emergency signs mastered"}`,
         nextGoal: language === "mr" ? "सर्व आपत्कालीन चिन्हे पूर्ण करा" : language === "hi" ? "सभी आपातकालीन संकेत पूरे करें" : "Complete all Emergency signs for full safety certification!"
       };
     }
     return {
-      title: language === "mr" ? "स्तर ६ · ISL ग्रँड मास्टर" : language === "hi" ? "स्तर 6 · ISL ग्रैंड मास्टर" : "Level 6 · ISL Grand Master",
+      title: language === "mr" ? "स्तर १० · ISL ग्रँड मास्टर" : language === "hi" ? "स्तर 10 · ISL ग्रैंड मास्टर" : "Level 10 · ISL Grand Master",
       desc: language === "mr" ? "सर्व अभ्यासक्रम यशस्वीपणे पूर्ण! 🏆" : language === "hi" ? "सभी पाठ्यक्रम सफलतापूर्वक पूर्ण! 🏆" : "All curriculum levels mastered! 🏆",
       nextGoal: language === "mr" ? "सर्वोच्च प्राविण्य प्राप्त झाले!" : language === "hi" ? "सर्वोच्च दक्षता प्राप्त हुई!" : "Full Mastery Achieved!"
     };
@@ -745,6 +1142,10 @@ export function StudentView({
     if (key === "alphabets") return t.catAlphabets;
     if (key === "festivals") return t.catFestivals;
     if (key === "numbers") return t.catNumbers;
+    if (key === "jobs") return t.catJobs;
+    if (key === "relations") return t.catRelations;
+    if (key === "questions") return t.catQuestions;
+    if (key === "sentences") return t.catSentences;
     if (key === "emergency") return t.catEmergency;
     return defaultName;
   };
@@ -755,6 +1156,10 @@ export function StudentView({
     if (key === "alphabets") return t.catAlphabetsDesc;
     if (key === "festivals") return t.catFestivalsDesc;
     if (key === "numbers") return t.catNumbersDesc;
+    if (key === "jobs") return t.catJobsDesc;
+    if (key === "relations") return t.catRelationsDesc;
+    if (key === "questions") return t.catQuestionsDesc;
+    if (key === "sentences") return t.catSentencesDesc;
     if (key === "emergency") return t.catEmergencyDesc;
     return defaultDesc;
   };
@@ -862,6 +1267,53 @@ export function StudentView({
         (nameNorm === "100000" && (outputNorm === "100000" || outputNorm.includes("lakh") || outputNorm.includes("100000"))) ||
         (nameNorm === "1000000" && (outputNorm === "1000000" || outputNorm.includes("million") || outputNorm.includes("10 lakh"))) ||
         (nameNorm === "10cr" && (outputNorm === "10cr" || outputNorm.includes("crore") || outputNorm.includes("10cr"))) ||
+        (nameNorm === "teacher" && (outputNorm === "teacher" || outputNorm.includes("teach"))) ||
+        (nameNorm === "doctor" && (outputNorm === "doctor" || outputNorm === "docter" || outputNorm.includes("doc"))) ||
+        (nameNorm === "driver" && (outputNorm === "driver" || outputNorm.includes("drive") || outputNorm.includes("car"))) ||
+        (nameNorm === "farmer" && (outputNorm === "farmer" || outputNorm === "framer" || outputNorm.includes("farm"))) ||
+        (nameNorm === "lawyer" && (outputNorm === "lawyer" || outputNorm.includes("law") || outputNorm.includes("court"))) ||
+        (nameNorm === "barber" && (outputNorm === "barber" || outputNorm.includes("cut") || outputNorm.includes("hair"))) ||
+        (nameNorm === "postman" && (outputNorm === "postman" || outputNorm.includes("post") || outputNorm.includes("letter"))) ||
+        (nameNorm === "sweeper" && (outputNorm === "sweeper" || outputNorm.includes("sweep") || outputNorm.includes("clean"))) ||
+        (nameNorm === "writer" && (outputNorm === "writer" || outputNorm.includes("write") || outputNorm.includes("pen"))) ||
+        (nameNorm === "father" && (outputNorm === "father" || outputNorm.includes("father") || outputNorm === "dad")) ||
+        (nameNorm === "mother" && (outputNorm === "mother" || outputNorm.includes("mother") || outputNorm === "mom")) ||
+        (nameNorm === "brother" && (outputNorm === "brother" || outputNorm.includes("brother"))) ||
+        (nameNorm === "daughter" && (outputNorm === "daughter" || outputNorm.includes("daughter"))) ||
+        (nameNorm === "husband" && (outputNorm === "husband" || outputNorm.includes("husband"))) ||
+        (nameNorm === "wife" && (outputNorm === "wife" || outputNorm.includes("wife"))) ||
+        (nameNorm === "married" && (outputNorm === "married" || outputNorm === "marry" || outputNorm.includes("marri"))) ||
+        (nameNorm === "grandfather" && (outputNorm === "grandfather" || outputNorm.includes("grandfa"))) ||
+        (nameNorm === "grandmother" && (outputNorm === "grandmother" || outputNorm.includes("grandmo"))) ||
+        (nameNorm === "family" && (outputNorm === "family" || outputNorm.includes("family"))) ||
+        (nameNorm === "man" && (outputNorm === "man" || outputNorm === "main" || outputNorm.includes("man"))) ||
+        (nameNorm === "woman" && (outputNorm === "woman" || outputNorm === "women" || outputNorm.includes("wom"))) ||
+        (nameNorm === "what" && (outputNorm === "what" || outputNorm.includes("what"))) ||
+        (nameNorm === "where" && (outputNorm === "where" || outputNorm.includes("where"))) ||
+        (nameNorm === "when" && (outputNorm === "when" || outputNorm.includes("when"))) ||
+        (nameNorm === "which" && (outputNorm === "which" || outputNorm.includes("which"))) ||
+        (nameNorm === "who" && (outputNorm === "who" || outputNorm.includes("who"))) ||
+        (nameNorm === "how" && (outputNorm === "how" || outputNorm.includes("how"))) ||
+        (nameNorm === "question" && (outputNorm === "question" || outputNorm.includes("quest"))) ||
+        (nameNorm === "answer" && (outputNorm === "answer" || outputNorm.includes("ans"))) ||
+        (nameNorm === "time" && (outputNorm === "time" || outputNorm.includes("time") || outputNorm.includes("watch"))) ||
+        (nameNorm === "place" && (outputNorm === "place" || outputNorm.includes("place") || outputNorm.includes("locat"))) ||
+        (nameNorm === "face" && (outputNorm === "face" || outputNorm.includes("face"))) ||
+        (nameNorm === "this" && (outputNorm === "this" || outputNorm.includes("this"))) ||
+        (nameNorm.includes("meet") && (outputNorm.includes("meet") || outputNorm.includes("hello"))) ||
+        (nameNorm.includes("my name") && (outputNorm.includes("name") || outputNorm.includes("priya"))) ||
+        (nameNorm.includes("deaf") && (outputNorm.includes("deaf") || outputNorm.includes("ear"))) ||
+        (nameNorm.includes("sign language") && (outputNorm.includes("sign") || outputNorm.includes("language"))) ||
+        (nameNorm.includes("your name") && (outputNorm.includes("name") || outputNorm.includes("what"))) ||
+        (nameNorm.includes("where") && outputNorm.includes("where")) ||
+        (nameNorm.includes("what do you do") && (outputNorm.includes("work") || outputNorm.includes("do"))) ||
+        (nameNorm.includes("father name") && (outputNorm.includes("father") || outputNorm.includes("name"))) ||
+        (nameNorm.includes("profession") && (outputNorm.includes("student") || outputNorm.includes("doctor") || outputNorm.includes("profession"))) ||
+        (nameNorm.includes("healthy") && (outputNorm.includes("healthy") || outputNorm.includes("happy"))) ||
+        (nameNorm.includes("slow") && (outputNorm.includes("slow") || outputNorm.includes("please"))) ||
+        (nameNorm.includes("again") && (outputNorm.includes("again") || outputNorm.includes("repeat"))) ||
+        (nameNorm.includes("fast") && (outputNorm.includes("fast") || outputNorm.includes("quick"))) ||
+        (nameNorm.includes("understand") && outputNorm.includes("understand")) ||
         (nameNorm === "safe" && outputNorm === "safe") ||
         (nameNorm === "help" && outputNorm === "help") ||
         (nameNorm === "emergency" && (outputNorm === "emergency" || outputNorm === "danger"));
