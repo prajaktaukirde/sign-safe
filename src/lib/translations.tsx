@@ -62,8 +62,24 @@ export interface Translations {
   level8Desc: string;
   level9Title: string;
   level9Desc: string;
+  level10Title: string;
+  level10Desc: string;
+  level11Title: string;
+  level11Desc: string;
   btnStartLevel: string;
   btnTestSos: string;
+
+  // Sentence Sub-Topics & Practice Studio
+  topicAll: string;
+  topicIntroductions: string;
+  topicQuestions: string;
+  topicAssistance: string;
+  topicComprehension: string;
+  sentencePracticeStudio: string;
+  sentencePracticeStudioDesc: string;
+  sentenceGloss: string;
+  markSentencePracticed: string;
+  sentencePracticedToast: string;
 
   // Category Names & Descriptions
   catGreetings: string;
@@ -178,6 +194,8 @@ export interface Translations {
   testLevel9Desc: string;
   testLevel10Title: string;
   testLevel10Desc: string;
+  testLevel11Title: string;
+  testLevel11Desc: string;
   testEmergencyTitle: string;
   testEmergencyDesc: string;
   testMixedTitle: string;
@@ -359,11 +377,27 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level7Title: "Family & Relations",
     level7Desc: "10 essential kinship signs: Father, Mother, Brother, Sister, Grandfather, Grandmother, Son, Daughter, Friend, Family.",
     level8Title: "Question Words (Wh-Words)",
-    level8Desc: "8 fundamental inquiry gestures: What, Where, When, Why, Who, How, Which, How Many.",
-    level9Title: "Emergency & Life Safety",
-    level9Desc: "Critical safety signs (Safe, Help, Emergency) with direct 1-tap Safety Status Update and Smart SOS dispatch.",
+    level8Desc: "12 fundamental inquiry gestures: What, Where, When, Why, Who, How, Which, Time, Place, Face, and This.",
+    level9Title: "Daily Conversation & Sentences",
+    level9Desc: "15 practical conversational phrases and dialog sentences with word gloss breakdown and live webcam mirror practice.",
+    level10Title: "Emergency & Life Safety Signs",
+    level10Desc: "Critical safety signs (Safe, Help, Emergency) with direct 1-tap Safety Status Update and Smart SOS dispatch.",
+    level11Title: "Smart SOS Emergency Hub",
+    level11Desc: "Campus fire alarm visual strobe simulation, real-time HTML5 GPS coordinate dispatcher, and 1-tap WhatsApp alert.",
     btnStartLevel: "Start Level",
     btnTestSos: "Test Smart SOS",
+
+    // Sentence Sub-Topics & Practice Studio
+    topicAll: "All Phrases (15)",
+    topicIntroductions: "Introductions & Identity",
+    topicQuestions: "Questions & Inquiries",
+    topicAssistance: "Signing Assistance & Speed",
+    topicComprehension: "Comprehension & Understanding",
+    sentencePracticeStudio: "Conversational Sentence Practice Studio",
+    sentencePracticeStudioDesc: "Watch the official ISLRTC demonstration video, review the word-by-word sign gloss breakdown, and practice signing in front of your live webcam mirror.",
+    sentenceGloss: "ISL Sign Structure & Word Gloss",
+    markSentencePracticed: "Mark as Practiced ✓",
+    sentencePracticedToast: "Sentence practice recorded! Great progress 🌟",
 
     // Category Names & Descriptions
     catGreetings: "Everyday Greetings",
@@ -473,6 +507,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel9Desc: "15 practical conversational phrases and dialog sentences",
     testLevel10Title: "Level 10: Emergency & Life Safety",
     testLevel10Desc: "Life safety signs with 1-tap live status dispatch and Smart SOS",
+    testLevel11Title: "Module 11: Smart SOS Emergency Hub",
+    testLevel11Desc: "Campus emergency strobe protocol, live GPS coordinates, and 1-tap dispatch",
     testEmergencyTitle: "Level 10: Emergency Rescue Signs",
     testEmergencyDesc: "Life safety signs (Help, Safe, Emergency distress)",
     testMixedTitle: "Grand Championship (Mixed Levels)",
@@ -649,11 +685,27 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level7Title: "परिवार और रिश्ते",
     level7Desc: "10 आवश्यक पारिवारिक संकेत: पिता, माता, भाई, बहन, दादाजी, दादीजी, बेटा, बेटी, दोस्त, परिवार।",
     level8Title: "प्रश्नवाचक शब्द",
-    level8Desc: "8 मुख्य प्रश्नवाचक संकेत: क्या, कहाँ, कब, क्यों, कौन, कैसे, कौन सा, कितना।",
-    level9Title: "आपातकालीन एवं जीवन सुरक्षा",
-    level9Desc: "महत्वपूर्ण सुरक्षा संकेत (सुरक्षित, मदद, आपातकाल) 1-टैप सुरक्षा स्थिति अपडेट और स्मार्ट SOS अलर्ट के साथ।",
+    level8Desc: "12 मुख्य प्रश्नवाचक संकेत: क्या, कहाँ, कब, क्यों, कौन, कैसे, कौन सा, समय, स्थान, चेहरा, यह।",
+    level9Title: "दैनिक वार्तालाप एवं वाक्य",
+    level9Desc: "15 व्यावहारिक दैनिक वार्तालाप और संवाद वाक्य, शब्द सांकेतिक व्याकरण और लाइव वेबकैम सराव के साथ।",
+    level10Title: "आपातकालीन एवं जीवन सुरक्षा संकेत",
+    level10Desc: "महत्वपूर्ण सुरक्षा संकेत (सुरक्षित, मदद, आपातकाल) 1-टैप सुरक्षा स्थिति अपडेट और स्मार्ट SOS अलर्ट के साथ।",
+    level11Title: "स्मार्ट SOS आपातकालीन हब",
+    level11Desc: "कैंपस फायर अलार्म स्ट्रोब अनुकरण, लाइव GPS ट्रैकिंग और अभिभावक अलर्ट।",
     btnStartLevel: "स्तर शुरू करें",
     btnTestSos: "SOS का परीक्षण करें",
+
+    // Sentence Sub-Topics & Practice Studio
+    topicAll: "सभी वाक्य (15)",
+    topicIntroductions: "परिचय और पहचान",
+    topicQuestions: "प्रश्न और पूछताछ",
+    topicAssistance: "संकेत सहायता और गति",
+    topicComprehension: "समझ और स्वीकृति",
+    sentencePracticeStudio: "संभाषण वाक्य अभ्यास स्टुडिओ",
+    sentencePracticeStudioDesc: "आधिकारिक ISLRTC प्रदर्शन वीडियो देखें, शब्द-दर-शब्द सांकेतिक विवरण की समीक्षा करें, और अपने लाइव वेबकैम के सामने अभ्यास करें।",
+    sentenceGloss: "ISL सांकेतिक व्याकरण संरचना",
+    markSentencePracticed: "अभ्यास पूर्ण के रूप में चिह्नित करें ✓",
+    sentencePracticedToast: "वाक्य अभ्यास रिकॉर्ड किया गया! बहुत बढ़िया 🌟",
 
     // Category Names & Descriptions
     catGreetings: "दैनिक अभिवादन",
@@ -763,6 +815,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel9Desc: "15 व्यावहारिक दैनिक वार्तालाप और संवाद वाक्य",
     testLevel10Title: "स्तर 10: आपातकालीन व जीवन सुरक्षा",
     testLevel10Desc: "1-टैप लाइव स्थिति प्रेषण और स्मार्ट SOS के साथ जीवन सुरक्षा संकेत",
+    testLevel11Title: "मॉड्यूल 11: स्मार्ट SOS आपातकालीन हब",
+    testLevel11Desc: "कैंपस संकट प्रोटोकॉल, लाइव GPS निर्देशांक और 1-टैप डिस्पैच",
     testEmergencyTitle: "स्तर 10: आपातकालीन बचाव संकेत",
     testEmergencyDesc: "जीवन सुरक्षा संकेत (मदद, सुरक्षित, आपातकालीन संकट)",
     testMixedTitle: "ग्रैंड चैम्पियनशिप (मिश्रित स्तर)",
@@ -939,11 +993,27 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     level7Title: "नातेसंबंध आणि परिवार",
     level7Desc: "१० आवश्यक कौटुंबिक चिन्हे: वडील, आई, भाऊ, बहीण, आजोबा, आजी, मुलगा, मुलगी, मित्र, कुटुंब.",
     level8Title: "प्रश्न विचारणारे शब्द",
-    level8Desc: "८ मूलभूत प्रश्नवाचक चिन्हे: काय, कुठे, केव्हा, का, कोण, कसे, कोणते, किती.",
-    level9Title: "आपत्कालीन आणि जीवन सुरक्षा",
-    level9Desc: "महत्त्वाची सुरक्षा चिन्हे (सुरक्षित, मदत, आपत्कालीन) १-टॅप सुरक्षा स्थिती अपडेट आणि स्मार्ट SOS अलर्टसह.",
+    level8Desc: "१२ मूलभूत प्रश्नवाचक चिन्हे: काय, कुठे, केव्हा, का, कोण, कसे, कोणते, वेळ, जागा, चेहरा, हे.",
+    level9Title: "दैनंदिन संभाषण आणि वाक्ये",
+    level9Desc: "१५ व्यावहारिक दैनंदिन संभाषण आणि संवाद वाक्ये, शब्दशः चिन्ह रचना आणि थेट वेबकॅम सरावसह.",
+    level10Title: "आपत्कालीन आणि जीवन सुरक्षा चिन्हे",
+    level10Desc: "महत्त्वाची सुरक्षा चिन्हे (सुरक्षित, मदत, आपत्कालीन) १-टॅप सुरक्षा स्थिती अपडेट आणि स्मार्ट SOS अलर्टसह.",
+    level11Title: "स्मार्ट SOS आपत्कालीन केंद्र",
+    level11Desc: "कॅम्पस फायर अलार्म स्ट्रोब अनुकरण, थेट GPS ट्रॅकिंग आणि पालक १-टॅप व्हॉट्सॲप अलर्ट.",
     btnStartLevel: "स्तर सुरू करा",
     btnTestSos: "SOS तपासा",
+
+    // Sentence Sub-Topics & Practice Studio
+    topicAll: "सर्व वाक्ये (१५)",
+    topicIntroductions: "ओळख आणि परिचय",
+    topicQuestions: "प्रश्न आणि विचारणा",
+    topicAssistance: "चिन्ह सहाय्य व वेग",
+    topicComprehension: "समज आणि स्वीकृती",
+    sentencePracticeStudio: "संभाषण वाक्य सराव स्टुडिओ",
+    sentencePracticeStudioDesc: "अधिकृत ISLRTC प्रात्यक्षिक व्हिडिओ पहा, शब्दशः चिन्ह रचना तपासा आणि थेट वेबकॅमसमोर सराव करा.",
+    sentenceGloss: "ISL चिन्ह व्याकरण रचना",
+    markSentencePracticed: "सराव पूर्ण म्हणून चिन्हांकित करा ✓",
+    sentencePracticedToast: "वाक्य सराव नोंदवला गेला! उत्तम प्रगती 🌟",
 
     // Category Names & Descriptions
     catGreetings: "दैनंदिन अभिवादन",
@@ -1053,6 +1123,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     testLevel9Desc: "१५ व्यावहारिक दैनंदिन संभाषण व संवाद वाक्ये",
     testLevel10Title: "स्तर १०: आपत्कालीन व जीवन सुरक्षा",
     testLevel10Desc: "१-टॅप थेट आपत्कालीन स्थिती प्रेषण व स्मार्ट SOS सह जीवन सुरक्षा चिन्हे",
+    testLevel11Title: "मॉड्यूल ११: स्मार्ट SOS आपत्कालीन केंद्र",
+    testLevel11Desc: "कॅम्पस आपत्कालीन प्रोटोकॉल, थेट GPS निर्देशांक आणि १-टॅप डिस्पॅच",
     testEmergencyTitle: "स्तर १०: आपत्कालीन बचाव चिन्हे",
     testEmergencyDesc: "जीवन सुरक्षा चिन्हे (मदत, सुरक्षित, आपत्कालीन संकट)",
     testMixedTitle: "ग्रँड चॅम्पियनशिप (मिश्र स्तर)",

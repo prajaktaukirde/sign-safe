@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { 
   Sparkles, Hand, RotateCcw, Trophy, BookOpen, Star, 
   AlertCircle, ShieldAlert, Award, Compass, Heart, Activity, CheckCircle2, RefreshCw,
   Palette, ChevronRight, ChevronLeft, Volume2, Flame, Lock, Trash2, BarChart3, TrendingUp, Check,
   PartyPopper, Hash, MessageSquare, PhoneCall, ShieldCheck, HeartPulse, AlertOctagon, Send,
-  Briefcase, Users, HelpCircle
+  Briefcase, Users, HelpCircle, FastForward, Play, Zap, CheckCircle
 } from "lucide-react";
 import { WebcamMock } from "./WebcamMock";
 import { TestSection } from "./TestSection";
@@ -626,6 +626,8 @@ export interface Sign {
   mappedGesture: string;
   videoUrl: string;
   hint?: string;
+  topic?: string;
+  gloss?: string[];
 }
 
 export interface Category {
@@ -821,21 +823,141 @@ export const CATEGORIES: Record<string, Category> = {
     level: "💬 Level 9",
     description: "Practical daily dialogues, polite phrases, and conversation sentences in ISL",
     signs: [
-      { name: "Hello Nice To Meet You", desc: "Wave hello followed by bringing both index fingers together meeting happily.", mappedGesture: "Hello Nice To Meet You", videoUrl: "/level9-sentences/hello_nice_to_meet_u.mp4", hint: "Hello wave + meeting gesture 🤝" },
-      { name: "My Name Is", desc: "Touch chest with flat hand (My) followed by H-hand fingers tapping together (Name).", mappedGesture: "My Name Is", videoUrl: "/level9-sentences/my_name_is_priya.mp4", hint: "Chest tap (My) + Name tap 📛" },
-      { name: "I Am Deaf", desc: "Touch index finger from ear to mouth indicating deaf identity.", mappedGesture: "I Am Deaf", videoUrl: "/level9-sentences/iamdeaf.mp4", hint: "Ear to mouth touch 🧏" },
-      { name: "I Know Sign Language", desc: "Touch forehead (Know) followed by rolling both hands in sign language conversation.", mappedGesture: "I Know Sign Language", videoUrl: "/level9-sentences/i_know_little_sign_language.mp4", hint: "Forehead touch (Know) + signing hands 🤟" },
-      { name: "What Is Your Name", desc: "Point forward (Your) + Name fingers tap + What open palms shake.", mappedGesture: "What Is Your Name", videoUrl: "/level9-sentences/what_is_ur_name.mp4", hint: "Your + Name + What ❓" },
-      { name: "Where Are You From", desc: "Point forward (You) followed by place & where inquiry gesture.", mappedGesture: "Where Are You From", videoUrl: "/level9-sentences/where r u from_or_where is ur house.mp4", hint: "You + Where location inquiry 🏡" },
-      { name: "What Do You Do", desc: "Point forward (You) + Work hammer hands + What inquiring palms.", mappedGesture: "What Do You Do", videoUrl: "/level9-sentences/what_do_u_do.mp4", hint: "You + Work + What 💼" },
-      { name: "What Is Father Name", desc: "Your + Father (forehead) + Name + What question sign.", mappedGesture: "What Is Father Name", videoUrl: "/level9-sentences/what_is_urs_father_name.mp4", hint: "Your + Father + Name + What 👨" },
-      { name: "My Profession", desc: "Self point followed by role indicator and badge gesture.", mappedGesture: "My Profession", videoUrl: "/level9-sentences/i_amstudent,doctor,engineer,homemaker,stay at home.mp4", hint: "Self + Role gesture 🎓" },
-      { name: "Healthy And Happy", desc: "Both hands sweep from chest with thumbs up in vibrant wellness.", mappedGesture: "Healthy And Happy", videoUrl: "/level9-sentences/friends_hope_u_r_healthy_and happy.mp4", hint: "Chest sweep + Thumbs up wellness 😊" },
-      { name: "Sign Slowly", desc: "Flat right hand moving gently and slowly across left forearm.", mappedGesture: "Sign Slowly", videoUrl: "/level9-sentences/please_sign_slow.mp4", hint: "Slow gentle glide across arm 🐢" },
-      { name: "Sign Again", desc: "Curved right hand pivoting into open left palm repeating gesture.", mappedGesture: "Sign Again", videoUrl: "/level9-sentences/please_could_sign _again.mp4", hint: "Pivoting hand repeating in palm 🔁" },
-      { name: "Signing Very Fast", desc: "Both hands flutter rapidly side-to-side signaling high speed.", mappedGesture: "Signing Very Fast", videoUrl: "/level9-sentences/u_r_signing_very_fast.mp4", hint: "Rapid flutter hands signaling fast ⚡" },
-      { name: "I Understand", desc: "Flick index finger upright from fist near temple (idea lightbulb).", mappedGesture: "I Understand", videoUrl: "/level9-sentences/Yes_i_understand.mp4", hint: "Index flick near temple 💡" },
-      { name: "I Dont Understand", desc: "Flick index finger near temple while shaking head sideways.", mappedGesture: "I Dont Understand", videoUrl: "/level9-sentences/I_dont_understand.mp4", hint: "Index flick with head shake 🤷" }
+      {
+        name: "Hello Nice To Meet You",
+        desc: "Wave hello followed by bringing both index fingers together meeting happily.",
+        mappedGesture: "Hello Nice To Meet You",
+        videoUrl: "/level9-sentences/hello_nice_to_meet_u.mp4",
+        hint: "Hello wave + meeting gesture 🤝",
+        topic: "introductions",
+        gloss: ["HELLO 👋", "NICE TO MEET YOU 🤝", "HAPPY 😊"]
+      },
+      {
+        name: "My Name Is",
+        desc: "Touch chest with flat hand (My) followed by H-hand fingers tapping together (Name).",
+        mappedGesture: "My Name Is",
+        videoUrl: "/level9-sentences/my_name_is_priya.mp4",
+        hint: "Chest tap (My) + Name tap 📛",
+        topic: "introductions",
+        gloss: ["MY / ME 🙋", "NAME 📛", "PRIYA 👧"]
+      },
+      {
+        name: "I Am Deaf",
+        desc: "Touch index finger from ear to mouth indicating deaf identity.",
+        mappedGesture: "I Am Deaf",
+        videoUrl: "/level9-sentences/iamdeaf.mp4",
+        hint: "Ear to mouth touch 🧏",
+        topic: "introductions",
+        gloss: ["ME / I 🙋", "DEAF (EAR-MOUTH) 🧏"]
+      },
+      {
+        name: "I Know Sign Language",
+        desc: "Touch forehead (Know) followed by rolling both hands in sign language conversation.",
+        mappedGesture: "I Know Sign Language",
+        videoUrl: "/level9-sentences/i_know_little_sign_language.mp4",
+        hint: "Forehead touch (Know) + signing hands 🤟",
+        topic: "introductions",
+        gloss: ["ME 🙋", "KNOW (FOREHEAD) 💡", "SIGN LANGUAGE 🤟"]
+      },
+      {
+        name: "What Is Your Name",
+        desc: "Point forward (Your) + Name fingers tap + What open palms shake.",
+        mappedGesture: "What Is Your Name",
+        videoUrl: "/level9-sentences/what_is_ur_name.mp4",
+        hint: "Your + Name + What ❓",
+        topic: "questions",
+        gloss: ["YOUR 👉", "NAME 📛", "WHAT ❓"]
+      },
+      {
+        name: "Where Are You From",
+        desc: "Point forward (You) followed by place & where inquiry gesture.",
+        mappedGesture: "Where Are You From",
+        videoUrl: "/level9-sentences/where r u from_or_where is ur house.mp4",
+        hint: "You + Where location inquiry 🏡",
+        topic: "questions",
+        gloss: ["YOU 👉", "HOME / LOCATION 🏡", "WHERE 📍"]
+      },
+      {
+        name: "What Do You Do",
+        desc: "Point forward (You) + Work hammer hands + What inquiring palms.",
+        mappedGesture: "What Do You Do",
+        videoUrl: "/level9-sentences/what_do_u_do.mp4",
+        hint: "You + Work + What 💼",
+        topic: "questions",
+        gloss: ["YOU 👉", "WORK / JOB 💼", "WHAT ❓"]
+      },
+      {
+        name: "What Is Father Name",
+        desc: "Your + Father (forehead) + Name + What question sign.",
+        mappedGesture: "What Is Father Name",
+        videoUrl: "/level9-sentences/what_is_urs_father_name.mp4",
+        hint: "Your + Father + Name + What 👨",
+        topic: "questions",
+        gloss: ["YOUR 👉", "FATHER (FOREHEAD) 👨", "NAME 📛", "WHAT ❓"]
+      },
+      {
+        name: "My Profession",
+        desc: "Self point followed by role indicator and badge gesture.",
+        mappedGesture: "My Profession",
+        videoUrl: "/level9-sentences/i_amstudent,doctor,engineer,homemaker,stay at home.mp4",
+        hint: "Self + Role gesture 🎓",
+        topic: "roles",
+        gloss: ["MY / ME 🙋", "ROLE (STUDENT / DOCTOR) 🎓"]
+      },
+      {
+        name: "Healthy And Happy",
+        desc: "Both hands sweep from chest with thumbs up in vibrant wellness.",
+        mappedGesture: "Healthy And Happy",
+        videoUrl: "/level9-sentences/friends_hope_u_r_healthy_and happy.mp4",
+        hint: "Chest sweep + Thumbs up wellness 😊",
+        topic: "roles",
+        gloss: ["FRIENDS 👥", "HEALTHY 💪", "HAPPY 😊"]
+      },
+      {
+        name: "Sign Slowly",
+        desc: "Flat right hand moving gently and slowly across left forearm.",
+        mappedGesture: "Sign Slowly",
+        videoUrl: "/level9-sentences/please_sign_slow.mp4",
+        hint: "Slow gentle glide across arm 🐢",
+        topic: "assistance",
+        gloss: ["PLEASE 🙏", "SIGN 🤟", "SLOWLY 🐢"]
+      },
+      {
+        name: "Sign Again",
+        desc: "Curved right hand pivoting into open left palm repeating gesture.",
+        mappedGesture: "Sign Again",
+        videoUrl: "/level9-sentences/please_could_sign _again.mp4",
+        hint: "Pivoting hand repeating in palm 🔁",
+        topic: "assistance",
+        gloss: ["PLEASE 🙏", "SIGN 🤟", "AGAIN / REPEAT 🔁"]
+      },
+      {
+        name: "Signing Very Fast",
+        desc: "Both hands flutter rapidly side-to-side signaling high speed.",
+        mappedGesture: "Signing Very Fast",
+        videoUrl: "/level9-sentences/u_r_signing_very_fast.mp4",
+        hint: "Rapid flutter hands signaling fast ⚡",
+        topic: "assistance",
+        gloss: ["YOU 👉", "SIGNING 🤟", "VERY FAST ⚡"]
+      },
+      {
+        name: "I Understand",
+        desc: "Flick index finger upright from fist near temple (idea lightbulb).",
+        mappedGesture: "I Understand",
+        videoUrl: "/level9-sentences/Yes_i_understand.mp4",
+        hint: "Index flick near temple 💡",
+        topic: "comprehension",
+        gloss: ["YES 👍", "I / ME 🙋", "UNDERSTAND 💡"]
+      },
+      {
+        name: "I Dont Understand",
+        desc: "Flick index finger near temple while shaking head sideways.",
+        mappedGesture: "I Dont Understand",
+        videoUrl: "/level9-sentences/I_dont_understand.mp4",
+        hint: "Index flick with head shake 🤷",
+        topic: "comprehension",
+        gloss: ["NO 👎", "I / ME 🙋", "DONT UNDERSTAND 🤷"]
+      }
     ]
   },
   emergency: {
@@ -1001,8 +1123,20 @@ export function StudentView({
   const [currentSignIdx, setCurrentSignIdx] = useState(0);
   const [safetyFeedbackToast, setSafetyFeedbackToast] = useState<string | null>(null);
 
+  // Sentences sub-topics and video player controls
+  const [sentenceTopicFilter, setSentenceTopicFilter] = useState<string>("all");
+  const [videoSpeed, setVideoSpeed] = useState<number>(1);
+  const [sentencePracticedToast, setSentencePracticedToast] = useState<string | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   // Persistent student progress store
   const [progressHistory, setProgressHistory] = useState<Record<string, SignRecord>>({});
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = videoSpeed;
+    }
+  }, [videoSpeed, currentSignIdx, selectedCat]);
 
   useEffect(() => {
     const syncProgress = () => {
@@ -1133,7 +1267,16 @@ export function StudentView({
   const [evaluatedScore, setEvaluatedScore] = useState<number | null>(null);
 
   const category = selectedCat ? CATEGORIES[selectedCat] : null;
-  const currentSign = category ? category.signs[currentSignIdx] : null;
+
+  const visibleSigns = useMemo(() => {
+    if (!category) return [];
+    if (selectedCat !== "sentences" || sentenceTopicFilter === "all") {
+      return category.signs;
+    }
+    return category.signs.filter(s => s.topic === sentenceTopicFilter);
+  }, [category, selectedCat, sentenceTopicFilter]);
+
+  const currentSign = visibleSigns[currentSignIdx] || (category ? category.signs[currentSignIdx] : null);
   const localizedSign = currentSign ? getSignDetails(currentSign.name, language) : null;
 
   const getCategoryName = (key: string, defaultName: string) => {
@@ -1351,7 +1494,7 @@ export function StudentView({
   };
 
   const handleNext = () => {
-    if (category && currentSignIdx < category.signs.length - 1) {
+    if (visibleSigns.length > 0 && currentSignIdx < visibleSigns.length - 1) {
       setCurrentSignIdx(currentSignIdx + 1);
     } else {
       setSelectedCat(null);
@@ -1360,7 +1503,7 @@ export function StudentView({
   };
 
   const handlePrev = () => {
-    if (category && currentSignIdx > 0) {
+    if (currentSignIdx > 0) {
       setCurrentSignIdx(currentSignIdx - 1);
     }
   };
@@ -1482,38 +1625,69 @@ export function StudentView({
             /* Active Learning & Practice Interface */
             <div className="space-y-4">
               {/* Top Lesson Header & Sign Carousel */}
-              <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border bg-card p-4">
-                <div className="flex items-center gap-2">
-                  {onBackToHome && (
+              <div className="space-y-3 rounded-2xl border border-border bg-card p-4 shadow-2xs">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    {onBackToHome && (
+                      <button
+                        onClick={onBackToHome}
+                        className="flex h-9 items-center gap-1 px-2.5 rounded-xl border border-border bg-muted/40 text-foreground hover:bg-muted transition-colors text-xs font-bold cursor-pointer shadow-2xs"
+                        title={t.backToHome}
+                      >
+                        <span>🏠 {t.navHome}</span>
+                      </button>
+                    )}
                     <button
-                      onClick={onBackToHome}
+                      onClick={() => setSelectedCat(null)}
                       className="flex h-9 items-center gap-1 px-2.5 rounded-xl border border-border bg-muted/40 text-foreground hover:bg-muted transition-colors text-xs font-bold cursor-pointer"
-                      title={t.backToHome}
+                      title={t.backToLessons}
                     >
-                      <span>🏠 {t.navHome}</span>
+                      <ChevronLeft className="h-4 w-4" />
+                      <span>{t.backToLessons}</span>
                     </button>
-                  )}
-                  <button
-                    onClick={() => setSelectedCat(null)}
-                    className="flex h-9 items-center gap-1 px-2.5 rounded-xl border border-border bg-muted/40 text-foreground hover:bg-muted transition-colors text-xs font-bold cursor-pointer"
-                    title={t.backToLessons}
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                    <span>{t.backToLessons}</span>
-                  </button>
-                  <div>
-                    <span className="text-[11px] font-bold text-primary uppercase tracking-wider">
-                      {category?.level} · {getCategoryName(selectedCat || "", category?.name || "")}
-                    </span>
-                    <h2 className="text-lg font-bold text-foreground">
-                      {currentSignIdx + 1} / {category?.signs.length}: <span className="text-primary">{localizedSign?.name}</span>
-                    </h2>
+                    <div>
+                      <span className="text-[11px] font-bold text-primary uppercase tracking-wider">
+                        {category?.level} · {getCategoryName(selectedCat || "", category?.name || "")}
+                      </span>
+                      <h2 className="text-lg font-bold text-foreground">
+                        {currentSignIdx + 1} / {visibleSigns.length}: <span className="text-primary">{localizedSign?.name}</span>
+                      </h2>
+                    </div>
                   </div>
+
+                  {/* Level 9 Sentence Sub-Topic Filter Bar */}
+                  {selectedCat === "sentences" && (
+                    <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-muted/30 border border-border/50">
+                      {[
+                        { id: "all", label: `${t.topicAll || "All"} (15)` },
+                        { id: "introductions", label: `${t.topicIntroductions || "Introductions"} (4)` },
+                        { id: "questions", label: `${t.topicQuestions || "Questions"} (4)` },
+                        { id: "roles", label: language === "mr" ? "भूमिका (2)" : language === "hi" ? "भूमिका (2)" : "Roles (2)" },
+                        { id: "assistance", label: `${t.topicAssistance || "Speed & Help"} (3)` },
+                        { id: "comprehension", label: `${t.topicComprehension || "Comprehend"} (2)` },
+                      ].map((top) => (
+                        <button
+                          key={top.id}
+                          onClick={() => {
+                            setSentenceTopicFilter(top.id);
+                            setCurrentSignIdx(0);
+                          }}
+                          className={`px-2.5 py-1 text-[11px] font-bold rounded-lg transition-all cursor-pointer ${
+                            sentenceTopicFilter === top.id
+                              ? "bg-primary text-white shadow-2xs"
+                              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                          }`}
+                        >
+                          {top.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Quick Switch Pills */}
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {category?.signs.map((s, idx) => {
+                <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-border/40">
+                  {visibleSigns.map((s, idx) => {
                     const pillDetails = getSignDetails(s.name, language);
                     return (
                       <button
@@ -1538,15 +1712,28 @@ export function StudentView({
               <div className="grid gap-5 lg:grid-cols-2">
                 {/* Left: Video Demonstration & Instructions */}
                 <div className="glass rounded-2xl p-5 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t.officialDemo}
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                      <Play className="h-3.5 w-3.5 text-primary" /> {t.officialDemo}
                     </span>
-                    {localizedSign?.hint && (
-                      <span className="rounded-full bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 text-[11px] font-semibold text-amber-600">
-                        {t.hintLabel}: {localizedSign.hint}
-                      </span>
-                    )}
+
+                    {/* Video Playback Speed Selector */}
+                    <div className="flex items-center gap-1 bg-muted/60 border border-border/60 p-0.5 rounded-lg text-[10px] font-bold text-muted-foreground">
+                      <span className="px-1 text-[9px] uppercase tracking-wider">Speed:</span>
+                      {[0.5, 0.75, 1].map((spd) => (
+                        <button
+                          key={spd}
+                          onClick={() => setVideoSpeed(spd)}
+                          className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                            videoSpeed === spd
+                              ? "bg-primary text-white font-extrabold shadow-2xs"
+                              : "hover:text-foreground"
+                          }`}
+                        >
+                          {spd}x
+                        </button>
+                      ))}
+                    </div>
                   </div>
 
                   {currentSign?.videoUrl?.endsWith(".png") || currentSign?.videoUrl?.endsWith(".webp") || currentSign?.videoUrl?.endsWith(".jpg") || currentSign?.videoUrl?.endsWith(".jpeg") ? (
@@ -1570,7 +1757,8 @@ export function StudentView({
                           />
                         ) : (
                           <video
-                            key={currentSign.videoUrl}
+                            ref={videoRef}
+                            key={`${currentSign.videoUrl}-${videoSpeed}`}
                             src={currentSign.videoUrl}
                             className="absolute inset-0 h-full w-full object-contain"
                             controls
@@ -1595,6 +1783,32 @@ export function StudentView({
                     </div>
                   )}
 
+                  {/* ISL Word-by-Word Sign Gloss Breakdown (Level 9 Sentences) */}
+                  {currentSign?.gloss && currentSign.gloss.length > 0 && (
+                    <div className="rounded-xl border border-primary/20 bg-primary/5 p-3.5 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-black uppercase tracking-wider text-primary flex items-center gap-1.5">
+                          <Sparkles className="h-3.5 w-3.5 text-primary" /> {t.sentenceGloss || "ISL Sign Gloss Breakdown"}
+                        </span>
+                        <span className="text-[10px] font-bold text-muted-foreground">
+                          {currentSign.gloss.length} Gestures Sequence
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {currentSign.gloss.map((g, gIdx) => (
+                          <React.Fragment key={g}>
+                            <span className="px-2.5 py-1 rounded-lg bg-card border border-primary/30 font-bold text-xs text-foreground shadow-2xs">
+                              {g}
+                            </span>
+                            {gIdx < currentSign.gloss!.length - 1 && (
+                              <span className="text-xs font-black text-primary/60">→</span>
+                            )}
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* AI Instruction description */}
                   <div className="rounded-xl border border-border/80 bg-muted/40 p-4 space-y-1 shadow-2xs">
                     <p className="text-xs font-bold uppercase tracking-wider text-foreground">{t.howToPerform}</p>
@@ -1614,92 +1828,163 @@ export function StudentView({
                       onClick={handleNext}
                       className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-xs font-bold text-white hover:opacity-90 transition-opacity cursor-pointer"
                     >
-                      {currentSignIdx === (category?.signs.length ?? 0) - 1 ? t.btnFinish : t.btnNext} <ChevronRight className="h-4 w-4" />
+                      {currentSignIdx === visibleSigns.length - 1 ? t.btnFinish : t.btnNext} <ChevronRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
 
-                {/* Right: Live Webcam & AI Verification */}
-                <div className="glass rounded-2xl p-5 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
-                        <Hand className="h-4 w-4 text-primary" /> {t.liveAiEvaluator}
-                      </h3>
-                      <p className="text-xs text-muted-foreground">{t.performPrompt}</p>
-                    </div>
-                  </div>
-
-                  <WebcamMock active={!!selectedCat} />
-
-                  {/* Evaluation Result Feedback */}
-                  <div className="space-y-3">
-                    {matchingStatus === "waiting" && (
-                      <div className="rounded-xl border border-border bg-muted/40 p-4 text-center space-y-2">
-                        <div className="h-3 w-3 mx-auto animate-ping rounded-full bg-primary" />
-                        <p className="text-sm font-bold text-foreground">{t.aiTeacherWatching}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {t.makeSignPrompt} <span className="font-bold text-primary">"{localizedSign?.name}"</span>
-                        </p>
-                        {localizedSign?.hint && (
-                          <div className="rounded-lg bg-primary/10 border border-primary/20 px-3 py-1.5 text-xs text-primary font-semibold">
-                            💡 {localizedSign.hint}
-                          </div>
-                        )}
-                        <div className="pt-2 border-t border-border/50 flex items-center justify-between gap-2">
-                          <span className="text-[11px] text-muted-foreground">{t.havingLightingIssue}</span>
-                          <button
-                            onClick={forceMatch}
-                            className="text-[11px] font-bold text-primary hover:underline px-2 py-1 rounded bg-muted/70 hover:bg-muted transition-colors cursor-pointer"
-                          >
-                            {t.markAsMatched}
-                          </button>
-                        </div>
+                {/* Right: Practice Studio for Sentences OR AI Computer Vision for Levels 1-8, 10 */}
+                {selectedCat === "sentences" ? (
+                  /* Interactive Sentences Practice Studio */
+                  <div className="glass rounded-2xl p-5 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
+                          <MessageSquare className="h-4 w-4 text-primary" /> {t.sentencePracticeStudio || "Interactive Practice Studio"}
+                        </h3>
+                        <p className="text-xs text-muted-foreground">{t.sentencePracticeStudioDesc || "Rehearse continuous ISL sentence signing with live webcam mirror"}</p>
                       </div>
-                    )}
+                      {progressHistory[currentSign?.name || ""] && (
+                        <span className="rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-0.5 text-xs font-bold text-emerald-600 flex items-center gap-1 shadow-2xs">
+                          <CheckCircle2 className="h-3.5 w-3.5" /> Practiced
+                        </span>
+                      )}
+                    </div>
 
-                    {matchingStatus === "correct" && (
-                      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 space-y-3 text-emerald-950 dark:text-emerald-200">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 text-emerald-600 font-bold">
-                            <CheckCircle2 className="h-5 w-5" />
-                            <span>{t.greatJob}</span>
-                          </div>
-                          <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-xs font-bold text-emerald-700">
-                            {evaluatedScore}% Match
-                          </span>
-                        </div>
-                        <p className="text-xs leading-relaxed text-emerald-900/80 dark:text-emerald-200/80">
-                          {localizedSign?.name} · {t.accuracyStarReward}
+                    {/* Mirror Webcam for Self-Practice */}
+                    <WebcamMock active={true} />
+
+                    {/* Sentence Self-Evaluation & Progression */}
+                    <div className="rounded-2xl border border-border/80 bg-card p-4 space-y-3 shadow-2xs">
+                      <div className="space-y-1">
+                        <p className="text-xs font-bold uppercase tracking-wider text-foreground">
+                          🗣️ Target Sentence: <span className="text-primary font-black">"{localizedSign?.name}"</span>
                         </p>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          Rehearse the sign sequence in your camera mirror at your own pace. When you feel confident, tap below to mark it as practiced.
+                        </p>
+                      </div>
+
+                      <div className="pt-2 border-t border-border/50 flex flex-wrap items-center gap-2">
+                        <button
+                          onClick={() => {
+                            if (currentSign) {
+                              saveProgressRecord(currentSign.name, "sentences", 100);
+                              setSentencePracticedToast(t.sentencePracticedToast || "🎉 Great practice! Sentence recorded in your progress tracker.");
+                              simulateSpeech(`Sentence practiced: ${localizedSign?.name}. Excellent job!`);
+                            }
+                          }}
+                          className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                        >
+                          <CheckCircle2 className="h-4 w-4" />
+                          <span>{t.markSentencePracticed || "Mark as Practiced ✓"}</span>
+                        </button>
+
                         <button
                           onClick={handleNext}
-                          className="w-full bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs transition-opacity hover:opacity-90 flex items-center justify-center gap-1 cursor-pointer"
+                          className="py-3 px-4 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
                         >
-                          {currentSignIdx === (category?.signs.length ?? 0) - 1 ? t.btnFinish : t.btnNext} <ChevronRight className="h-4 w-4" />
+                          <span>{currentSignIdx === visibleSigns.length - 1 ? t.btnFinish : t.btnNext}</span>
+                          <ChevronRight className="h-4 w-4" />
                         </button>
                       </div>
-                    )}
 
-                    {matchingStatus === "incorrect" && (
-                      <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 space-y-2.5 text-rose-950 dark:text-rose-200">
-                        <div className="flex items-center gap-2 text-rose-600 font-bold">
-                          <AlertCircle className="h-5 w-5" />
-                          <span>{t.almostThere}</span>
+                      {sentencePracticedToast && (
+                        <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-800 dark:text-emerald-300 font-bold flex items-center justify-between animate-in fade-in">
+                          <span>{sentencePracticedToast}</span>
+                          <button
+                            onClick={() => setSentencePracticedToast(null)}
+                            className="text-muted-foreground hover:text-foreground cursor-pointer text-xs font-black px-1"
+                          >
+                            ✕
+                          </button>
                         </div>
-                        <p className="text-xs leading-relaxed text-rose-900/80 dark:text-rose-200/80">
-                          {t.checkHandPosition}
-                        </p>
-                        <button
-                          onClick={() => setMatchingStatus("waiting")}
-                          className="w-full bg-white/80 border border-rose-200 text-rose-700 font-bold py-2 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                        >
-                          <RefreshCw className="h-3.5 w-3.5" /> {t.tryAgain}
-                        </button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  /* Regular Live AI Evaluator (Level 1-8, 10) */
+                  <div className="glass rounded-2xl p-5 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
+                          <Hand className="h-4 w-4 text-primary" /> {t.liveAiEvaluator}
+                        </h3>
+                        <p className="text-xs text-muted-foreground">{t.performPrompt}</p>
+                      </div>
+                    </div>
+
+                    <WebcamMock active={!!selectedCat} />
+
+                    {/* Evaluation Result Feedback */}
+                    <div className="space-y-3">
+                      {matchingStatus === "waiting" && (
+                        <div className="rounded-xl border border-border bg-muted/40 p-4 text-center space-y-2">
+                          <div className="h-3 w-3 mx-auto animate-ping rounded-full bg-primary" />
+                          <p className="text-sm font-bold text-foreground">{t.aiTeacherWatching}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {t.makeSignPrompt} <span className="font-bold text-primary">"{localizedSign?.name}"</span>
+                          </p>
+                          {localizedSign?.hint && (
+                            <div className="rounded-lg bg-primary/10 border border-primary/20 px-3 py-1.5 text-xs text-primary font-semibold">
+                              💡 {localizedSign.hint}
+                            </div>
+                          )}
+                          <div className="pt-2 border-t border-border/50 flex items-center justify-between gap-2">
+                            <span className="text-[11px] text-muted-foreground">{t.havingLightingIssue}</span>
+                            <button
+                              onClick={forceMatch}
+                              className="text-[11px] font-bold text-primary hover:underline px-2 py-1 rounded bg-muted/70 hover:bg-muted transition-colors cursor-pointer"
+                            >
+                              {t.markAsMatched}
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {matchingStatus === "correct" && (
+                        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 space-y-3 text-emerald-950 dark:text-emerald-200">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-emerald-600 font-bold">
+                              <CheckCircle2 className="h-5 w-5" />
+                              <span>{t.greatJob}</span>
+                            </div>
+                            <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-xs font-bold text-emerald-700">
+                              {evaluatedScore}% Match
+                            </span>
+                          </div>
+                          <p className="text-xs leading-relaxed text-emerald-900/80 dark:text-emerald-200/80">
+                            {localizedSign?.name} · {t.accuracyStarReward}
+                          </p>
+                          <button
+                            onClick={handleNext}
+                            className="w-full bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs transition-opacity hover:opacity-90 flex items-center justify-center gap-1 cursor-pointer"
+                          >
+                            {currentSignIdx === visibleSigns.length - 1 ? t.btnFinish : t.btnNext} <ChevronRight className="h-4 w-4" />
+                          </button>
+                        </div>
+                      )}
+
+                      {matchingStatus === "incorrect" && (
+                        <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 space-y-2.5 text-rose-950 dark:text-rose-200">
+                          <div className="flex items-center gap-2 text-rose-600 font-bold">
+                            <AlertCircle className="h-5 w-5" />
+                            <span>{t.almostThere}</span>
+                          </div>
+                          <p className="text-xs leading-relaxed text-rose-900/80 dark:text-rose-200/80">
+                            {t.checkHandPosition}
+                          </p>
+                          <button
+                            onClick={() => setMatchingStatus("waiting")}
+                            className="w-full bg-white/80 border border-rose-200 text-rose-700 font-bold py-2 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                          >
+                            <RefreshCw className="h-3.5 w-3.5" /> {t.tryAgain}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Interactive Live Safety Status Suite (Only in Level 6 Emergency & Safety module) */}
