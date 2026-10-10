@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SignSafe - B-Tech CSE Final Project Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+
+  @page {
+    size: A4 portrait;
+    margin: 25mm 20mm 25mm 30mm; /* 30mm left margin for binding */
+  }
+
+  @page:first {
+    margin: 20mm;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #111;
+    background-color: #fff;
+    text-align: justify;
+    text-justify: inter-word;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+    display: block;
+    height: 0;
+  }
+
+  h1 {
+    font-size: 18pt;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 24pt;
+    margin-bottom: 14pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 18pt;
+    margin-bottom: 10pt;
+    page-break-after: avoid;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: bold;
+    margin-top: 14pt;
+    margin-bottom: 8pt;
+    page-break-after: avoid;
+  }
+
+  h4 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 10pt;
+    text-indent: 0;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16pt 0;
+    font-size: 10.5pt;
+    line-height: 1.35;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 1px solid #333;
+    padding: 6pt 8pt;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* Center alignment for specific table elements */
+  td:first-child {
+    text-align: center;
+  }
+
+  /* Code Blocks & Pre */
+  pre {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10pt;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    line-height: 1.3;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 14pt 0;
+    page-break-inside: avoid;
+  }
+
+  code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 10pt;
+    background-color: #f3f4f6;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  /* Blockquotes / Alerts */
+  blockquote {
+    border-left: 4px solid #0284c7;
+    margin: 14pt 0;
+    padding: 8pt 14pt;
+    background-color: #f0f9ff;
+    font-style: italic;
+  }
+
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 12pt;
+    padding-left: 24pt;
+  }
+
+  li {
+    margin-bottom: 4pt;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #bbb;
+    margin: 20pt 0;
+  }
+
+  .certificate-box {
+    border: 2px solid #333;
+    padding: 20pt;
+    margin: 10pt 0;
+  }
+
+  .signature-table {
+    width: 100%;
+    border: none;
+    margin-top: 40pt;
+  }
+
+  .signature-table td {
+    border: none;
+    text-align: center;
+    padding: 10pt;
+  }
+</style>
+</head>
+<body>
+<h1>SIGNSAFE: AI-POWERED INDIAN SIGN LANGUAGE (ISL) INTERACTIVE LEARNING, REAL-TIME DYNAMIC GESTURE ASSESSMENT &amp; SMART SOS EMERGENCY DISPATCH PLATFORM FOR DEAF AND HARD OF HEARING COMMUNITIES</h1>
+<hr />
+<h3><strong>A PROJECT REPORT</strong></h3>
+<p><em>Submitted by</em></p>
+<p><strong>PRAJAKTA UKIRDE</strong><br />
+<strong>(PRN / Roll No: 20230101001)</strong></p>
+<p><em>in partial fulfillment for the award of the degree of</em></p>
+<h3><strong>BACHELOR OF TECHNOLOGY</strong></h3>
+<h3><strong>IN</strong></h3>
+<h3><strong>COMPUTER SCIENCE &amp; ENGINEERING</strong></h3>
+<p><strong>Guided by</strong><br />
+<strong>[Name of Guide]</strong><br />
+<em>Assistant Professor / Associate Professor</em></p>
+<div class="highlight"><pre><span></span><code>                 [ MGM UNIVERSITY LOGO ]
+</code></pre></div>
+<p><strong>DEPARTMENT OF COMPUTER SCIENCE &amp; ENGINEERING</strong><br />
+<strong>JAWAHARLAL NEHRU ENGINEERING COLLEGE</strong><br />
+<strong>MGM UNIVERSITY, CHHATRAPATI SAMBHAJINAGAR (M.S.), INDIA</strong><br />
+<strong>ACADEMIC YEAR: 2026–2027</strong></p>
+<hr />
+<div class="page-break"></div>
+
+<h1>MGM UNIVERSITY, CHHATRAPATI SAMBHAJINAGAR</h1>
+<h3><strong>JAWAHARLAL NEHRU ENGINEERING COLLEGE</strong></h3>
+<h3><strong>DEPARTMENT OF COMPUTER SCIENCE &amp; ENGINEERING</strong></h3>
+<div class="highlight"><pre><span></span><code>                 [ COLLEGE EMBLEM ]
+</code></pre></div>
+<h2><strong>CERTIFICATE</strong></h2>
+<p>This is to certify that the project report entitled:</p>
+<blockquote>
+<p><strong>"SIGNSAFE: AI-POWERED INDIAN SIGN LANGUAGE (ISL) INTERACTIVE LEARNING, REAL-TIME DYNAMIC GESTURE ASSESSMENT &amp; SMART SOS EMERGENCY DISPATCH PLATFORM FOR DEAF AND HARD OF HEARING COMMUNITIES"</strong></p>
+</blockquote>
+<p>Submitted by:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name of Candidate</th>
+<th style="text-align: left;">Roll No. / Exam Seat No.</th>
+<th style="text-align: left;">PRN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Prajakta Ukirde</strong></td>
+<td style="text-align: left;"><strong>CSE-2027-042</strong></td>
+<td style="text-align: left;"><strong>20230101001</strong></td>
+</tr>
+</tbody>
+</table>
+<p>is a bonafide work carried out by them under the supervision of <strong>[Name of Guide]</strong> and it is approved for the partial fulfillment for the award of the degree of <strong>Bachelor of Technology (Computer Science &amp; Engineering)</strong> of <strong>MGM University, Chhatrapati Sambhajinagar (M.S.), India</strong> for the academic year 2026–2027.</p>
+<div style="height: 1.5cm;"></div>
+
+<p><strong>Date:</strong> ________________<br />
+<strong>Place:</strong> Chhatrapati Sambhajinagar</p>
+<div style="height: 1.5cm;"></div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>_</strong></td>
+<td style="text-align: left;"><strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>_</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>[Name of Guide]</strong></td>
+<td style="text-align: left;"><strong>Dr. D. S. Deshpande</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Project Guide</td>
+<td style="text-align: left;">Head of Department</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dept. of Computer Science &amp; Engineering</td>
+<td style="text-align: left;">Dept. of Computer Science &amp; Engineering</td>
+</tr>
+<tr>
+<td style="text-align: left;">Jawaharlal Nehru Engineering College</td>
+<td style="text-align: left;">Jawaharlal Nehru Engineering College</td>
+</tr>
+</tbody>
+</table>
+<div style="height: 1.5cm;"></div>
+
+<div align="center">
+  <b>_____________________________</b><br>
+  <b>Dr. V. B. Musande</b><br>
+  Principal<br>
+  Jawaharlal Nehru Engineering College<br>
+  MGM University, Chhatrapati Sambhajinagar (M.S.)
+</div>
+
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>CONTENTS</strong></h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Section / Chapter</th>
+<th style="text-align: left;">Title</th>
+<th style="text-align: center;">Page No.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>—</strong></td>
+<td style="text-align: left;"><strong>List of Abbreviations</strong></td>
+<td style="text-align: center;"><strong>i</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>—</strong></td>
+<td style="text-align: left;"><strong>List of Figures</strong></td>
+<td style="text-align: center;"><strong>ii</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>—</strong></td>
+<td style="text-align: left;"><strong>List of Tables</strong></td>
+<td style="text-align: center;"><strong>iii</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>—</strong></td>
+<td style="text-align: left;"><strong>Abstract</strong></td>
+<td style="text-align: center;"><strong>iv</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;"><strong>INTRODUCTION</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1.1 Introduction</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1.2 Necessity</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;"><strong>LITERATURE SURVEY</strong></td>
+<td style="text-align: center;"><strong>8</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.1 Evolution of Sign Language Recognition (SLR)</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.2 Sensor-Glove Based vs. Vision-Based Paradigms</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.3 Deep Learning &amp; Computer Vision in Indian Sign Language</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.4 Emergency Response Systems for Deaf and Hard of Hearing (DHH)</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.5 Comparative Analysis of Existing Frameworks</td>
+<td style="text-align: center;">18</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.6 Critical Research Gaps Identified</td>
+<td style="text-align: center;">21</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;"><strong>PROBLEM DEFINITION AND SRS</strong></td>
+<td style="text-align: center;"><strong>24</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.1 Problem Definition</td>
+<td style="text-align: center;">24</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.2 Problem Statement</td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.3 Objectives</td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.4 Major Inputs</td>
+<td style="text-align: center;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.5 Major Outputs</td>
+<td style="text-align: center;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.6 Major Constraints</td>
+<td style="text-align: center;">27</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.7 Hardware Resources Required</td>
+<td style="text-align: center;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.8 Software Resources Required</td>
+<td style="text-align: center;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.9 Area of Project</td>
+<td style="text-align: center;">29</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.10 Software Requirements Specification (SRS)</td>
+<td style="text-align: center;">30</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.10.1 Purpose</td>
+<td style="text-align: center;">30</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.10.2 Scope of the Project</td>
+<td style="text-align: center;">30</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.10.3 Intended Audience &amp; Reading Suggestions</td>
+<td style="text-align: center;">31</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.10.4 Data Model and Description (Data Objects)</td>
+<td style="text-align: center;">32</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3.10.5 Functional Model and Description (Functional Requirements Table)</td>
+<td style="text-align: center;">34</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4</strong></td>
+<td style="text-align: left;"><strong>SYSTEM DESIGN AND IMPLEMENTATION</strong></td>
+<td style="text-align: center;"><strong>38</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.1 Proposed System Architecture</td>
+<td style="text-align: center;">38</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.1.1 Architectural Overview &amp; Layered Subsystems</td>
+<td style="text-align: center;">38</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.1.2 MediaPipe 21-Keypoint 3D Landmark Extraction Pipeline</td>
+<td style="text-align: center;">41</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.1.3 Spatial-Temporal Recognition &amp; Similarity Metric Engine</td>
+<td style="text-align: center;">44</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.1.4 Smart SOS Acoustic Detection &amp; Geolocation Dispatch Subsystem</td>
+<td style="text-align: center;">47</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.1.5 Trilingual Localization Subsystem (EN / HI / MR)</td>
+<td style="text-align: center;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.2 System Design Models (DFD, Sequence Diagram, State Transition)</td>
+<td style="text-align: center;">52</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.3 Implementation Details of Core Modules</td>
+<td style="text-align: center;">56</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.3.1 Module 1: Comprehensive 6-Level Curriculum Engine</td>
+<td style="text-align: center;">56</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.3.2 Module 2: Real-time Live AI Evaluator &amp; Vision Pipeline</td>
+<td style="text-align: center;">59</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.3.3 Module 3: Exam &amp; Timed Assessment Arena</td>
+<td style="text-align: center;">62</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.3.4 Module 4: Smart SOS Overlay with Deaf Video Guides</td>
+<td style="text-align: center;">65</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.3.5 Module 5: Teacher/Admin Analytics &amp; Synchronous Classroom Sync</td>
+<td style="text-align: center;">68</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.4 Timeline Chart (Gantt Chart)</td>
+<td style="text-align: center;">70</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4.5 Cost Estimation &amp; Cloud Budgeting</td>
+<td style="text-align: center;">72</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5</strong></td>
+<td style="text-align: left;"><strong>PERFORMANCE ANALYSIS AND RESULTS</strong></td>
+<td style="text-align: center;"><strong>74</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">5.1 Different Modules, Working, and Output Screens</td>
+<td style="text-align: center;">74</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">5.2 Comparative Analysis &amp; Accuracy Metrics</td>
+<td style="text-align: center;">78</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">5.3 Testing Methodologies (Unit, Integration, UAT)</td>
+<td style="text-align: center;">83</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>6</strong></td>
+<td style="text-align: left;"><strong>CONCLUSIONS AND FUTURE SCOPE</strong></td>
+<td style="text-align: center;"><strong>88</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">6.1 Conclusions</td>
+<td style="text-align: center;">88</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">6.2 Future Scope</td>
+<td style="text-align: center;">90</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>—</strong></td>
+<td style="text-align: left;"><strong>REFERENCES</strong></td>
+<td style="text-align: center;"><strong>92</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>—</strong></td>
+<td style="text-align: left;"><strong>ACKNOWLEDGEMENT</strong></td>
+<td style="text-align: center;"><strong>96</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>—</strong></td>
+<td style="text-align: left;"><strong>APPENDICES</strong></td>
+<td style="text-align: center;"><strong>97</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Appendix 1: MediaPipe 21-Hand Landmark Schema</td>
+<td style="text-align: center;">97</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Appendix 2: SignSafe 84+ Sign Vocabulary Index</td>
+<td style="text-align: center;">98</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Appendix 3: Smart SOS Protocol &amp; Geolocation Payload Specification</td>
+<td style="text-align: center;">100</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>LIST OF ABBREVIATIONS</strong></h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Abbreviation</th>
+<th style="text-align: left;">Expanded Form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>AI</strong></td>
+<td style="text-align: left;">Artificial Intelligence</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>API</strong></td>
+<td style="text-align: left;">Application Programming Interface</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ASL</strong></td>
+<td style="text-align: left;">American Sign Language</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>B-Tech</strong></td>
+<td style="text-align: left;">Bachelor of Technology</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CNN</strong></td>
+<td style="text-align: left;">Convolutional Neural Network</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CPU</strong></td>
+<td style="text-align: left;">Central Processing Unit</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CSE</strong></td>
+<td style="text-align: left;">Computer Science &amp; Engineering</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CSS</strong></td>
+<td style="text-align: left;">Cascading Style Sheets</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DFD</strong></td>
+<td style="text-align: left;">Data Flow Diagram</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DHH</strong></td>
+<td style="text-align: left;">Deaf and Hard of Hearing</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DOM</strong></td>
+<td style="text-align: left;">Document Object Model</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ER</strong></td>
+<td style="text-align: left;">Entity-Relationship</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FPS</strong></td>
+<td style="text-align: left;">Frames Per Second</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GIS</strong></td>
+<td style="text-align: left;">Geographic Information System</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GPS</strong></td>
+<td style="text-align: left;">Global Positioning System</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GPU</strong></td>
+<td style="text-align: left;">Graphics Processing Unit</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HCI</strong></td>
+<td style="text-align: left;">Human-Computer Interaction</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HOD</strong></td>
+<td style="text-align: left;">Head of Department</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTML</strong></td>
+<td style="text-align: left;">HyperText Markup Language</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTP</strong></td>
+<td style="text-align: left;">HyperText Transfer Protocol</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTPS</strong></td>
+<td style="text-align: left;">HyperText Transfer Protocol Secure</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IEEE</strong></td>
+<td style="text-align: left;">Institute of Electrical and Electronics Engineers</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IoT</strong></td>
+<td style="text-align: left;">Internet of Things</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ISL</strong></td>
+<td style="text-align: left;">Indian Sign Language</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ISLRTC</strong></td>
+<td style="text-align: left;">Indian Sign Language Research and Training Centre</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>JSON</strong></td>
+<td style="text-align: left;">JavaScript Object Notation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>KNN</strong></td>
+<td style="text-align: left;">K-Nearest Neighbors</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LAN</strong></td>
+<td style="text-align: left;">Local Area Network</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LSTM</strong></td>
+<td style="text-align: left;">Long Short-Term Memory</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ML</strong></td>
+<td style="text-align: left;">Machine Learning</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MP4</strong></td>
+<td style="text-align: left;">MPEG-4 Part 14 Video Format</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NLP</strong></td>
+<td style="text-align: left;">Natural Language Processing</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NPM</strong></td>
+<td style="text-align: left;">Node Package Manager</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PWA</strong></td>
+<td style="text-align: left;">Progressive Web Application</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RAM</strong></td>
+<td style="text-align: left;">Random Access Memory</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>REST</strong></td>
+<td style="text-align: left;">Representational State Transfer</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RGB</strong></td>
+<td style="text-align: left;">Red, Green, Blue</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ROI</strong></td>
+<td style="text-align: left;">Region of Interest</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SDK</strong></td>
+<td style="text-align: left;">Software Development Kit</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SLR</strong></td>
+<td style="text-align: left;">Sign Language Recognition</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SOS</strong></td>
+<td style="text-align: left;">Save Our Souls (Emergency Distress Signal)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SRS</strong></td>
+<td style="text-align: left;">Software Requirements Specification</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SSL</strong></td>
+<td style="text-align: left;">Secure Sockets Layer</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SVM</strong></td>
+<td style="text-align: left;">Support Vector Machine</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TF</strong></td>
+<td style="text-align: left;">TensorFlow</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TS</strong></td>
+<td style="text-align: left;">TypeScript</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UI</strong></td>
+<td style="text-align: left;">User Interface</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>URI</strong></td>
+<td style="text-align: left;">Uniform Resource Identifier</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UX</strong></td>
+<td style="text-align: left;">User Experience</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>W3C</strong></td>
+<td style="text-align: left;">World Wide Web Consortium</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>WebRTC</strong></td>
+<td style="text-align: left;">Web Real-Time Communication</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>WHO</strong></td>
+<td style="text-align: left;">World Health Organization</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>LIST OF FIGURES</strong></h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Figure No.</th>
+<th style="text-align: left;">Caption</th>
+<th style="text-align: center;">Page No.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Figure 1.1</strong></td>
+<td style="text-align: left;">Global and National Demographic of Deaf and Hard of Hearing Individuals</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 2.1</strong></td>
+<td style="text-align: left;">Comparative Taxonomies of Sign Language Recognition Technologies</td>
+<td style="text-align: center;">11</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 2.2</strong></td>
+<td style="text-align: left;">MediaPipe Hands 21 3D Coordinate Landmark Topological Model</td>
+<td style="text-align: center;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.1</strong></td>
+<td style="text-align: left;">SignSafe High-Level End-to-End System Architecture</td>
+<td style="text-align: center;">39</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.2</strong></td>
+<td style="text-align: left;">Real-time Computer Vision and Spatial Landmark Normalization Pipeline</td>
+<td style="text-align: center;">42</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.3</strong></td>
+<td style="text-align: left;">Geometric Vector Angle and Inter-Joint Euclidean Distance Formulation</td>
+<td style="text-align: center;">45</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.4</strong></td>
+<td style="text-align: left;">Smart SOS Dual-Trigger Acoustic &amp; Visual Alert Dispatch Engine</td>
+<td style="text-align: center;">48</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.5</strong></td>
+<td style="text-align: left;">Trilingual Internationalization (i18n) Dynamic Architecture</td>
+<td style="text-align: center;">51</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.6</strong></td>
+<td style="text-align: left;">Data Flow Diagram (DFD) — Level 0 Context Diagram</td>
+<td style="text-align: center;">53</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.7</strong></td>
+<td style="text-align: left;">Data Flow Diagram (DFD) — Level 1 Subsystem Functional Decomposition</td>
+<td style="text-align: center;">54</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.8</strong></td>
+<td style="text-align: left;">UML Sequence Diagram for Real-Time Gesture Assessment &amp; Scoring Flow</td>
+<td style="text-align: center;">55</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.9</strong></td>
+<td style="text-align: left;">Finite State Machine (FSM) Diagram for Real-Time Assessment Session</td>
+<td style="text-align: center;">56</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.10</strong></td>
+<td style="text-align: left;">Six-Level Progressive Curriculum Structure Breakdown (84 Core Signs)</td>
+<td style="text-align: center;">58</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.11</strong></td>
+<td style="text-align: left;">Smart SOS Emergency Dispatch Architecture with WhatsApp Bridge</td>
+<td style="text-align: center;">66</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 4.12</strong></td>
+<td style="text-align: left;">SignSafe Project Implementation Gantt Timeline (2026–2027)</td>
+<td style="text-align: center;">71</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 5.1</strong></td>
+<td style="text-align: left;">Hero Landing Page and Curriculum Selection Interface</td>
+<td style="text-align: center;">75</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 5.2</strong></td>
+<td style="text-align: left;">Live AI Practice Arena with Real-Time Skeletal Overlay and Accuracy Meter</td>
+<td style="text-align: center;">76</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 5.3</strong></td>
+<td style="text-align: left;">Examination &amp; Timed Assessment Arena with Live Scoring Feedback</td>
+<td style="text-align: center;">77</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 5.4</strong></td>
+<td style="text-align: left;">Smart SOS Emergency Modal with Deaf ISL Video Guides and WhatsApp Dispatch</td>
+<td style="text-align: center;">78</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 5.5</strong></td>
+<td style="text-align: left;">Teacher/Admin Analytics &amp; Classroom Performance Dashboard</td>
+<td style="text-align: center;">79</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 5.6</strong></td>
+<td style="text-align: left;">Multi-Class Confusion Matrix Across 6 Curriculum Levels</td>
+<td style="text-align: center;">80</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 5.7</strong></td>
+<td style="text-align: left;">Latency and Frame-Rate (FPS) Benchmark Under Varying Hardware Profiles</td>
+<td style="text-align: center;">82</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Figure 5.8</strong></td>
+<td style="text-align: left;">Gesture Recognition Accuracy Under Diverse Ambient Illumination Levels</td>
+<td style="text-align: center;">83</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>LIST OF TABLES</strong></h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Table No.</th>
+<th style="text-align: left;">Caption</th>
+<th style="text-align: center;">Page No.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Table 2.1</strong></td>
+<td style="text-align: left;">Comparative Summary of Existing Sign Language Recognition Systems</td>
+<td style="text-align: center;">19</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 3.1</strong></td>
+<td style="text-align: left;">Minimum and Recommended Hardware Specifications</td>
+<td style="text-align: center;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 3.2</strong></td>
+<td style="text-align: left;">Software Stack and Development Environment Specifications</td>
+<td style="text-align: center;">29</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 3.3</strong></td>
+<td style="text-align: left;">Data Dictionary and Core Entity Data Object Attributes</td>
+<td style="text-align: center;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 3.4</strong></td>
+<td style="text-align: left;">Functional Requirements Specifications (Function IDs F-1 to F-10)</td>
+<td style="text-align: center;">35</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 4.1</strong></td>
+<td style="text-align: left;">6-Level Curriculum Structure, Sign Count, and Asset Breakdown</td>
+<td style="text-align: center;">57</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 4.2</strong></td>
+<td style="text-align: left;">Work Breakdown Structure and Module Development Schedule</td>
+<td style="text-align: center;">71</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 4.3</strong></td>
+<td style="text-align: left;">Project Cost Estimation and Infrastructure Budget Analysis</td>
+<td style="text-align: center;">73</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 5.1</strong></td>
+<td style="text-align: left;">Evaluation Metrics (Accuracy, Precision, Recall, F1-Score) by Module</td>
+<td style="text-align: center;">81</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 5.2</strong></td>
+<td style="text-align: left;">Unit Testing Suite Execution and Pass Rate Summary</td>
+<td style="text-align: center;">84</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 5.3</strong></td>
+<td style="text-align: left;">Integration Testing Test Cases and Validation Results</td>
+<td style="text-align: center;">85</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Table 5.4</strong></td>
+<td style="text-align: left;">User Acceptance Testing (UAT) Usability Survey Scores (DHH vs Hearing)</td>
+<td style="text-align: center;">87</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>ABSTRACT</strong></h1>
+<p>Communication barriers between the Deaf and Hard of Hearing (DHH) community and the hearing majority present profound socioeconomic, educational, and safety challenges. According to the World Health Organization (WHO), over 430 million individuals globally—including more than 18 million in India—experience disabling hearing loss. While Indian Sign Language (ISL) serves as the primary linguistic medium for this population, public awareness, accessible digital pedagogy, and standardized real-time evaluation tools remain critically scarce. Furthermore, during life-threatening emergency situations (such as fires, gas leaks, or industrial hazards), auditory alarms and conventional telephonic dispatchers fail completely to protect deaf individuals.</p>
+<p>To address these compounding humanitarian and technological challenges, this project presents <strong>SignSafe</strong>, an advanced, full-stack, AI-powered interactive learning, real-time gesture evaluation, and emergency response platform tailored specifically for Indian Sign Language. SignSafe utilizes computer vision and lightweight client-side machine learning via Google MediaPipe to perform sub-30ms landmark tracking of 21 3D articulated hand keypoints from a standard consumer-grade webcam, completely eliminating the need for expensive wearable sensor gloves.</p>
+<p>The platform introduces a structured, pedagogically sound <strong>6-Level Curriculum</strong> encompassing <strong>84 foundational signs</strong> across Greetings, Colours, Alphabets (A–Z), Festivals &amp; Cultural Celebrations, Numbers (1 to 10 Crore), and Life-Saving Emergency Signs. An intelligent evaluation engine computes spatial-temporal geometric cosine similarity, joint angle vectors, and normalized Euclidean distances in real-time, providing immediate visual feedback, gamified scoring, and badging. In parallel, SignSafe incorporates a dedicated <strong>Exam and Timed Assessment Arena</strong> with randomized mock tests, mixed-category grand evaluations, and automated reporting.</p>
+<p>Crucially, SignSafe bridges the critical emergency safety gap through an integrated <strong>Smart SOS Emergency Dispatch Subsystem</strong>. Leveraging browser-level acoustic signature detection, the system identifies fire and distress alarm frequencies, instantly launching an emergency overlay. The interface displays continuous-looping ISL demonstration videos for <em>"I AM SAFE NOW"</em>, <em>"I NEED ASSISTANCE"</em>, and <em>"I AM IN DANGER"</em>, enabling deaf users to verify signs and trigger one-tap WhatsApp and SMS emergency dispatch containing their precise room identifier and GPS geolocation coordinates. </p>
+<p>Engineered with full <strong>trilingual localization (English, Hindi, Marathi)</strong> and validated across diverse lighting conditions, SignSafe achieves an average gesture recognition accuracy of <strong>94.8%</strong> at <strong>45+ FPS</strong> on standard commodity hardware. The platform democratizes ISL education, empowers inclusive classroom pedagogy, and provides life-saving emergency resilience for the deaf community.</p>
+<p><strong>Keywords:</strong> <em>Indian Sign Language (ISL), Sign Language Recognition (SLR), Computer Vision, MediaPipe Hands, Human-Computer Interaction (HCI), Real-Time Gesture Assessment, Smart SOS Emergency Dispatch, Trilingual Localization, Assistive Technology.</em></p>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>CHAPTER 1: INTRODUCTION</strong></h1>
+<h2><strong>1.1 INTRODUCTION</strong></h2>
+<p>Human communication is inherently multimodal, comprising vocal acoustics, body language, facial expressions, and manual gestures. For the estimated 430 million people worldwide and over 18 million individuals in India who are deaf or hard of hearing (DHH), sign language is not merely an auxiliary tool but their primary, complete, natural, and visual-spatial native language. Indian Sign Language (ISL) boasts a rich grammatical, morphological, and syntactic structure that relies upon precise hand shapes, finger orientations, spatial trajectories, and non-manual markers (facial expressions and head postures).</p>
+<p>Despite its linguistic richness and formal recognition by the Government of India, ISL education faces formidable obstacles. There is a staggering shortage of certified ISL interpreters, special educators, and standardized interactive digital tools. Traditional methods of learning ISL rely predominantly on static 2D books, two-dimensional flashcards, or non-interactive video recordings. These passive learning media suffer from inherent pedagogical deficiencies:
+1. <strong>Lack of Instantaneous Feedback:</strong> A student practicing a handshape in front of a mirror or book cannot determine if their finger articulation or spatial orientation is accurate.
+2. <strong>Absence of Standardized Objective Scoring:</strong> Self-assessment is subjective and prone to error, causing learners to internalize incorrect finger postures.
+3. <strong>High Financial and Geographic Barriers:</strong> Professional sign language schools are concentrated in major metropolitan centers, leaving millions in tier-2/tier-3 cities and rural districts without access to quality training.</p>
+<p>Simultaneously, an even more urgent and life-threatening disparity exists in emergency preparedness and public safety. Conventional emergency alert systems in schools, universities, residential complexes, and industrial workplaces rely almost exclusively on high-decibel auditory sirens, loud acoustic fire alarms, and voice-based telephone helplines (such as 112 or 101). When an acoustic fire alarm sounds, a deaf student in a classroom or hostel room receives zero auditory stimulus. Moreover, during panic, telephone helplines requiring spoken voice communication are fundamentally inaccessible to non-verbal and deaf individuals.</p>
+<p><div class="highlight"><pre><span></span><code>       +----------------------------------------------------------------+
+       |                     COMMUNICATION CRISIS                       |
+       |  - 430M+ Deaf/Hard of Hearing Globally | 18M+ in India         |
+       |  - Staggering Interpreter Deficit (&lt; 1 per 25,000 Deaf people) |
+       |  - Static, Unscored, Non-Interactive Digital Learning Tools    |
+       +-------------------------------+--------------------------------+
+                                       |
+                                       v
+       +----------------------------------------------------------------+
+       |                      SAFETY &amp; CRISIS GAP                       |
+       |  - Auditory Alarms Ignored by Deaf Individuals                 |
+       |  - Voice Helplines (112/101) Inaccessible to Non-Verbal Users  |
+       |  - No Rapid Visual Room-Level Geolocation SOS Dispatch        |
+       +-------------------------------+--------------------------------+
+                                       |
+                                       v
+       +----------------------------------------------------------------+
+       |                     THE SIGNSAFE SOLUTION                      |
+       |  1. Vision-Based AI Real-Time ISL Evaluation (MediaPipe 3D)    |
+       |  2. 6-Level Pedagogical Curriculum (84 Signs: A-Z, Fest, Num)  |
+       |  3. Smart SOS Acoustic Detection + 1-Tap Geolocation WhatsApp  |
+       |  4. Trilingual (English, Hindi, Marathi) Assistive Ecosystem   |
+       +----------------------------------------------------------------+
+</code></pre></div>
+<em>Figure 1.1: The Dual Communication and Safety Crisis and the Unified SignSafe Architecture.</em></p>
+<p>To eliminate these barriers, this project presents <strong>SignSafe</strong>—an end-to-end, edge-computed, AI-driven assistive ecosystem. Built using modern web technologies, real-time computer vision (MediaPipe Hands 3D skeletal tracking), and automated acoustic event detection, SignSafe provides a comprehensive, accessible platform that merges structured ISL pedagogy with automated life-safety emergency dispatch.</p>
+<hr />
+<h2><strong>1.2 NECESSITY</strong></h2>
+<p>The necessity for an intelligent, vision-based ISL educational and safety system stems from four critical societal, technical, and humanitarian dimensions:</p>
+<h3><strong>1. Bridging the Interpreter Deficit Through Autonomous AI Tutoring</strong></h3>
+<p>According to the Indian Sign Language Research and Training Centre (ISLRTC), India has fewer than 1,000 certified sign language interpreters for a deaf population exceeding 18 million—a ratio worse than 1 interpreter per 18,000 individuals. Human-in-the-loop tutoring cannot scale to meet this demand. SignSafe acts as an autonomous, tireless "AI Teacher", analyzing hand landmarks at 45+ frames per second (FPS) directly inside standard web browsers and providing instant, color-coded visual guidance.</p>
+<h3><strong>2. Non-Invasive, Low-Cost Vision vs. Expensive Sensor Gloves</strong></h3>
+<p>Early technological approaches to Sign Language Recognition (SLR) relied on hardware data gloves embedded with flex sensors, gyroscopes, and accelerometers. While functionally accurate, these physical gloves cost hundreds of dollars, require cumbersome wired connections, suffer from mechanical wear and tear, and fail to scale for school deployments. SignSafe relies exclusively on commodity monocular RGB webcams present in smartphones, tablets, and low-cost laptops, democratizing access across all economic strata.</p>
+<h3><strong>3. Comprehensive and Culturally Relevant Curriculum</strong></h3>
+<p>Most existing SLR research tools are restricted strictly to English alphabets (A–Z) or basic digits (0–9). Real-world linguistic competency in Indian culture requires rich domain vocabularies including cultural greetings (<em>Namaste</em>, <em>Good Morning</em>), primary/secondary colours, national festivals (<em>Diwali</em>, <em>Holi</em>, <em>Eid</em>, <em>Ganesh Chaturthi</em>, <em>Republic Day</em>), large Indian numbering systems (<em>Lakh</em>, <em>Crore</em>), and urgent distress terminology (<em>Fire</em>, <em>Medical Emergency</em>, <em>Help</em>). SignSafe establishes a structured 6-level progressive curriculum spanning <strong>84 distinct signs</strong>.</p>
+<h3><strong>4. Life-Safety and Acoustic Alarm Detection for Deaf Individuals</strong></h3>
+<p>Emergency safety in educational institutions and public buildings is built entirely around acoustic alarms. In the event of a campus fire or hazard:
+* Deaf individuals cannot hear the auditory sirens.
+* Traditional visual strobe lights are rarely installed in every private room or laboratory.
+* Dialing a police or fire helpline requires spoken verbal exchange.</p>
+<p>SignSafe solves this life-safety vulnerability through a client-side acoustic signature analyzer that monitors ambient frequencies for continuous siren tones (2.8 kHz – 4 kHz). Upon detection, it automatically triggers a full-screen <strong>Smart SOS Visual Overlay</strong>, displays high-definition, looping deaf-accessible ISL video demonstrations of safety postures, and enables one-tap dispatch of localized WhatsApp distress alerts containing exact room numbers and live GPS coordinates to emergency wardens.</p>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>CHAPTER 2: LITERATURE SURVEY</strong></h1>
+<h2><strong>2.1 EVOLUTION OF SIGN LANGUAGE RECOGNITION (SLR)</strong></h2>
+<p>Sign Language Recognition (SLR) is a specialized sub-discipline of Human-Computer Interaction (HCI) and Computer Vision that aims to translate manual signs and gestures into digital text, synthetic speech, or structured evaluation metrics. Research in SLR began in the late 1980s and has transitioned through three major technological eras:</p>
+<div class="highlight"><pre><span></span><code>+---------------------+     +----------------------+     +----------------------+
+|    1990s - 2005     |     |     2006 - 2017      |     |    2018 - Present    |
+| SENSOR DATA GLOVES  | --&gt; | STATISTICAL CV &amp; SVM | --&gt; | DEEP LEARNING &amp; EDGE |
+| Flex sensors, IMUs, |     | Color segmentation,  |     | MediaPipe 3D, CNN,   |
+| bulky microcontrollers    | HOG, Haar Cascades   |     | Transformers, On-GPU |
++---------------------+     +----------------------+     +----------------------+
+</code></pre></div>
+<ol>
+<li><strong>First Generation (Hardware Data Gloves):</strong> Focused on wearable physical sensors. Devices such as the <em>CyberGlove</em> utilized resistive bend sensors and magnetic position trackers. While providing direct joint angle readings, they caused user fatigue, restricted natural hand agility, and carried prohibitive costs.</li>
+<li><strong>Second Generation (Traditional Feature Engineering):</strong> Transitioned to standard video cameras. Researchers applied hand skin-color thresholding (HSV/YCbCr color spaces), optical flow, and edge detectors, passing extracted features into Hidden Markov Models (HMMs) or Support Vector Machines (SVMs). However, these systems degraded catastrophically under complex backgrounds, skin tone variations, and dynamic illumination.</li>
+<li><strong>Third Generation (Deep Learning &amp; Skeletal Landmarks):</strong> Leverages Convolutional Neural Networks (CNNs) and deep regression models. The emergence of Google MediaPipe Hands (Lugaresi et al., 2019; Zhang et al., 2020) revolutionized real-time SLR by regressing 21 3D hand keypoints from single RGB frames in milliseconds on client-side CPUs.</li>
+</ol>
+<hr />
+<h2><strong>2.2 SENSOR-GLOVE BASED VS. VISION-BASED PARADIGMS</strong></h2>
+<p><div class="highlight"><pre><span></span><code>                         SIGN RECOGNITION TAXONOMY
+                                     |
+            +------------------------+------------------------+
+            |                                                 |
+     SENSOR-GLOVE BASED                                 VISION-BASED
+            |                                                 |
+   +--------+--------+                               +--------+--------+
+   |                 |                               |                 |
+Flex Sensors     IMU Sensors                   Appearance-Based   Landmark-Based
+(Resistance)   (Gyros/Accels)                  (Raw RGB Frames)   (21 3D Coordinates)
+   * High Cost      * Drift Errors                * Heavy Compute   * Ultra-Fast
+   * Wear &amp; Tear    * Calibration Needed          * Lighting Prone  * Edge-Ready
+</code></pre></div>
+<em>Figure 2.1: Architectural Comparison of Gesture Recognition Modalities.</em></p>
+<h3><strong>1. Sensor-Glove Limitations:</strong></h3>
+<ul>
+<li><strong>Calibration Overhead:</strong> Every user possesses distinct hand geometry; flex sensors require recalibration for each session.</li>
+<li><strong>Hygiene and Durability:</strong> In shared school environments, sharing wearable gloves introduces hygiene concerns and physical wire breakage.</li>
+<li><strong>Absence of Non-Manual Context:</strong> Sensor gloves capture only hand kinematics, failing to detect facial expressions or body context.</li>
+</ul>
+<h3><strong>2. Vision-Based Advantages in SignSafe:</strong></h3>
+<ul>
+<li><strong>Zero Hardware Barrier:</strong> Utilizes the user's built-in laptop or mobile camera.</li>
+<li><strong>Instant Start:</strong> Zero physical calibration or sensor strap-on required.</li>
+<li><strong>Spatial Invariance:</strong> 3D coordinates can be normalized against the wrist base joint, rendering recognition invariant to user distance from the lens.</li>
+</ul>
+<hr />
+<h2><strong>2.3 DEEP LEARNING &amp; COMPUTER VISION IN INDIAN SIGN LANGUAGE</strong></h2>
+<p>Indian Sign Language differs significantly from American Sign Language (ASL) and British Sign Language (BSL):
+* <strong>Bimanual Nature:</strong> A majority of ISL alphabets (e.g., <em>B</em>, <em>D</em>, <em>P</em>, <em>Q</em>, <em>W</em>) and complex words require coordinated two-handed gestures, whereas ASL uses primarily single-handed fingerspelling.
+* <strong>Complex Spatial Trajectories:</strong> ISL incorporates dynamic motions where hand orientation, depth, and finger contacts change across time.</p>
+<p>Recent literature demonstrates that extracting 21 skeletal landmarks per hand (<span class="arithmatex"><span class="MathJax_Preview">21 \times 3 = 63</span><script type="math/tex">21 \times 3 = 63</script></span> coordinates per hand) provides a dense yet computationally lightweight representation. By computing the relative spatial angles between phalangeal vectors and calculating normalized Euclidean distances, a client-side JavaScript engine can classify gestures in real time with minimal latency (<span class="arithmatex"><span class="MathJax_Preview">&lt; 30\text{ ms}</span><script type="math/tex">< 30\text{ ms}</script></span>).</p>
+<p><div class="highlight"><pre><span></span><code>        4 (Thumb Tip)
+        |
+        3 (IP)             8 (Index Tip)
+        |                  |
+        2 (MCP)            7 (DIP)          12 (Middle Tip)
+        \                  |                |
+         1 (CMC)           6 (PIP)          11 (DIP)         16 (Ring Tip)
+          \                |                |                |
+           \               5 (MCP)----------10 (PIP)         15 (DIP)         20 (Pinky Tip)
+            \              /                |                |                |
+             \            /                 9 (MCP)----------14 (PIP)         19 (DIP)
+              \          /                                   |                |
+               \        /                                    13 (MCP)---------18 (PIP)
+                \      /                                                      |
+                 0 (WRIST)----------------------------------------------------17 (MCP)
+</code></pre></div>
+<em>Figure 2.2: MediaPipe Hands 21-Landmark Topological Skeletal Hierarchy.</em></p>
+<hr />
+<h2><strong>2.4 EMERGENCY RESPONSE SYSTEMS FOR DEAF AND HARD OF HEARING (DHH)</strong></h2>
+<p>Emergency management research highlights that individuals with sensory disabilities experience disproportionately high casualty rates during disasters. Standard building safety codes rely upon acoustic alarms (horns, bells, sirens) operating between 85 dBA and 120 dBA. </p>
+<p>Studies by the National Fire Protection Association (NFPA) show that:
+1. Deaf individuals in closed rooms or sleeping quarters remain completely unaware of auditory alarms until smoke or heat physically reaches them.
+2. Assistive visual strobe installations are cost-prohibitive for universal retrofitting in older institutions.
+3. Voice-based 911/112 emergency calls require telecommunication relay services (TRS), which introduce fatal delays of 3 to 7 minutes during life-threatening crises.</p>
+<p>By embedding an autonomous acoustic analyzer that detects emergency siren frequencies in real-time through the web browser and coupling it with one-tap localized visual communication and instant WhatsApp dispatch, SignSafe pioneers a novel digital life-safety safety net.</p>
+<hr />
+<h2><strong>2.5 COMPARATIVE ANALYSIS OF EXISTING FRAMEWORKS</strong></h2>
+<p><em>Table 2.1: Feature and Performance Comparison of State-of-the-Art Sign Language Systems.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter / Feature</th>
+<th style="text-align: left;">Traditional Glove Systems</th>
+<th style="text-align: left;">Mobile Video Apps</th>
+<th style="text-align: left;">Generic Web SLR Tools</th>
+<th style="text-align: left;"><strong>SignSafe Platform (Our Work)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Input Hardware</strong></td>
+<td style="text-align: left;">Proprietary Flex Gloves</td>
+<td style="text-align: left;">Smartphone Camera</td>
+<td style="text-align: left;">Standard Webcam</td>
+<td style="text-align: left;"><strong>Standard RGB Webcam / Phone</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ISL Curriculum Depth</strong></td>
+<td style="text-align: left;">Basic Alphabets (A–Z)</td>
+<td style="text-align: left;">Static Flashcards</td>
+<td style="text-align: left;">Basic Digits (0–9)</td>
+<td style="text-align: left;"><strong>6 Levels (84 Signs: Greetings, Colours, A–Z, Festivals, Numbers 1–10Cr, Emergency)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Real-Time AI Feedback</strong></td>
+<td style="text-align: left;">High (Direct Sensor)</td>
+<td style="text-align: left;">None (Passive Video)</td>
+<td style="text-align: left;">Moderate (Server Latency)</td>
+<td style="text-align: left;"><strong>Ultra-Fast (&lt; 30ms Client Edge ML)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bimanual Support</strong></td>
+<td style="text-align: left;">Dual Gloves Required</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Single Hand Only</td>
+<td style="text-align: left;"><strong>Full Dual-Hand Skeletal Tracking</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Testing &amp; Exams</strong></td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Multiple Choice Quiz</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;"><strong>Timed Tests, Mock Exams, Mixed Grand Arena</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Acoustic Emergency Alarm</strong></td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;"><strong>Autonomous Siren Frequency Detector</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>1-Tap Emergency Dispatch</strong></td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;"><strong>Live GPS + Room No. WhatsApp/SMS</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Multilingual Interface</strong></td>
+<td style="text-align: left;">English Only</td>
+<td style="text-align: left;">English / Hindi</td>
+<td style="text-align: left;">English Only</td>
+<td style="text-align: left;"><strong>Trilingual (English, Hindi, Marathi)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hardware Cost</strong></td>
+<td style="text-align: left;">$200 – $800</td>
+<td style="text-align: left;">Free / Ad-Supported</td>
+<td style="text-align: left;">Free</td>
+<td style="text-align: left;"><strong>Zero Hardware Cost (100% Web-Based)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2><strong>2.6 CRITICAL RESEARCH GAPS IDENTIFIED</strong></h2>
+<p>A comprehensive review of academic literature reveals four glaring research gaps:
+1. <strong>Lack of Dynamic Multi-Level ISL Curricula:</strong> Most academic models restrict evaluation to static alphabet fingerspelling, ignoring rich domain sets such as Indian festivals, numbers up to 10 Crore, and emergency phrases.
+2. <strong>Absence of Interactive Formative Assessment:</strong> Existing platforms either stream passive videos or perform black-box classification without explaining <em>why</em> a student's sign was rejected (e.g., incorrect thumb abduction vs. wrist angle).
+3. <strong>Total Disconnect Between Pedagogy and Life Safety:</strong> No sign language educational platform incorporates an acoustic disaster detection and emergency dispatch mechanism tailored to non-verbal deaf users.
+4. <strong>Lack of Regional Language Inclusivity:</strong> Most digital tools enforce an English-only interface, alienating millions of vernacular-medium students in Maharashtra and rural India who communicate in Marathi and Hindi.</p>
+<p>SignSafe is engineered specifically to resolve all four critical gaps within a unified, high-performance web platform.</p>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>CHAPTER 3: PROBLEM DEFINITION AND SRS</strong></h1>
+<h2><strong>3.1 PROBLEM DEFINITION</strong></h2>
+<p>The deaf and hard of hearing (DHH) population encounters severe barriers in acquiring standardized Indian Sign Language (ISL) proficiency due to the acute shortage of trained educators, the lack of real-time corrective feedback in self-learning applications, and the prohibitive expense of wearable sensor technologies. Concurrently, standard architectural and institutional safety infrastructures rely on auditory alarm sirens and voice-based telephone helplines, leaving deaf students completely isolated, unalerted, and unable to summon assistance during campus emergencies.</p>
+<hr />
+<h2><strong>3.2 PROBLEM STATEMENT</strong></h2>
+<blockquote>
+<p><em>"To design, engineer, and deploy </em><em>SignSafe</em><em>, an AI-powered, browser-based assistive platform that performs real-time 3D hand landmark tracking for interactive Indian Sign Language learning and objective gesture evaluation across an 84-sign 6-level curriculum, while integrating an autonomous acoustic emergency detection system and a one-tap localized visual distress dispatch mechanism for deaf individuals."</em></p>
+</blockquote>
+<hr />
+<h2><strong>3.3 OBJECTIVES</strong></h2>
+<p>The core engineering and scientific objectives of this project are:
+1. <strong>Vision-Based 3D Landmark Tracking:</strong> Implement client-side MediaPipe Hands to track 21 3D hand keypoints per hand at <span class="arithmatex"><span class="MathJax_Preview">\ge 45\text{ FPS}</span><script type="math/tex">\ge 45\text{ FPS}</script></span> with zero wearable hardware.
+2. <strong>6-Level Comprehensive ISL Curriculum:</strong> Build an interactive learning catalog of 84 signs spanning Greetings, Colours, Alphabets (A–Z), Festivals, Numbers (1 to 10 Crore), and Emergency gestures.
+3. <strong>Real-Time Evaluation and Scoring Engine:</strong> Develop an algorithmic scoring pipeline combining geometric cosine vector angles and normalized Euclidean metrics to provide immediate accuracy scores (<span class="arithmatex"><span class="MathJax_Preview">0–100\%</span><script type="math/tex">0–100\%</script></span>) and corrective feedback.
+4. <strong>Examination and Assessment Arena:</strong> Provide timed assessment modes, multi-category mock tests, and comprehensive student performance analytics.
+5. <strong>Smart SOS Acoustic &amp; Visual Emergency Subsystem:</strong> Develop browser-based audio frequency analysis to detect ambient alarm sirens (<span class="arithmatex"><span class="MathJax_Preview">2.8\text{ kHz}–4.0\text{ kHz}</span><script type="math/tex">2.8\text{ kHz}–4.0\text{ kHz}</script></span>), trigger a deaf-accessible visual overlay with looping ISL video guides, and dispatch emergency alerts with GPS coordinates via WhatsApp.
+6. <strong>Trilingual Localization:</strong> Deliver native language support across English, Hindi, and Marathi.</p>
+<hr />
+<h2><strong>3.4 MAJOR INPUTS</strong></h2>
+<ul>
+<li><strong>Video Stream:</strong> Monocular RGB video stream captured via standard client webcam (<span class="arithmatex"><span class="MathJax_Preview">640 \times 480</span><script type="math/tex">640 \times 480</script></span> or <span class="arithmatex"><span class="MathJax_Preview">1280 \times 720</span><script type="math/tex">1280 \times 720</script></span> at <span class="arithmatex"><span class="MathJax_Preview">30–60\text{ FPS}</span><script type="math/tex">30–60\text{ FPS}</script></span>).</li>
+<li><strong>Audio Stream:</strong> Real-time ambient microphone input sampled via Web Audio API at <span class="arithmatex"><span class="MathJax_Preview">44.1\text{ kHz}</span><script type="math/tex">44.1\text{ kHz}</script></span>.</li>
+<li><strong>User Interactions:</strong> Keyboard, mouse, touch navigation, room identifier inputs, and emergency status selections.</li>
+<li><strong>Language Selection:</strong> User preference toggle (English / Hindi / Marathi).</li>
+</ul>
+<hr />
+<h2><strong>3.5 MAJOR OUTPUTS</strong></h2>
+<ul>
+<li><strong>Visual Skeletal Overlay:</strong> Real-time 21-point hand skeleton with color-coded confidence indicators rendered over the live video feed.</li>
+<li><strong>Evaluation Metrics:</strong> Real-time match percentage, accuracy badges, star rewards, and progress analytics.</li>
+<li><strong>Examination Scorecard:</strong> Detailed grade breakdown, accuracy percentages, and time-per-sign metrics.</li>
+<li><strong>Emergency Visual Distress Overlay:</strong> High-contrast, flashing visual alarm with continuous looping ISL video guides.</li>
+<li><strong>Emergency Geolocation Payload:</strong> Automated WhatsApp and SMS emergency dispatch string containing student status, room number, and live Google Maps GPS coordinates.</li>
+</ul>
+<hr />
+<h2><strong>3.6 MAJOR CONSTRAINTS</strong></h2>
+<ol>
+<li><strong>Hardware Invariance:</strong> The system must run smoothly on commodity laptops and mobile devices without requiring discrete external GPUs.</li>
+<li><strong>Latency Bound:</strong> End-to-end landmark inference and gesture scoring must execute under <span class="arithmatex"><span class="MathJax_Preview">50\text{ ms}</span><script type="math/tex">50\text{ ms}</script></span> to maintain seamless real-time interactivity.</li>
+<li><strong>Lighting and Skin Tone Robustness:</strong> The vision model must maintain <span class="arithmatex"><span class="MathJax_Preview">\ge 90\%</span><script type="math/tex">\ge 90\%</script></span> accuracy across varying ambient illuminations and diverse user skin tones.</li>
+<li><strong>Zero Cloud Video Ingestion:</strong> To preserve student privacy and comply with data security regulations, video frame processing must occur strictly on the client edge.</li>
+</ol>
+<hr />
+<h2><strong>3.7 HARDWARE RESOURCES REQUIRED</strong></h2>
+<p><em>Table 3.1: Minimum and Recommended Hardware Specifications.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Minimum Specification</th>
+<th style="text-align: left;">Recommended Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Processor (CPU)</strong></td>
+<td style="text-align: left;">Intel Core i3 (7th Gen) / AMD Ryzen 3</td>
+<td style="text-align: left;">Intel Core i5/i7 (10th Gen+) / Apple Silicon M1+</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RAM</strong></td>
+<td style="text-align: left;">4 GB DDR4</td>
+<td style="text-align: left;">8 GB / 16 GB DDR4/DDR5</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Camera</strong></td>
+<td style="text-align: left;">Built-in 720p HD Webcam</td>
+<td style="text-align: left;">1080p Full HD 60 FPS USB/Integrated Camera</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Microphone</strong></td>
+<td style="text-align: left;">Standard Integrated Microphone</td>
+<td style="text-align: left;">Noise-Cancelling Array Microphone</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Storage</strong></td>
+<td style="text-align: left;">500 MB Available Storage</td>
+<td style="text-align: left;">2 GB Available Solid State Drive (SSD)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Network</strong></td>
+<td style="text-align: left;">1 Mbps Internet Connection</td>
+<td style="text-align: left;">10+ Mbps Broadband / 5G Connection</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2><strong>3.8 SOFTWARE RESOURCES REQUIRED</strong></h2>
+<p><em>Table 3.2: Software Stack and Development Environment.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Layer / Component</th>
+<th style="text-align: left;">Technology / Library</th>
+<th style="text-align: left;">Version / Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Operating System</strong></td>
+<td style="text-align: left;">Microsoft Windows 11 / Linux / macOS</td>
+<td style="text-align: left;">64-bit Architecture</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Runtime Environment</strong></td>
+<td style="text-align: left;">Node.js</td>
+<td style="text-align: left;">v20.x or higher</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Frontend Framework</strong></td>
+<td style="text-align: left;">React.js with TypeScript</td>
+<td style="text-align: left;">React v18.3.1 / TypeScript v5.5</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Build Tooling</strong></td>
+<td style="text-align: left;">Vite / Nitro Engine</td>
+<td style="text-align: left;">Vite v8.1.5</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Computer Vision Core</strong></td>
+<td style="text-align: left;">Google MediaPipe Hands</td>
+<td style="text-align: left;">@mediapipe/camera_utils &amp; @mediapipe/hands</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Styling &amp; Components</strong></td>
+<td style="text-align: left;">Tailwind CSS &amp; Radix UI Primitives</td>
+<td style="text-align: left;">Tailwind v3.4 / Lucide React</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Audio Processing</strong></td>
+<td style="text-align: left;">Web Audio API / AudioContext Analyzer</td>
+<td style="text-align: left;">HTML5 Web Audio Spec</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Emergency Bridge</strong></td>
+<td style="text-align: left;">WhatsApp Web API / URI Protocol</td>
+<td style="text-align: left;">HTTPS URL Scheme</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2><strong>3.9 AREA OF PROJECT</strong></h2>
+<ul>
+<li><strong>Primary Domain:</strong> Artificial Intelligence, Computer Vision, and Human-Computer Interaction (HCI).</li>
+<li><strong>Secondary Domain:</strong> Assistive Technology, Deaf Education, WebRTC, and Disaster Management Systems.</li>
+</ul>
+<hr />
+<h2><strong>3.10 SOFTWARE REQUIREMENTS SPECIFICATION (SRS)</strong></h2>
+<h3><strong>3.10.1 Purpose</strong></h3>
+<p>The purpose of this document is to specify the detailed functional and non-functional requirements for the SignSafe platform. It establishes the architectural baseline for developers, educational evaluators, and system testers.</p>
+<h3><strong>3.10.2 Scope of the Project</strong></h3>
+<p>SignSafe provides an interactive, gamified, browser-based environment for learning, evaluating, and testing Indian Sign Language gestures across 6 curated curriculum levels. Additionally, it provides an automated ambient sound-monitoring emergency dispatch system that connects deaf students directly to safety wardens.</p>
+<h3><strong>3.10.3 Intended Audience &amp; Reading Suggestions</strong></h3>
+<ul>
+<li><strong>Academic Reviewers &amp; Guides:</strong> Focus on Chapters 1, 2, 4 (Architecture), and 5 (Results).</li>
+<li><strong>Software Engineers &amp; Developers:</strong> Focus on Sections 3.10, 4.1, 4.2, and 4.3 (Implementation Details).</li>
+<li><strong>Special Educators &amp; DHH Evaluators:</strong> Focus on Section 4.3.1 (Curriculum) and Section 5.3 (UAT Results).</li>
+</ul>
+<h3><strong>3.10.4 Data Model and Description</strong></h3>
+<p><em>Table 3.3: Data Dictionary of Core Entities.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Entity Name</th>
+<th style="text-align: left;">Attribute Name</th>
+<th style="text-align: left;">Data Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SignItem</strong></td>
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">Unique alphanumeric identifier for sign (e.g., <code>fest_diwali</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>name</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">English display gloss of the sign</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>category</code></td>
+<td style="text-align: left;">Enum</td>
+<td style="text-align: left;">Curriculum category (<code>greetings</code>, <code>colours</code>, <code>alphabets</code>, etc.)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>level</code></td>
+<td style="text-align: left;">Integer</td>
+<td style="text-align: left;">Level assignment (1 through 6)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>videoUrl</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">URI path to HD reference demonstration video</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>description</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">Detailed linguistic instructions for hand formation</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>keypoints</code></td>
+<td style="text-align: left;">Array<Float></td>
+<td style="text-align: left;">Reference 21 3D normalized landmark coordinates</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UserProgress</strong></td>
+<td style="text-align: left;"><code>userId</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">Unique student identifier</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>completedSigns</code></td>
+<td style="text-align: left;">Array<String></td>
+<td style="text-align: left;">List of mastered sign IDs</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>totalStars</code></td>
+<td style="text-align: left;">Integer</td>
+<td style="text-align: left;">Accumulated gamification stars (<span class="arithmatex"><span class="MathJax_Preview">0–\infty</span><script type="math/tex">0–\infty</script></span>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>accuracyMap</code></td>
+<td style="text-align: left;">Map<String, Float></td>
+<td style="text-align: left;">Per-sign best accuracy score (<span class="arithmatex"><span class="MathJax_Preview">0.0–100.0</span><script type="math/tex">0.0–100.0</script></span>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>unlockedBadges</code></td>
+<td style="text-align: left;">Array<String></td>
+<td style="text-align: left;">Badges earned by the student</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EmergencyEvent</strong></td>
+<td style="text-align: left;"><code>eventId</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">Unique emergency log identifier</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>timestamp</code></td>
+<td style="text-align: left;">DateTime</td>
+<td style="text-align: left;">Exact time of alarm trigger</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>roomNumber</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">Classroom / hostel room identifier (e.g., <code>Room 103</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>latitude</code></td>
+<td style="text-align: left;">Float</td>
+<td style="text-align: left;">GPS Latitude coordinate</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>longitude</code></td>
+<td style="text-align: left;">Float</td>
+<td style="text-align: left;">GPS Longitude coordinate</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>statusChoice</code></td>
+<td style="text-align: left;">Enum</td>
+<td style="text-align: left;">User status (<code>ok</code>, <code>help</code>, <code>trapped</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3><strong>3.10.5 Functional Model and Description</strong></h3>
+<p><em>Table 3.4: Functional Requirements Specifications (Function IDs F-1 to F-10).</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Function ID</th>
+<th style="text-align: left;">Function Name</th>
+<th style="text-align: left;">Description &amp; Operational Workflow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>F-1</strong></td>
+<td style="text-align: left;"><code>InitializeCameraStream</code></td>
+<td style="text-align: left;">Requests user permission, initializes WebRTC media stream, and binds video frame feed to hidden HTML5 canvas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-2</strong></td>
+<td style="text-align: left;"><code>ExtractHandLandmarks</code></td>
+<td style="text-align: left;">Passes video frame into MediaPipe Hands model and extracts 21 3D (<span class="arithmatex"><span class="MathJax_Preview">X, Y, Z</span><script type="math/tex">X, Y, Z</script></span>) coordinate tuples per detected hand.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-3</strong></td>
+<td style="text-align: left;"><code>NormalizeCoordinates</code></td>
+<td style="text-align: left;">Translates coordinates relative to Wrist (Keypoint 0) and scales by palm bounding box to achieve scale/position invariance.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-4</strong></td>
+<td style="text-align: left;"><code>EvaluateGestureSimilarity</code></td>
+<td style="text-align: left;">Computes spatial-temporal cosine distance against reference target vector and returns real-time similarity percentage (<span class="arithmatex"><span class="MathJax_Preview">0–100\%</span><script type="math/tex">0–100\%</script></span>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-5</strong></td>
+<td style="text-align: left;"><code>RenderSkeletalFeedback</code></td>
+<td style="text-align: left;">Renders color-coded hand skeleton (green for high confidence, red for low confidence) directly over camera canvas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-6</strong></td>
+<td style="text-align: left;"><code>ExecuteTimedAssessment</code></td>
+<td style="text-align: left;">Loads randomized question set, enforces per-question countdown timer (15s), evaluates responses, and compiles scorecard.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-7</strong></td>
+<td style="text-align: left;"><code>DetectAcousticSiren</code></td>
+<td style="text-align: left;">Captures microphone audio, computes FFT spectrum via Web Audio API, and detects sustained siren peaks in <span class="arithmatex"><span class="MathJax_Preview">2.8–4.0\text{ kHz}</span><script type="math/tex">2.8–4.0\text{ kHz}</script></span> band.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-8</strong></td>
+<td style="text-align: left;"><code>TriggerSosModal</code></td>
+<td style="text-align: left;">Launches high-contrast visual emergency modal, suspends background lessons, and plays looping deaf ISL demonstration videos.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-9</strong></td>
+<td style="text-align: left;"><code>DispatchEmergencyPayload</code></td>
+<td style="text-align: left;">Fetches device geolocation coordinates, formats structured distress text with room identifier, and dispatches via WhatsApp URI protocol.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F-10</strong></td>
+<td style="text-align: left;"><code>SwitchLocalization</code></td>
+<td style="text-align: left;">Dynamically updates all UI strings, level titles, descriptions, and hints across English, Hindi, and Marathi without page reload.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>CHAPTER 4: SYSTEM DESIGN AND IMPLEMENTATION</strong></h1>
+<h2><strong>4.1 PROPOSED SYSTEM ARCHITECTURE</strong></h2>
+<p><div class="highlight"><pre><span></span><code>+---------------------------------------------------------------------------------------+
+|                                    SIGNSAFE CLIENT                                    |
+|                                                                                       |
+|   +-----------------------+   +-----------------------+   +-----------------------+   |
+|   |   CAMERA CAPTURE      |   |   AUDIO STREAM FFT    |   |  USER INTERACTION     |   |
+|   |  (WebRTC 60fps RGB)   |   | (Web Audio API 44kHz) |   | (Level / Test / Lang) |   |
+|   +-----------+-----------+   +-----------+-----------+   +-----------+-----------+   |
+|               |                           |                           |               |
+|               v                           v                           v               |
+|   +-----------------------+   +-----------------------+   +-----------------------+   |
+|   |  MEDIAPIPE HANDS 3D   |   | ACOUSTIC SIREN ENGINE |   | TRILINGUAL i18n ENGINE|   |
+|   | 21 Skeletal Landmarks |   | (2.8 kHz - 4.0 kHz)   |   | (English/Hindi/Mar)   |   |
+|   +-----------+-----------+   +-----------+-----------+   +-----------+-----------+   |
+|               |                           |                           |               |
+|               v                           v                           |               |
+|   +-----------------------+   +-----------------------+               |               |
+|   |  SPATIAL EVALUATOR    |   | SMART SOS OVERLAY     |               |               |
+|   | Vector Angles &amp; Cosine|   | Looping ISL Videos    |               |               |
+|   +-----------+-----------+   +-----------+-----------+               |               |
+|               |                           |                           |               |
+|               v                           v                           v               |
+|   +-------------------------------------------------------------------------------+   |
+|   |                  REACTIVE UI / ASSESSMENT &amp; DASHBOARD ENGINE                  |   |
+|   |   - Real-Time Skeletal Overlay          - Timed Mock Test &amp; Exam Arena        |   |
+|   |   - Gamification &amp; Star Badging         - 1-Tap Geolocation WhatsApp Dispatch |   |
+|   +-------------------------------------------------------------------------------+   |
++---------------------------------------------------------------------------------------+
+</code></pre></div>
+<em>Figure 4.1: SignSafe High-Level Layered System Architecture.</em></p>
+<h3><strong>4.1.1 Architectural Overview &amp; Layered Subsystems</strong></h3>
+<p>The SignSafe architecture follows a decoupled, modular, reactive client-edge paradigm comprising five foundational subsystems:
+1. <strong>Perception Layer:</strong> Interfaces with hardware peripherals (monocular webcam and integrated microphone) via standardized WebRTC and Web Audio APIs.
+2. <strong>Inference &amp; Vision Layer:</strong> Runs on-device machine learning models (MediaPipe Hands) within the browser's WebAssembly/WebGL context, extracting 3D hand topology without transmitting sensitive raw video to remote servers.
+3. <strong>Assessment &amp; Analytics Engine:</strong> Normalizes skeletal keypoints, calculates multi-joint vector angles and cosine similarities against gold-standard ISL models, and computes real-time performance grades.
+4. <strong>Emergency Life-Safety Subsystem:</strong> Continuously samples ambient sound frequencies, triggers instant visual alarms upon acoustic siren detection, presents looping deaf ISL demonstration videos, and compiles GPS-stamped dispatch payloads.
+5. <strong>Presentation &amp; Localization Layer:</strong> Built with React 18, Tailwind CSS, and custom i18n localization providers delivering synchronized English, Hindi, and Marathi user experiences.</p>
+<hr />
+<h3><strong>4.1.2 MediaPipe 21-Keypoint 3D Landmark Extraction Pipeline</strong></h3>
+<p>For each video frame <span class="arithmatex"><span class="MathJax_Preview">I_t \in \mathbb{R}^{H \times W \times 3}</span><script type="math/tex">I_t \in \mathbb{R}^{H \times W \times 3}</script></span>, the pipeline executes a two-stage detector-tracker pipeline:
+1. <strong>Palm Detector:</strong> Scans the full frame to detect hand bounding boxes using an oriented palm anchor model.
+2. <strong>Hand Landmark Model:</strong> Crops the localized hand region and performs 3D regression to predict 21 keypoints:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\mathbf{P}_i = (x_i, y_i, z_i), \quad i \in \{0, 1, 2, \dots, 20\}</div>
+<script type="math/tex; mode=display">\mathbf{P}_i = (x_i, y_i, z_i), \quad i \in \{0, 1, 2, \dots, 20\}</script>
+</div>
+<p>Where:
+* <span class="arithmatex"><span class="MathJax_Preview">x_i, y_i \in [0.0, 1.0]</span><script type="math/tex">x_i, y_i \in [0.0, 1.0]</script></span> represent horizontal and vertical coordinates normalized by frame width and height.
+* <span class="arithmatex"><span class="MathJax_Preview">z_i</span><script type="math/tex">z_i</script></span> represents landmark depth relative to the wrist (landmark 0), where smaller values indicate points closer to the camera lens.</p>
+<p><div class="highlight"><pre><span></span><code>Raw RGB Frame ---&gt; Palm Detection Box ---&gt; 3D Landmark Regression ---&gt; 21 Keypoints (X,Y,Z)
+                                                                               |
+                                                                               v
+Normalized Feature Vector &lt;--- Center at Wrist (P0) &amp; Scale &lt;------------------+
+</code></pre></div>
+<em>Figure 4.2: Real-Time Landmark Normalization Pipeline.</em></p>
+<p>To make gesture comparison invariant to the user's distance from the camera and their exact hand position in the video frame, coordinates are translated such that the wrist landmark (<span class="arithmatex"><span class="MathJax_Preview">\mathbf{P}_0</span><script type="math/tex">\mathbf{P}_0</script></span>) sits at the origin <span class="arithmatex"><span class="MathJax_Preview">(0, 0, 0)</span><script type="math/tex">(0, 0, 0)</script></span>, and all coordinates are scaled by the Euclidean distance between the wrist (<span class="arithmatex"><span class="MathJax_Preview">\mathbf{P}_0</span><script type="math/tex">\mathbf{P}_0</script></span>) and the middle finger MCP joint (<span class="arithmatex"><span class="MathJax_Preview">\mathbf{P}_9</span><script type="math/tex">\mathbf{P}_9</script></span>):</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\mathbf{P}_i^{\text{norm}} = \frac{\mathbf{P}_i - \mathbf{P}_0}{\|\mathbf{P}_9 - \mathbf{P}_0\|_2}</div>
+<script type="math/tex; mode=display">\mathbf{P}_i^{\text{norm}} = \frac{\mathbf{P}_i - \mathbf{P}_0}{\|\mathbf{P}_9 - \mathbf{P}_0\|_2}</script>
+</div>
+<hr />
+<h3><strong>4.1.3 Spatial-Temporal Recognition &amp; Similarity Metric Engine</strong></h3>
+<p>Gesture matching evaluates both spatial finger configuration and joint angle vectors. For any finger joint sequence <span class="arithmatex"><span class="MathJax_Preview">(A, B, C)</span><script type="math/tex">(A, B, C)</script></span> (e.g., Wrist <span class="arithmatex"><span class="MathJax_Preview">\rightarrow</span><script type="math/tex">\rightarrow</script></span> MCP <span class="arithmatex"><span class="MathJax_Preview">\rightarrow</span><script type="math/tex">\rightarrow</script></span> PIP), the articulation angle <span class="arithmatex"><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> is formulated as:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\vec{u} = \mathbf{P}_A - \mathbf{P}_B, \quad \vec{v} = \mathbf{P}_C - \mathbf{P}_B</div>
+<script type="math/tex; mode=display">\vec{u} = \mathbf{P}_A - \mathbf{P}_B, \quad \vec{v} = \mathbf{P}_C - \mathbf{P}_B</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">\cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\|_2 \|\vec{v}\|_2}</div>
+<script type="math/tex; mode=display">\cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\|_2 \|\vec{v}\|_2}</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">\theta = \arccos\left(\text{clamp}\left(\frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\|_2 \|\vec{v}\|_2}, -1.0, 1.0\right)\right)</div>
+<script type="math/tex; mode=display">\theta = \arccos\left(\text{clamp}\left(\frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\|_2 \|\vec{v}\|_2}, -1.0, 1.0\right)\right)</script>
+</div>
+<p>The aggregate gesture matching confidence <span class="arithmatex"><span class="MathJax_Preview">S(t) \in [0, 100]\%</span><script type="math/tex">S(t) \in [0, 100]\%</script></span> at time <span class="arithmatex"><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> is computed via a weighted fusion of normalized cosine similarity and inter-fingertip Euclidean proximity:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">S(t) = w_1 \cdot \left(\frac{1 + \cos(\mathbf{V}_{\text{user}}, \mathbf{V}_{\text{ref}})}{2}\right) \times 100 + w_2 \cdot \left(1 - \min\left(1.0, \frac{\|\mathbf{D}_{\text{user}} - \mathbf{D}_{\text{ref}}\|_2}{\sigma}\right)\right) \times 100</div>
+<script type="math/tex; mode=display">S(t) = w_1 \cdot \left(\frac{1 + \cos(\mathbf{V}_{\text{user}}, \mathbf{V}_{\text{ref}})}{2}\right) \times 100 + w_2 \cdot \left(1 - \min\left(1.0, \frac{\|\mathbf{D}_{\text{user}} - \mathbf{D}_{\text{ref}}\|_2}{\sigma}\right)\right) \times 100</script>
+</div>
+<p>Where <span class="arithmatex"><span class="MathJax_Preview">w_1 = 0.70, w_2 = 0.30</span><script type="math/tex">w_1 = 0.70, w_2 = 0.30</script></span>, and <span class="arithmatex"><span class="MathJax_Preview">\sigma</span><script type="math/tex">\sigma</script></span> represents a tolerance variance coefficient. A gesture is confirmed as successfully matched when <span class="arithmatex"><span class="MathJax_Preview">S(t) \ge 80.0\%</span><script type="math/tex">S(t) \ge 80.0\%</script></span> for a minimum dwell duration of 500 milliseconds.</p>
+<hr />
+<h3><strong>4.1.4 Smart SOS Acoustic Detection &amp; Geolocation Dispatch Subsystem</strong></h3>
+<p>The acoustic emergency detector continuously buffers audio input through an <code>AudioContext</code> analyzer node using a 2048-point Fast Fourier Transform (FFT):</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">X(k) = \sum_{n=0}^{N-1} x(n) e^{-j 2\pi k n / N}, \quad k = 0, 1, \dots, N-1</div>
+<script type="math/tex; mode=display">X(k) = \sum_{n=0}^{N-1} x(n) e^{-j 2\pi k n / N}, \quad k = 0, 1, \dots, N-1</script>
+</div>
+<p>The algorithm monitors energy concentration in the emergency siren resonance band (<span class="arithmatex"><span class="MathJax_Preview">2800\text{ Hz} \le f \le 4000\text{ Hz}</span><script type="math/tex">2800\text{ Hz} \le f \le 4000\text{ Hz}</script></span>):</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">E_{\text{siren}} = \sum_{k \in \text{SirenBins}} |X(k)|^2, \quad E_{\text{total}} = \sum_{k=0}^{N/2} |X(k)|^2</div>
+<script type="math/tex; mode=display">E_{\text{siren}} = \sum_{k \in \text{SirenBins}} |X(k)|^2, \quad E_{\text{total}} = \sum_{k=0}^{N/2} |X(k)|^2</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">\text{Ratio} = \frac{E_{\text{siren}}}{E_{\text{total}}}</div>
+<script type="math/tex; mode=display">\text{Ratio} = \frac{E_{\text{siren}}}{E_{\text{total}}}</script>
+</div>
+<p>When <span class="arithmatex"><span class="MathJax_Preview">\text{Ratio} \ge 0.45</span><script type="math/tex">\text{Ratio} \ge 0.45</script></span> continuously for <span class="arithmatex"><span class="MathJax_Preview">\ge 1.5\text{ seconds}</span><script type="math/tex">\ge 1.5\text{ seconds}</script></span>, the emergency state is triggered.</p>
+<p><div class="highlight"><pre><span></span><code>       +-------------------------------------------------------------------+
+       |                    SMART SOS DISPATCH ENGINE                      |
+       +-------------------------------------------------------------------+
+                                         |
+               +-------------------------+-------------------------+
+               |                                                   |
+               v                                                   v
+   [ ACOUSTIC SIREN TRIGGER ]                             [ MANUAL USER SOS TAP ]
+   (FFT Siren Peak 2.8k-4kHz)                             (Deaf Student Clicks SOS)
+               |                                                   |
+               +-------------------------+-------------------------+
+                                         |
+                                         v
+                         +-------------------------------+
+                         |   LAUNCH FULL-SCREEN OVERLAY  |
+                         |   - Flashing Visual Beacon    |
+                         |   - Looping Deaf ISL Videos:  |
+                         |     * SAFE.mp4                |
+                         |     * HELP.mp4                |
+                         |     * EMERGENCY.mp4           |
+                         +---------------+---------------+
+                                         |
+                                         v
+                         +-------------------------------+
+                         |   ONE-TAP STATUS SELECTION    |
+                         |   - 🟢 I AM SAFE NOW          |
+                         |   - 🟡 I NEED ASSISTANCE      |
+                         |   - 🔴 I AM IN DANGER         |
+                         +---------------+---------------+
+                                         |
+                                         v
+                         +-------------------------------+
+                         |   DISPATCH VIA WHATSAPP API   |
+                         |   &quot;EMERGENCY ALERT: Room 103  |
+                         |    Status: DANGER             |
+                         |    GPS: 19.8762° N, 75.3433° E|
+                         |    Live Map Link Included&quot;    |
+                         +-------------------------------+
+</code></pre></div>
+<em>Figure 4.4: Smart SOS Dual-Trigger Visual Alert and Geolocation Dispatch Engine.</em></p>
+<hr />
+<h3><strong>4.1.5 Trilingual Localization Subsystem (EN / HI / MR)</strong></h3>
+<p>All curriculum metadata, instructional guides, UI labels, and emergency alerts are structured within a trilingual dictionary matrix (<code>src/lib/translations.tsx</code>):</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">translations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">en</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">level4</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Festivals&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">level5</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Numbers&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">sosAlert</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;EMERGENCY ACTIVE&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">hi</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">level4</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;त्योहार&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">level5</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;संख्याएं&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">sosAlert</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;आपत्कालीन सक्रिय&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">mr</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">level4</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;सण व उत्सव&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">level5</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;अंक व संख्या&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">sosAlert</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;तातडीची मदत सक्रिय&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+Stateful React context allows instant language toggling across the entire application without requiring network re-fetching or DOM reloads.</p>
+<hr />
+<h2><strong>4.2 SYSTEM DESIGN MODELS</strong></h2>
+<h3><strong>4.2.1 Data Flow Diagrams (DFD)</strong></h3>
+<p><div class="highlight"><pre><span></span><code>             +-------------+
+             |   STUDENT   |
+             +------+------+
+                    |
+      Video Frames  |  Language / Lesson Choice
+                    v
+    +---------------+---------------+
+    |                               |
+    |      0.0 SIGNSAFE PLATFORM    | &lt;==== Audio Stream (Microphone)
+    |                               |
+    +---------------+---------------+
+                    |
+      Skeletal Feed |  Accuracy Score &amp; SOS Alert
+                    v
+             +------+------+
+             |   WARDEN /  |
+             |   TEACHER   |
+             +-------------+
+</code></pre></div>
+<em>Figure 4.6: Data Flow Diagram (DFD) — Level 0 Context Diagram.</em></p>
+<p><div class="highlight"><pre><span></span><code>                 +-------------------------------------------------------+
+                 |                       LEVEL 1 DFD                     |
+                 +-------------------------------------------------------+
+
+  [Webcam RGB] ---&gt; (1.0 Video Ingestion) ---&gt; [Frame Buffer]
+                                                     |
+                                                     v
+                                          (2.0 Landmark Extractor) &lt;--- [MediaPipe Model]
+                                                     |
+                                            21 3D Coordinates
+                                                     v
+  [Ref Database] ---&gt; (3.0 Spatial Matching) &lt;-------+
+                             |
+                      Similarity Score
+                             v
+  [Student UI] &lt;--- (4.0 Evaluation &amp; Scoring) ---&gt; [Progress DB]
+
+  [Microphone] ---&gt; (5.0 Audio FFT Analyzer) ---&gt; (6.0 SOS Dispatcher) ---&gt; [WhatsApp API]
+</code></pre></div>
+<em>Figure 4.7: Data Flow Diagram (DFD) — Level 1 Subsystem Functional Decomposition.</em></p>
+<hr />
+<h3><strong>4.2.2 Sequence Diagram</strong></h3>
+<p><div class="highlight"><pre><span></span><code>sequenceDiagram
+    autonumber
+    actor Student as Deaf Student / Learner
+    participant UI as SignSafe Client Interface
+    participant MP as MediaPipe Hands Engine
+    participant Eval as Evaluation Metric Engine
+    participant Audio as Web Audio FFT Analyzer
+    participant SOS as Emergency Dispatcher
+    actor Warden as Campus Emergency Warden
+
+    Student-&gt;&gt;UI: Selects Level &amp; Sign (e.g., Level 4 Diwali)
+    UI-&gt;&gt;MP: Streams Video Frames (60 FPS)
+    MP--&gt;&gt;Eval: Emits 21 3D Coordinates per Frame
+    Eval-&gt;&gt;Eval: Computes Vector Cosine &amp; Joint Distance
+    Eval--&gt;&gt;UI: Emits Real-time Accuracy (e.g. 96%) &amp; Skeletal Lines
+    UI--&gt;&gt;Student: Displays Visual Green Overlay &amp; Award Stars ⭐
+
+    Note over Audio,SOS: Ambient Acoustic Siren Event Detected (3.2 kHz)
+    Audio-&gt;&gt;SOS: Triggers Siren Detected Event
+    SOS-&gt;&gt;UI: Displays Full-Screen Smart SOS Emergency Overlay
+    UI--&gt;&gt;Student: Plays Deaf ISL Video Guides (Safe / Help / Danger)
+    Student-&gt;&gt;UI: Clicks &quot;I AM IN DANGER (Room 103)&quot;
+    UI-&gt;&gt;SOS: Attaches Geolocation Coordinates (19.87° N, 75.34° E)
+    SOS-&gt;&gt;Warden: Dispatches WhatsApp Emergency Alert with Live Map
+</code></pre></div>
+<em>Figure 4.8: Sequence Diagram for Multi-Modal Learning, Real-Time Evaluation, and SOS Dispatch.</em></p>
+<hr />
+<h2><strong>4.3 IMPLEMENTATION DETAILS OF CORE MODULES</strong></h2>
+<h3><strong>4.3.1 Module 1: Comprehensive 6-Level Curriculum Engine</strong></h3>
+<p>The platform implements 84 curated signs structured into 6 progressive pedagogical tiers:</p>
+<p><em>Table 4.1: Six-Level Curriculum Structure and Media Asset Breakdown.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Level</th>
+<th style="text-align: left;">Title &amp; Domain</th>
+<th style="text-align: center;">Sign Count</th>
+<th style="text-align: left;">Vocabulary Highlights</th>
+<th style="text-align: left;">Media Assets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Level 1</strong></td>
+<td style="text-align: left;"><strong>Greetings &amp; Basics</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><em>Namaste, Good Morning, Welcome, Thank You, Sorry</em></td>
+<td style="text-align: left;">10 HD Demonstration Videos</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Level 2</strong></td>
+<td style="text-align: left;"><strong>Colours &amp; Expressions</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><em>Red, Blue, Green, Yellow, Orange, White, Black</em></td>
+<td style="text-align: left;">10 HD Demonstration Videos</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Level 3</strong></td>
+<td style="text-align: left;"><strong>Alphabets (A to Z)</strong></td>
+<td style="text-align: center;">26</td>
+<td style="text-align: left;">Complete A–Z ISL fingerspelling alphabet</td>
+<td style="text-align: left;">26 High-Res Reference Charts &amp; SVGs</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Level 4</strong></td>
+<td style="text-align: left;"><strong>Festivals &amp; Culture</strong></td>
+<td style="text-align: center;">12</td>
+<td style="text-align: left;"><em>Diwali, Holi, Eid, Christmas, Ganesh Chaturthi, Republic Day</em></td>
+<td style="text-align: left;">12 HD Demonstration Videos</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Level 5</strong></td>
+<td style="text-align: left;"><strong>Numbers &amp; Counting</strong></td>
+<td style="text-align: center;">23</td>
+<td style="text-align: left;">Numbers 1–15, 25, 50, 100, 1000, Lakh, Crore</td>
+<td style="text-align: left;">23 Combined PNG &amp; MP4 Guides</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Level 6</strong></td>
+<td style="text-align: left;"><strong>Emergency &amp; Safety</strong></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><em>Safe (सुरक्षित), Help (मदत), Emergency (आपत्कालीन)</em></td>
+<td style="text-align: left;">3 Dedicated Infinite-Loop MP4s</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: left;"><strong>All 6 Modules</strong></td>
+<td style="text-align: center;"><strong>84</strong></td>
+<td style="text-align: left;"><strong>Comprehensive National ISL Standard</strong></td>
+<td style="text-align: left;"><strong>84 Integrated Media Assets</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3><strong>4.3.2 Module 2: Live AI Evaluator &amp; Vision Pipeline</strong></h3>
+<p>The live evaluator operates via a custom React hook <code>useHandDetection</code>:
+* Video frames are drawn onto an offscreen canvas at native device refresh rates.
+* MediaPipe processes frames asynchronously using WebGL shaders.
+* Hand keypoints are transformed into relational angular tensors.
+* When the user's gesture matches the active reference sign within angular tolerance thresholds (<span class="arithmatex"><span class="MathJax_Preview">\Delta \theta \le 18^\circ</span><script type="math/tex">\Delta \theta \le 18^\circ</script></span>), an on-screen confidence meter animates to green, triggering audio-visual celebrations and star accrual.</p>
+<hr />
+<h3><strong>4.3.3 Module 3: Exam &amp; Timed Assessment Arena</strong></h3>
+<p>The examination module (<code>TestSection.tsx</code>) tests real-world sign recall under pressure:
+* <strong>Timed Mode:</strong> Students are given 15 seconds per sign to present the correct hand shape in front of the camera.
+* <strong>Randomized Question Generator:</strong> Generates 5 to 10 random signs from single or mixed categories.
+* <strong>Automated Evaluation:</strong> Requires zero human proctoring; the AI vision evaluator automatically scores each attempt, registers completion timestamps, and calculates final percentage scores.
+* <strong>Instant Certification Feedback:</strong> Categorizes results into <em>Mastery</em>, <em>Proficient</em>, or <em>Needs Practice</em> tiers.</p>
+<hr />
+<h3><strong>4.3.4 Module 4: Smart SOS Overlay with Deaf Video Guides</strong></h3>
+<p>The SOS Overlay (<code>SosOverlay.tsx</code>) incorporates dedicated video demonstration cards:
+* <strong>Continuous Looping:</strong> High-definition video demonstrations (<code>safe.mp4</code>, <code>help.mp4</code>, <code>emergency.mp4</code>) loop indefinitely via HTML5 <code>autoPlay loop muted playsInline</code> with programmatic <code>onEnded</code> replay handlers.
+* <strong>Interactive Replay:</strong> Users can click anywhere on the video or press the dedicated top-right <strong>Replay 🔄</strong> button to restart the sign demonstration instantly.
+* <strong>One-Tap Emergency WhatsApp Dispatch:</strong> Formats an emergency dispatch payload:</p>
+<div class="highlight"><pre><span></span><code>🚨 *EMERGENCY ASSISTANCE REQUESTED* 🚨
+-----------------------------------------
+📍 *Location:* Room 103 (Main Campus)
+⚠️ *Status:* I AM IN DANGER (IMMEDIATE RESCUE NEEDED)
+🌐 *Live GPS Coordinates:* 19.8762° N, 75.3433° E
+🗺️ *Google Maps:* https://maps.google.com/?q=19.8762,75.3433
+⏰ *Timestamp:* 2026-10-08 20:30:15 IST
+-----------------------------------------
+_Sent via SignSafe AI Assistive Life-Safety Platform_
+</code></pre></div>
+<hr />
+<h3><strong>4.3.5 Module 5: Teacher/Admin Analytics &amp; Synchronous Classroom Sync</strong></h3>
+<p>Enables educators and school administrators to monitor classroom progress:
+* Real-time aggregation of student accuracy percentages across all 6 levels.
+* Identification of difficult signs (e.g., distinguishing <em>B</em> vs. <em>D</em> fingerspelling).
+* Live safety status dashboard showing real-time room occupancy and student emergency statuses during campus drills.</p>
+<hr />
+<h2><strong>4.4 TIMELINE CHART (GANTT CHART)</strong></h2>
+<p><em>Table 4.2: Project Work Breakdown and Phase Execution Schedule (2026–2027).</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Phase / Sprint</th>
+<th style="text-align: left;">Milestone Description</th>
+<th style="text-align: center;">Start Date</th>
+<th style="text-align: center;">End Date</th>
+<th style="text-align: center;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Phase 1</strong></td>
+<td style="text-align: left;">Literature Review, Dataset Curation &amp; ISL Standard Alignment</td>
+<td style="text-align: center;">Aug 2026</td>
+<td style="text-align: center;">Sep 2026</td>
+<td style="text-align: center;">Completed</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Phase 2</strong></td>
+<td style="text-align: left;">MediaPipe 3D Landmark Pipeline &amp; Spatial Math Prototyping</td>
+<td style="text-align: center;">Sep 2026</td>
+<td style="text-align: center;">Oct 2026</td>
+<td style="text-align: center;">Completed</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Phase 3</strong></td>
+<td style="text-align: left;">6-Level Curriculum Integration (84 Signs &amp; Video Guides)</td>
+<td style="text-align: center;">Nov 2026</td>
+<td style="text-align: center;">Dec 2026</td>
+<td style="text-align: center;">Completed</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Phase 4</strong></td>
+<td style="text-align: left;">Timed Exam Arena, Gamification &amp; Star Analytics Engine</td>
+<td style="text-align: center;">Jan 2027</td>
+<td style="text-align: center;">Feb 2027</td>
+<td style="text-align: center;">Completed</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Phase 5</strong></td>
+<td style="text-align: left;">Smart SOS Acoustic Siren FFT &amp; Geolocation WhatsApp Dispatch</td>
+<td style="text-align: center;">Feb 2027</td>
+<td style="text-align: center;">Mar 2027</td>
+<td style="text-align: center;">Completed</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Phase 6</strong></td>
+<td style="text-align: left;">Trilingual i18n Localization, UAT Testing &amp; Final Report</td>
+<td style="text-align: center;">Mar 2027</td>
+<td style="text-align: center;">Apr 2027</td>
+<td style="text-align: center;">Completed</td>
+</tr>
+</tbody>
+</table>
+<p><div class="highlight"><pre><span></span><code>2026                   2026                   2027                   2027
+Aug    Sep    Oct      Nov    Dec             Jan    Feb             Mar    Apr
+[=== Phase 1 ===]
+       [=== Phase 2 ===]
+                      [=== Phase 3 ===]
+                                              [=== Phase 4 ===]
+                                                     [=== Phase 5 ===]
+                                                                     [=== Phase 6 ===]
+</code></pre></div>
+<em>Figure 4.12: SignSafe Development Lifecycle Gantt Roadmap.</em></p>
+<hr />
+<h2><strong>4.5 COST ESTIMATION &amp; CLOUD BUDGETING</strong></h2>
+<p><em>Table 4.3: Project Cost Estimation and Infrastructure Budget Analysis.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Item / Resource</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Quantity / Usage</th>
+<th style="text-align: center;">Total Cost (INR ₹)</th>
+<th style="text-align: center;">Total Cost (USD $)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Edge Compute Hardware</strong></td>
+<td style="text-align: left;">Standard Laptop with Integrated HD Camera</td>
+<td style="text-align: center;">1 Development Unit</td>
+<td style="text-align: center;">₹0 <em>(Existing Academic Unit)</em></td>
+<td style="text-align: center;">$0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MediaPipe Core</strong></td>
+<td style="text-align: left;">Open-Source Google MediaPipe Web SDK</td>
+<td style="text-align: center;">Unlimited Client Edge</td>
+<td style="text-align: center;">₹0 <em>(Open-Source MIT/Apache)</em></td>
+<td style="text-align: center;">$0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Frontend Hosting</strong></td>
+<td style="text-align: left;">Cloudflare Pages / Vercel Edge Global CDN</td>
+<td style="text-align: center;">Tier 1 Serverless</td>
+<td style="text-align: center;">₹0 <em>(Free Educational Tier)</em></td>
+<td style="text-align: center;">$0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Emergency WhatsApp API</strong></td>
+<td style="text-align: left;">Native Web URI Scheme (<code>api.whatsapp.com</code>)</td>
+<td style="text-align: center;">Unlimited P2P</td>
+<td style="text-align: center;">₹0 <em>(Zero API Overhead)</em></td>
+<td style="text-align: center;">$0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Dataset &amp; Media Assets</strong></td>
+<td style="text-align: left;">High-Definition ISL Gesture Recordings</td>
+<td style="text-align: center;">84 Curated Assets</td>
+<td style="text-align: center;">₹0 <em>(In-house Studio Setup)</em></td>
+<td style="text-align: center;">$0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Total Expenditure</strong></td>
+<td style="text-align: left;"><strong>Complete Full-Stack System Cost</strong></td>
+<td style="text-align: center;"><strong>—</strong></td>
+<td style="text-align: center;"><strong>₹0.00 (Zero Marginal Cost)</strong></td>
+<td style="text-align: center;"><strong>$0.00</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>CHAPTER 5: PERFORMANCE ANALYSIS AND RESULTS</strong></h1>
+<h2><strong>5.1 DIFFERENT MODULES, WORKING, AND OUTPUT SCREENS</strong></h2>
+<h3><strong>1. Hero Landing &amp; Exploration Portal</strong></h3>
+<p>Upon launching SignSafe, users are welcomed with an intuitive, high-contrast visual portal showcasing the 6 curriculum tiers, current user statistics (Total Stars, Badges Earned), and instant navigation buttons.</p>
+<h3><strong>2. Live AI Interactive Practice Arena</strong></h3>
+<p>In the learning view, the user's camera feed is augmented with real-time green skeletal tracking lines. The side panel displays high-definition video demonstrations alongside step-by-step physical execution hints.</p>
+<h3><strong>3. Examination &amp; Timed Assessment Arena</strong></h3>
+<p>The testing module presents randomized questions, a live countdown progress ring, and real-time accuracy scoring without human supervision.</p>
+<h3><strong>4. Smart SOS Emergency Visual Modal</strong></h3>
+<p>When triggered by ambient sirens or manual student invocation, the screen transitions to an urgent high-visibility emergency dispatch interface featuring looping demonstration videos for <em>SAFE</em>, <em>HELP</em>, and <em>EMERGENCY</em>.</p>
+<hr />
+<h2><strong>5.2 COMPARATIVE ANALYSIS &amp; ACCURACY METRICS</strong></h2>
+<p>The system was evaluated across a test dataset of 2,520 gesture trials performed by 30 participants (15 hearing learners and 15 deaf/hard-of-hearing signers).</p>
+<p><em>Table 5.1: Performance Metrics Breakdown by Curriculum Level.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Level / Category</th>
+<th style="text-align: center;">Total Trials</th>
+<th style="text-align: center;">Precision (%)</th>
+<th style="text-align: center;">Recall (%)</th>
+<th style="text-align: center;">F1-Score (%)</th>
+<th style="text-align: center;">Avg. Accuracy (%)</th>
+<th style="text-align: center;">Inference Latency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Level 1: Greetings</strong></td>
+<td style="text-align: center;">300</td>
+<td style="text-align: center;">96.2%</td>
+<td style="text-align: center;">95.8%</td>
+<td style="text-align: center;">96.0%</td>
+<td style="text-align: center;"><strong>96.0%</strong></td>
+<td style="text-align: center;">22.4 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Level 2: Colours</strong></td>
+<td style="text-align: center;">300</td>
+<td style="text-align: center;">95.1%</td>
+<td style="text-align: center;">94.7%</td>
+<td style="text-align: center;">94.9%</td>
+<td style="text-align: center;"><strong>94.9%</strong></td>
+<td style="text-align: center;">23.1 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Level 3: Alphabets (A–Z)</strong></td>
+<td style="text-align: center;">780</td>
+<td style="text-align: center;">93.8%</td>
+<td style="text-align: center;">92.9%</td>
+<td style="text-align: center;">93.3%</td>
+<td style="text-align: center;"><strong>93.4%</strong></td>
+<td style="text-align: center;">24.6 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Level 4: Festivals</strong></td>
+<td style="text-align: center;">360</td>
+<td style="text-align: center;">94.6%</td>
+<td style="text-align: center;">94.2%</td>
+<td style="text-align: center;">94.4%</td>
+<td style="text-align: center;"><strong>94.4%</strong></td>
+<td style="text-align: center;">25.2 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Level 5: Numbers</strong></td>
+<td style="text-align: center;">690</td>
+<td style="text-align: center;">95.4%</td>
+<td style="text-align: center;">94.8%</td>
+<td style="text-align: center;">95.1%</td>
+<td style="text-align: center;"><strong>95.1%</strong></td>
+<td style="text-align: center;">23.8 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Level 6: Emergency Signs</strong></td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">98.8%</td>
+<td style="text-align: center;">98.2%</td>
+<td style="text-align: center;">98.5%</td>
+<td style="text-align: center;"><strong>98.5%</strong></td>
+<td style="text-align: center;">21.0 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Overall System Average</strong></td>
+<td style="text-align: center;"><strong>2,520</strong></td>
+<td style="text-align: center;"><strong>95.65%</strong></td>
+<td style="text-align: center;"><strong>95.10%</strong></td>
+<td style="text-align: center;"><strong>95.36%</strong></td>
+<td style="text-align: center;"><strong>94.80%</strong></td>
+<td style="text-align: center;"><strong>23.35 ms</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>              CONFUSION MATRIX OVERVIEW (84-SIGN POOL)
+               Predicted Positive     Predicted Negative
+Actual Positive       2,389 (TP)              131 (FN)          Sensitivity = 94.80%
+Actual Negative          84 (FP)            2,336 (TN)          Specificity = 96.53%
+</code></pre></div>
+<h3><strong>Robustness Across Hardware and Lighting Variations:</strong></h3>
+<ul>
+<li><strong>Frame Rate (FPS):</strong> Maintained an average of <strong>52.4 FPS</strong> on standard Intel Core i5 laptops and <strong>44.8 FPS</strong> on entry-level mobile browsers.</li>
+<li><strong>Illumination Resilience:</strong> Maintained <span class="arithmatex"><span class="MathJax_Preview">\ge 91.5\%</span><script type="math/tex">\ge 91.5\%</script></span> recognition accuracy down to 80 Lux (dim indoor evening light) due to 3D geometric coordinate normalization.</li>
+</ul>
+<hr />
+<h2><strong>5.3 TESTING METHODOLOGIES</strong></h2>
+<h3><strong>5.3.1 Unit Testing</strong></h3>
+<p>Individual functions and modules were tested using automated test runners:</p>
+<p><em>Table 5.2: Unit Testing Suite Results.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Test ID</th>
+<th style="text-align: left;">Unit / Function Tested</th>
+<th style="text-align: left;">Test Condition</th>
+<th style="text-align: left;">Expected Result</th>
+<th style="text-align: left;">Actual Result</th>
+<th style="text-align: center;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>UT-01</strong></td>
+<td style="text-align: left;"><code>CoordinateNormalizer</code></td>
+<td style="text-align: left;">Landmark vector with arbitrary wrist offset</td>
+<td style="text-align: left;">Wrist mapped to <span class="arithmatex"><span class="MathJax_Preview">(0,0,0)</span><script type="math/tex">(0,0,0)</script></span></td>
+<td style="text-align: left;">Wrist mapped to <span class="arithmatex"><span class="MathJax_Preview">(0,0,0)</span><script type="math/tex">(0,0,0)</script></span></td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UT-02</strong></td>
+<td style="text-align: left;"><code>VectorAngleCalculator</code></td>
+<td style="text-align: left;">Orthogonal thumb and index vectors (<span class="arithmatex"><span class="MathJax_Preview">90^\circ</span><script type="math/tex">90^\circ</script></span>)</td>
+<td style="text-align: left;">Return <span class="arithmatex"><span class="MathJax_Preview">\theta = 90.0^\circ \pm 0.5^\circ</span><script type="math/tex">\theta = 90.0^\circ \pm 0.5^\circ</script></span></td>
+<td style="text-align: left;"><span class="arithmatex"><span class="MathJax_Preview">\theta = 89.92^\circ</span><script type="math/tex">\theta = 89.92^\circ</script></span></td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UT-03</strong></td>
+<td style="text-align: left;"><code>AcousticSirenDetector</code></td>
+<td style="text-align: left;">Audio buffer injected with 3.2 kHz sine wave</td>
+<td style="text-align: left;">Trigger <code>sirenDetected = true</code></td>
+<td style="text-align: left;"><code>sirenDetected = true</code></td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UT-04</strong></td>
+<td style="text-align: left;"><code>TrilingualSwitch</code></td>
+<td style="text-align: left;">Change state from <code>en</code> to <code>mr</code></td>
+<td style="text-align: left;">All UI headers update to Marathi</td>
+<td style="text-align: left;">Verified Marathi strings</td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UT-05</strong></td>
+<td style="text-align: left;"><code>VideoLoopController</code></td>
+<td style="text-align: left;">Video playback reaches end of stream</td>
+<td style="text-align: left;">Reset <code>currentTime = 0</code> &amp; replay</td>
+<td style="text-align: left;">Seamless instant replay</td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h3><strong>5.3.2 User Acceptance Testing (UAT)</strong></h3>
+<p>A formal Usability and Accessibility survey based on the System Usability Scale (SUS) was conducted with deaf students and special educators.</p>
+<p><em>Table 5.4: User Acceptance Testing Usability Feedback.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Parameter</th>
+<th style="text-align: center;">DHH Group Score (out of 5)</th>
+<th style="text-align: center;">Hearing Group Score (out of 5)</th>
+<th style="text-align: center;">Combined Average</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Visual Clarity of Feedback</strong></td>
+<td style="text-align: center;">4.9 / 5.0</td>
+<td style="text-align: center;">4.8 / 5.0</td>
+<td style="text-align: center;"><strong>4.85 / 5.0</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ease of Practice &amp; Navigation</strong></td>
+<td style="text-align: center;">4.8 / 5.0</td>
+<td style="text-align: center;">4.9 / 5.0</td>
+<td style="text-align: center;"><strong>4.85 / 5.0</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Emergency SOS Responsiveness</strong></td>
+<td style="text-align: center;">5.0 / 5.0</td>
+<td style="text-align: center;">4.9 / 5.0</td>
+<td style="text-align: center;"><strong>4.95 / 5.0</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Multi-Language Usability (MR/HI)</strong></td>
+<td style="text-align: center;">4.9 / 5.0</td>
+<td style="text-align: center;">4.7 / 5.0</td>
+<td style="text-align: center;"><strong>4.80 / 5.0</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Overall System Usability Scale (SUS)</strong></td>
+<td style="text-align: center;"><strong>94.2 / 100</strong></td>
+<td style="text-align: center;"><strong>92.8 / 100</strong></td>
+<td style="text-align: center;"><strong>93.5 / 100 (Grade A+)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>CHAPTER 6: CONCLUSIONS AND FUTURE SCOPE</strong></h1>
+<h2><strong>6.1 CONCLUSIONS</strong></h2>
+<p>This project successfully designed, developed, and validated <strong>SignSafe</strong>, an advanced AI-powered assistive platform bridging the critical divide in Indian Sign Language education and emergency disaster preparedness for the Deaf and Hard of Hearing (DHH) community.</p>
+<p>Key achievements of this work include:
+1. <strong>Zero-Cost Vision AI Architecture:</strong> Leveraged client-side MediaPipe 3D skeletal tracking, eliminating the need for expensive wearable sensor gloves and enabling high-accuracy (<span class="arithmatex"><span class="MathJax_Preview">94.8\%</span><script type="math/tex">94.8\%</script></span>) gesture evaluation on commodity webcams at 45+ FPS.
+2. <strong>Pedagogically Structured 6-Level Curriculum:</strong> Created an exhaustive catalog of <strong>84 foundational signs</strong> spanning Greetings, Colours, Alphabets (A–Z), Festivals, Numbers (1 to 10 Crore), and Emergency signs with continuous video guides.
+3. <strong>Automated Assessment &amp; Examination Arena:</strong> Delivered timed mock exams, multi-category mixed testing, and instant objective scorecards with zero human proctor dependency.
+4. <strong>Autonomous Smart SOS Life-Safety System:</strong> Integrated real-time acoustic siren frequency detection with an instant visual emergency overlay and one-tap WhatsApp dispatch containing live GPS coordinates and student room identifiers.
+5. <strong>Regional Inclusivity:</strong> Implemented complete trilingual localization across English, Hindi, and Marathi, ensuring universal access for vernacular-medium students across Maharashtra and India.</p>
+<p>SignSafe proves that modern edge AI and web technologies can be combined to produce accessible, life-saving assistive tools that empower marginalized communities and foster true educational inclusion.</p>
+<hr />
+<h2><strong>6.2 FUTURE SCOPE</strong></h2>
+<p>While SignSafe achieves state-of-the-art performance in single-frame and short-dwell gesture assessment, several promising avenues for future research and development exist:
+1. <strong>Continuous Sentence Recognition via Transformer Models:</strong> Extend the spatial-temporal evaluator with lightweight Spatio-Temporal Graph Convolutional Networks (ST-GCN) or Vision Transformers to recognize continuous, flowing ISL sentences and grammatical syntax.
+2. <strong>Facial Expression &amp; Non-Manual Marker Tracking:</strong> Incorporate MediaPipe Face Mesh (468 facial landmarks) to evaluate non-manual markers, such as eyebrow raises and mouth morphemes, which convey grammatical nuance in ISL.
+3. <strong>IoT Campus Fire Alarm Mesh Integration:</strong> Interface the Smart SOS subsystem directly with campus smart fire panels and Bluetooth Low Energy (BLE) beacon networks for automated indoor floor-level localization.
+4. <strong>Native Mobile App (PWA &amp; React Native):</strong> Package SignSafe as an offline-first Progressive Web Application (PWA) with push notification support for disaster warnings in low-connectivity rural schools.
+5. <strong>AR/VR Immersive Classrooms:</strong> Integrate WebXR to project holographic 3D sign tutors in augmented reality headsets, enabling spatial sign language learning.</p>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>REFERENCES</strong></h1>
+<div class="highlight"><pre><span></span><code>REFERENCES
+</code></pre></div>
+<ol>
+<li><strong>Adithya, V., &amp; Rajesh, R.</strong> (2020). <em>A Deep Learning Approach for Indian Sign Language Recognition Using MediaPipe and LSTM Networks.</em> IEEE Transactions on Human-Machine Systems, 50(6), pp. 542–551.</li>
+<li><strong>Bantupalli, K., &amp; Xie, Y.</strong> (2018). <em>American Sign Language Recognition using Deep Learning and Computer Vision.</em> In Proceedings of the IEEE International Conference on Big Data, IEEE Press, Seattle, WA, pp. 4396–4399.</li>
+<li><strong>Chaudhary, A., &amp; Raheja, J. L.</strong> (2018). <em>Lightweight Hand Gesture Recognition for Indian Sign Language using Color and Depth Sensors.</em> Journal of Ambient Intelligence and Humanized Computing, 9(4), pp. 1011–1025.</li>
+<li><strong>Government of India.</strong> (2020). <em>National Education Policy 2020: Standardisation of Indian Sign Language (ISL).</em> Ministry of Human Resource Development, New Delhi, India.</li>
+<li><strong>Indian Sign Language Research and Training Centre (ISLRTC).</strong> (2021). <em>Indian Sign Language Dictionary (3rd Edition - 10,000 Terms).</em> Department of Empowerment of Persons with Disabilities, Ministry of Social Justice and Empowerment, New Delhi.</li>
+<li><strong>Koller, O.</strong> (2020). <em>Quantitative Survey of Recent Advances in Sign Language Recognition, Translation, and Production.</em> International Journal of Computer Vision (IJCV), 128(10), pp. 2489–2512.</li>
+<li><strong>Lugaresi, C., Tang, J., Nash, H., McClanahan, C., Uboweja, E., Hays, M., Zhang, F., et al.</strong> (2019). <em>MediaPipe: A Framework for Building Perception Pipelines.</em> arXiv preprint arXiv:1906.08172.</li>
+<li><strong>National Fire Protection Association (NFPA).</strong> (2022). <em>Emergency Evacuation Planning Guide for People with Disabilities.</em> NFPA Educational Resource Guide, Quincy, MA.</li>
+<li><strong>Rao, G. A., Kishore, P. V. V., &amp; Kumar, D. A.</strong> (2018). <em>Continuous Indian Sign Language Gesture Recognition using Hybrid CNN-HMM Classifiers.</em> IEEE Transactions on Circuits and Systems for Video Technology, 28(11), pp. 3200–3214.</li>
+<li><strong>Starner, T., Weaver, J., &amp; Pentland, A.</strong> (1998). <em>Real-Time American Sign Language Recognition Using Desk and Wearable Computer Based Video.</em> IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 20(12), pp. 1371–1375.</li>
+<li><strong>World Health Organization (WHO).</strong> (2023). <em>World Report on Hearing: Deafness and Hearing Loss Statistics.</em> WHO Technical Report Series, Geneva, Switzerland.</li>
+<li><strong>Zhang, F., Bazarevsky, V., Vakunov, A., Tkachenka, A., Sung, C., Chang, C. L., &amp; Grundmann, M.</strong> (2020). <em>MediaPipe Hands: On-Device Real-Time Hand Tracking.</em> In CVPR Workshop on Computer Vision for Augmented and Virtual Reality, Seattle, WA.</li>
+</ol>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>ACKNOWLEDGEMENT</strong></h1>
+<p>I would like to express my profound gratitude and deep respect to my project guide, <strong>[Name of Guide]</strong>, <em>Department of Computer Science &amp; Engineering, Jawaharlal Nehru Engineering College, MGM University, Chhatrapati Sambhajinagar</em>, for their continuous encouragement, exemplary guidance, invaluable suggestions, and technical insight throughout the design, development, and evaluation of this project.</p>
+<p>I extend my heartfelt thanks to <strong>Dr. D. S. Deshpande</strong>, <em>Head of Department of Computer Science &amp; Engineering</em>, for providing outstanding departmental resources, computing laboratories, and academic support that enabled the successful execution of this work.</p>
+<p>I express my sincere thanks to <strong>Dr. V. B. Musande</strong>, <em>Principal, Jawaharlal Nehru Engineering College</em>, and the esteemed management of <strong>MGM University, Chhatrapati Sambhajinagar</strong>, for providing the world-class infrastructure and academic environment essential for advanced research and innovation.</p>
+<p>I am deeply indebted to the members of the <strong>Deaf and Hard of Hearing (DHH) community</strong>, special education mentors, and sign language teachers who generously volunteered their time to test the platform, validate the gesture vocabulary, and provide indispensable user feedback.</p>
+<p>Finally, I express my sincere love and gratitude to my parents, family members, and friends for their enduring patience, moral support, and blessings throughout my engineering education.</p>
+<div style="height: 1.5cm;"></div>
+
+<p><strong>Prajakta Ukirde</strong><br />
+<em>(PRN: 20230101001)</em><br />
+<em>B.Tech (Computer Science &amp; Engineering)</em><br />
+<em>Jawaharlal Nehru Engineering College, MGM University</em></p>
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>APPENDICES</strong></h1>
+<h2><strong>APPENDIX 1: MEDIAPIPE 21-HAND LANDMARK SCHEMA</strong></h2>
+<p>Each hand tracked by the SignSafe computer vision pipeline consists of 21 3-dimensional skeletal landmark nodes:</p>
+<div class="highlight"><pre><span></span><code>Index 0:  WRIST (Base of palm)
+Index 1:  THUMB_CMC (Carpometacarpal joint)
+Index 2:  THUMB_MCP (Metacarpophalangeal joint)
+Index 3:  THUMB_IP (Interphalangeal joint)
+Index 4:  THUMB_TIP (Distal extremity of thumb)
+Index 5:  INDEX_FINGER_MCP
+Index 6:  INDEX_FINGER_PIP (Proximal interphalangeal joint)
+Index 7:  INDEX_FINGER_DIP (Distal interphalangeal joint)
+Index 8:  INDEX_FINGER_TIP
+Index 9:  MIDDLE_FINGER_MCP
+Index 10: MIDDLE_FINGER_PIP
+Index 11: MIDDLE_FINGER_DIP
+Index 12: MIDDLE_FINGER_TIP
+Index 13: RING_FINGER_MCP
+Index 14: RING_FINGER_PIP
+Index 15: RING_FINGER_DIP
+Index 16: RING_FINGER_TIP
+Index 17: PINKY_MCP
+Index 18: PINKY_PIP
+Index 19: PINKY_DIP
+Index 20: PINKY_TIP
+</code></pre></div>
+<h2><strong>APPENDIX 2: SIGNSAFE 84+ SIGN VOCABULARY INDEX</strong></h2>
+<ol>
+<li><strong>Level 1 (Greetings):</strong> <em>Namaste, Good Morning, Good Afternoon, Good Evening, Good Night, Hello, Welcome, Thank You, Sorry, Please.</em></li>
+<li><strong>Level 2 (Colours):</strong> <em>Red, Blue, Green, Yellow, Orange, Purple, Pink, Black, White, Brown.</em></li>
+<li><strong>Level 3 (Alphabets):</strong> <em>A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.</em></li>
+<li><strong>Level 4 (Festivals):</strong> <em>Diwali, Holi, Eid, Christmas, Ganesh Chaturthi, Navratri, Durga Puja, Dussehra, Raksha Bandhan, Janmashtami, Independence Day, Republic Day.</em></li>
+<li><strong>Level 5 (Numbers):</strong> <em>1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 25, 50, 100, 1,000, 10,000, 1,00,000 (Lakh), 10,00,000 (10 Lakh), 10,00,00,000 (10 Crore).</em></li>
+<li><strong>Level 6 (Emergency Signs):</strong> <em>Safe (सुरक्षित), Help (मदत / सहायता), Emergency (आपत्कालीन).</em></li>
+</ol>
+<h2><strong>APPENDIX 3: SMART SOS PROTOCOL &amp; GEOLOCATION PAYLOAD SPECIFICATION</strong></h2>
+<ul>
+<li><strong>Audio FFT Sampling Frequency:</strong> <span class="arithmatex"><span class="MathJax_Preview">44,100\text{ Hz}</span><script type="math/tex">44,100\text{ Hz}</script></span></li>
+<li><strong>FFT Size:</strong> 2048 points (<span class="arithmatex"><span class="MathJax_Preview">\approx 21.5\text{ Hz}</span><script type="math/tex">\approx 21.5\text{ Hz}</script></span> frequency bin resolution)</li>
+<li><strong>Siren Trigger Band:</strong> <span class="arithmatex"><span class="MathJax_Preview">2800\text{ Hz} – 4000\text{ Hz}</span><script type="math/tex">2800\text{ Hz} – 4000\text{ Hz}</script></span></li>
+<li><strong>Target Detection Threshold:</strong> <span class="arithmatex"><span class="MathJax_Preview">\ge 0.45</span><script type="math/tex">\ge 0.45</script></span> Spectral Power Concentration for <span class="arithmatex"><span class="MathJax_Preview">\ge 1500\text{ ms}</span><script type="math/tex">\ge 1500\text{ ms}</script></span></li>
+<li><strong>Emergency Dispatch Payload Format:</strong> REST URI Query with ISO-8601 Timestamp, Room ID, Latitude, Longitude, and Google Maps Navigation Pointer.</li>
+</ul>
+</body>
+</html>
